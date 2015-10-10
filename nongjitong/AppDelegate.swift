@@ -15,7 +15,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        
+        if kUser_ID() != nil {//已登陆
+        
+            
+            let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+            window?.rootViewController = rootstoryboard.instantiateInitialViewController()
+            
+            
+        } else {//未登录
+        
+            let signinVc = YNSignInViewController()
+            let NavVc = YNNavigationController(rootViewController: signinVc)
+            window?.rootViewController = NavVc
+            
+        }
+        
+        window?.makeKeyAndVisible()
+        
         return true
     }
 

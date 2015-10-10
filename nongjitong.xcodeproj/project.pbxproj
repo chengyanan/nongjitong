@@ -7,13 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4093BAAB1BC8F5B8005E1A9E /* YNModifytextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4093BAAA1BC8F5B8005E1A9E /* YNModifytextViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED434F1BC60A28004713C9 /* AppDelegate.swift */; };
-		40ED43521BC60A28004713C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43511BC60A28004713C9 /* ViewController.swift */; };
 		40ED43551BC60A28004713C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40ED43531BC60A28004713C9 /* Main.storyboard */; };
 		40ED43571BC60A28004713C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40ED43561BC60A28004713C9 /* Assets.xcassets */; };
 		40ED435A1BC60A28004713C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40ED43581BC60A28004713C9 /* LaunchScreen.storyboard */; };
 		40ED43651BC60A28004713C9 /* nongjitongTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43641BC60A28004713C9 /* nongjitongTests.swift */; };
 		40ED43701BC60A28004713C9 /* nongjitongUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED436F1BC60A28004713C9 /* nongjitongUITests.swift */; };
+		40ED43841BC60B76004713C9 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED437E1BC60B76004713C9 /* Layout.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43851BC60B76004713C9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED437F1BC60B76004713C9 /* Location.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43861BC60B76004713C9 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43801BC60B76004713C9 /* Macro.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43871BC60B76004713C9 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43811BC60B76004713C9 /* Network.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43881BC60B76004713C9 /* progressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43821BC60B76004713C9 /* progressHUD.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43891BC60B76004713C9 /* tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43831BC60B76004713C9 /* tools.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED438E1BC612F9004713C9 /* YNSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED438C1BC612F9004713C9 /* YNSignInViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED438F1BC612F9004713C9 /* YNSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED438D1BC612F9004713C9 /* YNSignUpViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43921BC613C3004713C9 /* YNTestFiledExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43911BC613C3004713C9 /* YNTestFiledExtension.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED439B1BC61A56004713C9 /* YNTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED439A1BC61A56004713C9 /* YNTabBarController.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED439D1BC61A75004713C9 /* YNNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED439C1BC61A75004713C9 /* YNNavigationController.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED439F1BC61ADE004713C9 /* YNHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED439E1BC61ADE004713C9 /* YNHomeViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43A11BC61AF5004713C9 /* YNEarlyWaringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43A01BC61AF5004713C9 /* YNEarlyWaringViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43A31BC61B03004713C9 /* YNHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43A21BC61B03004713C9 /* YNHelpViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43A71BC64A57004713C9 /* YNBaseParamater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43A61BC64A57004713C9 /* YNBaseParamater.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43AA1BC64D7F004713C9 /* YNSignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43A91BC64D7F004713C9 /* YNSignUpModel.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43AE1BC65EA7004713C9 /* YNExchangeRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43AD1BC65EA7004713C9 /* YNExchangeRootController.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43B01BC66490004713C9 /* YNMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43AF1BC66490004713C9 /* YNMeTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		40ED43B31BC670FB004713C9 /* YNPersionalSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43B21BC670FB004713C9 /* YNPersionalSettingTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +53,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4093BAAA1BC8F5B8005E1A9E /* YNModifytextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNModifytextViewController.swift; sourceTree = "<group>"; };
 		40ED434C1BC60A28004713C9 /* nongjitong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nongjitong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40ED434F1BC60A28004713C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		40ED43511BC60A28004713C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		40ED43541BC60A28004713C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40ED43561BC60A28004713C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40ED43591BC60A28004713C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +66,25 @@
 		40ED436B1BC60A28004713C9 /* nongjitongUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nongjitongUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40ED436F1BC60A28004713C9 /* nongjitongUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nongjitongUITests.swift; sourceTree = "<group>"; };
 		40ED43711BC60A28004713C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40ED437E1BC60B76004713C9 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		40ED437F1BC60B76004713C9 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		40ED43801BC60B76004713C9 /* Macro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
+		40ED43811BC60B76004713C9 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		40ED43821BC60B76004713C9 /* progressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = progressHUD.swift; sourceTree = "<group>"; };
+		40ED43831BC60B76004713C9 /* tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tools.swift; sourceTree = "<group>"; };
+		40ED438C1BC612F9004713C9 /* YNSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSignInViewController.swift; sourceTree = "<group>"; };
+		40ED438D1BC612F9004713C9 /* YNSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSignUpViewController.swift; sourceTree = "<group>"; };
+		40ED43911BC613C3004713C9 /* YNTestFiledExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNTestFiledExtension.swift; sourceTree = "<group>"; };
+		40ED439A1BC61A56004713C9 /* YNTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNTabBarController.swift; sourceTree = "<group>"; };
+		40ED439C1BC61A75004713C9 /* YNNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNNavigationController.swift; sourceTree = "<group>"; };
+		40ED439E1BC61ADE004713C9 /* YNHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHomeViewController.swift; sourceTree = "<group>"; };
+		40ED43A01BC61AF5004713C9 /* YNEarlyWaringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNEarlyWaringViewController.swift; sourceTree = "<group>"; };
+		40ED43A21BC61B03004713C9 /* YNHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHelpViewController.swift; sourceTree = "<group>"; };
+		40ED43A61BC64A57004713C9 /* YNBaseParamater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNBaseParamater.swift; sourceTree = "<group>"; };
+		40ED43A91BC64D7F004713C9 /* YNSignUpModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSignUpModel.swift; sourceTree = "<group>"; };
+		40ED43AD1BC65EA7004713C9 /* YNExchangeRootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNExchangeRootController.swift; sourceTree = "<group>"; };
+		40ED43AF1BC66490004713C9 /* YNMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMeTableViewController.swift; sourceTree = "<group>"; };
+		40ED43B21BC670FB004713C9 /* YNPersionalSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNPersionalSettingTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +112,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4093BAA91BC8F58B005E1A9E /* modify text */ = {
+			isa = PBXGroup;
+			children = (
+				4093BAAA1BC8F5B8005E1A9E /* YNModifytextViewController.swift */,
+			);
+			path = "modify text";
+			sourceTree = "<group>";
+		};
 		40ED43431BC60A28004713C9 = {
 			isa = PBXGroup;
 			children = (
@@ -97,8 +143,9 @@
 		40ED434E1BC60A28004713C9 /* nongjitong */ = {
 			isa = PBXGroup;
 			children = (
+				40ED438A1BC6119D004713C9 /* class */,
+				40ED437D1BC60B76004713C9 /* tools */,
 				40ED434F1BC60A28004713C9 /* AppDelegate.swift */,
-				40ED43511BC60A28004713C9 /* ViewController.swift */,
 				40ED43531BC60A28004713C9 /* Main.storyboard */,
 				40ED43561BC60A28004713C9 /* Assets.xcassets */,
 				40ED43581BC60A28004713C9 /* LaunchScreen.storyboard */,
@@ -123,6 +170,112 @@
 				40ED43711BC60A28004713C9 /* Info.plist */,
 			);
 			path = nongjitongUITests;
+			sourceTree = "<group>";
+		};
+		40ED437D1BC60B76004713C9 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				40ED43801BC60B76004713C9 /* Macro.swift */,
+				40ED43811BC60B76004713C9 /* Network.swift */,
+				40ED437E1BC60B76004713C9 /* Layout.swift */,
+				40ED43821BC60B76004713C9 /* progressHUD.swift */,
+				40ED437F1BC60B76004713C9 /* Location.swift */,
+				40ED43831BC60B76004713C9 /* tools.swift */,
+				40ED43AD1BC65EA7004713C9 /* YNExchangeRootController.swift */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
+		40ED438A1BC6119D004713C9 /* class */ = {
+			isa = PBXGroup;
+			children = (
+				40ED43991BC618DF004713C9 /* root */,
+				40ED43951BC61556004713C9 /* home */,
+				40ED43931BC61556004713C9 /* earlyWaring */,
+				40ED43941BC61556004713C9 /* help */,
+				40ED43961BC61556004713C9 /* me */,
+				40ED43901BC61390004713C9 /* extension */,
+				40ED438B1BC612F9004713C9 /* sign up and sign in */,
+			);
+			path = class;
+			sourceTree = "<group>";
+		};
+		40ED438B1BC612F9004713C9 /* sign up and sign in */ = {
+			isa = PBXGroup;
+			children = (
+				40ED43A81BC64D20004713C9 /* model */,
+				40ED438C1BC612F9004713C9 /* YNSignInViewController.swift */,
+				40ED438D1BC612F9004713C9 /* YNSignUpViewController.swift */,
+			);
+			path = "sign up and sign in";
+			sourceTree = "<group>";
+		};
+		40ED43901BC61390004713C9 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				40ED43911BC613C3004713C9 /* YNTestFiledExtension.swift */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
+		40ED43931BC61556004713C9 /* earlyWaring */ = {
+			isa = PBXGroup;
+			children = (
+				40ED43A01BC61AF5004713C9 /* YNEarlyWaringViewController.swift */,
+			);
+			path = earlyWaring;
+			sourceTree = "<group>";
+		};
+		40ED43941BC61556004713C9 /* help */ = {
+			isa = PBXGroup;
+			children = (
+				40ED43A21BC61B03004713C9 /* YNHelpViewController.swift */,
+			);
+			path = help;
+			sourceTree = "<group>";
+		};
+		40ED43951BC61556004713C9 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				40ED439E1BC61ADE004713C9 /* YNHomeViewController.swift */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		40ED43961BC61556004713C9 /* me */ = {
+			isa = PBXGroup;
+			children = (
+				40ED43AF1BC66490004713C9 /* YNMeTableViewController.swift */,
+				40ED43B11BC670DD004713C9 /* persional setting */,
+			);
+			path = me;
+			sourceTree = "<group>";
+		};
+		40ED43991BC618DF004713C9 /* root */ = {
+			isa = PBXGroup;
+			children = (
+				40ED439A1BC61A56004713C9 /* YNTabBarController.swift */,
+				40ED439C1BC61A75004713C9 /* YNNavigationController.swift */,
+				40ED43A61BC64A57004713C9 /* YNBaseParamater.swift */,
+			);
+			path = root;
+			sourceTree = "<group>";
+		};
+		40ED43A81BC64D20004713C9 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				40ED43A91BC64D7F004713C9 /* YNSignUpModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		40ED43B11BC670DD004713C9 /* persional setting */ = {
+			isa = PBXGroup;
+			children = (
+				40ED43B21BC670FB004713C9 /* YNPersionalSettingTableViewController.swift */,
+				4093BAA91BC8F58B005E1A9E /* modify text */,
+			);
+			path = "persional setting";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,8 +408,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40ED43521BC60A28004713C9 /* ViewController.swift in Sources */,
+				40ED43B01BC66490004713C9 /* YNMeTableViewController.swift in Sources */,
+				40ED43921BC613C3004713C9 /* YNTestFiledExtension.swift in Sources */,
+				4093BAAB1BC8F5B8005E1A9E /* YNModifytextViewController.swift in Sources */,
+				40ED43A11BC61AF5004713C9 /* YNEarlyWaringViewController.swift in Sources */,
+				40ED438F1BC612F9004713C9 /* YNSignUpViewController.swift in Sources */,
+				40ED43881BC60B76004713C9 /* progressHUD.swift in Sources */,
 				40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */,
+				40ED43871BC60B76004713C9 /* Network.swift in Sources */,
+				40ED43851BC60B76004713C9 /* Location.swift in Sources */,
+				40ED43841BC60B76004713C9 /* Layout.swift in Sources */,
+				40ED438E1BC612F9004713C9 /* YNSignInViewController.swift in Sources */,
+				40ED43861BC60B76004713C9 /* Macro.swift in Sources */,
+				40ED43891BC60B76004713C9 /* tools.swift in Sources */,
+				40ED43A31BC61B03004713C9 /* YNHelpViewController.swift in Sources */,
+				40ED43AE1BC65EA7004713C9 /* YNExchangeRootController.swift in Sources */,
+				40ED43A71BC64A57004713C9 /* YNBaseParamater.swift in Sources */,
+				40ED43AA1BC64D7F004713C9 /* YNSignUpModel.swift in Sources */,
+				40ED439D1BC61A75004713C9 /* YNNavigationController.swift in Sources */,
+				40ED439B1BC61A56004713C9 /* YNTabBarController.swift in Sources */,
+				40ED439F1BC61ADE004713C9 /* YNHomeViewController.swift in Sources */,
+				40ED43B31BC670FB004713C9 /* YNPersionalSettingTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +571,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = nongjitong/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sd.nongjitong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -410,6 +583,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = nongjitong/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sd.nongjitong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -483,6 +657,7 @@
 				40ED43761BC60A28004713C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40ED43771BC60A28004713C9 /* Build configuration list for PBXNativeTarget "nongjitongTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +666,7 @@
 				40ED43791BC60A28004713C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40ED437A1BC60A28004713C9 /* Build configuration list for PBXNativeTarget "nongjitongUITests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +675,7 @@
 				40ED437C1BC60A28004713C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
