@@ -25,15 +25,22 @@ class YNMeTableViewController: UITableViewController {
     //MARK: - tableViewDelegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 3 {
-            
-            //退出当前帐户
-            Tools().removeValueForKey(kUserID)
-            
-            YNExchangeRootController().showSign()
-            
-        }
+       
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "Segue_Informatiom" {
+            
+            let destinationVc = segue.destinationViewController as! YNPersionalSettingTableViewController
+            
+            destinationVc.isFromMeVc = true
+            
+        }
+        
+        
+    }
+
     
 }

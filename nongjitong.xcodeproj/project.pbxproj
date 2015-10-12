@@ -33,6 +33,7 @@
 		40ED43AE1BC65EA7004713C9 /* YNExchangeRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43AD1BC65EA7004713C9 /* YNExchangeRootController.swift */; settings = {ASSET_TAGS = (); }; };
 		40ED43B01BC66490004713C9 /* YNMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43AF1BC66490004713C9 /* YNMeTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		40ED43B31BC670FB004713C9 /* YNPersionalSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43B21BC670FB004713C9 /* YNPersionalSettingTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		40FCB5AC1BCB7C4600D1C278 /* YNSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FCB5AB1BCB7C4600D1C278 /* YNSettingTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		40ED43AD1BC65EA7004713C9 /* YNExchangeRootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNExchangeRootController.swift; sourceTree = "<group>"; };
 		40ED43AF1BC66490004713C9 /* YNMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMeTableViewController.swift; sourceTree = "<group>"; };
 		40ED43B21BC670FB004713C9 /* YNPersionalSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNPersionalSettingTableViewController.swift; sourceTree = "<group>"; };
+		40FCB5AB1BCB7C4600D1C278 /* YNSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSettingTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				40ED43AF1BC66490004713C9 /* YNMeTableViewController.swift */,
+				40FCB5AA1BCB7C1500D1C278 /* setting */,
 				40ED43B11BC670DD004713C9 /* persional setting */,
 			);
 			path = me;
@@ -276,6 +279,14 @@
 				4093BAA91BC8F58B005E1A9E /* modify text */,
 			);
 			path = "persional setting";
+			sourceTree = "<group>";
+		};
+		40FCB5AA1BCB7C1500D1C278 /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				40FCB5AB1BCB7C4600D1C278 /* YNSettingTableViewController.swift */,
+			);
+			path = setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,6 +424,7 @@
 				4093BAAB1BC8F5B8005E1A9E /* YNModifytextViewController.swift in Sources */,
 				40ED43A11BC61AF5004713C9 /* YNEarlyWaringViewController.swift in Sources */,
 				40ED438F1BC612F9004713C9 /* YNSignUpViewController.swift in Sources */,
+				40FCB5AC1BCB7C4600D1C278 /* YNSettingTableViewController.swift in Sources */,
 				40ED43881BC60B76004713C9 /* progressHUD.swift in Sources */,
 				40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */,
 				40ED43871BC60B76004713C9 /* Network.swift in Sources */,

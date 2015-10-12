@@ -25,5 +25,13 @@ class YNExchangeRootController: UIViewController {
         
     }
     
+    func showInformation() {
+
+        let rootstoryboard = UIStoryboard().instantiateViewControllerWithIdentifier("user_information") as! YNPersionalSettingTableViewController
+        rootstoryboard.isFromMeVc = false
+        
+        UIApplication.sharedApplication().keyWindow?.rootViewController = rootstoryboard
+
+    }
     
 }
