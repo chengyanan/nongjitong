@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YNPersionalSettingTableViewController: UITableViewController, YNModifytextViewControllerDelegate {
+class YNPersionalSettingTableViewController: UITableViewController, YNModifytextViewControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, YNProvinceTableViewControllerDelegate {
 
     //MARK: - public proporty 
     
@@ -65,7 +65,8 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        
+        self.avatorImageView.layer.cornerRadius = 3
+        self.avatorImageView.clipsToBounds = true
     }
     
     //MARK: - private method
@@ -116,6 +117,8 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
             
                 //打开模态窗口选择身份
             
+                chooseWorker()
+                
             }
             
         }
@@ -127,6 +130,8 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
             
                 //显示actionseet 选择性别
             
+                chooseGender()
+                
             }
         
         }
@@ -136,9 +141,289 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     
     //MARK: - actionSheet
     func selectAlbumOrCamera() {
+        
+            if #available(iOS 8.0, *) {
+                
+                let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+                
+                //取消按钮
+                let cancleAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
+                    
+                })
+                alertController.addAction(cancleAction)
+                
+                //相册
+                let albumAction = UIAlertAction(title: "相册", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                    //打开系统相册
+                    self.openAlbum(UIImagePickerControllerSourceType.PhotoLibrary)
+                    
+                })
+                alertController.addAction(albumAction)
+                
+                
+                if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
+                
+                    //相机
+                    let cameraAction = UIAlertAction(title: "相机", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                        
+                        //打开系统相机
+                        self.openAlbum(UIImagePickerControllerSourceType.Camera)
+                        
+                    })
+                    alertController.addAction(cameraAction)
+                
+                }
+                
+                self.presentViewController(alertController, animated: true, completion: { () -> Void in
+                    
+                })
+                
+                
+            } else {
+                
+                // Fallback on earlier versions iOS7
+                
+                actionsheetInIOS8Early()
+                
+            }
+        
+    }
+    
+    
+    
+    
+    //MARK: - 打开系统相册
+    func openAlbum(type: UIImagePickerControllerSourceType) {
+    
+       let imagePickerVc = UIImagePickerController()
+       imagePickerVc.sourceType = type
+       imagePickerVc.delegate = self
+        
+    self.presentViewController(imagePickerVc, animated: true) { () -> Void in
+        
+        
+        }
+        
+    
+    }
+    
+    //MARK: - 选择身份
+    func chooseWorker() {
+    
+        if #available(iOS 8.0, *) {
+            
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            //取消按钮
+            let cancleAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
+                
+            })
+            alertController.addAction(cancleAction)
+            
+            let oneAction = UIAlertAction(title: "生产者", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                
+                //TODO: - 上传身份
+                //上传成功之后修改名字
+                self.roleIDLabel.text = "生产者"
+        
+                
+            })
+            alertController.addAction(oneAction)
+            
+            let twoAction = UIAlertAction(title: "农技师", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                
+                self.roleIDLabel.text = "农技师"
+                
+                //TODO: - 上传身份
+            })
+            alertController.addAction(twoAction)
+            
+            let threeAction = UIAlertAction(title: "农资厂家业务员", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                
+                //TODO: - 上传身份
+                
+                self.roleIDLabel.text = "农资厂家业务员"
+                
+            })
+            alertController.addAction(threeAction)
+            
+            let fourAction = UIAlertAction(title: "农资批发商", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                
+                self.roleIDLabel.text = "农资批发商"
+                //TODO: - 上传身份
+            })
+            alertController.addAction(fourAction)
+            
+            let fiveAction = UIAlertAction(title: "农资零售商", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                
+                self.roleIDLabel.text = "农资零售商"
+                //TODO: - 上传身份
+            })
+            alertController.addAction(fiveAction)
+            
+            self.presentViewController(alertController, animated: true, completion: { () -> Void in
+                
+            })
+            
+            
+        } else {
+            
+            // Fallback on earlier versions iOS7
+            
+//            genderActionSheetInIOS8Early()
+            
+        }
+
+    
+    }
+    
+    //MARK: - 选择性别
+    func chooseGender() {
+    
+        if #available(iOS 8.0, *) {
+            
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            //取消按钮
+            let cancleAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
+                
+            })
+            alertController.addAction(cancleAction)
+            
+            let albumAction = UIAlertAction(title: "男", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                
+                self.genderLabel.text = "男"
+                
+            })
+            alertController.addAction(albumAction)
+        
+            let cameraAction = UIAlertAction(title: "女", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                    
+                self.genderLabel.text = "女"
+                    
+            })
+            alertController.addAction(cameraAction)
+            
+            self.presentViewController(alertController, animated: true, completion: { () -> Void in
+                
+            })
+            
+            
+        } else {
+            
+            // Fallback on earlier versions iOS7
+            
+            genderActionSheetInIOS8Early()
+            
+        }
+
+    
+    }
+    
+    //MARK: - iOS8以前actionsheet
+    func actionsheetInIOS8Early() {
+    
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil)
+        actionSheet.tag = 1
+        actionSheet.delegate = self
+        
+        actionSheet.addButtonWithTitle("相册")
+        
+        if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
+            
+            actionSheet.addButtonWithTitle("相机")
+            
+        }
+        
+        actionSheet.showInView(self.view)
+    
+    }
+    
+    func genderActionSheetInIOS8Early() {
+    
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil)
+        actionSheet.tag = 2
+        actionSheet.delegate = self
+        actionSheet.addButtonWithTitle("男")
+        actionSheet.addButtonWithTitle("女")
+        actionSheet.showInView(self.view)
+    
+    }
+    
+    
+    //MARK: - UIActionSheetDelegate
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        
+        if actionSheet.tag == 1 {
+        
+            if buttonIndex == 0 {
+                //相册
+                
+                self.openAlbum(UIImagePickerControllerSourceType.PhotoLibrary)
+                
+            } else {
+                //相机
+                
+                self.openAlbum(UIImagePickerControllerSourceType.Camera)
+            }
+            
+        } else if actionSheet.tag == 1 {
+        
+            
+            if buttonIndex == 0 {
+                //男
+                
+                self.genderLabel.text = "男"
+                
+            } else {
+                //女
+                
+                 self.genderLabel.text = "女"
+            }
+            
+        
+        }
+        
+
+    }
+    
+    //MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+//        print("\ndidFinishPickingMediaWithInfo - \(info)\n")
+        
+        let mediaType = info["UIImagePickerControllerMediaType"] as! String
+        
+        if mediaType == "public.image" {
+            //图片
+        
+             let image = info["UIImagePickerControllerOriginalImage"] as! UIImage
+            
+            picker.dismissViewControllerAnimated(true) { () -> Void in
+                
+            }
+            
+            //TODO:向服务器上传头像
+            
+            
+             //MARK: - 上传成功改变该页面的头像
+            self.avatorImageView.image = image
+            
+        } else {
+        
+            //不是图片
+            picker.dismissViewControllerAnimated(true) { () -> Void in
+                
+            }
+            
+            //TODO: - 给个不是图片的提示
+            
+        }
     
         
     }
+    
+    //MARK: - UIActionSheetDelegate
     
     
     //MARK: - YNModifytextViewControllerDelegate
@@ -170,6 +455,13 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
             
         }
         
+        
+    }
+    
+    //MARK: - YNProvinceTableViewControllerDelegate
+    func provinceTableViewController(vc: YNProvinceTableViewController, province: YNBaseModel, city: YNBaseModel) {
+        
+        self.areaIDLabel.text = "\(province.name)  \(city.name)"
         
     }
     
@@ -240,8 +532,25 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
             rootVc.textType = YNTextType.MobileNumber
             rootVc.textString = self.mobelLabel.text
             rootVc.delegate = self
+            
+        }  else if segue.identifier == "Segue_Province" {
+            
+            let destinationVc = segue.destinationViewController as! YNProvinceTableViewController
+            destinationVc.data =
+            destinationVc.delegate = self
+            
         }
+
         
     }
     
+    
+    lazy let cityData: Array<YNCityModel> = {
+        
+        let path = NSBundle.mainBundle().pathForResource("cityData", ofType: "plist")
+        
+        //TODO: 转成plist
+        
+        
+        }()
 }
