@@ -53,6 +53,8 @@ class YNModifytextViewController: UIViewController {
         }
     
     }
+    var textString: String?
+    
     var delegate: YNModifytextViewControllerDelegate?
     
     //MARK: - private proporty
@@ -65,6 +67,7 @@ class YNModifytextViewController: UIViewController {
         
         textfield.leftView = UIView(frame: CGRectMake(0, 0, 16, 10))
         textfield.leftViewMode = UITextFieldViewMode.Always
+        textfield.text = self.textString
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -101,6 +104,7 @@ class YNModifytextViewController: UIViewController {
                 
                 //提交成功之后把数据传给代理控制器
                 self.delegate?.modifytextViewController(self, text: textfield.text)
+                self.dismissViewControllerAnimated(true, completion: nil)
                 
             }
             
@@ -112,6 +116,7 @@ class YNModifytextViewController: UIViewController {
             
             //提交成功之后把数据传给代理控制器
             self.delegate?.modifytextViewController(self, text: textfield.text)
+            self.dismissViewControllerAnimated(true, completion: nil)
             
         } else if self.textType == YNTextType.IDNumber {
             
@@ -120,6 +125,7 @@ class YNModifytextViewController: UIViewController {
             
             //提交成功之后把数据传给代理控制器
             self.delegate?.modifytextViewController(self, text: textfield.text)
+            self.dismissViewControllerAnimated(true, completion: nil)
             
         } else if self.textType == YNTextType.MobileNumber {
             
@@ -134,6 +140,7 @@ class YNModifytextViewController: UIViewController {
                 
                 //提交成功之后把数据传给代理控制器
                 self.delegate?.modifytextViewController(self, text: textfield.text)
+                self.dismissViewControllerAnimated(true, completion: nil)
                 
             }
 
@@ -141,6 +148,8 @@ class YNModifytextViewController: UIViewController {
         
         
     }
+    
+    
     
     
 }

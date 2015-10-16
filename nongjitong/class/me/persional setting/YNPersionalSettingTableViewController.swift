@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YNPersionalSettingTableViewController: UITableViewController {
+class YNPersionalSettingTableViewController: UITableViewController, YNModifytextViewControllerDelegate {
 
     //MARK: - public proporty 
     
@@ -76,7 +76,6 @@ class YNPersionalSettingTableViewController: UITableViewController {
         self.areaIDLabel.text = nil
         self.mobelLabel.text = kUser_MobileNumber() as? String
         self.trueNameLabel.text = nil
-        self.trueNameLabel.text = nil
         self.genderLabel.text = nil
         self.idNumberLabel.text = nil
     }
@@ -106,6 +105,8 @@ class YNPersionalSettingTableViewController: UITableViewController {
             if indexPath.row == 0 {
             
                 //打开相册或相机选择头像
+                
+                selectAlbumOrCamera()
             }
         }
         
@@ -132,6 +133,46 @@ class YNPersionalSettingTableViewController: UITableViewController {
         
         
     }
+    
+    //MARK: - actionSheet
+    func selectAlbumOrCamera() {
+    
+        
+    }
+    
+    
+    //MARK: - YNModifytextViewControllerDelegate
+    func modifytextViewController(modifytextViewController: YNModifytextViewController, text: String?) {
+        
+        if modifytextViewController.textType == YNTextType.NiceName {
+            
+            //昵称
+            
+            self.nicenameLabel.text = text
+            
+        } else if modifytextViewController.textType == YNTextType.UserName {
+            
+            //姓名
+            
+            self.trueNameLabel.text = text
+            
+            
+        } else if modifytextViewController.textType == YNTextType.IDNumber {
+            
+            //身份证号
+            self.idNumberLabel.text = text
+            
+        } else if modifytextViewController.textType == YNTextType.MobileNumber {
+            
+            //号码
+            
+            self.mobelLabel.text = text
+            
+        }
+        
+        
+    }
+    
     
     //MARK: - event response
     @IBAction func doneItemClick(sender: AnyObject) {
@@ -170,12 +211,17 @@ class YNPersionalSettingTableViewController: UITableViewController {
             let destinationVc = segue.destinationViewController as! UINavigationController
            let rootVc = destinationVc.viewControllers[0] as! YNModifytextViewController
             rootVc.textType = YNTextType.NiceName
+            rootVc.textString = self.nicenameLabel.text
+            rootVc.delegate = self
+            
         } else if segue.identifier == "Segue_name" {
             
             //姓名
             let destinationVc = segue.destinationViewController as! UINavigationController
             let rootVc = destinationVc.viewControllers[0] as! YNModifytextViewController
             rootVc.textType = YNTextType.UserName
+            rootVc.textString = self.trueNameLabel.text
+            rootVc.delegate = self
 
         } else if segue.identifier == "Segue_IdNumber" {
             
@@ -183,6 +229,8 @@ class YNPersionalSettingTableViewController: UITableViewController {
             let destinationVc = segue.destinationViewController as! UINavigationController
             let rootVc = destinationVc.viewControllers[0] as! YNModifytextViewController
             rootVc.textType = YNTextType.IDNumber
+            rootVc.textString = self.idNumberLabel.text
+            rootVc.delegate = self
 
         } else if segue.identifier == "Segue_MobileNumber" {
             
@@ -190,7 +238,8 @@ class YNPersionalSettingTableViewController: UITableViewController {
             let destinationVc = segue.destinationViewController as! UINavigationController
             let rootVc = destinationVc.viewControllers[0] as! YNModifytextViewController
             rootVc.textType = YNTextType.MobileNumber
-            
+            rootVc.textString = self.mobelLabel.text
+            rootVc.delegate = self
         }
         
     }
