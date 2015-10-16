@@ -536,7 +536,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         }  else if segue.identifier == "Segue_Province" {
             
             let destinationVc = segue.destinationViewController as! YNProvinceTableViewController
-            destinationVc.data =
+            destinationVc.data = cityData
             destinationVc.delegate = self
             
         }
@@ -545,12 +545,13 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     }
     
     
-    lazy let cityData: Array<YNCityModel> = {
+    let cityData: Array<YNCityModel> = {
         
         let path = NSBundle.mainBundle().pathForResource("cityData", ofType: "plist")
         
         //TODO: 转成plist
         
+        return Array()
         
         }()
 }
