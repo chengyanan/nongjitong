@@ -39,6 +39,8 @@
 		40ED43AE1BC65EA7004713C9 /* YNExchangeRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43AD1BC65EA7004713C9 /* YNExchangeRootController.swift */; settings = {ASSET_TAGS = (); }; };
 		40ED43B01BC66490004713C9 /* YNMeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43AF1BC66490004713C9 /* YNMeTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		40ED43B31BC670FB004713C9 /* YNPersionalSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED43B21BC670FB004713C9 /* YNPersionalSettingTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		40FA6FF31BD4DF6000CFE69C /* YNSearchAndQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FA6FF21BD4DF6000CFE69C /* YNSearchAndQuestionCell.swift */; settings = {ASSET_TAGS = (); }; };
+		40FA6FF51BD4E61500CFE69C /* YNNewQuestionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FA6FF41BD4E61500CFE69C /* YNNewQuestionHeaderView.swift */; settings = {ASSET_TAGS = (); }; };
 		40FCB5AC1BCB7C4600D1C278 /* YNSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FCB5AB1BCB7C4600D1C278 /* YNSettingTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -98,6 +100,8 @@
 		40ED43AD1BC65EA7004713C9 /* YNExchangeRootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNExchangeRootController.swift; sourceTree = "<group>"; };
 		40ED43AF1BC66490004713C9 /* YNMeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMeTableViewController.swift; sourceTree = "<group>"; };
 		40ED43B21BC670FB004713C9 /* YNPersionalSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNPersionalSettingTableViewController.swift; sourceTree = "<group>"; };
+		40FA6FF21BD4DF6000CFE69C /* YNSearchAndQuestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchAndQuestionCell.swift; sourceTree = "<group>"; };
+		40FA6FF41BD4E61500CFE69C /* YNNewQuestionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNNewQuestionHeaderView.swift; sourceTree = "<group>"; };
 		40FCB5AB1BCB7C4600D1C278 /* YNSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSettingTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -288,6 +292,9 @@
 			isa = PBXGroup;
 			children = (
 				40ED439E1BC61ADE004713C9 /* YNHomeViewController.swift */,
+				40FA6FEF1BD4DF0800CFE69C /* conreoller */,
+				40FA6FF01BD4DF0800CFE69C /* model */,
+				40FA6FF11BD4DF0800CFE69C /* view */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -330,6 +337,29 @@
 				4093BAA91BC8F58B005E1A9E /* modify text */,
 			);
 			path = "persional setting";
+			sourceTree = "<group>";
+		};
+		40FA6FEF1BD4DF0800CFE69C /* conreoller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = conreoller;
+			sourceTree = "<group>";
+		};
+		40FA6FF01BD4DF0800CFE69C /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		40FA6FF11BD4DF0800CFE69C /* view */ = {
+			isa = PBXGroup;
+			children = (
+				40FA6FF21BD4DF6000CFE69C /* YNSearchAndQuestionCell.swift */,
+				40FA6FF41BD4E61500CFE69C /* YNNewQuestionHeaderView.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		40FCB5AA1BCB7C1500D1C278 /* setting */ = {
@@ -480,6 +510,8 @@
 				401CCAEE1BD0DB7F00023F66 /* YNBaseModel.swift in Sources */,
 				40ED438F1BC612F9004713C9 /* YNSignUpViewController.swift in Sources */,
 				401CCAF81BD0ED1300023F66 /* YNCityTableViewController.swift in Sources */,
+				40FA6FF31BD4DF6000CFE69C /* YNSearchAndQuestionCell.swift in Sources */,
+				40FA6FF51BD4E61500CFE69C /* YNNewQuestionHeaderView.swift in Sources */,
 				40FCB5AC1BCB7C4600D1C278 /* YNSettingTableViewController.swift in Sources */,
 				40ED43881BC60B76004713C9 /* progressHUD.swift in Sources */,
 				40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */,

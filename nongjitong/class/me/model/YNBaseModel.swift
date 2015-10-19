@@ -13,4 +13,13 @@ class YNBaseModel {
     var id = ""
     var name = ""
     
+    init() {
+    
+    }
+    
+    init(dict: NSDictionary) {
+    
+        self.id = dict["id"] as! String
+        self.name = dict["name"] as! String
+    }
 }

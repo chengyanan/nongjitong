@@ -550,8 +550,17 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         let path = NSBundle.mainBundle().pathForResource("cityData", ofType: "plist")
         
         //TODO: 转成plist
+        let temparray = NSArray(contentsOfFile: path!)
         
-        return Array()
+        var tempCityArray = [YNCityModel]()
+        
+        for item in temparray! {
+            
+            let citymodel = YNCityModel(dict: item as! NSDictionary)
+            tempCityArray.append(citymodel)
+        }
+    
+        return tempCityArray
         
         }()
 }

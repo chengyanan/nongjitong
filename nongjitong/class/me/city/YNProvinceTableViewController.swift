@@ -21,6 +21,15 @@ class YNProvinceTableViewController: UITableViewController, YNCityTableViewContr
     var delegate: YNProvinceTableViewControllerDelegate?
     
     
+    //MARK: - life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "省份"
+        
+    }
+    
+    
     //MARK: tableview datasource
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -46,13 +55,27 @@ class YNProvinceTableViewController: UITableViewController, YNCityTableViewContr
     //MARK: tableview delegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             
-        let vc = UIStoryboard().instantiateViewControllerWithIdentifier("SB_City") as! YNCityTableViewController
-        vc.delegate = self
-        vc.citymodel = data[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = UIStoryboard().instantiateViewControllerWithIdentifier("Storboard_city") as! YNCityTableViewController
+        
+        self.performSegueWithIdentifier("Segue_City", sender: indexPath.row)
         
     }
 
+    //MARK: - Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "Segue_City" {
+        
+            let vc = segue.destinationViewController as! YNCityTableViewController
+            
+            vc.delegate = self
+            vc.citymodel = data[sender as! Int]
+
+        }
+        
+    }
+    
+    
     //MARK: - YNCityTableViewControllerDelegate
     func cityTableViewController(vc: YNCityTableViewController, province: YNBaseModel, city: YNBaseModel) {
         

@@ -18,6 +18,12 @@ class YNCityTableViewController: UITableViewController {
     var citymodel: YNCityModel = YNCityModel()
     var delegate: YNCityTableViewControllerDelegate?
     
+    //MARK: - life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "城市"
+    }
     
     //MARK: tableview datasource 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,6 +57,10 @@ class YNCityTableViewController: UITableViewController {
         province.name = self.citymodel.name
         
         let city = self.citymodel.array[indexPath.row]
+        
+        
+        
+        //TODO: 上传到服务器
         
         self.delegate?.cityTableViewController(self, province: province, city: city)
         self.navigationController?.popViewControllerAnimated(true)

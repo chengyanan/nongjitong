@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YNHomeViewController: UIViewController {
+class YNHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,12 +18,73 @@ class YNHomeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+   //MARK: - UITableViewDataSource
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if section == 0 {
+        
+            return 1
+        }
+        
+        return 7
+    }
 
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let identify: String = "Cell_SearchAndAnswer"
+        var cell: YNSearchAndQuestionCell? = tableView.dequeueReusableCellWithIdentifier(identify) as? YNSearchAndQuestionCell
+        
+        if cell == nil {
+            
+            cell = YNSearchAndQuestionCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
+            
+        }
+    
+        
+        return cell!
+
+    }
+    
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        if indexPath.section == 0 {
+        
+            return 144
+        }
+        
+        return 60
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if section == 0 {
+        
+            return 1
+        }
+        
+        return 36
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        
+        if section == 1 {
+        
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell_NewQuestionHeader")
+
+            return cell
+        }
+        
+        return nil
+    }
+    
     /*
     // MARK: - Navigation
 
