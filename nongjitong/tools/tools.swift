@@ -47,6 +47,35 @@ struct Tools {
         userDefault.removeObjectForKey(forKey)
     }
     
+    func removePresentEncoding(text: String) ->String? {
+    
+        if text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
+        
+            return nil
+        }
+    
+//        let text2 = text.stringByReplacingOccurrencesOfString("<p>", withString: "")
+//        
+//        let text3 = text2.stringByReplacingOccurrencesOfString("</b>", withString: "")
+//        let text4 = text3.stringByReplacingOccurrencesOfString("&nbsp;", withString: "")
+//        let text5 = text4.stringByReplacingOccurrencesOfString("\\n", withString: "")
+//        let text6 = text5.stringByReplacingOccurrencesOfString("\\r", withString: "")
+//        
+//        let text7 = text6.stringByReplacingOccurrencesOfString("<b>", withString: "")
+//        let text8 = text7.stringByReplacingOccurrencesOfString("</p>", withString: "\n\n")
+//        
+//        let text9 = text8.stringByReplacingOccurrencesOfString("<br>", withString: "")
+//        let text10 = text9.stringByReplacingOccurrencesOfString(";;;", withString: "")
+//        let text11 = text10.stringByReplacingOccurrencesOfString("", withString: "&micro;")
+        
+        let text1 = text.stringByReplacingOccurrencesOfString("&nbsp;数据来源", withString: "\n数据来源")
+        let text2 = text1.stringByReplacingOccurrencesOfString("&nbsp;", withString: "")
+        let text3 = text2.stringByReplacingOccurrencesOfString("\r\n", withString: " ")
+        let text4 = text3.stringByReplacingOccurrencesOfString("\t", withString: "")
+        let text5 = text4.stringByReplacingOccurrencesOfString("&", withString: "")
+        let text6 = text5.stringByReplacingOccurrencesOfString("  ", withString: "")
+        return text6
+    }
     
 }
 

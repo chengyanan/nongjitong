@@ -188,7 +188,6 @@ class YNSignInViewController: UIViewController {
     
     lazy var signInButton: UIButton! = {
         var button = UIButton()
-        
         button.layer.cornerRadius = 3
         button.backgroundColor = kStyleColor
         button.translatesAutoresizingMaskIntoConstraints = false

@@ -37,17 +37,35 @@ class YNHomeViewController: UIViewController, UITableViewDataSource, UITableView
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let identify: String = "Cell_SearchAndAnswer"
-        var cell: YNSearchAndQuestionCell? = tableView.dequeueReusableCellWithIdentifier(identify) as? YNSearchAndQuestionCell
+        if indexPath.section == 0 {
+        
+            let identify: String = "Cell_SearchAndAnswer"
+            var cell: YNSearchAndQuestionCell? = tableView.dequeueReusableCellWithIdentifier(identify) as? YNSearchAndQuestionCell
+            
+            if cell == nil {
+                
+                cell = YNSearchAndQuestionCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
+                
+            }
+            
+            
+            return cell!
+        
+        }
+        
+        let identify: String = "CELL_RestaurantName"
+        var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(identify)
         
         if cell == nil {
             
-            cell = YNSearchAndQuestionCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
+            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
             
         }
-    
+        
+        cell?.textLabel?.text = "rose"
         
         return cell!
+
 
     }
     

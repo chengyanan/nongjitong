@@ -37,6 +37,7 @@ class YNMeTableViewController: UITableViewController {
             
             destinationVc.isFromMeVc = true
             
+            
         }
         
         

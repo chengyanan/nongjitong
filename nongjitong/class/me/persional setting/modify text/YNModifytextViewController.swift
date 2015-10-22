@@ -69,8 +69,9 @@ class YNModifytextViewController: UIViewController {
         textfield.leftViewMode = UITextFieldViewMode.Always
         textfield.text = self.textString
     }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         textfield.becomeFirstResponder()
     }
