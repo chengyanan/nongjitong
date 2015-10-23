@@ -24,6 +24,9 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                 
                 //从服务器获取数据，设置界面数据
                 //TODO:从服务器获取数据，设置界面数据
+                
+                
+                
             } else {
             
                 //从登录界面转过来的
@@ -67,7 +70,16 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     
         self.avatorImageView.layer.cornerRadius = 3
         self.avatorImageView.clipsToBounds = true
+    
     }
+    
+    //MARK: load data 
+    func loadDataFromServer() {
+    
+        
+        
+    }
+    
     
     //MARK: - private method
     func setEmptyInterfaceData() {
@@ -79,6 +91,8 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         self.trueNameLabel.text = nil
         self.genderLabel.text = nil
         self.idNumberLabel.text = nil
+        
+        
     }
     
     

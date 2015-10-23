@@ -53,14 +53,14 @@ class Network {
 }
 
 class NetworkManager {
-    let method: String!
-    let url: String!
+    let method: String
+    let url: String
     let params: [String: String?]
     let success: (data: NSData, response: NSURLResponse, error: NSError?)->Void
     let failure: (error: NSError)->Void
     let session = NSURLSession.sharedSession()
-    var request: NSMutableURLRequest!
-    var task: NSURLSessionTask!
+    var request: NSMutableURLRequest
+    var task: NSURLSessionTask?
     
     init(method: String, url: String, params: [String: String?], success: (data: NSData, response: NSURLResponse, error: NSError?)->Void, failure: (error: NSError)->Void) {
    
@@ -107,7 +107,7 @@ class NetworkManager {
 
         })
         
-        task.resume()
+        task!.resume()
     }
     
     func buildBody() {
@@ -121,7 +121,7 @@ class NetworkManager {
     func buildRequest() {
    
         
-        if self.params.count>0 {
+        if self.params.count > 0 {
             
             let tempUrl = url + "?" + buildParams(self.params)
             

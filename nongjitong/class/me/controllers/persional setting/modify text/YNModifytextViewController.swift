@@ -99,12 +99,23 @@ class YNModifytextViewController: UIViewController {
             
                 YNProgressHUD().showText("请填写昵称", toView: self.view)
             } else {
-            
+                
                 //TODO:向服务器提交昵称
+                let progress = YNProgressHUD().showWaitingToView(self.view)
+                YNHttpTool().updateUserInformationNiceName(textfield.text, successFull: { (data) -> Void in
+                    
+                    progress.hideUsingAnimation()
+                    
+                    
+                    
+                    }, failureFul: { (error) -> Void in
+                       
+                        progress.hideUsingAnimation()
+                })
                 
                 
                 //提交成功之后把数据传给代理控制器
-                self.delegate?.modifytextViewController(self, text: textfield.text)
+                self.delegate?.modifytextViewController(self, text: self.textfield.text)
                 self.dismissViewControllerAnimated(true, completion: nil)
                 
             }
@@ -149,7 +160,6 @@ class YNModifytextViewController: UIViewController {
         
         
     }
-    
     
     
     
