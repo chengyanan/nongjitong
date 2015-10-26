@@ -100,44 +100,28 @@ class YNModifytextViewController: UIViewController {
                 YNProgressHUD().showText("请填写昵称", toView: self.view)
             } else {
                 
-                //TODO:向服务器提交昵称
-                let progress = YNProgressHUD().showWaitingToView(self.view)
-                YNHttpTool().updateUserInformationNiceName(textfield.text, successFull: { (data) -> Void in
-                    
-                    progress.hideUsingAnimation()
-                    
-                    
-                    
-                    }, failureFul: { (error) -> Void in
-                       
-                        progress.hideUsingAnimation()
-                })
-                
-                
-                //提交成功之后把数据传给代理控制器
-                self.delegate?.modifytextViewController(self, text: self.textfield.text)
-                self.dismissViewControllerAnimated(true, completion: nil)
-                
+                //向服务器提交昵称
+                let dict = ["paraName": "nickname",
+                                "text": self.textfield.text!]
+                updateUserInformation(dict)
             }
             
             
         } else if self.textType == YNTextType.UserName {
             
-            //TODO:向服务器提交姓名
+            //向服务器提交姓名
             
-            
-            //提交成功之后把数据传给代理控制器
-            self.delegate?.modifytextViewController(self, text: textfield.text)
-            self.dismissViewControllerAnimated(true, completion: nil)
+            let dict = ["paraName": "truename",
+                "text": self.textfield.text!]
+            updateUserInformation(dict)
             
         } else if self.textType == YNTextType.IDNumber {
             
-            //TODO:向服务器提交身份证号
+            //向服务器提交身份证号
             
-            
-            //提交成功之后把数据传给代理控制器
-            self.delegate?.modifytextViewController(self, text: textfield.text)
-            self.dismissViewControllerAnimated(true, completion: nil)
+            let dict = ["paraName": "id_num",
+                "text": self.textfield.text!]
+            updateUserInformation(dict)
             
         } else if self.textType == YNTextType.MobileNumber {
             
@@ -149,14 +133,57 @@ class YNModifytextViewController: UIViewController {
                 
                 //TODO:向服务器提交手机号
                 
-                
-                //提交成功之后把数据传给代理控制器
-                self.delegate?.modifytextViewController(self, text: textfield.text)
-                self.dismissViewControllerAnimated(true, completion: nil)
+                let dict = ["paraName": "mobile",
+                    "text": self.textfield.text!]
+                updateUserInformation(dict)
                 
             }
 
         }
+        
+        
+    }
+    
+    //MARK:向服务器提交修改的数据
+    func updateUserInformation(dict: [String: String]) {
+    
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpTool().updateUserInformationText(dict, successFull: { (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    let msg = json["msg"] as! String
+                    
+                    print("\n \(msg) \n")
+                    
+                    
+                    //提交成功之后把数据传给代理控制器
+                    self.delegate?.modifytextViewController(self, text: self.textfield.text)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: self.view)
+                        
+                        print("\n \(msg) \n")
+                    }
+                }
+                
+            }
+            
+            
+            }, failureFul: { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("请求失败", toView: self.view)
+                
+        })
         
         
     }
