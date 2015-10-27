@@ -10,6 +10,7 @@ import Foundation
 
 class YNHttpTool {
     
+    //MARK: - 提交单项资料
     func updateUserInformationText(dict: [String: String], successFull: ((json: NSDictionary)->Void)?, failureFul: ((error: NSError!)->Void)?) {
         
         let userId = kUser_ID() as? String
@@ -50,6 +51,42 @@ class YNHttpTool {
         
     }
 
+   //MARK: - 获取用户资料
+    func getUserInformation(successFull: ((json: NSDictionary)->Void)?, failureFul: ((error: NSError!)->Void)?) {
+    
+        let userId = kUser_ID() as? String
+        
+        let params = ["m": "Appapi",
+            "key": "edge5de7se4b5xd",
+            "c": "User",
+            "a": "getUser",
+            "id": userId,
+        ]
+        
+        Network.post(kURL, params: params, success: { (data, response, error) -> Void in
+            
+            let json: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+            
+//            print("data - \(json)")
+            
+            if let _ = successFull {
+                
+                successFull!(json: json)
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                if let _ = failureFul {
+                    
+                    failureFul!(error: error)
+                }
+                
+                
+        }
+
+    
+    }
     
     
 }

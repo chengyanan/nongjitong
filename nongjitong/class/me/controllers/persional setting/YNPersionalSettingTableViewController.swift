@@ -12,36 +12,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
 
     //MARK: - public proporty 
     
-    var isFromMeVc: Bool? {
-    
-        didSet {
-        
-            if isFromMeVc! {
-            
-                //从个人资料界面转过来的
-                self.rightBarButtonItem.enabled = false
-                self.rightBarButtonItem.title = nil
-                
-                //从服务器获取数据，设置界面数据
-                //TODO:从服务器获取数据，设置界面数据
-                
-                
-                
-            } else {
-            
-                //从登录界面转过来的
-                self.rightBarButtonItem.enabled = false
-                self.rightBarButtonItem.title = "完成"
-                
-                //设置空白的界面数据
-                self.setEmptyInterfaceData()
-                
-            }
-        
-        }
-    
-    }
-    
+    var isFromMeVc: Bool?     
     
     //MARK: - private proporty
     //头像
@@ -63,6 +34,15 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     
     @IBOutlet weak var rightBarButtonItem: UIBarButtonItem!
     
+    var information: YNUserInformationModel? {
+    
+        didSet {
+        
+            self.setUserInformationData(information!)
+        
+        }
+        
+    }
     
     //MARK: - life cycle
     override func viewDidLoad() {
@@ -70,28 +50,92 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     
         self.avatorImageView.layer.cornerRadius = 3
         self.avatorImageView.clipsToBounds = true
+        
+        //设置空白的界面数据
+        self.setEmptyInterfaceData()
+        
+        if isFromMeVc! {
+            
+            //从个人资料界面转过来的
+            self.rightBarButtonItem.enabled = false
+            self.rightBarButtonItem.title = nil
+            
+            //从服务器获取数据，设置界面数据
+//            loadDataFromServer()
+            
+        } else {
+            
+            //从注册界面转过来的
+            self.rightBarButtonItem.enabled = false
+            self.rightBarButtonItem.title = "完成"
+            
+        }
     
     }
     
-    //MARK: load data 
+    //MARK: 获取用户信息
     func loadDataFromServer() {
-    
         
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpTool().getUserInformation({ (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    let dict = json["data"] as! NSDictionary
+                    
+                    let tempInfo = YNUserInformationModel(dict: dict)
+                    
+                    self.information = tempInfo
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: self.view)
+                        
+                        print("\n \(msg) \n")
+                    }
+                }
+                
+            }
+            
+            
+            }) { (error) -> Void in
+                
+              progress.hideUsingAnimation()
+              YNProgressHUD().showText("请求失败", toView: self.view)
+                
+        }
         
     }
     
     
     //MARK: - private method
+    func setUserInformationData(data: YNUserInformationModel) {
+        
+        self.nicenameLabel.text = data.nickname
+        self.roleIDLabel.text = data.role
+        self.areaIDLabel.text = data.area_id
+        self.mobelLabel.text = data.mobile
+        self.trueNameLabel.text = data.truename
+        self.genderLabel.text = data.sex
+        self.idNumberLabel.text = data.id_num
+        
+    }
+    
     func setEmptyInterfaceData() {
     
-        self.nicenameLabel.text = nil
-        self.roleIDLabel.text = nil
-        self.areaIDLabel.text = nil
+        self.nicenameLabel.text = ""
+        self.roleIDLabel.text = ""
+        self.areaIDLabel.text = ""
         self.mobelLabel.text = kUser_MobileNumber() as? String
-        self.trueNameLabel.text = nil
-        self.genderLabel.text = nil
-        self.idNumberLabel.text = nil
-        
+        self.trueNameLabel.text = ""
+        self.genderLabel.text = ""
+        self.idNumberLabel.text = ""
         
     }
     
@@ -473,9 +517,9 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     }
     
     //MARK: - YNProvinceTableViewControllerDelegate
-    func provinceTableViewController(vc: YNProvinceTableViewController, province: YNBaseModel, city: YNBaseModel) {
+    func provinceTableViewController(vc: YNProvinceTableViewController, province: YNBaseCityModel, city: YNBaseModel) {
         
-        self.areaIDLabel.text = "\(province.name)  \(city.name)"
+        self.areaIDLabel.text = "\(province.city_name)  \(city.name)"
         
     }
     
@@ -550,7 +594,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         }  else if segue.identifier == "Segue_Province" {
             
             let destinationVc = segue.destinationViewController as! YNProvinceTableViewController
-            destinationVc.data = cityData
+//            destinationVc.data = cityData
             destinationVc.delegate = self
             
         }
@@ -563,7 +607,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         
         let path = NSBundle.mainBundle().pathForResource("cityData", ofType: "plist")
         
-        //TODO: 转成plist
+        //转成plist
         let temparray = NSArray(contentsOfFile: path!)
         
         var tempCityArray = [YNCityModel]()

@@ -11,13 +11,13 @@ import UIKit
 
 protocol YNProvinceTableViewControllerDelegate {
     
-    func provinceTableViewController(vc: YNProvinceTableViewController, province: YNBaseModel, city: YNBaseModel)
+    func provinceTableViewController(vc: YNProvinceTableViewController, province: YNBaseCityModel, city: YNBaseModel)
 }
 
 class YNProvinceTableViewController: UITableViewController, YNCityTableViewControllerDelegate {
 
     
-    var data: Array<YNCityModel> = Array()
+    var data = [YNBaseCityModel]()
     var delegate: YNProvinceTableViewControllerDelegate?
     
     
@@ -27,8 +27,53 @@ class YNProvinceTableViewController: UITableViewController, YNCityTableViewContr
         
         self.title = "省份"
         
+        getdataFromServer()
     }
     
+    //MARK: 获取数据
+    func getdataFromServer() {
+    
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpGetCityTool().getAreaChildsWithParentId("0", successFull: { (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    let tempdata = json["data"] as! NSArray
+                    
+                    for item in tempdata {
+                    
+                        let city = YNBaseCityModel(dict: item as! NSDictionary)
+                        
+                        self.data.append(city)
+                    }
+                    
+                    //tableview加载数据
+                    self.tableView.reloadData()
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: self.view)
+                        
+                        print("\n \(msg) \n")
+                    }
+                }
+                
+            }
+            
+            
+            }) { (error) -> Void in
+              
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("请求失败", toView: self.view)
+        }
+        
+    }
     
     //MARK: tableview datasource
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,7 +91,7 @@ class YNProvinceTableViewController: UITableViewController, YNCityTableViewContr
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: idetify)
         }
         
-        cell?.textLabel?.text = data[indexPath.row].name
+        cell?.textLabel?.text = data[indexPath.row].city_name
         
         return cell!
         
@@ -54,8 +99,6 @@ class YNProvinceTableViewController: UITableViewController, YNCityTableViewContr
     
     //MARK: tableview delegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            
-//        let vc = UIStoryboard().instantiateViewControllerWithIdentifier("Storboard_city") as! YNCityTableViewController
         
         self.performSegueWithIdentifier("Segue_City", sender: indexPath.row)
         
@@ -69,7 +112,7 @@ class YNProvinceTableViewController: UITableViewController, YNCityTableViewContr
             let vc = segue.destinationViewController as! YNCityTableViewController
             
             vc.delegate = self
-            vc.citymodel = data[sender as! Int]
+            vc.province = data[sender as! Int]
 
         }
         
@@ -77,7 +120,7 @@ class YNProvinceTableViewController: UITableViewController, YNCityTableViewContr
     
     
     //MARK: - YNCityTableViewControllerDelegate
-    func cityTableViewController(vc: YNCityTableViewController, province: YNBaseModel, city: YNBaseModel) {
+    func cityTableViewController(vc: YNCityTableViewController, province: YNBaseCityModel, city: YNBaseModel) {
         
         self.delegate?.provinceTableViewController(self, province: province, city: city)
         
