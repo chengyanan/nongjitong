@@ -32,6 +32,20 @@ class Network {
 
     }
     
+    //上传图片
+    static func post(url: String, params: [String: String?], files: Array<File>,  success: (data: NSData!, response: NSURLResponse!, error: NSError?)->Void, failure: (error: NSError!)->Void) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+            
+            let manager = NetworkManager(method: "POST", url: url, params: params, files: files, success: success, failure: failure)
+            
+            manager.fire()
+        })
+        
+    }
+
+    
+    //加载图片
     static func getImageWithURL(url: String, success:(data: NSData)->Void) {
    
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
@@ -50,6 +64,8 @@ class Network {
             
         })
     }
+    
+    
 }
 
 class NetworkManager {
@@ -62,7 +78,12 @@ class NetworkManager {
     var request: NSMutableURLRequest
     var task: NSURLSessionTask?
     
-    init(method: String, url: String, params: [String: String?], success: (data: NSData, response: NSURLResponse, error: NSError?)->Void, failure: (error: NSError)->Void) {
+    //add files
+    var files: Array<File>
+    //指定的间隔符
+    let boundary = "PitayaUGl0YXlh"
+    
+    init(method: String, url: String, params: [String: String?], files : Array<File> = [File](), success: (data: NSData, response: NSURLResponse, error: NSError?)->Void, failure: (error: NSError)->Void) {
    
         self.method = method
         self.url = url
@@ -70,6 +91,8 @@ class NetworkManager {
         self.success = success
         self.failure = failure
         self.request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        
+        self.files = files
         
     }
     
@@ -111,10 +134,39 @@ class NetworkManager {
     }
     
     func buildBody() {
-   
-        if self.params.count > 0 && self.method != "GET" {
-            request.HTTPBody = buildParams(self.params).dataUsingEncoding(NSUTF8StringEncoding)
+        
+        let data = NSMutableData()
+        
+        if self.files.count > 0 {
+        
+            for (key, value) in self.params {
+            
+                data.appendData("--\(self.boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                data.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                data.appendData("\(value!)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                
+            }
+            
+            for file in files {
+            
+                data.appendData("--\(self.boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                data.appendData("Content-Disposition: form-data; name=\"\(file.name)\"; filename=\"\(NSString(string: file.url.description).lastPathComponent)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                
+                if let a = NSData(contentsOfURL: file.url) {
+                    data.appendData(a)
+                    data.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                }
+            
+            }
+            
+            data.appendData("--\(self.boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            
+        } else if self.params.count > 0 && self.method != "GET" {
+            
+             data.appendData(buildParams(self.params).dataUsingEncoding(NSUTF8StringEncoding)!)
         }
+        
+        request.HTTPBody = data
     }
     
    
@@ -140,10 +192,16 @@ class NetworkManager {
 //        }
         
         request.HTTPMethod = self.method
-        if self.params.count > 0 {
+        
+        if self.files.count > 0 {
+        
+            request.addValue("multipart/form-data; boundary=" + self.boundary, forHTTPHeaderField: "Content-Type")
+            
+        } else if self.params.count > 0 {
        
             request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         }
+        
 
     }
     
@@ -182,5 +240,19 @@ class NetworkManager {
         let legalURLCharactersToBeEscaped: CFStringRef = generalDelimiters + subDelimiters
         
         return CFURLCreateStringByAddingPercentEscapes(nil, string, nil, legalURLCharactersToBeEscaped, CFStringBuiltInEncodings.UTF8.rawValue) as String
+    }
+    
+    
+    
+    
+}
+
+//MARK: struct file
+struct File {
+    let name: String!
+    let url: NSURL!
+    init(name: String, url: NSURL) {
+        self.name = name
+        self.url = url
     }
 }

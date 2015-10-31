@@ -68,6 +68,7 @@ class YNModifytextViewController: UIViewController {
         textfield.leftView = UIView(frame: CGRectMake(0, 0, 16, 10))
         textfield.leftViewMode = UITextFieldViewMode.Always
         textfield.text = self.textString
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -111,8 +112,10 @@ class YNModifytextViewController: UIViewController {
             
             //向服务器提交姓名
             
+            let name = self.textfield.text!
+            
             let dict = ["paraName": "truename",
-                "text": self.textfield.text!]
+                "text": name]
             updateUserInformation(dict)
             
         } else if self.textType == YNTextType.IDNumber {
@@ -131,7 +134,7 @@ class YNModifytextViewController: UIViewController {
                 
             } else {
                 
-                //TODO:向服务器提交手机号
+                //向服务器提交手机号
                 
                 let dict = ["paraName": "mobile",
                     "text": self.textfield.text!]

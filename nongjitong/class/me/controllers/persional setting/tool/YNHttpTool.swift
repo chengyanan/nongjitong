@@ -10,6 +10,42 @@ import Foundation
 
 class YNHttpTool {
     
+    //MARK: 提交头像
+    func updataUserAvatorImage(files: [File], successFull: ((json: NSDictionary)->Void)?, failureFul: ((error: NSError!)->Void)?) {
+    
+        let userId = kUser_ID() as? String
+        
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "edge5de7se4b5xd",
+            "c": "User",
+            "a": "update",
+            "id": userId,
+        ]
+
+        Network.post(kURL, params: params, files: files, success: { (data, response, error) -> Void in
+            
+            let json: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+            
+            print("data - \(json)")
+            
+            if let _ = successFull {
+                
+                successFull!(json: json)
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                
+                if let _ = failureFul {
+                    
+                    failureFul!(error: error)
+                }
+                
+        }
+    }
+    
+    
     //MARK: - 提交单项资料
     func updateUserInformationText(dict: [String: String], successFull: ((json: NSDictionary)->Void)?, failureFul: ((error: NSError!)->Void)?) {
         

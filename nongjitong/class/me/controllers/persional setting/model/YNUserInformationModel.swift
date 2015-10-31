@@ -16,10 +16,13 @@ class YNUserInformationModel {
     var mobile = ""
     var area_id = ""
     var role = ""
+    var role_id = ""
+    var password = ""
     var truename: String?
     var sex: String?
     var id_num: String?
     var address: String?
+    var avatar: String?
     
     init(dict: NSDictionary) {
     
@@ -29,11 +32,14 @@ class YNUserInformationModel {
         self.mobile = dict["mobile"] as! String
         self.area_id = dict["area_id"] as! String
         self.role = dict["role"] as! String
-        
+        self.role_id = dict["role_id"] as! String
         self.truename = dict["truename"] as? String
         self.sex = dict["sex"] as? String
         self.id_num = dict["id_num"] as? String
         self.address = dict["address"] as? String
+        self.password = dict["password"] as! String
+        
+        self.avatar = dict["avatar"] as? String
         
     }
     

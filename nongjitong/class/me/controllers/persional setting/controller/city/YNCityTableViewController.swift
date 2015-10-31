@@ -111,12 +111,58 @@ class YNCityTableViewController: UITableViewController {
         basemodel.name = city.city_name
         
         //TODO: 上传到服务器
+        sendCityDataToSever(basemodel)
         
-        self.delegate?.cityTableViewController(self, province: self.province!, city: basemodel)
-        self.navigationController?.popViewControllerAnimated(true)
+        
+        let vc = self.navigationController?.viewControllers[1]
+        self.navigationController?.popToViewController(vc!, animated: true)
+        
+//        self.delegate?.cityTableViewController(self, province: self.province!, city: basemodel)
+//        self.navigationController?.popViewControllerAnimated(true)
         
     }
     
+    //MARK: 上传地区
+    func sendCityDataToSever(baseModel: YNBaseModel) {
     
+        let dict = ["paraName": "area_id",
+            "text": baseModel.id]
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        
+        YNHttpTool().updateUserInformationText(dict, successFull: { (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    let msg = json["msg"] as! String
+                    
+                    //#warning: msg是更新成功 不是登陆成功
+                    print("\n \(msg) \n")
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: self.view)
+                        
+                        print("\n \(msg) \n")
+                    }
+                }
+                
+            }
+            
+            
+            }, failureFul: { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("请求失败", toView: self.view)
+                
+        })
+
+    }
     
 }
