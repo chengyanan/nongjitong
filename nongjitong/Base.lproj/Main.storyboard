@@ -1105,60 +1105,148 @@
             <point key="canvasLocation" x="403" y="-1646"/>
         </scene>
         <!--提问-->
-        <scene sceneID="mgX-EV-Qkp">
+        <scene sceneID="8zQ-7O-29x">
             <objects>
-                <tableViewController id="Xeh-4K-YcG" customClass="YNAskQuestionTableViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="112" sectionHeaderHeight="18" sectionFooterHeight="18" id="zT6-mh-CWd">
+                <viewController id="Fsx-bZ-U0G" customClass="YNAskQuestionViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5xg-P0-jyw"/>
+                        <viewControllerLayoutGuide type="bottom" id="5p3-dx-HBu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ABp-gj-r8o">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
-                            <tableViewSection id="yNm-P3-cno">
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uMx-Ff-7Yh">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ils-Pk-B63">
+                                    <size key="itemSize" width="407" height="104"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="112" id="tae-Wy-beB">
-                                        <rect key="frame" x="0.0" y="99" width="600" height="112"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tae-Wy-beB" id="hNv-vv-fOg">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="111"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell_Ask_Qustion_text" id="mgg-PZ-lCY" customClass="YNAskQuestionTextCollectionViewCell" customModule="nongjitong" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="64" width="407" height="104"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="407" height="104"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="112" id="u4l-Mi-0bw">
-                                        <rect key="frame" x="0.0" y="211" width="600" height="112"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u4l-Mi-0bw" id="xCf-Yi-AGJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="111"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请输入问题的描述" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5Rn-1F-cn4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="407" height="104"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="5Rn-1F-cn4" firstAttribute="leading" secondItem="mgg-PZ-lCY" secondAttribute="leading" id="O2F-X6-9fK"/>
+                                            <constraint firstItem="5Rn-1F-cn4" firstAttribute="top" secondItem="mgg-PZ-lCY" secondAttribute="top" id="aNJ-Ep-Agy"/>
+                                            <constraint firstAttribute="bottom" secondItem="5Rn-1F-cn4" secondAttribute="bottom" id="hqB-C0-7gX"/>
+                                            <constraint firstAttribute="trailing" secondItem="5Rn-1F-cn4" secondAttribute="trailing" id="zO7-Fx-Has"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="textView" destination="5Rn-1F-cn4" id="hNd-zL-KOt"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell_Ask_Qustion_Image" id="tuU-E7-GQc" customClass="YNAskQuestionImageCollectionViewCell" customModule="nongjitong" customModuleProvider="target">
+                                        <rect key="frame" x="490" y="64" width="110" height="104"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="110" height="104"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="112" id="Vrc-FC-NTC">
-                                        <rect key="frame" x="0.0" y="323" width="600" height="112"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vrc-FC-NTC" id="HHr-0W-i7T">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="111"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JSf-WS-1Rg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="110" height="104"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xKr-lw-eO0">
+                                                    <rect key="frame" x="6" y="6" width="98" height="92"/>
+                                                    <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" image="home_ask_question_camera"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2at-Rz-dC5">
+                                                    <rect key="frame" x="70" y="0.0" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="8UD-Xe-hHa"/>
+                                                        <constraint firstAttribute="width" constant="40" id="RCV-cZ-9S8"/>
+                                                    </constraints>
+                                                    <state key="normal" image="home_ask_qusetion_delete"/>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="2at-Rz-dC5" firstAttribute="top" secondItem="tuU-E7-GQc" secondAttribute="top" id="1MW-6i-isC"/>
+                                            <constraint firstAttribute="bottom" secondItem="JSf-WS-1Rg" secondAttribute="bottom" id="BfJ-BP-eto"/>
+                                            <constraint firstAttribute="trailing" secondItem="JSf-WS-1Rg" secondAttribute="trailing" id="JVw-K0-gTX"/>
+                                            <constraint firstAttribute="bottom" secondItem="xKr-lw-eO0" secondAttribute="bottom" constant="6" id="coF-90-EVx"/>
+                                            <constraint firstItem="JSf-WS-1Rg" firstAttribute="leading" secondItem="tuU-E7-GQc" secondAttribute="leading" id="dOK-Zv-hig"/>
+                                            <constraint firstAttribute="trailing" secondItem="xKr-lw-eO0" secondAttribute="trailing" constant="6" id="gMP-Lk-2Y2"/>
+                                            <constraint firstAttribute="trailing" secondItem="2at-Rz-dC5" secondAttribute="trailing" id="jID-hi-kdf"/>
+                                            <constraint firstItem="xKr-lw-eO0" firstAttribute="top" secondItem="tuU-E7-GQc" secondAttribute="top" constant="6" id="kDb-ef-33R"/>
+                                            <constraint firstItem="JSf-WS-1Rg" firstAttribute="top" secondItem="tuU-E7-GQc" secondAttribute="top" id="mrY-El-cz2"/>
+                                            <constraint firstItem="xKr-lw-eO0" firstAttribute="leading" secondItem="tuU-E7-GQc" secondAttribute="leading" constant="6" id="sbN-Hq-SKT"/>
+                                        </constraints>
+                                        <size key="customSize" width="110" height="104"/>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell_Ask_Qustion_Location" id="1Pz-qU-b4N" customClass="YNAskQuestionLocationCollectionViewCell" customModule="nongjitong" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="178" width="407" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="407" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXi-KX-bHd">
+                                                    <rect key="frame" x="6" y="0.0" width="104" height="50"/>
+                                                    <state key="normal" title="当前位置" image="home_ask_question_location">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="JXi-KX-bHd" firstAttribute="top" secondItem="1Pz-qU-b4N" secondAttribute="top" id="9oV-rU-zxn"/>
+                                            <constraint firstItem="JXi-KX-bHd" firstAttribute="leading" secondItem="1Pz-qU-b4N" secondAttribute="leading" constant="6" id="dFm-P5-ELN"/>
+                                            <constraint firstAttribute="bottom" secondItem="JXi-KX-bHd" secondAttribute="bottom" id="eKe-MY-3HQ"/>
+                                        </constraints>
+                                        <size key="customSize" width="407" height="50"/>
+                                    </collectionViewCell>
                                 </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="Xeh-4K-YcG" id="gm1-Ae-y5F"/>
-                            <outlet property="delegate" destination="Xeh-4K-YcG" id="zcw-in-TjR"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="提问" id="GrP-ti-dAJ">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="2Gv-3b-ZUc">
+                                <connections>
+                                    <outlet property="dataSource" destination="Fsx-bZ-U0G" id="kEk-Ul-JeK"/>
+                                    <outlet property="delegate" destination="Fsx-bZ-U0G" id="euV-Sx-YMr"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uMx-Ff-7Yh" firstAttribute="top" secondItem="5xg-P0-jyw" secondAttribute="bottom" constant="-64" id="0k8-C0-NyT"/>
+                            <constraint firstItem="5p3-dx-HBu" firstAttribute="top" secondItem="uMx-Ff-7Yh" secondAttribute="bottom" id="HOm-uW-bw5"/>
+                            <constraint firstItem="uMx-Ff-7Yh" firstAttribute="leading" secondItem="ABp-gj-r8o" secondAttribute="leading" id="O44-my-TfX"/>
+                            <constraint firstAttribute="trailing" secondItem="uMx-Ff-7Yh" secondAttribute="trailing" id="dNe-Fk-xqs"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="提问" id="lzC-4t-5iq">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="rfb-xc-o3d">
                             <connections>
-                                <action selector="cancle:" destination="Xeh-4K-YcG" id="yPL-om-mDb"/>
+                                <action selector="cancle:" destination="Fsx-bZ-U0G" id="vWL-yJ-WGh"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="发布" id="jtP-zF-vmR"/>
+                        <barButtonItem key="rightBarButtonItem" title="发布" id="1NS-Hd-T4x"/>
                     </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LZa-ZI-Uzs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <connections>
+                        <outlet property="collectionView" destination="uMx-Ff-7Yh" id="CND-4k-4s3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="frq-4x-CoW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="397" y="-997"/>
+            <point key="canvasLocation" x="384" y="-1008"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="p3w-9F-lbR">
@@ -1169,7 +1257,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Xeh-4K-YcG" kind="relationship" relationship="rootViewController" id="CCX-3U-1WZ"/>
+                        <segue destination="Fsx-bZ-U0G" kind="relationship" relationship="rootViewController" id="9rg-Zx-LPo"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yI1-td-nCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1296,6 +1384,9 @@
     </scenes>
     <resources>
         <image name="homeSearch" width="16" height="16"/>
+        <image name="home_ask_question_camera" width="30" height="23"/>
+        <image name="home_ask_question_location" width="32" height="32"/>
+        <image name="home_ask_qusetion_delete" width="22" height="22"/>
         <image name="tabBar_help" width="27" height="27"/>
         <image name="tabBar_home" width="25" height="25"/>
         <image name="tabBar_me" width="25" height="25"/>
