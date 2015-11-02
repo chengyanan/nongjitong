@@ -15,19 +15,31 @@ class YNAskQuestionTextCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.greenColor()
-        
-        
-    }
+
+        self.contentView.addSubview(inputTextView)
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        self.textView.text = "hello rose"
+        setLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    
+    func setLayout() {
+        
+        Layout().addLeftTopBottomConstraints(inputTextView, toView: self.contentView, multiplier: 1, constant: 0)
+        
+        Layout().addRightConstraint(inputTextView, toView: self.contentView, multiplier: 1, constant: 0)
+    }
+    
+    let inputTextView: YNTextView = {
+        
+        let tempView = YNTextView()
+        tempView.placeHolder = "请输入问题描述"
+        tempView.translatesAutoresizingMaskIntoConstraints = false
+        return tempView
+        
+    }()
+    
 }

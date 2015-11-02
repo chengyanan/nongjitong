@@ -12,19 +12,21 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let maxImageCount = 3
+    
+    var imageArray = [UIImage]()
+    
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.collectionView.registerClass(YNAskQuestionTextCollectionViewCell.self, forCellWithReuseIdentifier: "Cell_Ask_Qustion_text")
-//        
-//        self.collectionView.registerClass(YNAskQuestionImageCollectionViewCell.self , forCellWithReuseIdentifier: "Cell_Ask_Qustion_Image")
-//        
-//        self.collectionView.registerClass(YNAskQuestionLocationCollectionViewCell.self , forCellWithReuseIdentifier: "Cell_Ask_Qustion_Location")
+        self.collectionView.registerClass(YNAskQuestionTextCollectionViewCell.self, forCellWithReuseIdentifier: "Cell_Ask_Qustion_text")
         
+        self.collectionView.registerClass(YNAskQuestionImageCollectionViewCell.self , forCellWithReuseIdentifier: "Cell_Ask_Qustion_Image")
+        
+        self.collectionView.registerClass(YNAskQuestionLocationCollectionViewCell.self , forCellWithReuseIdentifier: "Cell_Ask_Qustion_Location")
         
         let flow = UICollectionViewFlowLayout()
-        
         
         flow.minimumInteritemSpacing = 6
         flow.minimumLineSpacing = 16
@@ -38,7 +40,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         flow.scrollDirection = UICollectionViewScrollDirection.Vertical
         self.collectionView.collectionViewLayout = flow
         
-        self.collectionView.backgroundColor = UIColor.whiteColor()
+        self.collectionView.backgroundColor = kRGBA(234, g: 234, b: 234, a: 1)
         
         self.collectionView.bounces = true
     }
@@ -76,6 +78,16 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if section == 1 {
+        
+            if self.imageArray.count >= maxImageCount {
+            
+                return maxImageCount
+            }
+            
+            return self.imageArray.count + 1
+        }
         return 1
     }
     
@@ -103,6 +115,20 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         let identify = "Cell_Ask_Qustion_Image"
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNAskQuestionImageCollectionViewCell
+        
+       
+        
+        if indexPath.item == self.imageArray.count + 1 {
+            
+            //TODO: 添加图片的Image
+//                cell.image
+            
+        } else {
+        
+              cell.image = self.imageArray[indexPath.item]
+        }
+        
+        
         
         return cell
     }
