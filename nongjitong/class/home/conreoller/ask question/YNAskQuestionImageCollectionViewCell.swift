@@ -12,6 +12,16 @@ class YNAskQuestionImageCollectionViewCell: UICollectionViewCell {
 
     
     //MARK: public proporty
+    
+    var cameraImage: UIImage? {
+    
+        didSet {
+        
+            self.imageButton.setImage(cameraImage!, forState: UIControlState.Normal)
+            self.deleteButton.hidden = true
+        }
+    }
+    
     var image: UIImage? {
     
         didSet{
