@@ -8,15 +8,27 @@
 
 import UIKit
 
+protocol YNAskQuestionImageCollectionViewCellDelegate {
+
+    func askQuestionImageCollectionViewCellImageButtonDidClick()
+    func askQuestionImageCollectionViewCellDeleteButtonDidClick(cell: YNAskQuestionImageCollectionViewCell)
+    
+}
+
 class YNAskQuestionImageCollectionViewCell: UICollectionViewCell {
 
     
     //MARK: public proporty
     
+    var delegate:YNAskQuestionImageCollectionViewCellDelegate?
+    
+    var index: Int?
+    
     var cameraImage: UIImage? {
     
         didSet {
         
+            self.imageButton.setBackgroundImage(nil, forState: UIControlState.Normal)
             self.imageButton.setImage(cameraImage!, forState: UIControlState.Normal)
             self.deleteButton.hidden = true
         }
@@ -27,6 +39,7 @@ class YNAskQuestionImageCollectionViewCell: UICollectionViewCell {
         didSet{
         
             self.imageButton.setBackgroundImage(image!, forState: UIControlState.Normal)
+            self.imageButton.setImage(nil, forState: UIControlState.Normal)
             self.deleteButton.hidden = false
         }
     }
@@ -38,10 +51,22 @@ class YNAskQuestionImageCollectionViewCell: UICollectionViewCell {
         
         self.contentView.addSubview(imageButton)
         self.contentView.addSubview(deleteButton)
-        
         setLayout()
+        
+        self.imageButton.addTarget(self, action: "imageButtonDidClick", forControlEvents: UIControlEvents.TouchUpInside)
+        self.deleteButton.addTarget(self, action: "deleteButtonDidClick", forControlEvents: UIControlEvents.TouchUpInside)
+    
     }
     
+    func imageButtonDidClick() {
+    
+        delegate?.askQuestionImageCollectionViewCellImageButtonDidClick()
+    }
+    
+    func deleteButtonDidClick() {
+    
+        delegate?.askQuestionImageCollectionViewCellDeleteButtonDidClick(self)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

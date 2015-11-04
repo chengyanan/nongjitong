@@ -57,6 +57,10 @@ class Location: NSObject, CLLocationManagerDelegate {
         
         cooridate = self.transformFromWGSToGCJ(newLocation.coordinate)
         
+        let nowLocation = CLLocation(latitude: cooridate!.latitude, longitude: cooridate!.longitude)
+        //发送定位成功通知
+        NSNotificationCenter.defaultCenter().postNotificationName("LocationSuccess", object: nowLocation)
+        
     }
     
     func transformFromWGSToGCJ(wgsLoc: CLLocationCoordinate2D)-> CLLocationCoordinate2D {
@@ -126,5 +130,7 @@ class Location: NSObject, CLLocationManagerDelegate {
         return tempLm
         
         }()
+    
+    
     
 }

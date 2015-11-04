@@ -8,23 +8,33 @@
 
 import UIKit
 
-class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YNFinishInputViewDelegate {
+class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YNFinishInputViewDelegate, YNAskQuestionImageCollectionViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let location = Location()
+    
     let finishViewHeight: CGFloat = 40
     var finishView: YNFinishInputView?
-    var collectionContentSize: CGSize?
 
     //上传的图片的最大数量
     let maxImageCount = 3
     
+    var tempImageArray = [UIImage]()
+    var imageArray = [UIImage]() {
     
-    var imageArray = [UIImage]()
+        didSet {
+
+            self.collectionView.reloadSections(NSIndexSet(index: 1))
+        }
+    }
     
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //开始定位
+        location.startLocation()
         
         //设置collectionView
         setupCollectionView()
@@ -35,7 +45,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         //添加键盘通知
         addKeyBoardNotication()
         
-        self.collectionContentSize = self.collectionView.contentSize
+        
     }
     
     func addFinishView() {
@@ -77,14 +87,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
 
             let deltaY = keyboardBoundsRect.size.height + finishViewHeight
             
-            print(self.collectionContentSize)
-            
            self.collectionView.contentInset = UIEdgeInsetsMake(64, 0, deltaY, 0)
-            
-            print(self.collectionView.frame)
-        
-//
-//            print(self.collectionView.contentSize)
             
             let animations: (()->Void) = {
                 
@@ -116,7 +119,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             let animations:(() -> Void) = {
                 self.finishView!.transform = CGAffineTransformIdentity
                 
-                self.collectionView.contentInset = UIEdgeInsetsZero
+                self.collectionView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
             }
             
             if duration > 0 {
@@ -191,7 +194,9 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             return CGSizeMake(self.view.frame.size.width, 50)
         }
         
-        return CGSizeMake(120, 120)
+        let widthHeight = (self.view.frame.size.width - 2*6) / 3 - 1
+        
+        return CGSizeMake(widthHeight, widthHeight)
     }
     
     //MARK:UICollectionViewDataSource
@@ -231,6 +236,8 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNAskQuestionLocationCollectionViewCell
             
+            cell.coorinate = self.location.cooridate
+            
             return cell
             
         }
@@ -240,7 +247,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNAskQuestionImageCollectionViewCell
         
-       
+       cell.delegate = self
         
         if indexPath.item  == self.imageArray.count {
             
@@ -250,12 +257,183 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             
         } else {
         
-              cell.image = self.imageArray[indexPath.item]
+            cell.image = self.imageArray[indexPath.item]
+            cell.index = indexPath.item
         }
         
         
         
         return cell
     }
+    
+    //MARK: YNAskQuestionImageCollectionViewCellDelegate
+    func askQuestionImageCollectionViewCellImageButtonDidClick() {
+        
+        selectAlbumOrCamera()
+    }
+    
+    func askQuestionImageCollectionViewCellDeleteButtonDidClick(cell: YNAskQuestionImageCollectionViewCell) {
+        
+        self.tempImageArray.removeAtIndex(cell.index!)
+        self.imageArray = tempImageArray
+        
+    }
+    
+    //MARK: - actionSheet
+    func selectAlbumOrCamera() {
+        
+        if #available(iOS 8.0, *) {
+            
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            //取消按钮
+            let cancleAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: { (UIAlertAction) -> Void in
+                
+            })
+            alertController.addAction(cancleAction)
+            
+            //相册
+            let albumAction = UIAlertAction(title: "相册", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                //打开系统相册
+                self.openAlbum(UIImagePickerControllerSourceType.PhotoLibrary)
+                
+            })
+            alertController.addAction(albumAction)
+            
+            
+            if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
+                
+                //相机
+                let cameraAction = UIAlertAction(title: "相机", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                    
+                    //打开系统相机
+                    self.openAlbum(UIImagePickerControllerSourceType.Camera)
+                    
+                })
+                alertController.addAction(cameraAction)
+                
+            }
+            
+            self.presentViewController(alertController, animated: true, completion: { () -> Void in
+                
+            })
+            
+            
+        } else {
+            
+            // Fallback on earlier versions iOS7
+            
+            actionsheetInIOS8Early()
+            
+        }
+        
+    }
+    
+    //MARK: - 打开系统相册
+    func openAlbum(type: UIImagePickerControllerSourceType) {
+        
+        let imagePickerVc = UIImagePickerController()
+        imagePickerVc.sourceType = type
+        imagePickerVc.delegate = self
+        
+        self.presentViewController(imagePickerVc, animated: true) { () -> Void in
+            
+            
+        }
+        
+        
+    }
+    
+    
+    //MARK: - iOS8.3以前actionsheet
+    
+    func actionsheetInIOS8Early() {
+        
+        let actionSheet = UIActionSheet(title: "请选择", delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil)
+        
+        
+        actionSheet.delegate = self
+        
+        actionSheet.addButtonWithTitle("相册")
+        
+        if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
+            
+            actionSheet.addButtonWithTitle("相机")
+            
+        }
+        
+        actionSheet.showInView(self.view)
+        
+    }
+    
+    
+    //MARK: - UIActionSheetDelegate
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        
+        //相册或相机
+        if buttonIndex == 0 {
+            //相册
+            self.openAlbum(UIImagePickerControllerSourceType.PhotoLibrary)
+            
+        } else {
+            //相机
+            self.openAlbum(UIImagePickerControllerSourceType.Camera)
+        }
+        
+        
+    }
+    
+    
+    //MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        //        print("\ndidFinishPickingMediaWithInfo - \(info)\n")
+        
+        let mediaType = info["UIImagePickerControllerMediaType"] as! String
+        
+        if mediaType == "public.image" {
+            //图片
+            
+            picker.dismissViewControllerAnimated(true) { () -> Void in
+                
+            }
+            
+            let image = info["UIImagePickerControllerOriginalImage"] as! UIImage
+            
+            self.tempImageArray.append(image)
+            
+            self.imageArray = self.tempImageArray
+            
+            
+            
+//            //TODO:向服务器上传头像
+//            
+//            let imageData = UIImageJPEGRepresentation(image, 0.001)
+//            
+//            sendImageToServer(imageData!)
+//            
+//            //MARK: - 上传成功改变该页面的头像
+//            self.avatorImageView.image = image
+            
+        } else {
+            
+            //不是图片
+            picker.dismissViewControllerAnimated(true) { () -> Void in
+                
+            }
+            
+            //TODO: - 给个不是图片的提示
+            
+        }
+        
+        
+    }
+    
+    
+    deinit {
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     
 }
