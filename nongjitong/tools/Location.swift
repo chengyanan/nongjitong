@@ -10,7 +10,15 @@ import Foundation
 import CoreLocation
 import UIKit
 
+protocol LocationDelegate {
+
+    func locationDidUpdateLocation(location: CLLocation)
+}
+
 class Location: NSObject, CLLocationManagerDelegate {
+    
+    //public protory
+    var delegate: LocationDelegate?
     
     private let pi: Double = 3.14159265358979324
     private let ee: Double = 0.00669342162296594323
@@ -58,8 +66,8 @@ class Location: NSObject, CLLocationManagerDelegate {
         cooridate = self.transformFromWGSToGCJ(newLocation.coordinate)
         
         let nowLocation = CLLocation(latitude: cooridate!.latitude, longitude: cooridate!.longitude)
-        //发送定位成功通知
-        NSNotificationCenter.defaultCenter().postNotificationName("LocationSuccess", object: nowLocation)
+        
+        self.delegate?.locationDidUpdateLocation(nowLocation)
         
     }
     
@@ -123,13 +131,64 @@ class Location: NSObject, CLLocationManagerDelegate {
         
     }
     
+    
     private lazy var locationManager: CLLocationManager = {
         
         var tempLm: CLLocationManager = CLLocationManager()
         tempLm.pausesLocationUpdatesAutomatically = true
         return tempLm
         
-        }()
+    }()
+    
+    //MARK: 解析地址
+    func geocoderAddress(location: CLLocation, success:(placemarks: [CLPlacemark]?)->Void, failure: (error: NSError?)->Void) {
+        
+        
+        CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) -> Void in
+            
+            if let temp = error {
+                
+               failure(error: temp)
+                
+            } else {
+            
+                
+                success(placemarks: placemarks)
+                
+////                print(placemarks)
+//                
+//                if let _ = placemarks {
+//                    
+//                    let placeMark: CLPlacemark = placemarks!.first!
+//                    
+//                    //常用的
+//                    print(placeMark.name)//名字, 比如古德佳苑
+//                    print(placeMark.thoroughfare)//农业路
+//                    print(placeMark.subThoroughfare)
+//                    print(placeMark.subLocality)//区, 比如金水区
+//                    print(placeMark.locality)//市, 比如郑州市
+//                    print(placeMark.administrativeArea)//省, 比如河南省
+//                    print(placeMark.country)//国家: 比如中国
+//                    
+//                    //不常用
+//                    print(placeMark.subAdministrativeArea)
+//                    print(placeMark.postalCode)
+//                    print(placeMark.ISOcountryCode)//国家代号：中国为CN
+//                    print(placeMark.inlandWater)
+//                    print(placeMark.ocean)
+//                    print(placeMark.areasOfInterest)
+//                    
+//                }
+
+                
+            }
+            
+            
+        }
+        
+    }
+    
+    
     
     
     

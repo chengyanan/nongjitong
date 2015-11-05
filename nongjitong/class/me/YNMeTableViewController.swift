@@ -29,19 +29,17 @@ class YNMeTableViewController: UITableViewController {
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "Segue_Informatiom" {
-            
-            let destinationVc = segue.destinationViewController as! YNPersionalSettingTableViewController
-            
-            destinationVc.isFromMeVc = true
-            
-            
-        }
-        
-        
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        
+//        if segue.identifier == "Segue_Informatiom" {
+//            
+//            let destinationVc = segue.destinationViewController as! YNPersionalSettingTableViewController
+//            
+//            
+//        }
+//        
+//        
+//    }
 
    
     

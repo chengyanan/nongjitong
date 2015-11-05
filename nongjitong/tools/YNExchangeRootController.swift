@@ -26,9 +26,8 @@ class YNExchangeRootController: UIViewController {
     }
     
     func showInformation() {
-
-        let rootstoryboard = UIStoryboard().instantiateViewControllerWithIdentifier("user_information") as! YNPersionalSettingTableViewController
-        rootstoryboard.isFromMeVc = false
+        
+        let rootstoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SB_Add_User_Information") as! YNPersionalSettingTableViewController
         
         UIApplication.sharedApplication().keyWindow?.rootViewController = rootstoryboard
 

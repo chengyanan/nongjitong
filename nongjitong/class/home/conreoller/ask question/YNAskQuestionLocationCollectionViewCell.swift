@@ -11,6 +11,54 @@ import CoreLocation
 
 class YNAskQuestionLocationCollectionViewCell: UICollectionViewCell {
 
+    var imageName: String? {
+    
+        didSet {
+        
+            if let tempImage = imageName {
+            
+                locationButton.setImage(UIImage(named: tempImage), forState: UIControlState.Normal)
+                
+            } else {
+            
+                locationButton.setImage(nil, forState: UIControlState.Normal)
+            }
+        }
+    }
+    
+    var title: String? {
+    
+        didSet {
+        
+            locationButton.setTitle(title, forState: UIControlState.Normal)
+        }
+    }
+    
+    var detaileTitle: String? {
+    
+        didSet {
+        
+            locationLabel.text = detaileTitle
+        }
+    }
+    
+    var isShowRightError: Bool = false {
+    
+        didSet {
+        
+            if isShowRightError {
+            
+                rightArror.hidden = false
+                locationButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+                
+            } else {
+            
+                rightArror.hidden = true
+                locationButton.imageEdgeInsets = UIEdgeInsetsZero
+            }
+        }
+    }
+    
     //MARK: public proporty
     var coorinate: CLLocationCoordinate2D? {
     
@@ -18,31 +66,7 @@ class YNAskQuestionLocationCollectionViewCell: UICollectionViewCell {
         
             if coorinate != nil {
             
-                //解析地址
-                CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: (coorinate?.latitude)!, longitude: (coorinate?.longitude)!)) { (placemarks, error) -> Void in
-                    
-                    if let _ = placemarks {
-                        
-                        let placeMark: CLPlacemark = placemarks!.first!
-                        
-                        if let thoroughfare = placeMark.thoroughfare {
-                            
-                            var title: String = thoroughfare
-                            
-                            if let subThoroughfare = placeMark.subThoroughfare {
-                                
-                                title += subThoroughfare
-                            }
-                            
-                            
-                            self.locationLabel.text = title
-                        }
-                        
-                    }
-                    
-                    
-                    
-                }
+                
                 
             }
             
@@ -57,11 +81,10 @@ class YNAskQuestionLocationCollectionViewCell: UICollectionViewCell {
         
         self.contentView.addSubview(locationButton)
         self.contentView.addSubview(locationLabel)
+        self.contentView.addSubview(rightArror)
         
         setLayout()
-    
-        
-        NSNotificationCenter.defaultCenter()
+
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -77,8 +100,14 @@ class YNAskQuestionLocationCollectionViewCell: UICollectionViewCell {
         
         //locationLabel
         Layout().addTopBottomConstraints(locationLabel, toView: self.contentView, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(locationLabel, toView: self.contentView, multiplier: 1, constant: -12)
+        Layout().addRightConstraint(locationLabel, toView: self.contentView, multiplier: 1, constant: -15)
         Layout().addLeftToRightConstraint(locationLabel, toView: locationButton, multiplier: 1, constant: 20)
+        
+        //rightArror
+        Layout().addRightConstraint(rightArror, toView: self.contentView, multiplier: 1, constant: -6)
+        Layout().addWidthConstraint( rightArror, toView: nil, multiplier: 0, constant: 7)
+        Layout().addHeightConstraint(rightArror, toView: nil, multiplier: 0, constant: 12)
+        Layout().addCenterYConstraint(rightArror, toView: self.contentView, multiplier: 1, constant: 0)
     }
     
     let locationButton: UIButton = {
@@ -86,8 +115,7 @@ class YNAskQuestionLocationCollectionViewCell: UICollectionViewCell {
         var tempView = UIButton()
         tempView.titleLabel?.font = UIFont.systemFontOfSize(15)
         tempView.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        tempView.setTitle("当前地址", forState: UIControlState.Normal)
-        tempView.setImage(UIImage(named: "home_ask_question_location"), forState: UIControlState.Normal)
+//        tempView.setImage(UIImage(named: "home_ask_question_location"), forState: UIControlState.Normal)
         tempView.translatesAutoresizingMaskIntoConstraints = false
         return tempView
         
@@ -105,6 +133,12 @@ class YNAskQuestionLocationCollectionViewCell: UICollectionViewCell {
         return tempView
     }()
     
-
+    let rightArror: UIImageView = {
+    
+        var tempView = UIImageView()
+        tempView.image = UIImage(named: "icon_cell_rightArrow")
+        tempView.translatesAutoresizingMaskIntoConstraints = false
+        return tempView
+    }()
     
 }

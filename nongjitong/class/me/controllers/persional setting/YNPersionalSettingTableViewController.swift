@@ -8,11 +8,16 @@
 
 import UIKit
 
-class YNPersionalSettingTableViewController: UITableViewController, YNModifytextViewControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, YNProvinceTableViewControllerDelegate {
+class YNPersionalSettingTableViewController: UITableViewController, YNModifytextViewControllerDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    //MARK: - public proporty 
+    //MARK: - public proporty
+    var cityName: String? {
     
-    var isFromMeVc: Bool?     
+        didSet {
+        
+            self.areaIDLabel.text = cityName
+        }
+    }
     
     //MARK: - private proporty
     //头像
@@ -31,8 +36,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     @IBOutlet weak var genderLabel: UILabel!
     //身份证号
     @IBOutlet weak var idNumberLabel: UILabel!
-    
-    @IBOutlet weak var rightBarButtonItem: UIBarButtonItem!
+
     
     var information: YNUserInformationModel? {
     
@@ -53,33 +57,9 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         
         //设置空白的界面数据
         self.setEmptyInterfaceData()
-        
-        if isFromMeVc! {
-            
-            //从个人资料界面转过来的
-            self.rightBarButtonItem.enabled = false
-            self.rightBarButtonItem.title = nil
-            
-            if isFromMeVc! {
-                
-                //从服务器获取数据，设置界面数据
-                loadDataFromServer()
-            }
-            
-        } else {
-            
-            //从注册界面转过来的
-            self.rightBarButtonItem.enabled = false
-            self.rightBarButtonItem.title = "完成"
-            
-        }
+        //从服务器获取数据，设置界面数据
+        loadDataFromServer()
     
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
     }
     
     //MARK: 获取用户信息
@@ -433,14 +413,15 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     
     func chooseRoleActionSheetInIOS8Early() {
     
-        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil)
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil)
         actionSheet.tag = 3
-        actionSheet.delegate = self
         actionSheet.addButtonWithTitle("生产者")
         actionSheet.addButtonWithTitle("农技师")
         actionSheet.addButtonWithTitle("农资厂家业务员")
         actionSheet.addButtonWithTitle("农资批发商")
         actionSheet.addButtonWithTitle("农资零售商")
+        actionSheet.addButtonWithTitle("取消")
+        actionSheet.cancelButtonIndex = 5
         actionSheet.showInView(self.view)
     }
     
@@ -493,7 +474,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     //MARK: - iOS8以前actionsheet
     func actionsheetInIOS8Early() {
     
-        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil)
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil)
         actionSheet.tag = 1
         actionSheet.delegate = self
         
@@ -502,8 +483,12 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
             
             actionSheet.addButtonWithTitle("相机")
-            
+            actionSheet.cancelButtonIndex = 2
+        } else {
+        
+            actionSheet.cancelButtonIndex = 1
         }
+        actionSheet.addButtonWithTitle("取消")
         
         actionSheet.showInView(self.view)
     
@@ -511,11 +496,13 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     
     func genderActionSheetInIOS8Early() {
     
-        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil)
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil)
         actionSheet.tag = 2
         actionSheet.delegate = self
         actionSheet.addButtonWithTitle("男")
         actionSheet.addButtonWithTitle("女")
+        actionSheet.addButtonWithTitle("取消")
+        actionSheet.cancelButtonIndex = 2
         actionSheet.showInView(self.view)
     
     }
@@ -531,7 +518,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                 //相册
                 self.openAlbum(UIImagePickerControllerSourceType.PhotoLibrary)
                 
-            } else {
+            } else if buttonIndex == 1{
                 //相机
                 self.openAlbum(UIImagePickerControllerSourceType.Camera)
             }
@@ -546,7 +533,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                 //上传性别
                 self.sendGenderToServerWithID("1")
                 
-            } else {
+            } else if buttonIndex == 1{
                 //女0
                 
                  self.genderLabel.text = "女"
@@ -575,7 +562,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
             case 3:
                 self.roleIDLabel.text = "农资批发商"
                 roleID = "4"
-            case 5:
+            case 4:
                 self.roleIDLabel.text = "农资零售商"
                 roleID = "5"
             default:
@@ -662,7 +649,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                 
             }
             
-            //TODO:向服务器上传头像
+            //向服务器上传头像
             
             let imageData = UIImageJPEGRepresentation(image, 0.001)
             
@@ -739,9 +726,6 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         
     }
     
-    //MARK: - UIActionSheetDelegate
-    
-    
     //MARK: - YNModifytextViewControllerDelegate
     func modifytextViewController(modifytextViewController: YNModifytextViewController, text: String?) {
         
@@ -773,14 +757,6 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         
         
     }
-    
-    //MARK: - YNProvinceTableViewControllerDelegate
-    func provinceTableViewController(vc: YNProvinceTableViewController, province: YNBaseCityModel, city: YNBaseModel) {
-        
-        self.areaIDLabel.text = "\(province.city_name)  \(city.name)"
-        
-    }
-    
     
     //MARK: - event response
     @IBAction func doneItemClick(sender: AnyObject) {
@@ -849,13 +825,15 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
             rootVc.textString = self.mobelLabel.text
             rootVc.delegate = self
             
-        }  else if segue.identifier == "Segue_Province" {
-            
-            let destinationVc = segue.destinationViewController as! YNProvinceTableViewController
-//            destinationVc.data = cityData
-            destinationVc.delegate = self
-            
         }
+        
+        
+//        else if segue.identifier == "Segue_Province" {
+//            
+//            let destinationVc = segue.destinationViewController as! YNProvinceTableViewController
+////            destinationVc.data = cityData
+//            
+//        }
 
         
     }

@@ -86,7 +86,7 @@ class YNSignInViewController: UIViewController {
         let params = ["m": "Appapi",
             "c": "User",
             "a": "login",
-            "key": "edge5de7se4b5xd",
+            "key": "KSECE20XE15DKIEX3",
             "mobile": self.userNameTextFiled.text,
             "password": self.passwordTextFiled.text]
         

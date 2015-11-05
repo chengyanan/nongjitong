@@ -16,7 +16,7 @@ class YNHttpTool {
         let userId = kUser_ID() as? String
         
         let params: [String: String?] = ["m": "Appapi",
-            "key": "edge5de7se4b5xd",
+            "key": "KSECE20XE15DKIEX3",
             "c": "User",
             "a": "update",
             "id": userId,
@@ -55,7 +55,7 @@ class YNHttpTool {
         let text = dict["text"]! as String
         
         let params = ["m": "Appapi",
-                    "key": "edge5de7se4b5xd",
+                    "key": "KSECE20XE15DKIEX3",
                       "c": "User",
                       "a": "update",
                      "id": userId,
@@ -93,7 +93,7 @@ class YNHttpTool {
         let userId = kUser_ID() as? String
         
         let params = ["m": "Appapi",
-            "key": "edge5de7se4b5xd",
+            "key": "KSECE20XE15DKIEX3",
             "c": "User",
             "a": "getUser",
             "id": userId,

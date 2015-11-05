@@ -67,7 +67,7 @@ class YNSearchResaultDetailViewController: UIViewController, UIWebViewDelegate {
     func loadDetail() {
     
         let params = ["m": "Appapi",
-            "key": "edge5de7se4b5xd",
+            "key": "KSECE20XE15DKIEX3",
             "c": "Search",
             "a": "doc",
             "id": self.searchresault?.id

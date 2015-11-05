@@ -14,7 +14,7 @@ class YNHttpGetCityTool {
     func getAreaChildsWithParentId(parentId: String, successFull: ((json: NSDictionary)->Void)?, failureFul: ((error: NSError!)->Void)?) {
         
         let params: [String: String?] = ["m": "Appapi",
-            "key": "edge5de7se4b5xd",
+            "key": "KSECE20XE15DKIEX3",
             "c": "Index",
             "a": "getAreaChilds",
             "parent_id": parentId,
@@ -48,7 +48,7 @@ class YNHttpGetCityTool {
     func getAreaWithId(id: String, successFull: ((json: NSDictionary)->Void)?, failureFul: ((error: NSError!)->Void)?) {
         
         let params: [String: String?] = ["m": "Appapi",
-            "key": "edge5de7se4b5xd",
+            "key": "KSECE20XE15DKIEX3",
             "c": "Index",
             "a": "getArea",
             "id": id,

@@ -19,11 +19,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if kUser_ID() != nil {//已登陆
         
+            let temp = kUser_IsInformationFinish()
             
-            let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-            window?.rootViewController = rootstoryboard.instantiateInitialViewController()
+            if  temp != nil {
             
+                //个人资料完善
+                let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+                window?.rootViewController = rootstoryboard.instantiateInitialViewController()
+                
+            } else {
+                
+                //个人资料不完善 显示个人资料页面
+                
+                let rootstoryboardVc = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SB_Add_User_Information") as! UINavigationController
+                
+                window?.rootViewController = rootstoryboardVc
+                
+            }
             
+        
         } else {//未登录
         
             let signinVc = YNSignInViewController()

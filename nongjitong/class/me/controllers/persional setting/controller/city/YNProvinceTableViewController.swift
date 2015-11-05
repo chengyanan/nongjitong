@@ -8,18 +8,9 @@
 
 import UIKit
 
-
-protocol YNProvinceTableViewControllerDelegate {
-    
-    func provinceTableViewController(vc: YNProvinceTableViewController, province: YNBaseCityModel, city: YNBaseModel)
-}
-
-class YNProvinceTableViewController: UITableViewController, YNCityTableViewControllerDelegate {
-
+class YNProvinceTableViewController: UITableViewController {
     
     var data = [YNBaseCityModel]()
-    var delegate: YNProvinceTableViewControllerDelegate?
-    
     
     //MARK: - life cycle
     override func viewDidLoad() {
@@ -111,19 +102,10 @@ class YNProvinceTableViewController: UITableViewController, YNCityTableViewContr
         
             let vc = segue.destinationViewController as! YNCityTableViewController
             
-            vc.delegate = self
             vc.province = data[sender as! Int]
 
         }
         
     }
     
-    
-    //MARK: - YNCityTableViewControllerDelegate
-    func cityTableViewController(vc: YNCityTableViewController, province: YNBaseCityModel, city: YNBaseModel) {
-        
-        self.delegate?.provinceTableViewController(self, province: province, city: city)
-        
-        self.navigationController?.popViewControllerAnimated(true)
-    }
 }

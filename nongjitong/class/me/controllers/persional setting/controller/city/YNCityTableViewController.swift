@@ -8,13 +8,8 @@
 
 import UIKit
 
-protocol YNCityTableViewControllerDelegate {
-
-    func cityTableViewController(vc: YNCityTableViewController, province: YNBaseCityModel, city: YNBaseModel)
-}
-
 class YNCityTableViewController: UITableViewController {
-
+    
     var province: YNBaseCityModel? {
     
         didSet {
@@ -23,7 +18,6 @@ class YNCityTableViewController: UITableViewController {
         }
     }
     var citymodel = [YNBaseCityModel]()
-    var delegate: YNCityTableViewControllerDelegate?
     
     //MARK: - life cycle
     override func viewDidLoad() {
@@ -100,8 +94,7 @@ class YNCityTableViewController: UITableViewController {
         return cell!
         
     }
-    
-    
+
     //MARK: tableview delegate 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -109,16 +102,27 @@ class YNCityTableViewController: UITableViewController {
         let basemodel = YNBaseModel()
         basemodel.id = city.id
         basemodel.name = city.city_name
+    
+        let numberOfViewControllers = (self.navigationController?.viewControllers.count)! - 3
         
-        //TODO: 上传到服务器
-        sendCityDataToSever(basemodel)
+        let vc = self.navigationController?.viewControllers[numberOfViewControllers]
         
+        if vc!.isKindOfClass(YNAddUserInformationTableViewController.self) {
         
-        let vc = self.navigationController?.viewControllers[1]
+            let addVc = vc as! YNAddUserInformationTableViewController
+            addVc.cityName = city.city_name
+            
+        } else if vc!.isKindOfClass(YNPersionalSettingTableViewController.self) {
+        
+            let addVc = vc as! YNPersionalSettingTableViewController
+            addVc.cityName = city.city_name
+            
+            //TODO: 上传到服务器
+            sendCityDataToSever(basemodel)
+        }
+        
         self.navigationController?.popToViewController(vc!, animated: true)
         
-//        self.delegate?.cityTableViewController(self, province: self.province!, city: basemodel)
-//        self.navigationController?.popViewControllerAnimated(true)
         
     }
     

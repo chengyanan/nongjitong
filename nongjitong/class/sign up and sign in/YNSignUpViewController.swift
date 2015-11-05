@@ -211,7 +211,7 @@ class YNSignUpViewController: UIViewController {
         let params = ["m": "Appapi",
             "c": "User",
             "a": "sendRegMsg",
-            "key": "edge5de7se4b5xd",
+            "key": "KSECE20XE15DKIEX3",
             "mobile": self.userNameTextFiled.text,
             "code": code]
         
@@ -265,7 +265,7 @@ class YNSignUpViewController: UIViewController {
         let params = ["m": "Appapi",
             "c": "User",
             "a": "register",
-            "key": "edge5de7se4b5xd",
+            "key": "KSECE20XE15DKIEX3",
             "mobile": self.userNameTextFiled.text,
             "password": self.passwordTextFiled.text]
         
@@ -292,13 +292,15 @@ class YNSignUpViewController: UIViewController {
                     
                     YNProgressHUD().showText("注册成功", toView: UIApplication.sharedApplication().keyWindow!)
                     
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-                        
-//                         YNExchangeRootController().showHome()
-                        
-                        YNExchangeRootController().showInformation()
-                        
-                    }
+                    YNExchangeRootController().showInformation()
+                    
+//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+//                        
+////                         YNExchangeRootController().showHome()
+//                        
+//
+//                        
+//                    }
                     
                     
                 } else if status == 0 {

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YNFinishInputViewDelegate, YNAskQuestionImageCollectionViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate{
+class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YNFinishInputViewDelegate, YNAskQuestionImageCollectionViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, LocationDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -16,10 +17,32 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     let finishViewHeight: CGFloat = 40
     var finishView: YNFinishInputView?
-
+    
+    //品类
+    var category: String? {
+    
+        didSet {
+        
+            if let _ = category {
+            
+                self.collectionView.reloadSections(NSIndexSet(index: 2))
+            }
+        }
+    }
+    //地址
+    var locationDetail: String? {
+    
+        didSet {
+            
+            if let _ = locationDetail {
+                
+                self.collectionView.reloadSections(NSIndexSet(index: 3))
+            }
+        }
+    }
+    
     //上传的图片的最大数量
     let maxImageCount = 3
-    
     var tempImageArray = [UIImage]()
     var imageArray = [UIImage]() {
     
@@ -34,6 +57,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         super.viewDidLoad()
         
         //开始定位
+        location.delegate = self
         location.startLocation()
         
         //设置collectionView
@@ -159,8 +183,6 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         self.collectionView.backgroundColor = kRGBA(234, g: 234, b: 234, a: 1)
         
-//        self.collectionView.bounces = true
-        
 //        let tgr = UITapGestureRecognizer(target: self, action: "hideKeyBoard")
 //        
 //        self.collectionView.addGestureRecognizer(tgr)
@@ -189,7 +211,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
             return CGSizeMake(self.view.frame.size.width, 120)
             
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 2 || indexPath.section == 3{
         
             return CGSizeMake(self.view.frame.size.width, 50)
         }
@@ -202,7 +224,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     //MARK:UICollectionViewDataSource
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         
-        return 3
+        return 4
     }
     
     
@@ -236,7 +258,22 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNAskQuestionLocationCollectionViewCell
             
-            cell.coorinate = self.location.cooridate
+            //TODO: 有时间的话给品类做一个图标
+            cell.imageName = nil
+            cell.title = "选择品类"
+            cell.detaileTitle = self.category
+            cell.isShowRightError = true
+            return cell
+            
+        } else if indexPath.section == 3 {
+        
+            let identify = "Cell_Ask_Qustion_Location"
+            
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNAskQuestionLocationCollectionViewCell
+            cell.imageName = "home_ask_question_location"
+            cell.title = "当前地址"
+            cell.detaileTitle = self.locationDetail
+            cell.isShowRightError = false
             
             return cell
             
@@ -349,18 +386,17 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     func actionsheetInIOS8Early() {
         
-        let actionSheet = UIActionSheet(title: "请选择", delegate: self, cancelButtonTitle: "取消", destructiveButtonTitle: nil)
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil)
         
-        
-        actionSheet.delegate = self
-        
-        actionSheet.addButtonWithTitle("相册")
+        actionSheet.addButtonWithTitle("album")
         
         if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
             
-            actionSheet.addButtonWithTitle("相机")
+            actionSheet.addButtonWithTitle("camera")
             
         }
+        
+        actionSheet.addButtonWithTitle("cancle")
         
         actionSheet.showInView(self.view)
         
@@ -428,6 +464,51 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         
     }
+    
+    //MARK: LocationDelegate
+    func locationDidUpdateLocation(location: CLLocation) {
+        
+        //解析地址
+        geocoderAddress(location)
+    }
+    
+    
+    //MARK: 解析地址
+    func geocoderAddress(location: CLLocation) {
+        
+        self.location.geocoderAddress(location, success: { (placemarks) -> Void in
+            
+            if let _ = placemarks {
+                
+                let placeMark: CLPlacemark = placemarks!.first!
+                var address = ""
+                
+                if let name = placeMark.name {
+                    
+                    address += name
+                    
+                } else if let thoroughfare = placeMark.thoroughfare {
+                    
+                    address += thoroughfare
+                    
+                }
+                
+                self.locationDetail = address
+                
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                print(error)
+                var address = ""
+                address += "定位失败"
+                self.locationDetail = address
+        }
+
+    
+    }
+
     
     
     deinit {
