@@ -8,10 +8,11 @@
 
 import UIKit
 
-class YNAddUserInformationTableViewController: UITableViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class YNAddUserInformationTableViewController: UITableViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, YNFinishInputViewDelegate {
     
-     //TODO: 添加一个随键盘弹出的view
-    
+    //添加一个随键盘弹出的view
+    var finishView: YNFinishInputView?
+    let finishViewHeight: CGFloat = 40
     
     //头像
     @IBOutlet weak var avatorImage: UIImageView!
@@ -30,13 +31,15 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
     //性别
     @IBOutlet weak var genderTextFiled: UITextField!
     
+    var imageData: NSData?
+    
     var roleId: String?
     var genderId: String?
-    var cityName: String? {
+    var city: YNBaseModel? {
     
         didSet {
         
-            self.areaTextFiled.text = cityName
+            self.areaTextFiled.text = city?.name
         }
     }
     
@@ -49,7 +52,123 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
         //设置电话号码
         self.mobileLabel.text = kUser_MobileNumber() as? String
         
+        addViewWithKeyBoard()
     }
+    
+    func addViewWithKeyBoard() {
+    
+        //添加跟随键盘出现的View
+        addFinishView()
+        
+        //添加键盘通知
+        addKeyBoardNotication()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UIApplication.sharedApplication().keyWindow?.addSubview(self.finishView!)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.finishView?.removeFromSuperview()
+    }
+    
+    deinit {
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func addFinishView() {
+        
+        let finishView = YNFinishInputView()
+        finishView.delegate = self
+        finishView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, finishViewHeight)
+        self.finishView = finishView
+        
+    }
+
+    
+    //MARK: YNFinishInputViewDelegate
+    func finishInputViewFinishButtonDidClick() {
+        
+        //退出键盘
+        hideKeyBoard()
+    }
+    
+    func hideKeyBoard() {
+        
+        self.view.endEditing(true)
+    }
+
+    func addKeyBoardNotication() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let keyboardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+            
+            //            print(keyboardBounds)
+            
+            let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+            
+            let keyboardBoundsRect = self.view.convertRect(keyboardBounds, toView: nil)
+            
+            let deltaY = keyboardBoundsRect.size.height + finishViewHeight
+            
+            let animations: (()->Void) = {
+                
+                self.finishView!.transform = CGAffineTransformMakeTranslation(0, -deltaY)
+            }
+            
+            if duration > 0 {
+                
+                let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue << 16))
+                
+                UIView.animateWithDuration(duration, delay: 0, options:options, animations: animations, completion: nil)
+                
+            } else {
+                
+                animations()
+            }
+            
+            
+        }
+        
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+            let animations:(() -> Void) = {
+                
+                self.finishView!.transform = CGAffineTransformIdentity
+            }
+            
+            if duration > 0 {
+                
+                let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue << 16))
+                UIView.animateWithDuration(duration, delay: 0, options:options, animations: animations, completion: nil)
+                
+            } else{
+                
+                animations()
+            }
+        }
+        
+    }
+    
+    
     
     //MARK: UITableViewDelegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -383,6 +502,8 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
             
             let image = info["UIImagePickerControllerOriginalImage"] as! UIImage
             
+            self.imageData = UIImageJPEGRepresentation(image, 0.001)
+            
             self.avatorImage.image = image
             
             picker.dismissViewControllerAnimated(true) { () -> Void in
@@ -400,7 +521,6 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
             //TODO: - 给个不是图片的提示
             
         }
-        
         
     }
     
@@ -425,14 +545,81 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
             
         } else {
             
-            //TODO: 上传信息
-    
-            YNExchangeRootController().showHome()
+            //上传信息
+            uploadUserInformation()
             
         }
 
     }
     
+    //上传用户信息
+    func uploadUserInformation() {
     
+        let userId = kUser_ID() as? String
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "User",
+            "a": "update",
+            "id": userId,
+            "nickname": self.nickNameTextFiled.text,
+            "area_id": self.city?.id,
+            "role_id": self.roleId,
+            "truename": self.trueNameTextFiled.text,
+            "sex": self.genderId,
+            "id_num": self.idNunberTextFiled.text
+        ]
+        
+        var files = [File]()
+        
+        if let tempImage = self.imageData {
+            
+            let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("1.jpg")
+            
+            //        print(path)
+            
+            tempImage.writeToFile(path!, atomically: true)
+            let imageUrl = NSURL(fileURLWithPath: path!)
+
+            files.append(File(name: "avatar", url: imageUrl))
+        }
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpTool().updateUserAllInfoemations(params, files: files, successFull: { (json) -> Void in
+            
+            progress.hideUsingAnimation()
+    
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    let msg = json["msg"] as! String
+                    
+                    //#warning: msg是更新成功 不是登陆成功
+                    print("\n \(msg) \n")
+                    
+                    Tools().saveValue("YES", forKey: kUserIsInformationFinish)
+                    
+                    YNExchangeRootController().showHome()
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: UIApplication.sharedApplication().keyWindow!)
+                        
+                        print("\n \(msg) \n")
+                    }
+                }
+                
+            }
+        
+            
+            }) { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                
+                YNProgressHUD().showText("请求失败", toView: UIApplication.sharedApplication().keyWindow!)
+        }
+    }
     
 }

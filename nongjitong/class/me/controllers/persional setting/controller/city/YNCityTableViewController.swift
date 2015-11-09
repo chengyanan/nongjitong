@@ -110,7 +110,8 @@ class YNCityTableViewController: UITableViewController {
         if vc!.isKindOfClass(YNAddUserInformationTableViewController.self) {
         
             let addVc = vc as! YNAddUserInformationTableViewController
-            addVc.cityName = city.city_name
+            
+            addVc.city = basemodel
             
         } else if vc!.isKindOfClass(YNPersionalSettingTableViewController.self) {
         

@@ -69,6 +69,10 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         //添加键盘通知
         addKeyBoardNotication()
         
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
         
     }
     
@@ -78,7 +82,6 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         finishView.delegate = self
         finishView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, finishViewHeight)
         self.view.addSubview(finishView)
-        
         self.finishView = finishView
         self.view.bringSubviewToFront(self.finishView!)
     }
@@ -90,7 +93,11 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         hideKeyBoard()
     }
     
-    
+    func hideKeyBoard() {
+        
+        self.view.endEditing(true)
+    }
+        
     func addKeyBoardNotication() {
     
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
@@ -186,11 +193,6 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
 //        let tgr = UITapGestureRecognizer(target: self, action: "hideKeyBoard")
 //        
 //        self.collectionView.addGestureRecognizer(tgr)
-    }
-    
-    func hideKeyBoard() {
-    
-        self.view.endEditing(true)
     }
     
     //MARK: event response
@@ -302,6 +304,19 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         return cell
     }
+    
+    //MARK:UICollectionViewDelegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        if indexPath.section == 2 {
+        
+            let selectCatagoryVc = YNSelectedCategoryViewController()
+            
+            self.navigationController?.pushViewController(selectCatagoryVc, animated: true)
+        }
+        
+    }
+    
     
     //MARK: YNAskQuestionImageCollectionViewCellDelegate
     func askQuestionImageCollectionViewCellImageButtonDidClick() {
@@ -439,17 +454,6 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             self.tempImageArray.append(image)
             
             self.imageArray = self.tempImageArray
-            
-            
-            
-//            //TODO:向服务器上传头像
-//            
-//            let imageData = UIImageJPEGRepresentation(image, 0.001)
-//            
-//            sendImageToServer(imageData!)
-//            
-//            //MARK: - 上传成功改变该页面的头像
-//            self.avatorImageView.image = image
             
         } else {
             

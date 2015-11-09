@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         
@@ -36,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 window?.rootViewController = rootstoryboardVc
                 
             }
+            
             
         
         } else {//未登录
