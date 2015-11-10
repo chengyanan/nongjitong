@@ -105,6 +105,8 @@ class YNModifytextViewController: UIViewController {
                 let dict = ["paraName": "nickname",
                                 "text": self.textfield.text!]
                 updateUserInformation(dict)
+                
+                
             }
             
             
@@ -124,6 +126,7 @@ class YNModifytextViewController: UIViewController {
             
             let dict = ["paraName": "id_num",
                 "text": self.textfield.text!]
+
             updateUserInformation(dict)
             
         } else if self.textType == YNTextType.MobileNumber {
@@ -159,6 +162,12 @@ class YNModifytextViewController: UIViewController {
             if let status = json["status"] as? Int {
                 
                 if status == 1 {
+                    
+                    if dict["paraName"] == "nickname" {
+                    
+                        //保存昵称
+                        Tools().saveValue(self.textfield.text!, forKey: kUserNiceName)
+                    }
                     
                     let msg = json["msg"] as! String
                     

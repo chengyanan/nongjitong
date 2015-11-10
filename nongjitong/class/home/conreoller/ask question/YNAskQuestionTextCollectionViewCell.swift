@@ -8,16 +8,22 @@
 
 import UIKit
 
-class YNAskQuestionTextCollectionViewCell: UICollectionViewCell {
+protocol YNAskQuestionTextCollectionViewCellDelegate {
 
-    @IBOutlet weak var textView: UITextView!
+    func askQuestionTextCollectionViewCellTextViewDidEndEditing(text: String)
+}
+
+class YNAskQuestionTextCollectionViewCell: UICollectionViewCell, UITextViewDelegate {
+
+    //MARK: public protory
+    var delegate: YNAskQuestionTextCollectionViewCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-
         self.contentView.addSubview(inputTextView)
-    
+        inputTextView.delegate = self
+        
         setLayout()
     }
     
@@ -25,6 +31,13 @@ class YNAskQuestionTextCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    
+    //MARK: UITextViewDelegate
+    func textViewDidEndEditing(textView: UITextView) {
+        
+        self.delegate?.askQuestionTextCollectionViewCellTextViewDidEndEditing(textView.text)
+        
+    }
     
     func setLayout() {
         
@@ -38,6 +51,7 @@ class YNAskQuestionTextCollectionViewCell: UICollectionViewCell {
         let tempView = YNTextView()
         tempView.placeHolder = "请输入问题描述"
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.font = UIFont.systemFontOfSize(17)
         return tempView
         
     }()

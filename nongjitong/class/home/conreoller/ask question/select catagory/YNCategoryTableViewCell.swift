@@ -10,9 +10,6 @@ import UIKit
 
 class YNCategoryTableViewCell: UITableViewCell {
 
-    
-   
-    
     var categoryModel: YNCategoryModel? {
     
         didSet {
@@ -65,6 +62,7 @@ class YNCategoryTableViewCell: UITableViewCell {
         let tempView = UILabel()
         tempView.textAlignment = .Center
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.adjustsFontSizeToFitWidth = true
         return tempView
     }()
 }

@@ -11,11 +11,17 @@ import UIKit
 
 let kUserKey = "User_MobileNumber"
 let kUserID = "User_ID"
+let kUserNiceName = "User_NiceName"
 let kUserIsInformationFinish = "User_Information"
 
 func kUser_ID() ->AnyObject? {
     
     return NSUserDefaults.standardUserDefaults().valueForKey(kUserID)
+}
+
+func kUser_NiceName() ->AnyObject? {
+    
+    return NSUserDefaults.standardUserDefaults().valueForKey(kUserNiceName)
 }
 
 func kUser_IsInformationFinish() ->AnyObject?  {

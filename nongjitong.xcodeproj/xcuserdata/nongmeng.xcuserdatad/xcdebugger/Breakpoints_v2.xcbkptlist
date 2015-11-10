@@ -38,11 +38,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "nongjitong/class/sign up and sign in/YNAddUserInformationTableViewController.swift"
-            timestampString = "468486776.208507"
+            timestampString = "468836696.781294"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "619"
-            endingLineNumber = "619"
+            startingLineNumber = "639"
+            endingLineNumber = "639"
             landmarkName = "uploadUserInformation()"
             landmarkType = "5">
          </BreakpointContent>

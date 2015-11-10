@@ -554,7 +554,26 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
     
     //上传用户信息
     func uploadUserInformation() {
+        
+        var truename = ""
+        var sex = ""
+        var id_num = ""
+        
+        if let _ = self.trueNameTextFiled.text {
+        
+            truename = self.trueNameTextFiled.text!
+        }
     
+        if let _ = self.genderId {
+        
+            sex = self.genderId!
+        }
+        
+        if let _ = self.idNunberTextFiled.text {
+        
+            id_num = self.idNunberTextFiled.text!
+        }
+        
         let userId = kUser_ID() as? String
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
@@ -564,9 +583,9 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
             "nickname": self.nickNameTextFiled.text,
             "area_id": self.city?.id,
             "role_id": self.roleId,
-            "truename": self.trueNameTextFiled.text,
-            "sex": self.genderId,
-            "id_num": self.idNunberTextFiled.text
+            "truename": truename,
+            "sex": sex,
+            "id_num": id_num
         ]
         
         var files = [File]()
@@ -598,6 +617,7 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
                     print("\n \(msg) \n")
                     
                     Tools().saveValue("YES", forKey: kUserIsInformationFinish)
+                    Tools().saveValue(self.nickNameTextFiled.text, forKey: kUserNiceName)
                     
                     YNExchangeRootController().showHome()
                     

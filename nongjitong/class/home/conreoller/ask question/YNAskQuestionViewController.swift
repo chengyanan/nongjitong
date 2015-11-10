@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YNFinishInputViewDelegate, YNAskQuestionImageCollectionViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, LocationDelegate{
+class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, YNFinishInputViewDelegate, YNAskQuestionImageCollectionViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, LocationDelegate, YNSelectedCategoryViewControllerDelegate, YNAskQuestionTextCollectionViewCellDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -17,6 +17,12 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     let finishViewHeight: CGFloat = 40
     var finishView: YNFinishInputView?
+    
+    //问题描述，长度不超过2000个字
+    var descript: String?
+    
+    //问题的领域ID
+    var class_id: String?
     
     //品类
     var category: String? {
@@ -205,6 +211,82 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
     }
     
+    @IBAction func postQuestion(sender: AnyObject) {
+        
+        if self.descript?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
+        
+            if let _ = self.class_id {
+            
+                //满足条件上传问题
+                sendQusetionToServer()
+                
+            } else {
+            
+                YNProgressHUD().showText("请选择品类", toView: self.view)
+            }
+            
+            
+        } else {
+        
+            YNProgressHUD().showText("请填写问题描述", toView: self.view)
+        }
+    }
+    
+    //MARK: Http send 
+    func sendQusetionToServer() {
+    
+        let nicename = kUser_NiceName() as? String
+        
+        //TODO: 还没有加图片  然后测试
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "QuestionManage",
+            "a": "addQuestion",
+            "user_id": kUser_ID() as? String,
+            "user_name": nicename,
+            "descript": self.descript,
+            "class_id": self.class_id
+        ]
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpAskQuestion().sendQuestionToServer(params, successFull: { (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            print(json)
+            
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    //上传成功
+                    
+                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                        
+                        
+                    })
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: self.view)
+                        
+                        print("\n \(msg) \n")
+                    }
+                }
+                
+            }
+            
+            
+            }) { (error) -> Void in
+              
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("请求失败", toView: self.view)
+                
+        }
+    }
+    
     //MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -251,7 +333,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             let identify = "Cell_Ask_Qustion_text"
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNAskQuestionTextCollectionViewCell
-            
+            cell.delegate = self
             return cell
             
         } else if indexPath.section == 2 {
@@ -310,13 +392,29 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         if indexPath.section == 2 {
         
+            //选择标签
             let selectCatagoryVc = YNSelectedCategoryViewController()
-            
+            selectCatagoryVc.delegate = self
             self.navigationController?.pushViewController(selectCatagoryVc, animated: true)
         }
         
     }
     
+    //MARK: YNAskQuestionTextCollectionViewCellDelegate
+    func askQuestionTextCollectionViewCellTextViewDidEndEditing(text: String) {
+        
+        self.descript = text
+    }
+    
+    
+    //MARK: YNSelectedCategoryViewControllerDelegate
+    func selectedCategoryDidSelectedProduct(product: YNCategoryModel) {
+        self.class_id = product.id
+        self.category = product.class_name
+        
+        self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 2)])
+        
+    }
     
     //MARK: YNAskQuestionImageCollectionViewCellDelegate
     func askQuestionImageCollectionViewCellImageButtonDidClick() {

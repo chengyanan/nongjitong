@@ -49,6 +49,7 @@ class YNProductCollectionViewCell: UICollectionViewCell {
         let tempView = UILabel()
         tempView.textAlignment = .Center
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.adjustsFontSizeToFitWidth = true
         return tempView
     }()
     

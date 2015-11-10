@@ -100,7 +100,7 @@ class YNAskQuestionLocationCollectionViewCell: UICollectionViewCell {
         
         //locationLabel
         Layout().addTopBottomConstraints(locationLabel, toView: self.contentView, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(locationLabel, toView: self.contentView, multiplier: 1, constant: -15)
+        Layout().addRightConstraint(locationLabel, toView: self.contentView, multiplier: 1, constant: -18)
         Layout().addLeftToRightConstraint(locationLabel, toView: locationButton, multiplier: 1, constant: 20)
         
         //rightArror

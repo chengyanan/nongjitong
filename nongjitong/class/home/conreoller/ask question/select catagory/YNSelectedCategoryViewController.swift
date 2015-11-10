@@ -8,16 +8,24 @@
 
 import UIKit
 
+protocol YNSelectedCategoryViewControllerDelegate {
+
+    func selectedCategoryDidSelectedProduct(product: YNCategoryModel)
+}
+
 class YNSelectedCategoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     enum YNReloadData {
         case TableView, CollectionView
     }
     
+    //MARK: public protory
+    var delegate: YNSelectedCategoryViewControllerDelegate?
+    
     let tableViewWidthPercent: CGFloat = 0.33
     let numbersOfOneLine = 3
     let leftRightMargin: CGFloat = 10
-    let itemSpacing: CGFloat = 6
+    let itemSpacing: CGFloat = 3
     
     var tableView: UITableView?
     var collectionView: UICollectionView?
@@ -70,6 +78,8 @@ class YNSelectedCategoryViewController: UIViewController, UITableViewDataSource,
                         
                     } else if reloadData == .CollectionView {
                         
+                        self.productArray = [YNCategoryModel]()
+                        
                         for item in tempdata {
                             
                             let model = YNCategoryModel(dict: item as! NSDictionary)
@@ -116,7 +126,7 @@ class YNSelectedCategoryViewController: UIViewController, UITableViewDataSource,
         //collectionView
         let flow = UICollectionViewFlowLayout()
         flow.minimumInteritemSpacing = itemSpacing
-        flow.minimumLineSpacing = 10
+        flow.minimumLineSpacing = 20
         
         let collectionWidth: CGFloat = self.view.frame.size.width * (1 - tableViewWidthPercent)
         
@@ -183,10 +193,14 @@ class YNSelectedCategoryViewController: UIViewController, UITableViewDataSource,
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         
-       self.cayegoryArray[indexPath.row].isSelected = true
-       self.tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-    
+        let model = self.cayegoryArray[indexPath.row]
+        model.isSelected = true
+        
+        self.tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
         self.tableView?.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
+        
+        //发送网络请求二级数据
+        loadHttpData(model.id, reloadData: .CollectionView)
         
     }
     
@@ -196,8 +210,7 @@ class YNSelectedCategoryViewController: UIViewController, UITableViewDataSource,
         self.tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
     }
     
-    
-    //UICollectionViewDataSource
+    //MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return self.productArray.count
@@ -211,6 +224,16 @@ class YNSelectedCategoryViewController: UIViewController, UITableViewDataSource,
         cell.productModel = self.productArray[indexPath.item]
 
         return cell
+    }
+    
+    //MARK: UICollectionViewDelegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        //把选的数据传给上个页面
+        self.delegate?.selectedCategoryDidSelectedProduct(self.productArray[indexPath.item])
+        
+        self.navigationController?.popViewControllerAnimated(true)
+        
     }
     
 }

@@ -1457,7 +1457,11 @@
                                 <action selector="cancle:" destination="Fsx-bZ-U0G" id="vWL-yJ-WGh"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="发布" id="1NS-Hd-T4x"/>
+                        <barButtonItem key="rightBarButtonItem" title="发布" id="1NS-Hd-T4x">
+                            <connections>
+                                <action selector="postQuestion:" destination="Fsx-bZ-U0G" id="OKJ-qW-N6W"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="uMx-Ff-7Yh" id="CND-4k-4s3"/>
