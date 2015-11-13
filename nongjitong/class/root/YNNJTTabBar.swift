@@ -60,28 +60,9 @@ class YNNJTTabBar: UITabBar {
         askQuestionButton.center = CGPoint(x: self.bounds.width * 0.5, y: self.bounds.height * 0.5)
         
         //set 4 item's frame
-        var isShow = false
         for view in self.subviews {
             
             if view is UIControl && !(view is UIButton) {
-                
-                    if !isShow {
-
-                        if view.tag == 0 {
-
-                            isShow = true
-                        }
-
-                    } else {
-
-                        if view.tag == 0 {
-
-                            view.tag = 3
-                        }
-
-                    }
-                
-//                    print(view.tag)
                 
                     view.frame = CGRectOffset(frame, width * CGFloat(view.tag), 0)
 

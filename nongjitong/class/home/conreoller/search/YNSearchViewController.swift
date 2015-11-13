@@ -8,8 +8,9 @@
 
 import UIKit
 
-class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, YNFinishInputViewDelegate {
 
+    let finishViewHeight: CGFloat = 40
     
     //MARK: - private proporty
     @IBOutlet weak var tableView: UITableView!
@@ -23,6 +24,7 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
         didSet {
         
             self.tableView.reloadData()
+            
         }
     
     }
@@ -35,24 +37,121 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
         self.navigationItem.titleView = self.searchBar
         
         self.tableView.hidden = true
-        self.tableView.delegate = self
+        self.tableView.allowsSelection = true
         
-        let tgr = UITapGestureRecognizer(target: self, action: "hideKeyBoard")
-        self.view.addGestureRecognizer(tgr)
+        addViewWithKeyBoard()
     }
     
-    func hideKeyBoard() {
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.view.endEditing(true)
+//        self.view.addSubview(self.finishView!)
+        
+        UIApplication.sharedApplication().keyWindow?.addSubview(self.finishView!)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.view.endEditing(true)
+        self.finishView?.removeFromSuperview()
     }
     
     
+    func addViewWithKeyBoard() {
+        
+        //添加跟随键盘出现的View
+        addFinishView()
+        
+        //添加键盘通知
+        addKeyBoardNotication()
+    }
+    
+    func addFinishView() {
+        
+        let finishView = YNFinishInputView()
+        finishView.delegate = self
+        finishView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, finishViewHeight)
+        self.finishView = finishView
+        
+    }
+    
+    func addKeyBoardNotication() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let keyboardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+            
+            //            print(keyboardBounds)
+            
+            let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+            
+            let keyboardBoundsRect = self.view.convertRect(keyboardBounds, toView: nil)
+            
+            let deltaY = keyboardBoundsRect.size.height + finishViewHeight
+            
+            let animations: (()->Void) = {
+                
+                self.finishView!.transform = CGAffineTransformMakeTranslation(0, -deltaY)
+            }
+            
+            if duration > 0 {
+                
+                let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue << 16))
+                
+                UIView.animateWithDuration(duration, delay: 0, options:options, animations: animations, completion: nil)
+                
+            } else {
+                
+                animations()
+            }
+            
+            
+        }
+        
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+            let animations:(() -> Void) = {
+                
+                self.finishView!.transform = CGAffineTransformIdentity
+            }
+            
+            if duration > 0 {
+                
+                let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue << 16))
+                UIView.animateWithDuration(duration, delay: 0, options:options, animations: animations, completion: nil)
+                
+            } else{
+                
+                animations()
+            }
+        }
+        
+    }
+    
+    //MARK: YNFinishInputViewDelegate
+    func finishInputViewFinishButtonDidClick() {
+        //退出键盘
+        hideKeyBoard()
+    }
+    func hideKeyBoard() {
+    
+        self.searchBar.endEditing(true)
+    }
+
     
     //MARK: - UISearchBarDelegate
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -63,6 +162,14 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
         
         //MARK: 加载搜索结果
         search()
+    }
+    
+    
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        
+        self.searchBar.text = nil
+        self.resaultArray = [YNSearchResaultModel]()
     }
     
     func search() {
@@ -137,7 +244,15 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
         
         if let tempArray = self.resaultArray {
         
-            return tempArray.count + 1
+            if tempArray.count < 20 {
+            
+                return tempArray.count
+                
+            } else {
+            
+                return tempArray.count + 1
+            }
+           
         }
         
         return 0
@@ -176,8 +291,6 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
     
     //MARK: - UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        print("cell click")
         
         if indexPath.row == self.resaultArray?.count {
         
@@ -218,18 +331,36 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
     //MARK: event response
     @IBAction func cancleBarOtemClick(sender: AnyObject) {
         
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-        
+        self.searchBar.endEditing(true)
+        self.searchBar.text = nil
+        self.resaultArray = [YNSearchResaultModel]()
     }
     
    
+    //添加一个随键盘弹出的view
+    var finishView: YNFinishInputView?
+    
     let searchBar: UISearchBar = {
         
         let tempSearchBar = UISearchBar()
         tempSearchBar.placeholder = "请输入关键词"
+        
+        for view in (tempSearchBar.subviews.last?.subviews)! {
+        
+            if view is UITextField {
+            
+                view.backgroundColor = UIColor(red: 221/255.0, green: 223/255.0, blue: 225/255.0, alpha: 1)
+            }
+            
+        }
         return tempSearchBar
         
         }()
+    
+    deinit {
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     
 }

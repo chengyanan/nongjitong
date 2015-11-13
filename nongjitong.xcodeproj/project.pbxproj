@@ -38,6 +38,14 @@
 		40B5B2891BEC80BC008E5F77 /* YNSelectedCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B5B2881BEC80BC008E5F77 /* YNSelectedCategoryViewController.swift */; };
 		40D5729C1BD88EA000E19A12 /* YNResaultLoadModeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5729B1BD88EA000E19A12 /* YNResaultLoadModeCell.swift */; };
 		40D5729E1BD8A4C500E19A12 /* YNSearchResaultDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5729D1BD8A4C500E19A12 /* YNSearchResaultDetailModel.swift */; };
+		40E0397E1BF5C5A4007FFF2A /* YNNearbyTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0397D1BF5C5A4007FFF2A /* YNNearbyTitleView.swift */; };
+		40E039801BF5C5A8007FFF2A /* YNNearbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0397F1BF5C5A8007FFF2A /* YNNearbyViewController.swift */; };
+		40E039871BF5C5F4007FFF2A /* YNBaseAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E039821BF5C5F4007FFF2A /* YNBaseAnnotation.swift */; };
+		40E039881BF5C5F4007FFF2A /* YNCallOutAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E039831BF5C5F4007FFF2A /* YNCallOutAnnotation.swift */; };
+		40E039891BF5C5F4007FFF2A /* YNCallOutAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E039841BF5C5F4007FFF2A /* YNCallOutAnnotationView.swift */; };
+		40E0398A1BF5C5F4007FFF2A /* YNCalloutContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E039851BF5C5F4007FFF2A /* YNCalloutContentView.swift */; };
+		40E0398B1BF5C5F4007FFF2A /* YNLocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E039861BF5C5F4007FFF2A /* YNLocationAnnotation.swift */; };
+		40E0398D1BF5C61E007FFF2A /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0398C1BF5C61E007FFF2A /* Restaurant.swift */; };
 		40E939EF1BD9CDC8001A5D35 /* YNPersionalSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E939E91BD9CDC8001A5D35 /* YNPersionalSettingTableViewController.swift */; };
 		40E939F01BD9CDC8001A5D35 /* YNSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E939EB1BD9CDC8001A5D35 /* YNSettingTableViewController.swift */; };
 		40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED434F1BC60A28004713C9 /* AppDelegate.swift */; };
@@ -118,6 +126,14 @@
 		40B5B2881BEC80BC008E5F77 /* YNSelectedCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSelectedCategoryViewController.swift; sourceTree = "<group>"; };
 		40D5729B1BD88EA000E19A12 /* YNResaultLoadModeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNResaultLoadModeCell.swift; sourceTree = "<group>"; };
 		40D5729D1BD8A4C500E19A12 /* YNSearchResaultDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchResaultDetailModel.swift; sourceTree = "<group>"; };
+		40E0397D1BF5C5A4007FFF2A /* YNNearbyTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNNearbyTitleView.swift; sourceTree = "<group>"; };
+		40E0397F1BF5C5A8007FFF2A /* YNNearbyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNNearbyViewController.swift; sourceTree = "<group>"; };
+		40E039821BF5C5F4007FFF2A /* YNBaseAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNBaseAnnotation.swift; sourceTree = "<group>"; };
+		40E039831BF5C5F4007FFF2A /* YNCallOutAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCallOutAnnotation.swift; sourceTree = "<group>"; };
+		40E039841BF5C5F4007FFF2A /* YNCallOutAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCallOutAnnotationView.swift; sourceTree = "<group>"; };
+		40E039851BF5C5F4007FFF2A /* YNCalloutContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCalloutContentView.swift; sourceTree = "<group>"; };
+		40E039861BF5C5F4007FFF2A /* YNLocationAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNLocationAnnotation.swift; sourceTree = "<group>"; };
+		40E0398C1BF5C61E007FFF2A /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		40E939E91BD9CDC8001A5D35 /* YNPersionalSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNPersionalSettingTableViewController.swift; sourceTree = "<group>"; };
 		40E939EB1BD9CDC8001A5D35 /* YNSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSettingTableViewController.swift; sourceTree = "<group>"; };
 		40ED434C1BC60A28004713C9 /* nongjitong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nongjitong.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -304,6 +320,19 @@
 			path = "ask question";
 			sourceTree = "<group>";
 		};
+		40E039811BF5C5F4007FFF2A /* location */ = {
+			isa = PBXGroup;
+			children = (
+				40E0398C1BF5C61E007FFF2A /* Restaurant.swift */,
+				40E039821BF5C5F4007FFF2A /* YNBaseAnnotation.swift */,
+				40E039831BF5C5F4007FFF2A /* YNCallOutAnnotation.swift */,
+				40E039841BF5C5F4007FFF2A /* YNCallOutAnnotationView.swift */,
+				40E039851BF5C5F4007FFF2A /* YNCalloutContentView.swift */,
+				40E039861BF5C5F4007FFF2A /* YNLocationAnnotation.swift */,
+			);
+			path = location;
+			sourceTree = "<group>";
+		};
 		40E939E21BD9CDC8001A5D35 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +481,9 @@
 		40ED43951BC61556004713C9 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				40E039811BF5C5F4007FFF2A /* location */,
+				40E0397F1BF5C5A8007FFF2A /* YNNearbyViewController.swift */,
+				40E0397D1BF5C5A4007FFF2A /* YNNearbyTitleView.swift */,
 				40ED439E1BC61ADE004713C9 /* YNHomeViewController.swift */,
 				40FA6FEF1BD4DF0800CFE69C /* conreoller */,
 				40FA6FF01BD4DF0800CFE69C /* model */,
@@ -666,11 +698,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				401AD68D1BF03AAB00E747BF /* YNCategoryTableViewCell.swift in Sources */,
+				40E039891BF5C5F4007FFF2A /* YNCallOutAnnotationView.swift in Sources */,
+				40E0397E1BF5C5A4007FFF2A /* YNNearbyTitleView.swift in Sources */,
 				40292E4E1BD6311B0028F87C /* YNSearchViewController.swift in Sources */,
 				40ED43B01BC66490004713C9 /* YNMeTableViewController.swift in Sources */,
 				40ED43921BC613C3004713C9 /* YNTestFiledExtension.swift in Sources */,
 				40D5729C1BD88EA000E19A12 /* YNResaultLoadModeCell.swift in Sources */,
 				40519C5B1BD74B2F00A8BE65 /* YNSearchResaultModel.swift in Sources */,
+				40E0398B1BF5C5F4007FFF2A /* YNLocationAnnotation.swift in Sources */,
 				40B1CEE71BE5F97200D42187 /* YNAskQuestionLocationCollectionViewCell.swift in Sources */,
 				40B1CEE31BE5F93400D42187 /* YNAskQuestionTextCollectionViewCell.swift in Sources */,
 				40ED43A11BC61AF5004713C9 /* YNEarlyWaringViewController.swift in Sources */,
@@ -682,6 +717,7 @@
 				40E939EF1BD9CDC8001A5D35 /* YNPersionalSettingTableViewController.swift in Sources */,
 				401CCAEE1BD0DB7F00023F66 /* YNBaseModel.swift in Sources */,
 				40ED438F1BC612F9004713C9 /* YNSignUpViewController.swift in Sources */,
+				40E039801BF5C5A8007FFF2A /* YNNearbyViewController.swift in Sources */,
 				40B1CEE51BE5F95700D42187 /* YNAskQuestionImageCollectionViewCell.swift in Sources */,
 				401AD6911BF04E5400E747BF /* YNHttpLoadCategory.swift in Sources */,
 				40FA6FF31BD4DF6000CFE69C /* YNSearchAndQuestionCell.swift in Sources */,
@@ -693,6 +729,8 @@
 				40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */,
 				40ED43871BC60B76004713C9 /* Network.swift in Sources */,
 				40ED43851BC60B76004713C9 /* Location.swift in Sources */,
+				40E039871BF5C5F4007FFF2A /* YNBaseAnnotation.swift in Sources */,
+				40E039881BF5C5F4007FFF2A /* YNCallOutAnnotation.swift in Sources */,
 				40F830E31BD781F500C1F0BB /* YNSearchResaultCell.swift in Sources */,
 				40ED43841BC60B76004713C9 /* Layout.swift in Sources */,
 				40ED438E1BC612F9004713C9 /* YNSignInViewController.swift in Sources */,
@@ -703,6 +741,7 @@
 				40B5B2891BEC80BC008E5F77 /* YNSelectedCategoryViewController.swift in Sources */,
 				40ED43861BC60B76004713C9 /* Macro.swift in Sources */,
 				40ED43891BC60B76004713C9 /* tools.swift in Sources */,
+				40E0398D1BF5C61E007FFF2A /* Restaurant.swift in Sources */,
 				40ED43A31BC61B03004713C9 /* YNHelpViewController.swift in Sources */,
 				4003F7801BDF2F5400137258 /* YNCityTableViewController.swift in Sources */,
 				40ED43AE1BC65EA7004713C9 /* YNExchangeRootController.swift in Sources */,
@@ -713,6 +752,7 @@
 				40ED43AA1BC64D7F004713C9 /* YNSignUpModel.swift in Sources */,
 				40ED439D1BC61A75004713C9 /* YNNavigationController.swift in Sources */,
 				40ED439B1BC61A56004713C9 /* YNTabBarController.swift in Sources */,
+				40E0398A1BF5C5F4007FFF2A /* YNCalloutContentView.swift in Sources */,
 				40B1CEE11BE5CE5B00D42187 /* YNAskQuestionViewController.swift in Sources */,
 				4003F7831BDF2F5400137258 /* YNModifytextViewController.swift in Sources */,
 				40ED439F1BC61ADE004713C9 /* YNHomeViewController.swift in Sources */,

@@ -10,7 +10,5 @@ import UIKit
 
 class YNResaultLoadModeCell: UITableViewCell {
 
-    @IBAction func loadMoreButtonClick(sender: AnyObject) {
-    }
     
 }
