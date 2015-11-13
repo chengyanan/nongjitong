@@ -4,7 +4,7 @@
 //
 //  Created by 农盟 on 15/11/1.
 //  Copyright © 2015年 农盟. All rights reserved.
-//
+//提问
 
 import UIKit
 import CoreLocation
@@ -74,11 +74,6 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         //添加键盘通知
         addKeyBoardNotication()
-        
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
         
     }
     
@@ -190,10 +185,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         self.collectionView.collectionViewLayout = flow
         
         self.collectionView.backgroundColor = kRGBA(234, g: 234, b: 234, a: 1)
-        
-        let tgr = UITapGestureRecognizer(target: self, action: "hideKeyBoard")
-        
-        self.collectionView.addGestureRecognizer(tgr)
+    
     }
     
     //MARK: event response
@@ -496,15 +488,17 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil)
         
-        actionSheet.addButtonWithTitle("album")
+        actionSheet.addButtonWithTitle("相册")
         
         if UIImagePickerController.isSourceTypeAvailable( UIImagePickerControllerSourceType.Camera) {
             
-            actionSheet.addButtonWithTitle("camera")
+            actionSheet.addButtonWithTitle("相机")
+            actionSheet.cancelButtonIndex = 2
+        } else {
             
+            actionSheet.cancelButtonIndex = 1
         }
-        
-        actionSheet.addButtonWithTitle("cancle")
+        actionSheet.addButtonWithTitle("取消")
         
         actionSheet.showInView(self.view)
         
@@ -519,7 +513,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             //相册
             self.openAlbum(UIImagePickerControllerSourceType.PhotoLibrary)
             
-        } else {
+        } else if buttonIndex == 1{
             //相机
             self.openAlbum(UIImagePickerControllerSourceType.Camera)
         }
