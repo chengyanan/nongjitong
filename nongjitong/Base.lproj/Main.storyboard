@@ -10,7 +10,7 @@
         <scene sceneID="RKa-NB-kEY">
             <objects>
                 <navigationController id="TLJ-hy-rP9" customClass="YNNavigationController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="预警" image="tabBar_waring" id="3Yj-DV-TpJ"/>
+                    <tabBarItem key="tabBarItem" title="预警" image="tabBar_help" id="3Yj-DV-TpJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aUt-j4-6Gv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -380,7 +380,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sG-Nr-47L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-435" y="1757"/>
+            <point key="canvasLocation" x="-1072" y="1662"/>
         </scene>
         <!--完善个人资料-->
         <scene sceneID="50f-Oq-V3V">
@@ -746,7 +746,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJu-SS-pFL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="224" y="1662"/>
+            <point key="canvasLocation" x="-411" y="1662"/>
         </scene>
         <!--City Table View Controller-->
         <scene sceneID="VHb-Tl-gTC">
@@ -774,7 +774,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BXr-Lh-VwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="864" y="1662"/>
+            <point key="canvasLocation" x="232" y="1662"/>
         </scene>
         <!--昵称-->
         <scene sceneID="4IY-SG-fjJ">
@@ -1274,7 +1274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vrb-DT-2pp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-983" y="-1022"/>
+            <point key="canvasLocation" x="-1071" y="-1032"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bhr-5b-TDh">
@@ -1370,8 +1370,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="Fjw-0r-VGx" id="zxH-ox-Huq"/>
-                                    <outlet property="delegate" destination="Fjw-0r-VGx" id="hho-OC-heC"/>
+                                    <outlet property="dataSource" destination="Fjw-0r-VGx" id="V0p-7r-HHB"/>
+                                    <outlet property="delegate" destination="Fjw-0r-VGx" id="6rT-ap-awC"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -1391,28 +1391,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchDisplayController" destination="cad-A2-GLh" id="15K-3Z-DXB"/>
                         <outlet property="tableView" destination="jWl-bB-E6a" id="sNU-ZM-w9m"/>
                         <segue destination="1rA-Dk-cw1" kind="show" identifier="Segue_SearchResault_Detail" id="BcL-E7-a9H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zSu-Qf-6VS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="AOe-1P-pR4">
-                    <connections>
-                        <outlet property="delegate" destination="Fjw-0r-VGx" id="gu2-d7-WAP"/>
-                        <outlet property="searchContentsController" destination="Fjw-0r-VGx" id="nDC-p3-egd"/>
-                        <outlet property="searchResultsDataSource" destination="Fjw-0r-VGx" id="aav-sU-1cy"/>
-                        <outlet property="searchResultsDelegate" destination="Fjw-0r-VGx" id="TZ6-rN-zbS"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="cad-A2-GLh">
-                    <connections>
-                        <outlet property="delegate" destination="Fjw-0r-VGx" id="2IZ-R1-DP6"/>
-                        <outlet property="searchContentsController" destination="Fjw-0r-VGx" id="Sss-0c-jvS"/>
-                        <outlet property="searchResultsDataSource" destination="Fjw-0r-VGx" id="LWt-Mw-iH3"/>
-                        <outlet property="searchResultsDelegate" destination="Fjw-0r-VGx" id="ISj-64-go7"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="403" y="-1646"/>
         </scene>
@@ -1469,12 +1452,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frq-4x-CoW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="384" y="-1008"/>
+            <point key="canvasLocation" x="403" y="-965"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="p3w-9F-lbR">
             <objects>
-                <navigationController id="wJP-wL-cXs" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SB_AskQuestion" id="wJP-wL-cXs" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qf1-Do-r5S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1485,7 +1468,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yI1-td-nCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-253" y="-997"/>
+            <point key="canvasLocation" x="-253" y="-965"/>
         </scene>
         <!--Search Resault Detail View Controller-->
         <scene sceneID="h41-m7-LSe">
@@ -1537,7 +1520,7 @@
         <scene sceneID="d2s-7G-2Gx">
             <objects>
                 <navigationController id="KU6-ga-QPn" customClass="YNNavigationController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首页" image="tabBar_home" id="AkQ-xF-flT"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="tabBar_waring" id="AkQ-xF-flT"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7qn-LW-9AL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1554,7 +1537,7 @@
         <scene sceneID="zGq-cL-FJg">
             <objects>
                 <navigationController id="Mez-u5-dlg" customClass="YNNavigationController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="救援" image="tabBar_help" id="fAA-fg-4u2"/>
+                    <tabBarItem key="tabBarItem" title="救援" image="tabBar_home" id="fAA-fg-4u2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8EP-40-aCE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1588,25 +1571,20 @@
         <scene sceneID="v3P-kJ-Kxi">
             <objects>
                 <tabBarController storyboardIdentifier="YNTabBarController" id="ohl-K8-Puv" customClass="YNTabBarController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="CQ3-2C-DAQ">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="CQ3-2C-DAQ" customClass="YNNJTTabBar" customModule="nongjitong" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="KU6-ga-QPn" kind="relationship" relationship="viewControllers" id="MUH-1l-j16"/>
-                        <segue destination="TLJ-hy-rP9" kind="relationship" relationship="viewControllers" id="WQq-6k-vz5"/>
-                        <segue destination="Mez-u5-dlg" kind="relationship" relationship="viewControllers" id="ans-Gy-7I8"/>
-                        <segue destination="ca2-Bq-3tl" kind="relationship" relationship="viewControllers" id="bIL-X2-hYF"/>
+                        <outlet property="customTabBar" destination="CQ3-2C-DAQ" id="kqT-XV-Efu"/>
+                        <segue destination="KU6-ga-QPn" kind="relationship" relationship="viewControllers" id="3zT-07-v4t"/>
+                        <segue destination="TLJ-hy-rP9" kind="relationship" relationship="viewControllers" id="zyu-gm-3po"/>
+                        <segue destination="Mez-u5-dlg" kind="relationship" relationship="viewControllers" id="uXa-HP-TOs"/>
+                        <segue destination="ca2-Bq-3tl" kind="relationship" relationship="viewControllers" id="X8o-Pk-DpS"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="19H-Ae-CSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择地区" textAlignment="right" minimumFontSize="17" id="dTl-sS-XbG">
-                    <rect key="frame" x="0.0" y="0.0" width="471" height="58"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
             </objects>
             <point key="canvasLocation" x="-2876" y="530"/>
         </scene>

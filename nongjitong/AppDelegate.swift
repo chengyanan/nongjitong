@@ -16,35 +16,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         
-        if kUser_ID() != nil {//已登陆
+        //个人资料完善
+        let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+        window?.rootViewController = rootstoryboard.instantiateInitialViewController()
         
-            let temp = kUser_IsInformationFinish()
-            
-            if  temp != nil {
-            
-                //个人资料完善
-                let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-                window?.rootViewController = rootstoryboard.instantiateInitialViewController()
-                
-            } else {
-                
-                //个人资料不完善 显示个人资料页面
-                
-                let rootstoryboardVc = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SB_Add_User_Information") as! UINavigationController
-                
-                window?.rootViewController = rootstoryboardVc
-                
-            }
-            
-            
         
-        } else {//未登录
-        
-            let signinVc = YNSignInViewController()
-            let NavVc = YNNavigationController(rootViewController: signinVc)
-            window?.rootViewController = NavVc
-            
-        }
+//        if kUser_ID() != nil {//已登陆
+//        
+//            let temp = kUser_IsInformationFinish()
+//            
+//            if  temp != nil {
+//            
+//                //个人资料完善
+//                let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+//                window?.rootViewController = rootstoryboard.instantiateInitialViewController()
+//                
+//            } else {
+//                
+//                //个人资料不完善 显示个人资料页面
+//                
+//                let rootstoryboardVc = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SB_Add_User_Information") as! UINavigationController
+//                
+//                window?.rootViewController = rootstoryboardVc
+//                
+//            }
+//            
+//            
+//        
+//        } else {//未登录
+//        
+//            let signinVc = YNSignInViewController()
+//            let NavVc = YNNavigationController(rootViewController: signinVc)
+//            window?.rootViewController = NavVc
+//            
+//        }
         
         window?.makeKeyAndVisible()
         

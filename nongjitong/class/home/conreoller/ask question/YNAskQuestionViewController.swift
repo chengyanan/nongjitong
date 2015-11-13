@@ -184,21 +184,16 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         flow.minimumInteritemSpacing = 6
         flow.minimumLineSpacing = 16
-        
-        let size = CGSizeMake(self.view.frame.size.width, 100)
-        print(size)
-        
-        //        flow.itemSize = size
-        
+
         flow.sectionInset = UIEdgeInsetsMake(0, 0, 12, 0)
         flow.scrollDirection = UICollectionViewScrollDirection.Vertical
         self.collectionView.collectionViewLayout = flow
         
         self.collectionView.backgroundColor = kRGBA(234, g: 234, b: 234, a: 1)
         
-//        let tgr = UITapGestureRecognizer(target: self, action: "hideKeyBoard")
-//        
-//        self.collectionView.addGestureRecognizer(tgr)
+        let tgr = UITapGestureRecognizer(target: self, action: "hideKeyBoard")
+        
+        self.collectionView.addGestureRecognizer(tgr)
     }
     
     //MARK: event response
@@ -253,7 +248,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             
             progress.hideUsingAnimation()
             
-            print(json)
+//            print(json)
             
             if let status = json["status"] as? Int {
                 

@@ -8,21 +8,31 @@
 
 import UIKit
 
-class YNTabBarController: UITabBarController {
+class YNTabBarController: UITabBarController, YNNJTTabBarDeleagte {
 
+    
+    @IBOutlet var customTabBar: YNNJTTabBar!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
-//        self.tabBar.tintColor = kStyleColor
+      customTabBar.btnClickDelegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  //MARK: YNNJTTabBarDeleagte
     
+    func njtTabBarAskQuestionButtonDidClick() {
+        
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let askVc = mainStoryBoard.instantiateViewControllerWithIdentifier("SB_AskQuestion")
+        
+        
+        self.presentViewController(askVc, animated: true) { () -> Void in
+            
+        }
+        
+    }
 
     /*
     // MARK: - Navigation

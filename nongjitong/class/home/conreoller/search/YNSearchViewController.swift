@@ -35,7 +35,15 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
         self.navigationItem.titleView = self.searchBar
         
         self.tableView.hidden = true
-        self.searchBar.becomeFirstResponder()
+        self.tableView.delegate = self
+        
+        let tgr = UITapGestureRecognizer(target: self, action: "hideKeyBoard")
+        self.view.addGestureRecognizer(tgr)
+    }
+    
+    func hideKeyBoard() {
+    
+        self.view.endEditing(true)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -43,6 +51,8 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
         
         self.view.endEditing(true)
     }
+    
+    
     
     //MARK: - UISearchBarDelegate
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -74,7 +84,7 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
                 
                 let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
                 
-                print("data - \(json)")
+//                print("data - \(json)")
                 
                 if let status = json["status"] as? Int {
                     
@@ -166,6 +176,8 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
     
     //MARK: - UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        print("cell click")
         
         if indexPath.row == self.resaultArray?.count {
         
