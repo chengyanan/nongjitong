@@ -127,10 +127,6 @@ class YNSignInViewController: UIViewController {
                     
                     YNExchangeRootController().showHome()
                     
-//                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
-//                        
-//                        YNProgressHUD().showText("登录成功", toView: UIApplication.sharedApplication().keyWindow!)
-//                    })
                     
                 } else if status == 0 {
                     
