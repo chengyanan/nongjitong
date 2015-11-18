@@ -26,7 +26,7 @@
         <!--问题-->
         <scene sceneID="1lG-bW-aih">
             <objects>
-                <viewController title="问题" id="qyf-m8-zJv" sceneMemberID="viewController">
+                <viewController title="问题" id="qyf-m8-zJv" customClass="YNQuestionViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hmi-3p-v1P"/>
                         <viewControllerLayoutGuide type="bottom" id="SE8-Jx-HnP"/>

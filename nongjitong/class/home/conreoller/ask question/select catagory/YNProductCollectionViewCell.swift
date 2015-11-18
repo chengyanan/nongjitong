@@ -10,7 +10,6 @@ import UIKit
 
 class YNProductCollectionViewCell: UICollectionViewCell {
 
-    
     var productModel: YNCategoryModel? {
         
         didSet {

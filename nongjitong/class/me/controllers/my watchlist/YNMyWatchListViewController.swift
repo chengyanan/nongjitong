@@ -35,7 +35,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
     var productArray = [YNCategoryModel]()
     
     //collectionViewdatasource
-    var selectedArray = [YNCategoryModel]()
+    var selectedArray = [YNSelectedProductModel]()
     
     var tableViewCatagory: UITableView?
     var tableViewProduct: UITableView?
@@ -92,12 +92,12 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
                     
                         for var i = 0; i < tempdata.count; i++ {
                             
-                            let model = YNCategoryModel(dict: tempdata[i] as! NSDictionary)
+                            let model = YNSelectedProductModel(dict: tempdata[i] as! NSDictionary)
                             
-                            self.productArray.append(model)
+                            self.selectedArray.append(model)
                         }
                         
-                        
+                        self.collectionView?.reloadData()
                         
                     }
                     
@@ -256,7 +256,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
         
     }
     
-    func markDeselected(model: YNCategoryModel) {
+    func markDeselected(model: YNSelectedProductModel) {
     
         for var i = 0; i < productArray.count; i++ {
         
@@ -354,7 +354,12 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
                 
                 if selectedArray.count < maxNumberOfWatch {
                     
-                    self.selectedArray.append(cell.productModel!)
+                    let model = YNSelectedProductModel()
+                    model.class_id = cell.productModel!.id
+                    model.class_name = cell.productModel!.class_name
+                    model.isSelected = cell.productModel!.isSelected
+                    
+                    self.selectedArray.append(model)
                     self.collectionView?.reloadData()
                     
                     //TODO: 添加到个人关注上
@@ -386,7 +391,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
     
         for var i = 0; i < selectedArray.count; i++ {
         
-            if selectedArray[i].id == id {
+            if selectedArray[i].class_id == id {
             
                 selectedArray.removeAtIndex(i)
                 break
@@ -407,7 +412,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
                 
                 if status == 1 {
                     
-                   
+                   print(json["msg"])
                     
                 } else if status == 0 {
                     
@@ -434,11 +439,11 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
         
             if i == (selectedArray.count - 1) {
             
-                classId += selectedArray[i].id
+                classId += selectedArray[i].class_id
                 
             } else {
             
-                classId += selectedArray[i].id + ","
+                classId += selectedArray[i].class_id + ","
             }
         }
         
@@ -519,7 +524,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
         
             for var j = 0; j < productArray.count; j++ {
             
-                if productArray[j].id == selectedArray[i].id {
+                if productArray[j].id == selectedArray[i].class_id {
                 
                     productArray[j].isSelected = true
                     break
