@@ -53,8 +53,8 @@ class YNQuestionTableViewCell: UITableViewCell {
         Layout().addLeftConstraint(questionContent, toView: avatorImage, multiplier: 1, constant: 0)
         Layout().addRightConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: -leftRightMargin)
         Layout().addTopToBottomConstraint(questionContent, toView: avatorImage, multiplier: 1, constant: 10)
-//        Layout().addHeightConstraint(questionContent, toView: nil, multiplier: 0, constant: 60)
-        Layout().addBottomConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: 0)
+        Layout().addHeightConstraint(questionContent, toView: nil, multiplier: 0, constant: 60)
+//        Layout().addBottomConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: 0)
         
         
         

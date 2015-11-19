@@ -12,7 +12,7 @@ class YNSettingTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
         
             if indexPath.row == 0 {
             

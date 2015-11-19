@@ -25,12 +25,26 @@ class YNMeTableViewController: UITableViewController {
     //MARK: - tableViewDelegate
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 1 && indexPath.row == 2 {
+        if indexPath.section == 2 {
         
-            let vc = YNMyWatchListViewController()
+            if indexPath.row == 0 {
             
-            self.navigationController?.pushViewController(vc, animated: true)
+                //我的关注
+                let vc = YNMyWatchListViewController()
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            } else if indexPath.row == 1 {
+            
+                //我的订阅
+                let vc = YNMySubscriptionViewController()
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+            
         }
+        
         
        
     }

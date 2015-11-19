@@ -104,8 +104,8 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         let tempTableView = UITableView()
         tempTableView.delegate = self
         tempTableView.dataSource = self
-        tempTableView.estimatedRowHeight = 44
-        tempTableView.rowHeight = UITableViewAutomaticDimension
+//        tempTableView.estimatedRowHeight = 44
+//        tempTableView.rowHeight = UITableViewAutomaticDimension
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
@@ -165,10 +165,10 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         return cell!
     }
     
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        
-//        return 180
-//    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        return 180
+    }
     
     //MARK:UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
