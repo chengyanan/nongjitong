@@ -9,6 +9,34 @@
 import UIKit
 
 class YNAddSubscriptionTableViewCell: UITableViewCell {
+    
+    var name = "" {
+    
+        didSet {
+        
+            self.nameLabel.text = name
+        }
+    }
+    var content = "" {
+    
+        didSet {
+            
+            self.contentLabel.text = content
+        }
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.accessoryType = .DisclosureIndicator
+        
+        setInterface()
+        setLayout()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     func setInterface() {
     
@@ -20,9 +48,9 @@ class YNAddSubscriptionTableViewCell: UITableViewCell {
     
         //nameLabel
         Layout().addTopConstraint(nameLabel, toView: self.contentView, multiplier: 1, constant: 0)
-        Layout().addLeftConstraint(nameLabel, toView: self.contentView, multiplier: 1, constant: 0)
+        Layout().addLeftConstraint(nameLabel, toView: self.contentView, multiplier: 1, constant: 12)
         Layout().addBottomConstraint(nameLabel, toView: self.contentView, multiplier: 1, constant: 0)
-        Layout().addWidthConstraint(nameLabel, toView: nil, multiplier: 1, constant: 0)
+        Layout().addWidthConstraint(nameLabel, toView: nil, multiplier: 1, constant: 80)
         
         //contentLabel 
         Layout().addTopConstraint(contentLabel, toView: self.contentView, multiplier: 1, constant: 0)
@@ -33,17 +61,17 @@ class YNAddSubscriptionTableViewCell: UITableViewCell {
     
     let nameLabel: UILabel =  {
         
-        //种类名称
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
         return tempView
     }()
     
     let contentLabel: UILabel =  {
-        //规模
+        //内容
         let tempView = UILabel()
         tempView.textAlignment = .Right
         tempView.font = UIFont.systemFontOfSize(13)
+        tempView.textColor = UIColor.grayColor()
         tempView.translatesAutoresizingMaskIntoConstraints = false
         return tempView
     }()

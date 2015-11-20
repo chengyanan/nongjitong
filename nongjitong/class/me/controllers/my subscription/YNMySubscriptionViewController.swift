@@ -27,6 +27,7 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "我的订阅"
         self.view.backgroundColor = UIColor(red: 235/255.0, green: 235/255.0, blue: 241/255.0, alpha: 1)
         
         setInterface()
