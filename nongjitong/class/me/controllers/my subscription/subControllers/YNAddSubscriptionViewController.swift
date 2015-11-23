@@ -8,8 +8,8 @@
 
 import UIKit
 
-class YNAddSubscriptionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNSelectedCategoryViewControllerDelegate {
-
+class YNAddSubscriptionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNSelectedCategoryViewControllerDelegate, YNScaleViewDelegate, YNSelectAreaViewControllerDelegate {
+    
     var tableView: UITableView?
     
     var model = YNSubscriptionModel()
@@ -20,8 +20,80 @@ class YNAddSubscriptionViewController: UIViewController, UITableViewDataSource, 
         
         self.title = "添加订阅"
         
+        let rightBarButtonItem = UIBarButtonItem(title: "确定", style: UIBarButtonItemStyle.Plain, target: self, action: "rightBarButtonItemDidClick")
+        
+        self.navigationController?.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
         setInterface()
         setLayout()
+    }
+    
+    func rightBarButtonItemDidClick() {
+        
+        if model.product_name == "" {
+        
+            YNProgressHUD().showText("请选择品类", toView: self.view)
+            
+        } else {
+        
+            if model.range == "" {
+            
+                YNProgressHUD().showText("请选择规模", toView: self.view)
+                
+            } else {
+            
+                
+                if model.area_id == "" {
+                
+                    YNProgressHUD().showText("请选择规模", toView: self.view)
+                    
+                } else {
+                    
+                    //信息完整, 上传到服务器
+                    addSubcribe()
+                }
+                
+            }
+        }
+        
+    }
+    
+    //MARK: 上传服务器
+    func addSubcribe() {
+    
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpSubscription().addSubcribe(self.model, successFull: { (json) -> Void in
+            
+                progress.hideUsingAnimation()
+            
+                if let status = json["status"] as? Int {
+                    
+                    if status == 1 {
+                        
+//                        let tempdata = json["data"] as! NSArray
+                        
+                        
+                        
+                    } else if status == 0 {
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            YNProgressHUD().showText(msg, toView: self.view)
+                            
+                            print("\n \(msg) \n")
+                        }
+                    }
+                    
+                }
+            
+            
+            }, failureFul: { (error) -> Void in
+                
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("请求失败", toView: self.view)
+                
+        })
     }
     
     func setLayout() {
@@ -42,7 +114,7 @@ class YNAddSubscriptionViewController: UIViewController, UITableViewDataSource, 
         tempTableView.tableFooterView = UIView()
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
         tempTableView.showsVerticalScrollIndicator = false
-        tempTableView.backgroundColor = UIColor(red: 235/255.0, green: 235/255.0, blue: 241/255.0, alpha: 1)
+//        tempTableView.backgroundColor = UIColor(red: 235/255.0, green: 235/255.0, blue: 241/255.0, alpha: 1)
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
     }
@@ -130,16 +202,50 @@ class YNAddSubscriptionViewController: UIViewController, UITableViewDataSource, 
             let selectCatagoryVc = YNSelectedCategoryViewController()
             selectCatagoryVc.delegate = self
             self.navigationController?.pushViewController(selectCatagoryVc, animated: true)
+            
+        } else if indexPath.section == 1 {
+        
+            //选择规模
+            let scaleView = YNScaleView()
+            scaleView.delegate = self
+            scaleView.show()
+            
+        } else if indexPath.section == 2 {
+        
+            //选择地区
+            let vc = YNSelectAreaViewController()
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         }
+        
         
     }
     
+   
     //MARK: YNSelectedCategoryViewControllerDelegate
     func selectedCategoryDidSelectedProduct(product: YNCategoryModel) {
         
         self.model.product_name = product.class_name
         
         self.tableView?.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+    }
+    
+    //MARK: YNScaleViewDelegate
+    func scaleViewDoneButtonDidClick(title: String) {
+        
+        self.model.range = title
+        
+        self.tableView?.reloadSections(NSIndexSet(index: 1), withRowAnimation: .None)
+    }
+    
+    //MARK: YNSelectAreaViewControllerDelegate
+    func selectAreaViewControllerDidSelectArea(model: YNBaseCityModel) {
+        
+        self.model.area_id = model.id
+        self.model.address = model.city_name
+        
+        self.tableView?.reloadSections(NSIndexSet(index: 2), withRowAnimation: .None)
     }
     
 }

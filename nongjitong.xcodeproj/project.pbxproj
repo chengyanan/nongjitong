@@ -22,6 +22,8 @@
 		401CCAF21BD0E9A700023F66 /* cityData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 401CCAF01BD0E9A700023F66 /* cityData.plist */; };
 		401CCAF31BD0E9A700023F66 /* areaList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 401CCAF11BD0E9A700023F66 /* areaList.plist */; };
 		401CCAF51BD0EB1E00023F66 /* YNCityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401CCAF41BD0EB1E00023F66 /* YNCityModel.swift */; };
+		401F4FB61C02C92A00F45EBA /* YNSelectAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F4FB51C02C92A00F45EBA /* YNSelectAreaViewController.swift */; };
+		401F4FB81C030A4400F45EBA /* YNHttpSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F4FB71C030A4400F45EBA /* YNHttpSubscription.swift */; };
 		40292E4B1BD5F7840028F87C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40292E491BD5F7840028F87C /* LaunchScreen.storyboard */; };
 		40292E4E1BD6311B0028F87C /* YNSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40292E4D1BD6311B0028F87C /* YNSearchViewController.swift */; };
 		40317DBC1BF1A22600921B8D /* YNHttpAskQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40317DBB1BF1A22600921B8D /* YNHttpAskQuestion.swift */; };
@@ -124,6 +126,8 @@
 		401CCAF01BD0E9A700023F66 /* cityData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cityData.plist; sourceTree = "<group>"; };
 		401CCAF11BD0E9A700023F66 /* areaList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areaList.plist; sourceTree = "<group>"; };
 		401CCAF41BD0EB1E00023F66 /* YNCityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCityModel.swift; sourceTree = "<group>"; };
+		401F4FB51C02C92A00F45EBA /* YNSelectAreaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSelectAreaViewController.swift; sourceTree = "<group>"; };
+		401F4FB71C030A4400F45EBA /* YNHttpSubscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHttpSubscription.swift; sourceTree = "<group>"; };
 		40292E4A1BD5F7840028F87C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40292E4D1BD6311B0028F87C /* YNSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchViewController.swift; sourceTree = "<group>"; };
 		40317DBB1BF1A22600921B8D /* YNHttpAskQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHttpAskQuestion.swift; sourceTree = "<group>"; };
@@ -388,6 +392,7 @@
 			children = (
 				40E236FD1BFD782400321B12 /* YNMySubscriptionViewController.swift */,
 				40E237011BFD854B00321B12 /* YNSunscriptionTableViewCell.swift */,
+				401F4FB71C030A4400F45EBA /* YNHttpSubscription.swift */,
 				40E237031BFD9A1C00321B12 /* subControllers */,
 			);
 			path = "my subscription";
@@ -400,6 +405,7 @@
 				40E237081BFDC91600321B12 /* YNSubscriptionModel.swift */,
 				40E2370C1BFDCC0100321B12 /* YNAddSubscriptionTableViewCell.swift */,
 				406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */,
+				401F4FB51C02C92A00F45EBA /* YNSelectAreaViewController.swift */,
 			);
 			path = subControllers;
 			sourceTree = "<group>";
@@ -807,6 +813,7 @@
 				40ED43881BC60B76004713C9 /* progressHUD.swift in Sources */,
 				40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */,
 				40ED43871BC60B76004713C9 /* Network.swift in Sources */,
+				401F4FB61C02C92A00F45EBA /* YNSelectAreaViewController.swift in Sources */,
 				40ED43851BC60B76004713C9 /* Location.swift in Sources */,
 				40E237051BFD9B4200321B12 /* YNAddSubscriptionViewController.swift in Sources */,
 				40E039871BF5C5F4007FFF2A /* YNBaseAnnotation.swift in Sources */,
@@ -820,6 +827,7 @@
 				4003F7861BDF2F9600137258 /* YNUserInformationModel.swift in Sources */,
 				40E237091BFDC91600321B12 /* YNSubscriptionModel.swift in Sources */,
 				401CCAF51BD0EB1E00023F66 /* YNCityModel.swift in Sources */,
+				401F4FB81C030A4400F45EBA /* YNHttpSubscription.swift in Sources */,
 				40B5B2891BEC80BC008E5F77 /* YNSelectedCategoryViewController.swift in Sources */,
 				40E237021BFD854B00321B12 /* YNSunscriptionTableViewCell.swift in Sources */,
 				40ED43861BC60B76004713C9 /* Macro.swift in Sources */,
