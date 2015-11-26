@@ -26,13 +26,13 @@ class YNSelectAreaViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         
         self.title = "地区"
+    
+        setInterface()
+        setLayout()
         
         let model = YNBaseCityModel()
         model.id = "0"
         getdataFromServer(model)
-        
-        setInterface()
-        setLayout()
     }
 
     
@@ -54,7 +54,7 @@ class YNSelectAreaViewController: UIViewController, UITableViewDataSource, UITab
     func setLayout() {
     
         //tableView
-        Layout().addTopConstraint(tableView!, toView: self.view, multiplier: 1, constant: 64)
+        Layout().addTopConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         Layout().addLeftConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
@@ -94,6 +94,7 @@ class YNSelectAreaViewController: UIViewController, UITableViewDataSource, UITab
     func getdataFromServer(model: YNBaseCityModel) {
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
+        
         YNHttpGetCityTool().getAreaChildsWithParentId(model.id, successFull: { (json) -> Void in
             
             progress.hideUsingAnimation()

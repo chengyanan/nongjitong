@@ -13,9 +13,9 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
     var tableView: UITableView?
     var addSubscriptionButton: UIButton?
     
+    var dataArray = [YNSubscriptionModel]()
     
     //MARK: life cycle
-    
     init() {
         super.init(nibName: nil, bundle: nil)
         
@@ -24,14 +24,69 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "我的订阅"
         self.view.backgroundColor = UIColor(red: 235/255.0, green: 235/255.0, blue: 241/255.0, alpha: 1)
         
-        setInterface()
-        setLayout()
+        self.setInterface()
+        self.setLayout()
+
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+         getData()
+    }
+    
+    //MARK: 加载数据
+    func getData() {
+    
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        
+        YNHttpSubscription().getSubcribe({ (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    print(json)
+                    
+                    let tempdata = json["data"] as! NSArray
+                
+                    self.dataArray.removeAll()
+                    
+                    for item in tempdata {
+                    
+                        let model = YNSubscriptionModel(dict: item as! NSDictionary)
+                        self.dataArray.append(model)
+                    }
+                    
+                   self.tableView?.reloadData()
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: self.view)
+                        
+                        print("\n \(msg) \n")
+                    }
+                }
+                
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("请求失败", toView: self.view)
+        }
     }
     
     func setLayout() {
@@ -68,11 +123,11 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
         self.addSubscriptionButton = tempButton
     
         //tableView
-        let tempTableView = UITableView()
+        let tempTableView = UITableView(frame: CGRectZero, style: .Grouped)
         tempTableView.delegate = self
         tempTableView.dataSource = self
         tempTableView.tableFooterView = UIView()
-        tempTableView.rowHeight = 58
+        tempTableView.rowHeight = 50
         tempTableView.separatorStyle = .None
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
         tempTableView.showsVerticalScrollIndicator = false
@@ -91,9 +146,14 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
     }
     
     //MARK:UITableViewDataSource
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return dataArray.count
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return 1
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -106,9 +166,62 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
             cell = YNSunscriptionTableViewCell(style: .Default, reuseIdentifier: identify)
         }
         
+        cell?.model = self.dataArray[indexPath.section]
+        
         return cell!
     }
     
-   
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+         return 11
+    }
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        return 1
+    }
+    
+   //MARK:UITableViewDelagate
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == .Delete {
+        
+            delSubcribeWithModel(self.dataArray[indexPath.row], indexPath: indexPath)
+        }
+    }
+    
+    func delSubcribeWithModel(model: YNSubscriptionModel, indexPath: NSIndexPath) {
+    
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpSubscription().delSubcribe(model, successFull: { (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    print(json)
+
+                    //删除成功
+                    self.dataArray.removeAtIndex(indexPath.row)
+                    self.tableView?.reloadData()
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: self.view)
+                        
+                        print("\n \(msg) \n")
+                    }
+                }
+                
+            }
+            
+            }) { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("请求失败", toView: self.view)
+        }
+    }
     
 }

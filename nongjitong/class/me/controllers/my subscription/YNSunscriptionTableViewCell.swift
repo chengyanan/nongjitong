@@ -10,6 +10,16 @@ import UIKit
 
 class YNSunscriptionTableViewCell: UITableViewCell {
     
+    var model: YNSubscriptionModel? {
+    
+        didSet {
+        
+            self.nameLabel.text = model!.class_name
+            self.scaleLabel.text = model!.range
+            self.locationLabel.text = model!.address
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -44,17 +54,17 @@ class YNSunscriptionTableViewCell: UITableViewCell {
         Layout().addRightConstraint(locationLabel, toView: scaleLabel, multiplier: 1, constant: 0)
         Layout().addLeftToRightConstraint(locationLabel, toView: nameLabel, multiplier: 1, constant: 12)
         
-        //separatorView
-        Layout().addTopToBottomConstraint(separatorView, toView: nameLabel, multiplier: 1, constant: 3)
-        Layout().addLeftConstraint(separatorView, toView: self.contentView, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(separatorView, toView: self.contentView, multiplier: 1, constant: 0)
-        Layout().addHeightConstraint(separatorView, toView: nil, multiplier: 0, constant: 0.6)
-        
-        //blankView
-        Layout().addTopToBottomConstraint(blankView, toView: separatorView, multiplier: 1, constant: 0)
-        Layout().addLeftConstraint(blankView, toView: self.contentView, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(blankView, toView: self.contentView, multiplier: 1, constant: 0)
-        Layout().addBottomConstraint(blankView, toView: self.contentView, multiplier: 1, constant: 0)
+//        //separatorView
+//        Layout().addTopToBottomConstraint(separatorView, toView: nameLabel, multiplier: 1, constant: 3)
+//        Layout().addLeftConstraint(separatorView, toView: self.contentView, multiplier: 1, constant: 0)
+//        Layout().addRightConstraint(separatorView, toView: self.contentView, multiplier: 1, constant: 0)
+//        Layout().addHeightConstraint(separatorView, toView: nil, multiplier: 0, constant: 0.6)
+//        
+//        //blankView
+//        Layout().addTopToBottomConstraint(blankView, toView: separatorView, multiplier: 1, constant: 0)
+//        Layout().addLeftConstraint(blankView, toView: self.contentView, multiplier: 1, constant: 0)
+//        Layout().addRightConstraint(blankView, toView: self.contentView, multiplier: 1, constant: 0)
+//        Layout().addBottomConstraint(blankView, toView: self.contentView, multiplier: 1, constant: 0)
     }
     
     func setInterface() {
@@ -62,8 +72,8 @@ class YNSunscriptionTableViewCell: UITableViewCell {
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(scaleLabel)
         self.contentView.addSubview(locationLabel)
-        self.contentView.addSubview(separatorView)
-        self.contentView.addSubview(blankView)
+//        self.contentView.addSubview(separatorView)
+//        self.contentView.addSubview(blankView)
     }
     
 
@@ -71,7 +81,7 @@ class YNSunscriptionTableViewCell: UITableViewCell {
         
         //种类名称
         let tempView = UILabel()
-        tempView.text = "花生"
+//        tempView.text = "花生"
         tempView.translatesAutoresizingMaskIntoConstraints = false
         return tempView
     }()
@@ -79,7 +89,7 @@ class YNSunscriptionTableViewCell: UITableViewCell {
     let scaleLabel: UILabel =  {
         //规模
         let tempView = UILabel()
-        tempView.text = "100亩"
+//        tempView.text = "100亩"
         tempView.textAlignment = .Right
         tempView.font = UIFont.systemFontOfSize(13)
         tempView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,7 +99,7 @@ class YNSunscriptionTableViewCell: UITableViewCell {
     let locationLabel: UILabel =  {
         //地址
         let tempView = UILabel()
-        tempView.text = "郑州市, 郑东新区"
+//        tempView.text = "郑州市, 郑东新区"
         tempView.textAlignment = .Right
         tempView.font = UIFont.systemFontOfSize(13)
         tempView.translatesAutoresizingMaskIntoConstraints = false

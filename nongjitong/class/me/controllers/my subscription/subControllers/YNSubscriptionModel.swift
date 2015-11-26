@@ -10,19 +10,32 @@ import Foundation
 
 class YNSubscriptionModel {
     
-    var product_name = ""
-    var area_id = ""
+    var class_name = ""
+    var class_id = ""
     var range = ""
+    var area_id = ""
     var address = ""
+    var id = ""
+    var user_id = ""
     
     init() {}
     
     init(dict: NSDictionary) {
         
-        self.product_name = dict["class_id"] as! String
-        self.area_id = dict["id"] as! String
-        self.range = dict["class_name"] as! String
+        self.class_name = dict["class_name"] as! String
         
+        self.class_id = dict["class_id"] as! String
+
+        self.range = dict["range"] as! String
+        
+        self.area_id = dict["area_id"] as! String
+        
+        self.address = dict["address"] as! String
+        
+        self.id = dict["id"] as! String
+        
+        self.user_id = dict["user_id"] as! String
+    
     }
     
     

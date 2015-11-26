@@ -11,26 +11,30 @@ import UIKit
 class YNAddSubscriptionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNSelectedCategoryViewControllerDelegate, YNScaleViewDelegate, YNSelectAreaViewControllerDelegate {
     
     var tableView: UITableView?
-    
     var model = YNSubscriptionModel()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "添加订阅"
         
-        let rightBarButtonItem = UIBarButtonItem(title: "确定", style: UIBarButtonItemStyle.Plain, target: self, action: "rightBarButtonItemDidClick")
-        
-        self.navigationController?.navigationItem.rightBarButtonItem = rightBarButtonItem
-        
+        addRightItem()
         setInterface()
         setLayout()
     }
     
+    func addRightItem() {
+    
+        let rightBarButtonItem = UIBarButtonItem(title: "确定", style: UIBarButtonItemStyle.Plain, target: self, action: "rightBarButtonItemDidClick")
+        
+        
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
+    }
+    
     func rightBarButtonItemDidClick() {
         
-        if model.product_name == "" {
+        if model.class_name == "" {
         
             YNProgressHUD().showText("请选择品类", toView: self.view)
             
@@ -62,6 +66,7 @@ class YNAddSubscriptionViewController: UIViewController, UITableViewDataSource, 
     func addSubcribe() {
     
         let progress = YNProgressHUD().showWaitingToView(self.view)
+        
         YNHttpSubscription().addSubcribe(self.model, successFull: { (json) -> Void in
             
                 progress.hideUsingAnimation()
@@ -70,9 +75,18 @@ class YNAddSubscriptionViewController: UIViewController, UITableViewDataSource, 
                     
                     if status == 1 {
                         
-//                        let tempdata = json["data"] as! NSArray
+//                        print(json)
+                        
+//                        let tempdata = json["data"] as! String
                         
                         
+                      YNProgressHUD().showText("添加成功", toView: self.view)
+                        
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+                            
+                           
+                            self.navigationController?.popViewControllerAnimated(true)
+                        }
                         
                     } else if status == 0 {
                         
@@ -146,9 +160,9 @@ class YNAddSubscriptionViewController: UIViewController, UITableViewDataSource, 
         
             cell?.name = "品类名称"
             
-            if model.product_name != "" {
+            if model.class_name != "" {
             
-                cell?.content = model.product_name
+                cell?.content = model.class_name
                 
             } else {
             
@@ -226,8 +240,8 @@ class YNAddSubscriptionViewController: UIViewController, UITableViewDataSource, 
     //MARK: YNSelectedCategoryViewControllerDelegate
     func selectedCategoryDidSelectedProduct(product: YNCategoryModel) {
         
-        self.model.product_name = product.class_name
-        
+        self.model.class_name = product.class_name
+        self.model.class_id = product.id
         self.tableView?.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
     }
     
