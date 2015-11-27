@@ -24,6 +24,8 @@ class YNCityTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "城市"
+        
+        self.tableView.tableFooterView = UIView()
     }
     
     //MARK: 获取数据

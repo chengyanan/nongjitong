@@ -527,19 +527,23 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
     //MARK: event response
     @IBAction func doneButtonDidClick(sender: AnyObject) {
         
-        if nickNameTextFiled.text == nil {
+        let nicename = nickNameTextFiled.text
+        
+        print(nicename)
+        
+        if nickNameTextFiled.text == "" {
             
             YNProgressHUD().showText("请填写昵称", toView: self.view)
             
-        } else if roleTextFiled.text == nil {
+        } else if roleTextFiled.text == "" {
             
-            YNProgressHUD().showText("请选择角色", toView: self.view)
+            YNProgressHUD().showText("请选择身份", toView: self.view)
             
-        } else if areaTextFiled.text == nil {
+        } else if areaTextFiled.text == "" {
             
             YNProgressHUD().showText("请选择地区", toView: self.view)
             
-        }  else if mobileLabel.text == nil {
+        }  else if mobileLabel.text == "" {
             
             YNProgressHUD().showText("请填写手机号", toView: self.view)
             

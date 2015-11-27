@@ -45,5 +45,32 @@ class YNHttpAskQuestion {
         
     }
 
+    //MARK: 带图片的
+    func sendQuestionToServerWithParams(params: [String: String?], files: [File], successFull: ((json: NSDictionary)->Void)?, failureFul: ((error: NSError!)->Void)?) {
+        
+        Network.post(kURL, params: params, files: files, success: { (data, response, error) -> Void in
+            
+            let json: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+            
+            print("data - \(json)")
+            
+            if let _ = successFull {
+                
+                successFull!(json: json)
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                
+                if let _ = failureFul {
+                    
+                    failureFul!(error: error)
+                }
+                
+        }
+        
+    }
+
     
 }

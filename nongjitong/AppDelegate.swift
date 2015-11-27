@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
 //        window?.rootViewController = rootstoryboard.instantiateInitialViewController()
         
-        
+//        
         if kUser_ID() != nil {//已登陆
         
             let temp = kUser_IsInformationFinish()

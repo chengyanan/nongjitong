@@ -672,6 +672,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         
     }
     
+    //MARK: 上传头像
     func sendImageToServer(imagedata: NSData) {
         
         let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("1.jpg")

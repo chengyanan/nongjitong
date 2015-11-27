@@ -17,6 +17,7 @@ class YNProvinceTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "省份"
+        self.tableView.tableFooterView = UIView()
         
         getdataFromServer()
     }

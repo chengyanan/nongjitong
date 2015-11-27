@@ -49,6 +49,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     //上传的图片的最大数量
     let maxImageCount = 3
+    var uploadImageFilesArray = [File]()
     var tempImageArray = [UIImage]()
     var imageArray = [UIImage]() {
     
@@ -203,9 +204,13 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         if self.descript?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
         
             if let _ = self.class_id {
+                
+                //TODO: 处理图片
+                
             
                 //满足条件上传问题
                 sendQusetionToServer()
+                
                 
             } else {
             
@@ -235,19 +240,65 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             "class_id": self.class_id
         ]
         
+        sendImagesToServer(params)
+        
+//        let progress = YNProgressHUD().showWaitingToView(self.view)
+//        YNHttpAskQuestion().sendQuestionToServer(params, successFull: { (json) -> Void in
+//            
+//            progress.hideUsingAnimation()
+//            
+////            print(json)
+//            
+//            if let status = json["status"] as? Int {
+//                
+//                if status == 1 {
+//                    
+//                    //上传成功
+//                    
+//                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
+//                        
+//                        
+//                    })
+//                    
+//                } else if status == 0 {
+//                    
+//                    if let msg = json["msg"] as? String {
+//                        
+//                        YNProgressHUD().showText(msg, toView: self.view)
+//                        
+//                        print("\n \(msg) \n")
+//                    }
+//                }
+//                
+//            }
+//            
+//            
+//            }) { (error) -> Void in
+//              
+//                progress.hideUsingAnimation()
+//                YNProgressHUD().showText("请求失败", toView: self.view)
+//                
+//        }
+        
+        
+    }
+    
+    func sendImagesToServer(params: [String: String?]) {
+    
         let progress = YNProgressHUD().showWaitingToView(self.view)
-        YNHttpAskQuestion().sendQuestionToServer(params, successFull: { (json) -> Void in
+        YNHttpAskQuestion().sendQuestionToServerWithParams(params, files: self.uploadImageFilesArray, successFull: { (json) -> Void in
             
             progress.hideUsingAnimation()
             
-//            print(json)
+            //print(json)
             
             if let status = json["status"] as? Int {
                 
                 if status == 1 {
                     
-                    //上传成功
                     
+                    
+                    //上传成功
                     self.dismissViewControllerAnimated(true, completion: { () -> Void in
                         
                         
@@ -267,10 +318,9 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             
             
             }) { (error) -> Void in
-              
+                
                 progress.hideUsingAnimation()
                 YNProgressHUD().showText("请求失败", toView: self.view)
-                
         }
     }
     
@@ -411,6 +461,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     func askQuestionImageCollectionViewCellDeleteButtonDidClick(cell: YNAskQuestionImageCollectionViewCell) {
         
+        self.uploadImageFilesArray.removeAtIndex(cell.index!)
         self.tempImageArray.removeAtIndex(cell.index!)
         self.imageArray = tempImageArray
         
@@ -525,7 +576,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     //MARK: - UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        //        print("\ndidFinishPickingMediaWithInfo - \(info)\n")
+//        print("\ndidFinishPickingMediaWithInfo - \(info)\n")
         
         let mediaType = info["UIImagePickerControllerMediaType"] as! String
         
@@ -537,6 +588,11 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             }
             
             let image = info["UIImagePickerControllerOriginalImage"] as! UIImage
+            let url = info["UIImagePickerControllerReferenceURL"] as? NSURL
+            
+            let file = File(name: "photo", url: url!)
+            
+            self.uploadImageFilesArray.append(file)
             
             self.tempImageArray.append(image)
             
