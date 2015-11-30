@@ -36,6 +36,10 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         }
     }
     //地址
+    
+    //第一次定位到的
+    
+    
     var locationDetail: String? {
     
         didSet {
@@ -49,6 +53,9 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     //上传的图片的最大数量
     let maxImageCount = 3
+    
+    var dataImageArray = [NSData]()
+    
     var uploadImageFilesArray = [File]()
     var tempImageArray = [UIImage]()
     var imageArray = [UIImage]() {
@@ -63,10 +70,6 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //开始定位
-        location.delegate = self
-        location.startLocation()
-        
         //设置collectionView
         setupCollectionView()
         
@@ -76,6 +79,16 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         //添加键盘通知
         addKeyBoardNotication()
         
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        //开始定位
+        location.delegate = self
+        location.startLocation()
     }
     
     func addFinishView() {
@@ -205,12 +218,8 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
             if let _ = self.class_id {
                 
-                //TODO: 处理图片
-                
-            
                 //满足条件上传问题
                 sendQusetionToServer()
-                
                 
             } else {
             
@@ -242,45 +251,6 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         sendImagesToServer(params)
         
-//        let progress = YNProgressHUD().showWaitingToView(self.view)
-//        YNHttpAskQuestion().sendQuestionToServer(params, successFull: { (json) -> Void in
-//            
-//            progress.hideUsingAnimation()
-//            
-////            print(json)
-//            
-//            if let status = json["status"] as? Int {
-//                
-//                if status == 1 {
-//                    
-//                    //上传成功
-//                    
-//                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
-//                        
-//                        
-//                    })
-//                    
-//                } else if status == 0 {
-//                    
-//                    if let msg = json["msg"] as? String {
-//                        
-//                        YNProgressHUD().showText(msg, toView: self.view)
-//                        
-//                        print("\n \(msg) \n")
-//                    }
-//                }
-//                
-//            }
-//            
-//            
-//            }) { (error) -> Void in
-//              
-//                progress.hideUsingAnimation()
-//                YNProgressHUD().showText("请求失败", toView: self.view)
-//                
-//        }
-        
-        
     }
     
     func sendImagesToServer(params: [String: String?]) {
@@ -296,13 +266,18 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
                 
                 if status == 1 {
                     
+                    YNProgressHUD().showText("提问成功", toView: self.view)
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.8 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+                        
+                        //退出控制器
+                        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                            
+                            
+                        })
+                    }
                     
                     
-                    //上传成功
-                    self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                        
-                        
-                    })
                     
                 } else if status == 0 {
                     
@@ -588,9 +563,10 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             }
             
             let image = info["UIImagePickerControllerOriginalImage"] as! UIImage
-            let url = info["UIImagePickerControllerReferenceURL"] as? NSURL
             
-            let file = File(name: "photo", url: url!)
+            let imageData = UIImageJPEGRepresentation(image, 0.001)
+            
+            let file = File(name: "photo[]", imageData: imageData!)
             
             self.uploadImageFilesArray.append(file)
             
@@ -618,8 +594,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         //解析地址
         geocoderAddress(location)
     }
-    
-    
+
     //MARK: 解析地址
     func geocoderAddress(location: CLLocation) {
         

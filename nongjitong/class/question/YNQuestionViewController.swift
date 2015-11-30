@@ -21,6 +21,9 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //collectionViewdatasource
     var selectedArray = [YNSelectedProductModel]()
     
+    //tableviewDatasource
+    var tableViewDataArray = [YNQuestionModel]()
+    
     
     //MARK: life cycle
     override func viewDidLoad() {
@@ -43,11 +46,71 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     func loadDataFromServer() {
         
         // 加载关注数据
+        loadWatchList()
+        
+        //加载问题数据
+        getQuestionListWithClassID(nil)
+        
+    }
+    
+    //MARK: 加载问题数据
+    func getQuestionListWithClassID(classId: String?) {
+    
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpQuestion().getQuestionListWithClassID(classId, successFull: { (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            if let status = json["status"] as? Int {
+                
+//                print(json)
+                
+                if status == 1 {
+                    
+                    let tempdata = json["data"] as! NSArray
+                    
+                    if tempdata.count > 0 {
+                        
+                        self.tableViewDataArray.removeAll()
+                        
+                        for var i = 0; i < tempdata.count; i++ {
+                            
+                            let model = YNQuestionModel(dict: tempdata[i] as! NSDictionary)
+                            
+                            self.tableViewDataArray.append(model)
+                        }
+                        
+                        self.tableView?.reloadData()
+                        
+                    }
+                    
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: self.view)
+                    }
+                }
+                
+            }
+            
+            
+            }) { (error) -> Void in
+               
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("数据加载失败", toView: self.view)
+        }
+    }
+    
+    //MARK: 加载关注数据
+    func loadWatchList() {
+    
         let progress = YNProgressHUD().showWaitingToView(self.view)
         YNWatchHttp.getUserSpecialty({ (json) -> Void in
             progress.hideUsingAnimation()
             
-//            print("data - \(json)")
+            //            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -94,7 +157,6 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                 
                 YNProgressHUD().showText("数据加载失败", toView: self.view)
         }
-        
     }
     
     //MARK: 设置界面
@@ -114,7 +176,6 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         let flow = UICollectionViewFlowLayout()
         flow.minimumInteritemSpacing = itemSpacing
         flow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        flow.itemSize = CGSize(width: 60, height: tableViewHeight - 1)
         flow.scrollDirection = .Horizontal
         
         let tempCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flow)
@@ -148,7 +209,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return self.tableViewDataArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -162,6 +223,8 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
             cell = YNQuestionTableViewCell(style: .Default, reuseIdentifier: identify)
         }
         
+        cell?.model = self.tableViewDataArray[indexPath.row]
+        
         return cell!
     }
     
@@ -169,6 +232,8 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         
         return 180
     }
+    
+    
     
     //MARK:UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

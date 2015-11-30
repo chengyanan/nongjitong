@@ -38,11 +38,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "nongjitong/class/sign up and sign in/YNAddUserInformationTableViewController.swift"
-            timestampString = "470303078.916"
+            timestampString = "470549898.100453"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "643"
-            endingLineNumber = "643"
+            startingLineNumber = "644"
+            endingLineNumber = "644"
             landmarkName = "uploadUserInformation()"
             landmarkType = "5">
          </BreakpointContent>
@@ -53,13 +53,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "nongjitong/class/sign up and sign in/YNAddUserInformationTableViewController.swift"
-            timestampString = "470303455.359175"
+            filePath = "nongjitong/tools/Location.swift"
+            timestampString = "470550729.819638"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
-            landmarkName = "uploadUserInformation()"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "startLocation()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -69,13 +69,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "nongjitong/class/sign up and sign in/YNAddUserInformationTableViewController.swift"
-            timestampString = "470303461.055246"
+            filePath = "nongjitong/class/home/YNNearbyViewController.swift"
+            timestampString = "470559171.927288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "632"
-            endingLineNumber = "632"
-            landmarkName = "uploadUserInformation()"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "mapView(_:didUpdateUserLocation:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

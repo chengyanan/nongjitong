@@ -148,16 +148,32 @@ class NetworkManager {
             }
             
             for file in files {
-            
-                data.appendData("--\(self.boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-                data.appendData("Content-Disposition: form-data; name=\"\(file.name)\"; filename=\"\(NSString(string: file.url.description).lastPathComponent)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
                 
-                if let a = NSData(contentsOfURL: file.url) {
-                    data.appendData(a)
-                    data.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
-                }
-            
+                data.appendData("--\(self.boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                
+                data.appendData("Content-Disposition: form-data; name=\"\(file.name)\"; filename=\"\(file.name).jpg\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+                
+                data.appendData(file.imageData)
+                data.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+               
+                
             }
+
+            
+            //            for file in files {
+            //
+            //                data.appendData("--\(self.boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            //
+            //                data.appendData("Content-Disposition: form-data; name=\"\(file.name)\"; filename=\"\(NSString(string: file.url.description).lastPathComponent)\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            //
+            //                if let a = NSData(contentsOfURL: file.url) {
+            //                    data.appendData(a)
+            //                    data.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+            //                }
+            //            
+            //            }
+
+            
             
             data.appendData("--\(self.boundary)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
             
@@ -209,8 +225,15 @@ class NetworkManager {
     func buildParams(parameters: [String: String?]) -> String {
         var components: [(String, String)] = []
         for key in Array(parameters.keys).sort(<) {
+            
+            
             let value: AnyObject! = parameters[key]!
-            components += queryComponents(key, value)
+            
+            if value != nil {
+            
+                components += queryComponents(key, value)
+            }
+            
         }
         
         return (components.map { "\($0)=\($1)" } as [String]).joinWithSeparator("&")
@@ -250,9 +273,9 @@ class NetworkManager {
 //MARK: struct file
 struct File {
     let name: String!
-    let url: NSURL!
-    init(name: String, url: NSURL) {
+    let imageData: NSData!
+    init(name: String, imageData: NSData) {
         self.name = name
-        self.url = url
+        self.imageData = imageData
     }
 }

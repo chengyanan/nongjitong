@@ -675,15 +675,15 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     //MARK: 上传头像
     func sendImageToServer(imagedata: NSData) {
         
-        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("1.jpg")
-        
-//        print(path)
-        
-        imagedata.writeToFile(path!, atomically: true)
-        let imageUrl = NSURL(fileURLWithPath: path!)
+//        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("1.jpg")
+//        
+////        print(path)
+//        
+//        imagedata.writeToFile(path!, atomically: true)
+//        let imageUrl = NSURL(fileURLWithPath: path!)
         
         var files = [File]()
-        files.append(File(name: "avatar", url: imageUrl))
+        files.append(File(name: "avatar", imageData: imagedata))
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
         YNHttpTool().updataUserAvatorImage(files, successFull: { (json) -> Void in

@@ -22,6 +22,15 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     }()
     
+    lazy var myselfLocationButton: UIButton = {
+    
+        var tempView = UIButton()
+        tempView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        return tempView
+    }()
+    
     lazy var locationManger: CLLocationManager = {
         var tempLocationManager = CLLocationManager()
         tempLocationManager.pausesLocationUpdatesAutomatically = true
@@ -81,8 +90,9 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         super.viewDidLoad()
         
         startLocate()
-        self.view.addSubview(self.mapView)
         
+        self.view.addSubview(self.mapView)
+       
         self.navigationItem.titleView = self.titleView
         
     }
@@ -299,7 +309,10 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                 //新位置和以前不一样，设置新位置，从新加载数据
                 self.coordinate = userLocation.location!.coordinate
                 reverseGeocodeLocationWithUserLocation(userLocation)
-    
+            
+            } else {
+            
+                //不是新位置 什么也不做
             }
             
         }else {
@@ -307,6 +320,14 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             self.coordinate = userLocation.location!.coordinate
             reverseGeocodeLocationWithUserLocation(userLocation)
         }
+        
+        
+//        self.coordinate = userLocation.location!.coordinate
+//        reverseGeocodeLocationWithUserLocation(userLocation)
+        
+        //TODO:保存位置
+        
+        
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {

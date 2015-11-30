@@ -503,7 +503,6 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
             let image = info["UIImagePickerControllerOriginalImage"] as! UIImage
             
             self.imageData = UIImageJPEGRepresentation(image, 0.001)
-            
             self.avatorImage.image = image
             
             picker.dismissViewControllerAnimated(true) { () -> Void in
@@ -596,14 +595,14 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
         
         if let tempImage = self.imageData {
             
-            let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("1.jpg")
-            
-            //        print(path)
-            
-            tempImage.writeToFile(path!, atomically: true)
-            let imageUrl = NSURL(fileURLWithPath: path!)
+//            let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("1.jpg")
+//            
+//            //        print(path)
+//            
+//            tempImage.writeToFile(path!, atomically: true)
+//            let imageUrl = NSURL(fileURLWithPath: path!)
 
-            files.append(File(name: "avatar", url: imageUrl))
+            files.append(File(name: "avatar", imageData: tempImage))
         }
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
@@ -614,6 +613,8 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
             if let status = json["status"] as? Int {
                 
                 if status == 1 {
+                    
+                    self.avatorImage.image = UIImage(data: self.imageData!)
                     
                     let msg = json["msg"] as! String
                     

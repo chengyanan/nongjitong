@@ -117,6 +117,8 @@ class YNSelectedCategoryViewController: UIViewController, UITableViewDataSource,
     
         //tableView
         let tempTableView = UITableView()
+        tempTableView.tableFooterView = UIView()
+        tempTableView.rowHeight = 50
         tempTableView.delegate = self
         tempTableView.dataSource = self
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -134,7 +136,7 @@ class YNSelectedCategoryViewController: UIViewController, UITableViewDataSource,
         
         let itemWidth = (collectionWidth - leftRightMargin*2 - space) / CGFloat(numbersOfOneLine) - 1
         
-        flow.itemSize = CGSize(width: itemWidth, height: 20)
+        flow.itemSize = CGSize(width: itemWidth, height: 30)
         
         flow.sectionInset = UIEdgeInsets(top: 16, left: 10, bottom: 16, right: 10)
         

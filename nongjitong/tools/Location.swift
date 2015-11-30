@@ -61,13 +61,23 @@ class Location: NSObject, CLLocationManagerDelegate {
     //MARK: - CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let newLocation: CLLocation = locations[locations.startIndex] 
+        let newLocation: CLLocation = locations[locations.startIndex]
         
-        cooridate = self.transformFromWGSToGCJ(newLocation.coordinate)
+        var nowLocation: CLLocation?
         
-        let nowLocation = CLLocation(latitude: cooridate!.latitude, longitude: cooridate!.longitude)
+        if kIOS7() {
         
-        self.delegate?.locationDidUpdateLocation(nowLocation)
+            cooridate = self.transformFromWGSToGCJ(newLocation.coordinate)
+            
+            nowLocation = CLLocation(latitude: cooridate!.latitude, longitude: cooridate!.longitude)
+            
+        } else {
+        
+            cooridate = newLocation.coordinate
+            nowLocation = CLLocation(latitude: cooridate!.latitude, longitude: cooridate!.longitude)
+        }
+        
+        self.delegate?.locationDidUpdateLocation(nowLocation!)
         
     }
     

@@ -10,6 +10,18 @@ import UIKit
 
 class YNQuestionTableViewCell: UITableViewCell {
     
+    var model: YNQuestionModel? {
+    
+        didSet {
+        
+            self.nickName.text = model?.user_name
+            self.postTime.text = model?.add_time
+            self.questionContent.text = model?.descript
+            
+        }
+    }
+    
+    
     let leftRightMargin: CGFloat = 10
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -84,19 +96,19 @@ class YNQuestionTableViewCell: UITableViewCell {
     
         //昵称
         let tempView = UILabel()
-        tempView.text = "rose"
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.backgroundColor = UIColor.redColor()
+        tempView.font = UIFont.boldSystemFontOfSize(17)
+//        tempView.backgroundColor = UIColor.redColor()
         return tempView
     }()
     
     let postTime: UILabel = {
     
-        //昵称
+        //time
         let tempView = UILabel()
-        tempView.text = "11-18"
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.backgroundColor = UIColor.redColor()
+        tempView.font = UIFont.systemFontOfSize(11)
+//        tempView.backgroundColor = UIColor.redColor()
         return tempView
     }()
     
@@ -106,8 +118,10 @@ class YNQuestionTableViewCell: UITableViewCell {
         let tempView = UIButton()
         tempView.setTitle("河南省, 郑州市, 金水区", forState: .Normal)
         tempView.setImage(UIImage(named: "home_page_location_image"), forState: .Normal)
-        tempView.backgroundColor = UIColor.redColor()
+//        tempView.backgroundColor = UIColor.redColor()
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.titleLabel?.font = UIFont.systemFontOfSize(11)
+        tempView.setTitleColor(UIColor.grayColor(), forState: .Normal)
         return tempView
     }()
     
@@ -115,9 +129,8 @@ class YNQuestionTableViewCell: UITableViewCell {
         
         //问题内容
         let tempView = UILabel()
-        tempView.text = "怎么种花生"
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.backgroundColor = UIColor.redColor()
+//        tempView.backgroundColor = UIColor.redColor()
         return tempView
     }()
     
