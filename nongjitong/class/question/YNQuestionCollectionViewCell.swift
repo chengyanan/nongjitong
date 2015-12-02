@@ -37,6 +37,8 @@ class YNQuestionCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.contentView.backgroundColor = UIColor.clearColor()
+        
         setInterface()
         setLayout()
     }

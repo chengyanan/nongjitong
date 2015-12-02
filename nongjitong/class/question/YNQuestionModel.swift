@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 class YNQuestionModel {
-
+    
+    var marginModel = YNQuestionModelConstant()
+    
     //问题的ID
     var id = ""
     
@@ -32,10 +35,12 @@ class YNQuestionModel {
     var add_time = ""
     
     //存放图片的数组
-    var photo = [NSURL]()
+    var photo = [String]()
     
     //问题的状态。1 待回答,2 线上采纳,3 线下解决,4 问题超时
     var status = ""
+    
+    var height: CGFloat?
     
     init() {}
     
@@ -64,8 +69,44 @@ class YNQuestionModel {
             self.class_name = dict["class_name"] as! String
         }
         
-    
-        self.photo = dict["photo"] as! Array<NSURL>
+        self.photo = dict["photo"] as! Array<String>
         
+        calcuateCellHeight(self.descript)
+    }
+    
+    func calcuateCellHeight(text: String) {
+        
+        let contentWidth = kScreenWidth - marginModel.leftRightMargin*2
+        
+        let contentHeight = heightForText(text, font: UIFont.systemFontOfSize(15), width: contentWidth)
+        
+        var height = marginModel.topMargin + marginModel.avatarHeight + marginModel.marginBetweenAvatarAndDescription + contentHeight
+        
+        marginModel.imageY = height + marginModel.marginBetweenDescriptionAndImages
+        
+        if self.photo.count > 0 {
+            
+            let imageWidthHeight = (kScreenWidth - marginModel.leftRightMargin*2 -  CGFloat(self.photo.count - 1) * marginModel.imageMargin ) / 3 - 1
+            marginModel.imageWidthHeight = imageWidthHeight
+        
+            height += marginModel.marginBetweenDescriptionAndImages + marginModel.imageWidthHeight!
+            
+        } else {
+        
+            marginModel.imageWidthHeight = (kScreenWidth - marginModel.leftRightMargin*2) / 3 - 1
+        }
+        
+        self.height = height + 10
+        
+    }
+    
+    func heightForText(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+        let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
+        label.numberOfLines = 3
+        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        return label.frame.height
     }
 }

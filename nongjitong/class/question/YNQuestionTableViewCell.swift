@@ -10,43 +10,100 @@ import UIKit
 
 class YNQuestionTableViewCell: UITableViewCell {
     
+    let marginModel = YNQuestionModelConstant()
+    
     var model: YNQuestionModel? {
     
         didSet {
         
+            
             self.nickName.text = model?.user_name
             self.postTime.text = model?.add_time
             self.questionContent.text = model?.descript
+            
+            if model?.photo.count > 0 {
+            
+                //添加图片
+                self.addPictures()
+            } else {
+            
+                self.removePictures()
+            }
             
         }
     }
     
     
-    let leftRightMargin: CGFloat = 10
+    
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setInterface()
         setLayout()
+
+        self.selectionStyle = .None
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func removePictures() {
+    
+        for view in self.contentView.subviews {
+        
+            if view is UIImageView {
+            
+                if view.frame.origin.y == model?.marginModel.imageY {
+                
+                    view.removeFromSuperview()
+                }
+            }
+        }
+    }
+    
+    func addPictures() {
+    
+        for var i = 0; i < model?.photo.count; i++ {
+        
+            let imageView = UIImageView()
+            
+            let leftRightMargin = model!.marginModel.leftRightMargin
+            
+            let imageWidthHeight = model!.marginModel.imageWidthHeight!
+            
+            let imageY = model!.marginModel.imageY!
+            
+            let imageMargin = model!.marginModel.imageMargin
+            
+            let x =  leftRightMargin + CGFloat(i) * imageWidthHeight + CGFloat(i) * imageMargin
+            
+            imageView.backgroundColor = UIColor.redColor()
+            
+            imageView.frame = CGRectMake(x, imageY, imageWidthHeight, imageWidthHeight)
+            
+            Network.getImageWithURL(model!.photo[i], success: { (data) -> Void in
+                imageView.image = UIImage(data: data)
+            })
+            
+            self.contentView.addSubview(imageView)
+        }
+    }
+    
     func setLayout() {
     
         //avatorImage
-        Layout().addTopConstraint(avatorImage, toView: self.contentView, multiplier: 1, constant: leftRightMargin)
-        Layout().addLeftConstraint(avatorImage, toView: self.contentView, multiplier: 1, constant: leftRightMargin)
-        Layout().addHeightConstraint(avatorImage, toView: nil, multiplier: 0, constant: 44)
-        Layout().addWidthConstraint(avatorImage, toView: nil, multiplier: 0, constant: 44)
+        Layout().addTopConstraint(avatorImage, toView: self.contentView, multiplier: 1, constant: marginModel.topMargin)
+        Layout().addLeftConstraint(avatorImage, toView: self.contentView, multiplier: 1, constant: marginModel.leftRightMargin)
+        Layout().addHeightConstraint(avatorImage, toView: nil, multiplier: 0, constant: marginModel.avatarHeight)
+        Layout().addWidthConstraint(avatorImage, toView: nil, multiplier: 0, constant: marginModel.avatarHeight)
         
         //nickName
         Layout().addTopConstraint(nickName, toView: avatorImage, multiplier: 1, constant: 0)
         Layout().addLeftToRightConstraint(nickName, toView: avatorImage, multiplier: 1, constant: 5)
-        Layout().addRightConstraint(nickName, toView: self.contentView, multiplier: 1, constant: -leftRightMargin)
+        Layout().addRightConstraint(nickName, toView: self.contentView, multiplier: 1, constant: -marginModel.leftRightMargin)
         Layout().addHeightConstraint(nickName, toView: nil, multiplier: 0, constant: 24)
         
         //postTime
@@ -58,17 +115,13 @@ class YNQuestionTableViewCell: UITableViewCell {
         //location
         Layout().addTopConstraint(location, toView: postTime, multiplier: 1, constant: 0)
         Layout().addBottomConstraint(location, toView: postTime, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(location, toView: self.contentView, multiplier: 1, constant: -leftRightMargin)
+        Layout().addRightConstraint(location, toView: self.contentView, multiplier: 1, constant: -marginModel.leftRightMargin)
         Layout().addLeftToRightConstraint(location, toView: postTime, multiplier: 1, constant: 10)
         
         //questionContent
         Layout().addLeftConstraint(questionContent, toView: avatorImage, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: -leftRightMargin)
+        Layout().addRightConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: -marginModel.leftRightMargin)
         Layout().addTopToBottomConstraint(questionContent, toView: avatorImage, multiplier: 1, constant: 10)
-        Layout().addHeightConstraint(questionContent, toView: nil, multiplier: 0, constant: 60)
-//        Layout().addBottomConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: 0)
-        
-        
         
     }
     
@@ -88,7 +141,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         let tempView = UIImageView()
         tempView.image = UIImage(named: "home_page_default_avatar_image")
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.backgroundColor = UIColor.redColor()
+//        tempView.backgroundColor = UIColor.redColor()
         return tempView
     }()
     
@@ -108,6 +161,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.font = UIFont.systemFontOfSize(11)
+        tempView.textColor = UIColor.grayColor()
 //        tempView.backgroundColor = UIColor.redColor()
         return tempView
     }()
@@ -130,6 +184,9 @@ class YNQuestionTableViewCell: UITableViewCell {
         //问题内容
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.numberOfLines = 3
+        tempView.font = UIFont.systemFontOfSize(15)
+        tempView.lineBreakMode = NSLineBreakMode.ByWordWrapping
 //        tempView.backgroundColor = UIColor.redColor()
         return tempView
     }()

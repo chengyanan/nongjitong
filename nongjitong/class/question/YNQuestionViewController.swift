@@ -31,6 +31,8 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         
         self.automaticallyAdjustsScrollViewInsets = false
         
+        self.view.backgroundColor = kRGBA(244, g: 244, b: 244, a: 1)
+        
         setupInterface()
         setLayout()
         
@@ -142,6 +144,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                     
                 } else if status == 0 {
                     
+                    
                     if let msg = json["msg"] as? String {
                         
                         YNProgressHUD().showText(msg, toView: self.view)
@@ -163,11 +166,10 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     func setupInterface() {
         
         //tableView
-        let tempTableView = UITableView()
+        let tempTableView = UITableView(frame: CGRectZero, style: .Grouped)
         tempTableView.delegate = self
         tempTableView.dataSource = self
-//        tempTableView.estimatedRowHeight = 44
-//        tempTableView.rowHeight = UITableViewAutomaticDimension
+        tempTableView.separatorStyle = .None
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
@@ -202,14 +204,20 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         Layout().addTopToBottomConstraint(tableView!, toView: collectionView!, multiplier: 1, constant: 0)
         Layout().addLeftConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: -64)
+        Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: -44)
         
     }
     
     //MARK: UITableViewDataSource
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return self.tableViewDataArray.count
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -223,17 +231,23 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
             cell = YNQuestionTableViewCell(style: .Default, reuseIdentifier: identify)
         }
         
-        cell?.model = self.tableViewDataArray[indexPath.row]
+        cell?.model = self.tableViewDataArray[indexPath.section]
         
         return cell!
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 180
+        return self.tableViewDataArray[indexPath.section].height!
     }
     
-    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
+    }
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        return 10
+    }
     
     //MARK:UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -250,9 +264,8 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         let identify = "Cell_Collection_Question_List"
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNQuestionCollectionViewCell
-        
         cell.productModel = selectedArray[indexPath.item]
-            
+
         return cell
         
     }
@@ -280,11 +293,11 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: collectionView delegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let model = self.selectedArray[indexPath.row]
-        model.isSelected = true
-        
-        collectionView.reloadItemsAtIndexPaths([indexPath])
-        collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
+            let model = self.selectedArray[indexPath.row]
+            model.isSelected = true
+            
+            collectionView.reloadItemsAtIndexPaths([indexPath])
+            collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
         
     }
     
