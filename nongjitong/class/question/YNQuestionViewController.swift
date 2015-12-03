@@ -65,7 +65,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
             
             if let status = json["status"] as? Int {
                 
-//                print(json)
+                print(json)
                 
                 if status == 1 {
                     
@@ -120,14 +120,14 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                     
                     let tempdata = json["data"] as! NSArray
                     
+                    self.selectedArray.removeAll()
+                    
+                    let newmodel = YNSelectedProductModel()
+                    newmodel.class_name = "最新"
+                    newmodel.isSelected = true
+                    self.selectedArray.append(newmodel)
+                    
                     if tempdata.count > 0 {
-                        
-                        self.selectedArray.removeAll()
-                        
-                        let newmodel = YNSelectedProductModel()
-                        newmodel.class_name = "最新"
-                        newmodel.isSelected = true
-                        self.selectedArray.append(newmodel)
                         
                         for var i = 0; i < tempdata.count; i++ {
                             
@@ -136,11 +136,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                             self.selectedArray.append(model)
                         }
                         
-                        self.collectionView?.reloadData()
-                        self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
+                    }  else {
+                    
                         
                     }
                     
+                    self.collectionView?.reloadData()
+                    self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
                     
                 } else if status == 0 {
                     
@@ -217,7 +219,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 1
+        return 10
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -307,6 +309,11 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         model.isSelected = false
         
         collectionView.reloadItemsAtIndexPaths([indexPath])
+    }
+    
+    override func didReceiveMemoryWarning() {
+        
+        print("YNQuestionViewController didReceiveMemoryWarning")
     }
     
 }

@@ -23,6 +23,8 @@ class YNQuestionTableViewCell: UITableViewCell {
             
             if model?.photo.count > 0 {
             
+                self.removePictures()
+                
                 //添加图片
                 self.addPictures()
             } else {
@@ -32,9 +34,6 @@ class YNQuestionTableViewCell: UITableViewCell {
             
         }
     }
-    
-    
-    
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,11 +54,12 @@ class YNQuestionTableViewCell: UITableViewCell {
         for view in self.contentView.subviews {
         
             if view is UIImageView {
-            
-                if view.frame.origin.y == model?.marginModel.imageY {
+                
+                if view.tag > 0 {
                 
                     view.removeFromSuperview()
                 }
+            
             }
         }
     }
@@ -69,6 +69,8 @@ class YNQuestionTableViewCell: UITableViewCell {
         for var i = 0; i < model?.photo.count; i++ {
         
             let imageView = UIImageView()
+//            imageView.backgroundColor = UIColor.redColor()
+            imageView.tag = i+1
             
             let leftRightMargin = model!.marginModel.leftRightMargin
             
@@ -80,13 +82,10 @@ class YNQuestionTableViewCell: UITableViewCell {
             
             let x =  leftRightMargin + CGFloat(i) * imageWidthHeight + CGFloat(i) * imageMargin
             
-            imageView.backgroundColor = UIColor.redColor()
-            
             imageView.frame = CGRectMake(x, imageY, imageWidthHeight, imageWidthHeight)
             
-            Network.getImageWithURL(model!.photo[i], success: { (data) -> Void in
-                imageView.image = UIImage(data: data)
-            })
+            imageView.getImageWithURL(model!.photo[i], contentMode: UIViewContentMode.ScaleToFill)
+            imageView.clipsToBounds = true
             
             self.contentView.addSubview(imageView)
         }

@@ -321,26 +321,26 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         
         
-//        if let _ = self.coordinate {
-//            
-//            let isUpdateLocation = self.isUpdateLocation(self.coordinate!, userLocation: userLocation.coordinate)
-//        
-//            if isUpdateLocation {
-//           
-//                //新位置和以前不一样，设置新位置，从新加载数据
-//                self.coordinate = userLocation.location!.coordinate
-//                reverseGeocodeLocationWithUserLocation(userLocation)
-//            
-//            } else {
-//            
-//                //不是新位置 什么也不做
-//            }
-//            
-//        }else {
-//       
-//            self.coordinate = userLocation.location!.coordinate
-//            reverseGeocodeLocationWithUserLocation(userLocation)
-//        }
+        if let _ = self.coordinate {
+            
+            let isUpdateLocation = self.isUpdateLocation(self.coordinate!, userLocation: userLocation.coordinate)
+        
+            if isUpdateLocation {
+           
+                //新位置和以前不一样，设置新位置，从新加载数据
+                self.coordinate = userLocation.location!.coordinate
+                reverseGeocodeLocationWithUserLocation(userLocation)
+            
+            } else {
+            
+                //不是新位置 什么也不做
+            }
+            
+        }else {
+       
+            self.coordinate = userLocation.location!.coordinate
+            reverseGeocodeLocationWithUserLocation(userLocation)
+        }
         
         
 //        self.coordinate = userLocation.location!.coordinate
@@ -494,20 +494,20 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if let location = locations.last {
-            
-            let locationTool = Location()
-            
-            let coorinate = locationTool.transformFromWGSToGCJ(location.coordinate)
-            
-            let span = MKCoordinateSpanMake(0.011, 0.0089)
-            
-            let region = MKCoordinateRegionMake(coorinate, span)
-            
-            self.mapView.setRegion(region, animated: true)
-        }
-        
-        self.locationManger.stopUpdatingLocation()
+//        if let location = locations.last {
+//            
+//            let locationTool = Location()
+//            
+//            let coorinate = locationTool.transformFromWGSToGCJ(location.coordinate)
+//            
+//            let span = MKCoordinateSpanMake(0.011, 0.0089)
+//            
+//            let region = MKCoordinateRegionMake(coorinate, span)
+//            
+//            self.mapView.setRegion(region, animated: true)
+//        }
+//        
+//        self.locationManger.stopUpdatingLocation()
         
     }
     
