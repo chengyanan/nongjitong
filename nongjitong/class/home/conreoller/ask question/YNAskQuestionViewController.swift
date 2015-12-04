@@ -598,24 +598,53 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     //MARK: 解析地址
     func geocoderAddress(location: CLLocation) {
         
+        location.coordinate.longitude
+        
         self.location.geocoderAddress(location, success: { (placemarks) -> Void in
             
             if let _ = placemarks {
                 
                 let placeMark: CLPlacemark = placemarks!.first!
+                
                 var address = ""
                 
-                if let name = placeMark.name {
-                    
-                    address += name
-                    
-                } else if let thoroughfare = placeMark.thoroughfare {
-                    
-                    address += thoroughfare
+                if let _ = placeMark.administrativeArea {
+                
+                    address += placeMark.administrativeArea!
                     
                 }
                 
-                self.locationDetail = address
+                if let _ = placeMark.locality {
+                
+                    address += placeMark.locality!
+                }
+                
+                if let _ = placeMark.subLocality {
+                
+                    address += placeMark.subLocality!
+                }
+                
+                if kIOS7() {
+                
+                    if let _ = placeMark.name {
+                    
+                        address += placeMark.name!
+                        
+                        self.locationDetail = placeMark.name!
+                        
+                    }
+                    
+                } else {
+                
+                    if let _ = placeMark.thoroughfare {
+                    
+                        address += placeMark.thoroughfare!
+                        self.locationDetail = placeMark.thoroughfare!
+                    }
+                }
+
+                //TODO:构造上传地址，精度，纬度和地址
+                
                 
             }
             

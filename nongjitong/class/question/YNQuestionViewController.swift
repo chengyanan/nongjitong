@@ -24,6 +24,9 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //tableviewDatasource
     var tableViewDataArray = [YNQuestionModel]()
     
+    // 当前问题的classId
+    var classId: String? = nil
+    
     
     //MARK: life cycle
     override func viewDidLoad() {
@@ -36,12 +39,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         setupInterface()
         setLayout()
         
+        loadDataFromServer()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadDataFromServer()
+//        loadDataFromServer()
     }
     
     //MARK: 数据加载
@@ -51,7 +55,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         loadWatchList()
         
         //加载问题数据
-        getQuestionListWithClassID(nil)
+        getQuestionListWithClassID(self.classId)
         
     }
     
@@ -84,6 +88,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                         
                         self.tableView?.reloadData()
                         
+                    } else {
+                    
+                        //没有数据
+                        
+                        YNProgressHUD().showText("当前分类下没有相关问题", toView: self.view)
+                        self.tableViewDataArray.removeAll()
+                        self.tableView?.reloadData()
                     }
                     
                     
@@ -219,7 +230,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -249,6 +260,14 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
         return 10
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let questionDetailVc = YNQuestionDetailViewController()
+        questionDetailVc.questionModel = self.tableViewDataArray[indexPath.section]
+        
+        self.navigationController?.pushViewController(questionDetailVc, animated: true)
     }
     
     //MARK:UICollectionViewDataSource
@@ -297,7 +316,11 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         
             let model = self.selectedArray[indexPath.row]
             model.isSelected = true
-            
+        
+            self.classId = model.class_id
+            //加载新数据
+            getQuestionListWithClassID(model.class_id)
+        
             collectionView.reloadItemsAtIndexPaths([indexPath])
             collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
         

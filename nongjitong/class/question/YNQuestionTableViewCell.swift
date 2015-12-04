@@ -175,6 +175,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.titleLabel?.font = UIFont.systemFontOfSize(11)
         tempView.setTitleColor(UIColor.grayColor(), forState: .Normal)
+        tempView.userInteractionEnabled = false
         return tempView
     }()
     

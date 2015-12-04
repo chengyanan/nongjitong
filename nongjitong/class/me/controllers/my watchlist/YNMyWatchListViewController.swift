@@ -31,6 +31,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
 
     //tableViewCatagory数据源
     var cayegoryArray = [YNCategoryModel]()
+    
     //tableViewProduct数据源
     var productArray = [YNCategoryModel]()
     
@@ -359,6 +360,16 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
                     model.class_name = cell.productModel!.class_name
                     model.isSelected = cell.productModel!.isSelected
                     
+                    for item in self.productArray {
+                    
+                        if item.id == cell.productModel!.id {
+                        
+                            item.isSelected = true
+                            break
+                        }
+                        
+                    }
+                    
                     self.selectedArray.append(model)
                     self.collectionView?.reloadData()
                     
@@ -413,6 +424,9 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
                 if status == 1 {
                     
                    print(json["msg"])
+                    
+                    
+                    
                     
                 } else if status == 0 {
                     
