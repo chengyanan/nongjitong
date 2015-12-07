@@ -12,13 +12,21 @@ class YNNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "sapi-nav-back-btn-bg"), style: .Plain, target: self, action: "popViewController")
+        
+        
 
         // Do any additional setup after loading the view.
         
 //        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: kStyleColor]
 //        UINavigationBar.appearance().tintColor = kStyleColor
         
+       
+        
     }
+    
+   
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -39,13 +39,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         setupInterface()
         setLayout()
         
-        loadDataFromServer()
+//        loadDataFromServer()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-//        loadDataFromServer()
+        loadDataFromServer()
     }
     
     //MARK: 数据加载
@@ -69,7 +69,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
             
             if let status = json["status"] as? Int {
                 
-                print(json)
+//                print(json)
                 
                 if status == 1 {
                     
@@ -123,7 +123,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         YNWatchHttp.getUserSpecialty({ (json) -> Void in
             progress.hideUsingAnimation()
             
-            //            print("data - \(json)")
+//            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -149,7 +149,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                         
                     }  else {
                     
-                        
+                        YNProgressHUD().showText("没有数据", toView: self.view)
                     }
                     
                     self.collectionView?.reloadData()
