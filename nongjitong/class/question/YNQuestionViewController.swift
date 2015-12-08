@@ -39,13 +39,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         setupInterface()
         setLayout()
         
-//        loadDataFromServer()
+        loadDataFromServer()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadDataFromServer()
+//        loadDataFromServer()
     }
     
     //MARK: 数据加载
@@ -173,6 +173,8 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                 
                 YNProgressHUD().showText("数据加载失败", toView: self.view)
         }
+        
+        
     }
     
     //MARK: 设置界面

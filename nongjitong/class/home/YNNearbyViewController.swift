@@ -60,7 +60,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
             if isLoadData {
            
-                self.getDataFromServer()
+//                self.getDataFromServer()
             }
             
         }

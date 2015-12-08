@@ -66,7 +66,8 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
     
     func answerButtonDidClick() {
         
-        let answerVc = YNAnswerQuestionViewController(questionModel: self.questionModel!)
+        let answerVc = YNNewAnswerQuestionViewController()
+        answerVc.questionModel = self.questionModel
     
         self.navigationController?.pushViewController(answerVc, animated: true)
     }

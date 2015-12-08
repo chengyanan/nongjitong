@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Tools {
     
@@ -53,20 +54,6 @@ struct Tools {
         
             return nil
         }
-    
-//        let text2 = text.stringByReplacingOccurrencesOfString("<p>", withString: "")
-//        
-//        let text3 = text2.stringByReplacingOccurrencesOfString("</b>", withString: "")
-//        let text4 = text3.stringByReplacingOccurrencesOfString("&nbsp;", withString: "")
-//        let text5 = text4.stringByReplacingOccurrencesOfString("\\n", withString: "")
-//        let text6 = text5.stringByReplacingOccurrencesOfString("\\r", withString: "")
-//        
-//        let text7 = text6.stringByReplacingOccurrencesOfString("<b>", withString: "")
-//        let text8 = text7.stringByReplacingOccurrencesOfString("</p>", withString: "\n\n")
-//        
-//        let text9 = text8.stringByReplacingOccurrencesOfString("<br>", withString: "")
-//        let text10 = text9.stringByReplacingOccurrencesOfString(";;;", withString: "")
-//        let text11 = text10.stringByReplacingOccurrencesOfString("", withString: "&micro;")
         
         let text1 = text.stringByReplacingOccurrencesOfString("&nbsp;数据来源", withString: "\n数据来源")
         let text2 = text1.stringByReplacingOccurrencesOfString("&nbsp;", withString: "")
@@ -75,6 +62,16 @@ struct Tools {
         let text5 = text4.stringByReplacingOccurrencesOfString("&", withString: "")
         let text6 = text5.stringByReplacingOccurrencesOfString("  ", withString: "")
         return text6
+    }
+    
+    func heightForText(text:String, font:UIFont, width:CGFloat) -> CGSize{
+        let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        return label.frame.size
     }
     
 }
