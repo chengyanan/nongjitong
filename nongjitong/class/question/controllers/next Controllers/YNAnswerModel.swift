@@ -12,33 +12,45 @@ import UIKit
 class YNAnswerModel {
     
     let avatarWidthHeight: CGFloat = 30
-    let margin: CGFloat = 8
+    let marginTopBottomLeftOrRight: CGFloat = 8
+    let marginBetweenAvatarAndContent: CGFloat = 3
+    let marginContent:CGFloat = 20
     
     var contentSize: CGSize {
         
-        let width = kScreenWidth - margin*3 - avatarWidthHeight
+        let width = kScreenWidth - marginTopBottomLeftOrRight - avatarWidthHeight - marginBetweenAvatarAndContent - marginContent
         
-        var size = Tools().heightForText(self.description!, font: UIFont.systemFontOfSize(15), width: width)
+        let size = Tools().heightForText(self.description!, font: UIFont.systemFontOfSize(15), width: width)
         
-        if size.width + 5 >= width {
+        let secondsize = Tools().heightForText(self.description!, font: UIFont.systemFontOfSize(15), width: width - 40)
         
-            size.height += 44
+        var realSize = CGSizeZero
+        
+        if size.width == secondsize.width && size.height == secondsize.height {
+        
+            //单行
+            realSize = size
+            realSize.width += 41
+            realSize.height += 20
             
         } else {
         
-            size.height += 20
-            size.width += 40
+            //多行
+            realSize = CGSize(width: size.width, height: secondsize.height + 30)
         }
         
-        return size
+        return realSize
     }
     
     var avatarUrl: String?
     var username: String?
     var description: String?
+    
+    var questionId: String?
 
     var isQuestionOwner: Bool?
     
+    var isFinish: Bool = true
     
     var cellHeight: CGFloat?
     
@@ -52,10 +64,10 @@ class YNAnswerModel {
         self.isQuestionOwner = dict["isQuestionOwner"] as? Bool
         
         //头像的高度
-        let avatarheight = avatarWidthHeight + margin*2
+        let avatarheight = avatarWidthHeight + marginTopBottomLeftOrRight*2
         
         //文字的高度
-        let contentHeight = self.contentSize.height + margin*2
+        let contentHeight = self.contentSize.height + marginTopBottomLeftOrRight*2
         
         if avatarheight > contentHeight {
             

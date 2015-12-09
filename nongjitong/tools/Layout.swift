@@ -84,6 +84,14 @@ struct Layout {
         
     }
     
+    func addBottomToTopConstraint(view: UIView, toView: UIView, multiplier:CGFloat, constant: CGFloat) {
+        
+        let distanceLabelConstantHeight = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: toView, attribute: NSLayoutAttribute.Top, multiplier: multiplier, constant: constant)
+        
+        view.superview?.addConstraint(distanceLabelConstantHeight)
+        
+    }
+    
     func addCenterXConstraint(view: UIView, toView: UIView, multiplier:CGFloat, constant: CGFloat) {
    
         let distanceLabelConstantHeight = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: toView, attribute: NSLayoutAttribute.CenterX, multiplier: multiplier, constant: constant)

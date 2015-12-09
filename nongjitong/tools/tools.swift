@@ -74,5 +74,17 @@ struct Tools {
         return label.frame.size
     }
     
+    func resizeImage(name: String) -> UIImage{
+        
+        let image = UIImage(named: name)
+        
+        let top =  image!.size.width * 0.5
+        let left = image!.size.height * 0.5
+        
+        let newimage = image!.resizableImageWithCapInsets(UIEdgeInsets(top: top, left: left, bottom: top, right: left), resizingMode: .Stretch)
+        
+        return newimage
+    }
+    
 }
 

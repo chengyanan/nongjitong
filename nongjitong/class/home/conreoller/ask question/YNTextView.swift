@@ -37,16 +37,19 @@ class YNTextView: UITextView {
     override func drawRect(rect: CGRect) {
         
         if self.text == "" {
-        
-           let placeHolderRect: CGRect = CGRectMake(10, 8, CGRectGetWidth(self.frame) - 10, CGRectGetHeight(self.frame) - 8)
             
-            let attributes: [String : AnyObject]? = [NSFontAttributeName: UIFont.systemFontOfSize(17),
-                   NSForegroundColorAttributeName: kRGBA(200, g: 200, b: 200, a: 1)]
+            if let _ = self.placeHolder {
             
-            let str = NSString(string: self.placeHolder!)
-            
-            str.drawInRect(placeHolderRect, withAttributes: attributes)
-            
+                let placeHolderRect: CGRect = CGRectMake(10, 8, CGRectGetWidth(self.frame) - 10, CGRectGetHeight(self.frame) - 8)
+                
+                let attributes: [String : AnyObject]? = [NSFontAttributeName: UIFont.systemFontOfSize(17),
+                    NSForegroundColorAttributeName: kRGBA(200, g: 200, b: 200, a: 1)]
+                
+                let str = NSString(string: self.placeHolder!)
+                
+                str.drawInRect(placeHolderRect, withAttributes: attributes)
+            }
+    
             
         }
         

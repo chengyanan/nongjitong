@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol YNAnswerTableViewCellDelegate {
+
+    func answerTableViewCellHiddenKeyboard()
+}
+
 class YNAnswerTableViewCell: UITableViewCell {
+    
+    var delegate: YNAnswerTableViewCellDelegate?
     
     var questionModel: YNAnswerModel? {
     
@@ -16,16 +23,28 @@ class YNAnswerTableViewCell: UITableViewCell {
         
             if let _ = questionModel {
                 
+                setLayout()
+                
                 //TODO: 设置头像 和文字
                 self.contentButton.setTitle(questionModel?.description, forState: .Normal)
                 
                 if questionModel!.isQuestionOwner! {
-                
-                    self.contentButton.setBackgroundImage(resizeImage("bubble_left_blue"), forState: .Normal)
+                  self.contentButton.setBackgroundImage(resizeImage("bubble_left_blue"), forState: .Normal)
                     
                 } else {
                 
-                     self.contentButton.setBackgroundImage(resizeImage("bubble_green"), forState: .Normal)
+                    self.contentButton.setBackgroundImage(resizeImage("bubble_green"), forState: .Normal)
+                }
+                
+                //设置加载条和加载结果
+                if questionModel!.isFinish {
+                
+//                    self.sendButton.hidden = true
+                    
+                } else {
+                
+                    //加载数据
+                    sendMessageToserver()
                 }
                 
                 
@@ -33,15 +52,71 @@ class YNAnswerTableViewCell: UITableViewCell {
             
         }
     }
+
+    
+    func sendMessageToserver() {
+        
+        let userId = kUser_ID() as? String
+        let username = kUser_NiceName() as? String
+        
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "Answer",
+            "a": "answer",
+            "question_id": questionModel!.questionId,
+            "user_id": userId,
+            "user_name": username,
+            "content": questionModel?.description
+        ]
+        
+        self.sendButton.hidden = true
+        self.activityIndicatorView.startAnimating()
+        YNHttpAnswerQuestion().answerWithParams(params, successFull: { (json) -> Void in
+            
+            self.activityIndicatorView.stopAnimating()
+            
+            //            print("data - \(json)")
+            
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    
+                    
+                } else if status == 0 {
+                    
+                    self.sendButton.hidden = false
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        print(msg)
+                        
+                        
+                    }
+                }
+                
+            }
+            
+            
+            }, failureFul: { (error) -> Void in
+                
+                self.activityIndicatorView.stopAnimating()
+                
+                self.sendButton.hidden = false
+                
+        })
+        
+    }
     
     func resizeImage(name: String) -> UIImage{
     
         let image = UIImage(named: name)
         
-        let top =  image!.size.width * 0.5
-        let left = image!.size.height * 0.5
+        let top =  image!.size.height * 0.6
+        let bottom = image!.size.height - top
+        let left = image!.size.width * 0.5
         
-        let newimage = image!.resizableImageWithCapInsets(UIEdgeInsets(top: top, left: left, bottom: top, right: left), resizingMode: .Stretch)
+        let newimage = image!.resizableImageWithCapInsets(UIEdgeInsets(top: top, left: left, bottom: bottom, right: left), resizingMode: .Stretch)
         
         return newimage
     }
@@ -50,8 +125,13 @@ class YNAnswerTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setInterface()
-    }
+        
+        self.sendButton.addTarget(self, action: "sendMessageToserver", forControlEvents: .TouchUpInside)
 
+        self.contentView.backgroundColor = UIColor.redColor()
+    }
+    
+   
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -60,7 +140,8 @@ class YNAnswerTableViewCell: UITableViewCell {
     
         self.contentView.addSubview(avatarImageView)
         self.contentView.addSubview(contentButton)
-        
+        self.contentView.addSubview(activityIndicatorView)
+        self.contentView.addSubview(sendButton)
     }
     
     //头像
@@ -85,40 +166,148 @@ class YNAnswerTableViewCell: UITableViewCell {
         tempView.backgroundColor = UIColor.clearColor()
         tempView.contentEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         tempView.userInteractionEnabled = false
-//        tempView.backgroundColor = UIColor.redColor()
-        tempView.titleLabel?.textAlignment = .Center
+//        tempView.titleLabel?.textAlignment = .Center
         return tempView
+    }()
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+    
+        let tempView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.hidesWhenStopped = true
+        return tempView
+    }()
+    
+    let sendButton: UIButton = {
+    
+        let tempView = UIButton()
+        tempView.hidden = true
+        tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.setBackgroundImage(UIImage(named: "chatroom_msg_failed"), forState: .Normal)
+        return tempView
+        
     }()
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
+//        //avatarImageView
+//        Layout().addTopConstraint(avatarImageView, toView: self.contentView, multiplier: 1, constant: questionModel!.marginTopBottomLeftOrRight)
+//        Layout().addWidthHeightConstraints(avatarImageView, toView: nil, multiplier: 1, constant: questionModel!.avatarWidthHeight)
+//        
+//        if self.questionModel!.isQuestionOwner! {
+//            
+//            //avatarImageView
+//            Layout().addLeftConstraint(avatarImageView, toView: self.contentView, multiplier: 1, constant: questionModel!.marginTopBottomLeftOrRight)
+//    
+//            //contentLabel
+//            Layout().addLeftToRightConstraint(contentButton, toView: avatarImageView, multiplier: 1, constant: questionModel!.marginBetweenAvatarAndContent)
+//           
+//            
+//        } else {
+//        
+//            //avatarImageView
+//            Layout().addRightConstraint(avatarImageView, toView: self.contentView, multiplier: 1, constant: -questionModel!.marginTopBottomLeftOrRight)
+//            
+//            //contentLabel
+//            Layout().addRightToLeftConstraint(contentButton, toView: avatarImageView, multiplier: 1, constant: -questionModel!.marginBetweenAvatarAndContent)
+//        
+//        }
+//    
+//        Layout().addTopConstraint(contentButton, toView: avatarImageView, multiplier: 1, constant: 0)
+//        Layout().addHeightConstraint(contentButton, toView: nil, multiplier: 0, constant: questionModel!.contentSize.height)
+//        Layout().addWidthConstraint(contentButton, toView: nil, multiplier: 0, constant: questionModel!.contentSize.width)
+//        
+//        
+//        //activityIndicatorView
+//        Layout().addCenterYConstraint(activityIndicatorView, toView: contentButton, multiplier: 1, constant: 0)
+//        Layout().addWidthHeightConstraints(activityIndicatorView, toView: nil, multiplier: 0, constant: 22)
+//        
+//        //sendButton
+//        Layout().addCenterYConstraint(sendButton, toView: contentButton, multiplier: 1, constant: 0)
+//        Layout().addWidthHeightConstraints(sendButton, toView: nil, multiplier: 0, constant: 22)
+//        
+//        if self.questionModel!.isQuestionOwner! {
+//        
+//            //activityIndicatorView
+//            Layout().addLeftToRightConstraint(activityIndicatorView, toView: contentButton, multiplier: 1, constant: 0)
+//            
+//            //sendButton
+//            Layout().addLeftToRightConstraint(sendButton, toView: contentButton, multiplier: 1, constant: 0)
+//            
+//        } else {
+//        
+//            //activityIndicatorView
+//            Layout().addRightToLeftConstraint(activityIndicatorView, toView: contentButton, multiplier: 1, constant: 6)
+//            
+//            //sendButton
+//            
+//             Layout().addRightToLeftConstraint(sendButton, toView: contentButton, multiplier: 1, constant: 6)
+//        }
+        
+        
+    }
+    
+    func setLayout() {
+    
         //avatarImageView
-        Layout().addTopConstraint(avatarImageView, toView: self.contentView, multiplier: 1, constant: 10)
+        Layout().addTopConstraint(avatarImageView, toView: self.contentView, multiplier: 1, constant: questionModel!.marginTopBottomLeftOrRight)
         Layout().addWidthHeightConstraints(avatarImageView, toView: nil, multiplier: 1, constant: questionModel!.avatarWidthHeight)
         
         if self.questionModel!.isQuestionOwner! {
             
             //avatarImageView
-            Layout().addLeftConstraint(avatarImageView, toView: self.contentView, multiplier: 1, constant: 10)
-    
+            Layout().addLeftConstraint(avatarImageView, toView: self.contentView, multiplier: 1, constant: questionModel!.marginTopBottomLeftOrRight)
+            
             //contentLabel
-            Layout().addLeftToRightConstraint(contentButton, toView: avatarImageView, multiplier: 1, constant: questionModel!.margin)
-           
+            Layout().addLeftToRightConstraint(contentButton, toView: avatarImageView, multiplier: 1, constant: questionModel!.marginBetweenAvatarAndContent)
+            
             
         } else {
-        
+            
             //avatarImageView
-            Layout().addRightConstraint(avatarImageView, toView: self.contentView, multiplier: 1, constant: -10)
+            Layout().addRightConstraint(avatarImageView, toView: self.contentView, multiplier: 1, constant: -questionModel!.marginTopBottomLeftOrRight)
             
             //contentLabel
-            Layout().addRightToLeftConstraint(contentButton, toView: avatarImageView, multiplier: 1, constant: -questionModel!.margin)
-        
+            Layout().addRightToLeftConstraint(contentButton, toView: avatarImageView, multiplier: 1, constant: -questionModel!.marginBetweenAvatarAndContent)
+            
         }
-    
+        
         Layout().addTopConstraint(contentButton, toView: avatarImageView, multiplier: 1, constant: 0)
         Layout().addHeightConstraint(contentButton, toView: nil, multiplier: 0, constant: questionModel!.contentSize.height)
         Layout().addWidthConstraint(contentButton, toView: nil, multiplier: 0, constant: questionModel!.contentSize.width)
+        
+        
+        //activityIndicatorView
+        Layout().addCenterYConstraint(activityIndicatorView, toView: contentButton, multiplier: 1, constant: 0)
+        Layout().addWidthHeightConstraints(activityIndicatorView, toView: nil, multiplier: 0, constant: 22)
+        
+        //sendButton
+        Layout().addCenterYConstraint(sendButton, toView: contentButton, multiplier: 1, constant: 0)
+        Layout().addWidthHeightConstraints(sendButton, toView: nil, multiplier: 0, constant: 22)
+        
+        if self.questionModel!.isQuestionOwner! {
+            
+            //activityIndicatorView
+            Layout().addLeftToRightConstraint(activityIndicatorView, toView: contentButton, multiplier: 1, constant: 0)
+            
+            //sendButton
+            Layout().addLeftToRightConstraint(sendButton, toView: contentButton, multiplier: 1, constant: 0)
+            
+        } else {
+            
+            //activityIndicatorView
+            Layout().addRightToLeftConstraint(activityIndicatorView, toView: contentButton, multiplier: 1, constant: 6)
+            
+            //sendButton
+            
+            Layout().addRightToLeftConstraint(sendButton, toView: contentButton, multiplier: 1, constant: 6)
+        }
     }
     
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        self.delegate?.answerTableViewCellHiddenKeyboard()
+    }
 }
