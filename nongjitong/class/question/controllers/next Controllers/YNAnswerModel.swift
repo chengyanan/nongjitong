@@ -31,7 +31,7 @@ class YNAnswerModel {
             //单行
             realSize = size
             realSize.width += 41
-            realSize.height += 20
+            realSize.height += 26
             
         } else {
         
@@ -79,7 +79,6 @@ class YNAnswerModel {
         }
         
     }
-    
-    
+
     
 }

@@ -40,6 +40,8 @@ class YNInputView: UIView, UITextViewDelegate {
     func finishButtonDidClick() {
         
         delegate?.inputViewFinishButtonDidClick()
+        
+        self.textView.text = ""
     }
     
     required init?(coder aDecoder: NSCoder) {

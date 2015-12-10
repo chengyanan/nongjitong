@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNInputViewDelegate, YNAnswerTableViewCellDelegate {
+class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNInputViewDelegate {
 
     var tableView: UITableView?
     //添加一个随键盘弹出的view
@@ -18,10 +18,11 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
     
     //inputView的高度
     let inputViewHeight: CGFloat = 44
-    
     let margin: CGFloat = 5
     
     var questionModel: YNQuestionModel?
+    
+    var isKeyboardShowing = false
     
     var dataarray = [YNAnswerModel]()
     
@@ -45,7 +46,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         self.title = "用户的提问"
         self.view.backgroundColor = UIColor.whiteColor()
         
-        let dict1: NSDictionary = ["descriptiom": "rose"]
+        let dict1: NSDictionary = ["descriptiom": "roseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroserose"]
         
         let model1 = YNAnswerModel(dict: dict1)
         model1.isQuestionOwner = true
@@ -58,13 +59,28 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         model2.isQuestionOwner = false
         
         self.dataarray.append(model2)
-        
-        
+    
         setInterface()
-        addViewWithKeyBoard()
+        
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        addKeyBoardNotication()
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        removeKeyBoardNotication()
+    }
     
+    deinit {
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    //MARK: interface
     func setInterface() {
     
         //tableView
@@ -101,97 +117,25 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         
     }
 
-    
-    func addViewWithKeyBoard() {
-        
-        //添加键盘通知
-        addKeyBoardNotication()
-    }
-    
-    
+    //MARK: keyBoardNotication
     func addKeyBoardNotication() {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
-    //MARK: YNInputViewDelegate
-    func inputViewFinishButtonDidClick() {
-        
-        if self.messageStr == "" {
-        
-            
-        } else {
-        
-            //TODO:有内容发送
-            let dict1: NSDictionary = ["descriptiom": self.messageStr]
-            
-            let model1 = YNAnswerModel(dict: dict1)
-            model1.isQuestionOwner = false
-            model1.isFinish = false
-            model1.questionId = questionModel?.id
-            self.dataarray.append(model1)
-            
-            //判断tableView是否需要向上移动
-            
-            self.tableView?.reloadData()
-            
-            decideIfTableViewNeedMoveUp(model1.cellHeight!)
-        }
-    }
+    func removeKeyBoardNotication() {
     
-    func decideIfTableViewNeedMoveUp(height: CGFloat) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
         
-        print(cellHeight)
-        
-        if cellHeight >= self.view.frame.size.height - 44 {
-            
-            
-            self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.dataarray.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-            
-        } else {
-            
-        
-            let needScroolHeight = cellHeight + self.keyBoardHeight! + inputViewHeight - self.view.frame.size.height + 64
-            
-            let animations: (()->Void) = {
-                
-                if needScroolHeight > 0 {
-                    
-                    self.tableView?.transform = CGAffineTransformMakeTranslation(0, -needScroolHeight)
-                    
-//                    if needScroolHeight > self.keyBoardHeight {
-//                    
-//                        self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.dataarray.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-//                        
-//                    } else {
-//                    
-//                         self.tableView?.transform = CGAffineTransformMakeTranslation(0, -needScroolHeight)
-//                    }
-                    
-                   
-                }
-                
-            }
-            
-            animations()
-        }
-        
-    }
-    
-    func inputViewTextViewDidChange(text: String) {
-        
-        self.messageStr = text
-    }
-    
-    func hideKeyBoard() {
-        
-        self.view.endEditing(true)
     }
     
     func keyboardWillShow(notification: NSNotification) {
         
         if let userInfo = notification.userInfo {
+            
+            self.isKeyboardShowing = true
             
             let keyboardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
             
@@ -203,22 +147,24 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
             
             self.keyBoardHeight = deltaY
             
-            let needScroolHeight = cellHeight + deltaY + inputViewHeight - self.view.frame.size.height + 64
+            let needScroolHeight = cellHeight + deltaY + inputViewHeight + 64 - self.view.frame.size.height
             
             let animations: (()->Void) = {
                 
                 self.bottomInputView!.transform = CGAffineTransformMakeTranslation(0, -deltaY)
                 
-                if needScroolHeight  > deltaY {
-                
-                    self.tableView?.transform = CGAffineTransformMakeTranslation(0, -deltaY)
+                if needScroolHeight > 0 {
+                    
+                    if needScroolHeight  > deltaY {
+                        
+                        self.tableView?.transform = CGAffineTransformMakeTranslation(0, -deltaY)
+                        
+                    } else {
+                        
+                        self.tableView?.transform = CGAffineTransformMakeTranslation(0, -needScroolHeight)
+                    }
                     
                 }
-//                
-//                else {
-//                
-//                    self.tableView?.transform = CGAffineTransformMakeTranslation(0, needScroolHeight)
-//                }
                 
             }
             
@@ -234,12 +180,14 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
             }
             
         }
-    
+        
     }
     
     func keyboardWillHide(notification: NSNotification) {
         
         if let userInfo = notification.userInfo {
+            
+            self.isKeyboardShowing = false
             
             let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
             let animations:(() -> Void) = {
@@ -261,11 +209,109 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         
     }
     
-    deinit {
+    
+    //MARK: YNInputViewDelegate
+    func inputViewFinishButtonDidClick() {
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        if self.messageStr == "" {
+        
+            
+        } else {
+        
+            //有内容发送
+            let dict1: NSDictionary = ["descriptiom": self.messageStr]
+            
+            let model1 = YNAnswerModel(dict: dict1)
+            model1.isQuestionOwner = false
+            model1.isFinish = false
+            model1.questionId = questionModel?.id
+            self.dataarray.append(model1)
+            
+            self.tableView?.reloadData()
+            
+            //判断tableView是否需要向上移动
+            decideIfTableViewNeedMoveUp()
+            
+            self.messageStr = ""
+        }
     }
     
+    //判断tableView是否需要向上移动
+    func inputViewTextViewDidChange(text: String) {
+        
+        self.messageStr = text
+    }
+    
+    func decideIfTableViewNeedMoveUp() {
+        
+        if isKeyboardShowing {
+            
+            //当有键盘的时候点击发送
+            ifTableViewNeedScrollWithKeyboard()
+            
+        } else {
+            
+            //当没键盘的时候点击发送
+            ifTableViewNeedScrollWithoutKeyboard()
+            
+        }
+        
+        
+    }
+    
+    func ifTableViewNeedScrollWithoutKeyboard() {
+        
+        let tableViewNeedScrollHeight = 64 + cellHeight + inputViewHeight - self.view.frame.size.height
+        
+        if tableViewNeedScrollHeight > 0 {
+            
+            //需要滚动
+            self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.dataarray.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+            
+            
+        } else {
+            
+            //如果cell高度没有超出tableview的高度 不需要滚动
+        }
+    }
+    
+    func ifTableViewNeedScrollWithKeyboard() {
+        
+        let needScroolHeight = 64 + cellHeight + self.keyBoardHeight! + inputViewHeight - self.view.frame.size.height
+        
+        let animations: (()->Void) = {
+            
+            if needScroolHeight > 0 {
+                
+                //最高的滚动高度
+                let maxScrollHeight = self.keyBoardHeight!
+                
+                if needScroolHeight > self.keyBoardHeight! {
+                    //如果需要向上移动的距离大于键盘的距离， 就向下移动tableview
+                    self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.dataarray.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                    
+                    self.tableView?.transform = CGAffineTransformMakeTranslation(0, -maxScrollHeight)
+                    
+                } else {
+                    
+                    //如果需要向上移动的距离小于键盘的距离， 就向上移动tableview
+                    self.tableView?.transform = CGAffineTransformMakeTranslation(0, -needScroolHeight)
+                }
+                
+                
+            }
+            
+        }
+        
+        animations()
+        
+    }
+    
+    
+    func hideKeyBoard() {
+        
+        self.view.endEditing(true)
+    }
     
     //MARK: UITableViewDataSource
     
@@ -281,14 +327,11 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         let identify = "CELL_AnswerQuestion"
         var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNAnswerTableViewCell
         
-        print(indexPath.row)
-        
         if cell == nil {
             
             cell = YNAnswerTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
         }
         
-        cell?.delegate = self
         cell?.questionModel = dataarray[indexPath.row]
         return cell!
         
@@ -300,14 +343,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
     }
     
     //MARK: scrollViewDelegate
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-//        hideKeyBoard()
-    }
-    
-    
-    //MARK: YNAnswerTableViewCellDelegate
-    func answerTableViewCellHiddenKeyboard() {
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         hideKeyBoard()
     }
     
