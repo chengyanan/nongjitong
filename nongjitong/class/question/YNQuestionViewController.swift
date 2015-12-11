@@ -48,6 +48,18 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
 //        loadDataFromServer()
     }
     
+    //MARK: event response
+    @IBAction func leftbarButtonClick(sender: AnyObject) {
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        
+        let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting")
+        
+        self.navigationController?.pushViewController(settingVc, animated: true)
+        
+    }
+    
+    
     //MARK: 数据加载
     func loadDataFromServer() {
         

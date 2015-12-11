@@ -128,6 +128,8 @@ class YNAnswerTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+//        self.contentView.removeConstraints(self.contentView.constraints)
+        
         self.avatarImageView.removeFromSuperview()
         self.contentButton.removeFromSuperview()
         self.activityIndicatorView.removeFromSuperview()

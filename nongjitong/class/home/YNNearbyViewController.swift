@@ -87,6 +87,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         return Array()
         }()
     
+    //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,15 +97,21 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
        
 //        self.navigationItem.titleView = self.titleView
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
     
     }
+    
+    //MARK: event response
+    @IBAction func leftBarButtonClicke(sender: AnyObject) {
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        
+        let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting")
+        
+        self.navigationController?.pushViewController(settingVc, animated: true)
+    }
+   
     
     //MARK: - get data from server
-    
     func getDataFromServer() {
         
         let lat = "\(self.coordinate!.latitude)"

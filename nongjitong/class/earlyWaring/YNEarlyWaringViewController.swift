@@ -15,9 +15,19 @@ class YNEarlyWaringViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        self.title = "预警"
     }
 
+    @IBAction func leftbarButtonClick(sender: AnyObject) {
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        
+        let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting")
+        
+        self.navigationController?.pushViewController(settingVc, animated: true)
+        
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

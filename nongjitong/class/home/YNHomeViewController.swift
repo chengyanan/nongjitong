@@ -13,7 +13,7 @@ class YNHomeViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "首页"
+        self.title = "救援"
         
         // Do any additional setup after loading the view.
     }

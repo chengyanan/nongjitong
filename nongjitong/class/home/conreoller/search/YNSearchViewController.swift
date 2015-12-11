@@ -57,6 +57,16 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
         self.finishView?.removeFromSuperview()
     }
     
+    //MARK: event response
+    
+    @IBAction func leftBarButtonClick(sender: AnyObject) {
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        
+        let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting")
+        
+        self.navigationController?.pushViewController(settingVc, animated: true)
+    }
     
     func addViewWithKeyBoard() {
         
