@@ -359,10 +359,10 @@
 		409A393B1C1574E000E84F2D /* next Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				404E0BB11C16A01200924D5A /* YNNewAnswerQuestionViewController.swift */,
 				409A393C1C1574FF00E84F2D /* YNAnswerQuestionViewController.swift */,
 				404E0BAD1C1690B100924D5A /* YNHttpAswerQuestion.swift */,
 				404E0BAF1C1696D500924D5A /* YNAnswerModel.swift */,
-				404E0BB11C16A01200924D5A /* YNNewAnswerQuestionViewController.swift */,
 				404E0BB51C16A7CB00924D5A /* YNAnswerTableViewCell.swift */,
 				40E5ED1A1C17C3B100897799 /* YNInputView.swift */,
 			);

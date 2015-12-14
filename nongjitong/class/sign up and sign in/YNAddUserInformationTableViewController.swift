@@ -614,7 +614,10 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
                 
                 if status == 1 {
                     
-                    self.avatorImage.image = UIImage(data: self.imageData!)
+                    if let _ = self.imageData {
+                    
+                        self.avatorImage.image = UIImage(data: self.imageData!)
+                    }
                     
                     let msg = json["msg"] as! String
                     

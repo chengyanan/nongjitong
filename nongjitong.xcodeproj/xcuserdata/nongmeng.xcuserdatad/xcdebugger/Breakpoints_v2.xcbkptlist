@@ -38,11 +38,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "nongjitong/class/sign up and sign in/YNAddUserInformationTableViewController.swift"
-            timestampString = "470549898.100453"
+            timestampString = "471770627.271954"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "644"
-            endingLineNumber = "644"
+            startingLineNumber = "647"
+            endingLineNumber = "647"
             landmarkName = "uploadUserInformation()"
             landmarkType = "5">
          </BreakpointContent>
@@ -69,13 +69,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "nongjitong/class/question/controllers/next Controllers/YNAnswerQuestionViewController.swift"
-            timestampString = "471245842.251461"
+            filePath = "nongjitong/class/question/controllers/next Controllers/YNAnswerTableViewCell.swift"
+            timestampString = "471774511.203695"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "sendAnswerToserver()"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "sendMessageToserver()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "nongjitong/class/question/controllers/next Controllers/YNAnswerTableViewCell.swift"
+            timestampString = "471774511.203695"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "sendMessageToserver()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

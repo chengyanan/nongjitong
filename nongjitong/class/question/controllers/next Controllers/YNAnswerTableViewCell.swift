@@ -76,6 +76,8 @@ class YNAnswerTableViewCell: UITableViewCell {
                     
                     
                     
+                    
+                    
                 } else if status == 0 {
                     
                     self.sendButton.hidden = false

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ohl-K8-Puv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ohl-K8-Puv">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--问题-->
+        <!--问答-->
         <scene sceneID="RKa-NB-kEY">
             <objects>
                 <navigationController id="TLJ-hy-rP9" customClass="YNNavigationController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="问题" image="tabBar_help" id="3Yj-DV-TpJ"/>
+                    <tabBarItem key="tabBarItem" title="问答" image="tabBar_help" id="3Yj-DV-TpJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aUt-j4-6Gv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-1739" y="-393"/>
         </scene>
-        <!--问题-->
+        <!--问答-->
         <scene sceneID="1lG-bW-aih">
             <objects>
-                <viewController title="问题" id="qyf-m8-zJv" customClass="YNQuestionViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="问答" id="qyf-m8-zJv" customClass="YNQuestionViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hmi-3p-v1P"/>
                         <viewControllerLayoutGuide type="bottom" id="SE8-Jx-HnP"/>
@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="问题" id="lhu-cF-hfS">
+                    <navigationItem key="navigationItem" title="问答" id="lhu-cF-hfS">
                         <barButtonItem key="leftBarButtonItem" image="tabBar_me" id="r8v-SR-WrE">
                             <connections>
                                 <action selector="leftbarButtonClick:" destination="qyf-m8-zJv" id="d3m-bH-G8W"/>
@@ -1509,7 +1509,7 @@
             </objects>
             <point key="canvasLocation" x="-1739" y="948"/>
         </scene>
-        <!--预警-->
+        <!--Early Waring View Controller-->
         <scene sceneID="BdT-xH-3V1">
             <objects>
                 <viewController id="weu-DS-vJc" customClass="YNEarlyWaringViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
@@ -1522,12 +1522,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="预警" id="hKB-wy-fum">
+                    <navigationItem key="navigationItem" id="hKB-wy-fum">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="tabBar_me" id="jgc-BB-qS1">
                             <connections>
                                 <action selector="leftbarButtonClick:" destination="weu-DS-vJc" id="7vf-o0-Zyw"/>
                             </connections>
                         </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="OUa-HR-M5g">
+                            <rect key="frame" x="208" y="7" width="185" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="给我的方案"/>
+                                <segment title="写方案给别人"/>
+                            </segments>
+                        </segmentedControl>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rr-uJ-EAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
