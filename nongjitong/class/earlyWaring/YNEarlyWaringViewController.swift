@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YNEarlyWaringViewController: UIViewController {
+class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     
     //MARK: life cycle
@@ -21,14 +21,11 @@ class YNEarlyWaringViewController: UIViewController {
 
     func setInterface() {
         
-//        self.view.addSubview(segmentController)
+
     }
     
     func setLayout() {
         
-        Layout().addTopConstraint(segmentController, toView: self.view, multiplier: 1, constant: 64)
-        Layout().addCenterXConstraint(segmentController, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addWidthConstraint(segmentController, toView: self.view, multiplier: 0.5, constant: 0)
         
     }
     
@@ -43,9 +40,27 @@ class YNEarlyWaringViewController: UIViewController {
         
     }
     
+    //MARK:UITableViewDataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 10
+    }
     
-    
-    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let identify = "CELL_Waring"
+        var cell = tableView.dequeueReusableCellWithIdentifier(identify)
+        
+        if cell == nil {
+        
+            cell = UITableViewCell(style: .Default, reuseIdentifier: identify)
+            
+        }
+        
+        cell?.textLabel?.text = "rose"
+        
+        return cell!
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,17 +71,6 @@ class YNEarlyWaringViewController: UIViewController {
 
     //MARK: UI components
     
-    
-    let segmentController: UISegmentedControl = {
-    
-        let tempView = UISegmentedControl(items: ["给我的方案", "写方案给别人"])
-        tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.selectedSegmentIndex = 0
-//        tempView.setTitle("给我的方案", forSegmentAtIndex: 0)
-//        tempView.setTitle("写方案给别人", forSegmentAtIndex: 1)
-        return tempView
-        
-    }()
     
     /*
     // MARK: - Navigation

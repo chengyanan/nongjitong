@@ -13,59 +13,6 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let location = Location()
-    
-    let finishViewHeight: CGFloat = 40
-    var finishView: YNFinishInputView?
-    
-    //问题描述，长度不超过2000个字
-    var descript: String?
-    
-    //问题的领域ID
-    var class_id: String?
-    
-    //品类
-    var category: String? {
-    
-        didSet {
-        
-            if let _ = category {
-            
-                self.collectionView.reloadSections(NSIndexSet(index: 2))
-            }
-        }
-    }
-    //地址
-    
-    //第一次定位到的
-    
-    
-    var locationDetail: String? {
-    
-        didSet {
-            
-            if let _ = locationDetail {
-                
-                self.collectionView.reloadSections(NSIndexSet(index: 3))
-            }
-        }
-    }
-    
-    //上传的图片的最大数量
-    let maxImageCount = 3
-    
-    var dataImageArray = [NSData]()
-    
-    var uploadImageFilesArray = [File]()
-    var tempImageArray = [UIImage]()
-    var imageArray = [UIImage]() {
-    
-        didSet {
-
-            self.collectionView.reloadSections(NSIndexSet(index: 1))
-        }
-    }
-    
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -214,9 +161,9 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBAction func postQuestion(sender: AnyObject) {
         
-        if self.descript?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
+        if self.askQuestionModel.descript?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
         
-            if let _ = self.class_id {
+            if let _ = self.askQuestionModel.class_id {
                 
                 //满足条件上传问题
                 sendQusetionToServer()
@@ -235,18 +182,19 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     //MARK: Http send 
     func sendQusetionToServer() {
-    
-        let nicename = kUser_NiceName() as? String
         
         //TODO: 还没有加图片  然后测试
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
             "c": "QuestionManage",
             "a": "addQuestion",
-            "user_id": kUser_ID() as? String,
-            "user_name": nicename,
-            "descript": self.descript,
-            "class_id": self.class_id
+            "user_id": self.askQuestionModel.user_id,
+            "descript": self.askQuestionModel.descript,
+            "class_id": self.askQuestionModel.class_id,
+            "latitude": self.askQuestionModel.latitude,
+            "longitude": self.askQuestionModel.longitude,
+            "address_detail": self.askQuestionModel.address_detail,
+            "address": self.askQuestionModel.address
         ]
         
         sendImagesToServer(params)
@@ -415,13 +363,14 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     //MARK: YNAskQuestionTextCollectionViewCellDelegate
     func askQuestionTextCollectionViewCellTextViewDidEndEditing(text: String) {
         
-        self.descript = text
+        self.askQuestionModel.descript = text
+    
     }
     
     
     //MARK: YNSelectedCategoryViewControllerDelegate
     func selectedCategoryDidSelectedProduct(product: YNCategoryModel) {
-        self.class_id = product.id
+        self.askQuestionModel.class_id = product.id
         self.category = product.class_name
         
         self.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 2)])
@@ -598,8 +547,6 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     //MARK: 解析地址
     func geocoderAddress(location: CLLocation) {
         
-        location.coordinate.longitude
-        
         self.location.geocoderAddress(location, success: { (placemarks) -> Void in
             
             if let _ = placemarks {
@@ -628,7 +575,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
                 
                     if let _ = placeMark.name {
                     
-                        address += placeMark.name!
+//                        address += placeMark.name!
                         
                         self.locationDetail = placeMark.name!
                         
@@ -638,14 +585,16 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
                 
                     if let _ = placeMark.thoroughfare {
                     
-                        address += placeMark.thoroughfare!
+//                        address += placeMark.thoroughfare!
                         self.locationDetail = placeMark.thoroughfare!
                     }
                 }
 
-                //TODO:构造上传地址，精度，纬度和地址
-                
-                
+                //构造上传地址，精度，纬度和地址
+                self.askQuestionModel.latitude = String(location.coordinate.latitude)
+                self.askQuestionModel.longitude = String(location.coordinate.longitude)
+                self.askQuestionModel.address_detail = self.locationDetail
+                self.askQuestionModel.address = address
             }
             
             
@@ -660,7 +609,52 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     }
 
+    //MARK: property
+    let location = Location()
     
+    let finishViewHeight: CGFloat = 40
+    var finishView: YNFinishInputView?
+    
+    var askQuestionModel = YNAskQuestionModel()
+    
+    //品类
+    var category: String? {
+        
+        didSet {
+            
+            if let _ = category {
+                
+                self.collectionView.reloadSections(NSIndexSet(index: 2))
+            }
+        }
+    }
+    
+    //定位到的地址
+    var locationDetail: String? {
+        
+        didSet {
+            
+            if let _ = locationDetail {
+                
+                self.collectionView.reloadSections(NSIndexSet(index: 3))
+            }
+        }
+    }
+    
+    //上传的图片的最大数量
+    let maxImageCount = 3
+    
+    var dataImageArray = [NSData]()
+    
+    var uploadImageFilesArray = [File]()
+    var tempImageArray = [UIImage]()
+    var imageArray = [UIImage]() {
+        
+        didSet {
+            
+            self.collectionView.reloadSections(NSIndexSet(index: 1))
+        }
+    }
     
     deinit {
         

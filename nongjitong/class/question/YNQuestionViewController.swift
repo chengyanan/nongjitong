@@ -115,6 +115,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                     if let msg = json["msg"] as? String {
                         
                         YNProgressHUD().showText(msg, toView: self.view)
+                        print("问题列表数据获取失败: \(msg)")
                     }
                 }
                 
@@ -173,6 +174,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                     if let msg = json["msg"] as? String {
                         
                         YNProgressHUD().showText(msg, toView: self.view)
+                        print("关注数据获取失败: \(msg)")
                     }
                 }
                 

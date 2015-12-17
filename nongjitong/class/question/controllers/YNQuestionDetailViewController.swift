@@ -15,7 +15,14 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
     
      var answerButton: UIButton?
     
-    var questionModel: YNQuestionModel?
+    var questionModel: YNQuestionModel? {
+    
+        didSet {
+        
+            setInterface()
+            setLayout()
+        }
+    }
     
     var tableView: UITableView?
     
@@ -34,8 +41,8 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
         self.title = "\(questionModel!.user_name)的提问"
         self.view.backgroundColor = UIColor.whiteColor()
         
-        setInterface()
-        setLayout()
+//        setInterface()
+//        setLayout()
     }
     
     func setInterface() {
@@ -49,18 +56,25 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
         
+        if questionModel?.user_id == kUser_ID() as? String {
         
-        let tempButton = UIButton()
-        tempButton.translatesAutoresizingMaskIntoConstraints = false
-        tempButton.layer.cornerRadius = 3
-        tempButton.clipsToBounds = true
-        tempButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
-        tempButton.setImage(UIImage(named: "ic_list_answer"), forState: .Normal)
-        tempButton.setTitle("我要回答", forState: .Normal)
-        tempButton.addTarget(self, action: "answerButtonDidClick", forControlEvents: .TouchUpInside)
-        tempButton.backgroundColor = kRGBA(46, g: 163, b: 70, a: 1)
-        self.view.addSubview(tempButton)
-        self.answerButton = tempButton
+            //自己的问题不显示回答按钮
+            
+        } else {
+        
+            //别人的问题显示回答按钮
+            let tempButton = UIButton()
+            tempButton.translatesAutoresizingMaskIntoConstraints = false
+            tempButton.layer.cornerRadius = 3
+            tempButton.clipsToBounds = true
+            tempButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10)
+            tempButton.setImage(UIImage(named: "ic_list_answer"), forState: .Normal)
+            tempButton.setTitle("我要回答", forState: .Normal)
+            tempButton.addTarget(self, action: "answerButtonDidClick", forControlEvents: .TouchUpInside)
+            tempButton.backgroundColor = kRGBA(46, g: 163, b: 70, a: 1)
+            self.view.addSubview(tempButton)
+            self.answerButton = tempButton
+        }
         
     }
     
@@ -78,14 +92,25 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
         Layout().addTopConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         Layout().addLeftConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: -answerButtonHeight - margin*2)
         
-        //answerButton
-        Layout().addTopToBottomConstraint(answerButton!, toView: tableView!, multiplier: 1, constant: margin)
-        Layout().addHeightConstraint(answerButton!, toView: nil, multiplier: 0, constant: answerButtonHeight)
-        Layout().addLeftConstraint(answerButton!, toView: self.view, multiplier: 1, constant: margin)
-        Layout().addRightConstraint(answerButton!, toView: self.view, multiplier: 1, constant: -margin)
+        if questionModel?.user_id == kUser_ID() as? String {
         
+            //自己的问题
+            Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+            
+        } else {
+            
+            // other's question
+            Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: -answerButtonHeight - margin*2)
+            
+            //answerButton
+            Layout().addTopToBottomConstraint(answerButton!, toView: tableView!, multiplier: 1, constant: margin)
+            Layout().addHeightConstraint(answerButton!, toView: nil, multiplier: 0, constant: answerButtonHeight)
+            Layout().addLeftConstraint(answerButton!, toView: self.view, multiplier: 1, constant: margin)
+            Layout().addRightConstraint(answerButton!, toView: self.view, multiplier: 1, constant: -margin)
+        }
+        
+       
     }
     
     //MARK: UITableViewDataSource

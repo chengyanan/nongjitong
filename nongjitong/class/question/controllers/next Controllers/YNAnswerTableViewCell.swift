@@ -75,7 +75,7 @@ class YNAnswerTableViewCell: UITableViewCell {
                 if status == 1 {
                     
                     
-                    
+                    print("回答成功")
                     
                     
                 } else if status == 0 {

@@ -64,7 +64,8 @@ struct Tools {
         return text6
     }
     
-    func heightForText(text:String, font:UIFont, width:CGFloat) -> CGSize{
+    //计算label的高度
+    func heightForText(text:String, font:UIFont, width:CGFloat) -> CGSize {
         let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.ByWordWrapping

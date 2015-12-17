@@ -27,6 +27,9 @@ class YNQuestionModelConstant {
     //图片之间的间距
     let imageMargin: CGFloat = 6
     
+    //底部回答数量的高度
+    let answerCountHeight: CGFloat = 36
+    
     var imageWidthHeight: CGFloat?
     
     var imageY: CGFloat?
