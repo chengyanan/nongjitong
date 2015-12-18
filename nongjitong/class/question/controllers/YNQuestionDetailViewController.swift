@@ -15,12 +15,14 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
     
      var answerButton: UIButton?
     
+    var dataArray = [YNAnswerModel]()
+    
     var questionModel: YNQuestionModel? {
     
         didSet {
         
-            setInterface()
-            setLayout()
+//            setInterface()
+//            setLayout()
         }
     }
     
@@ -41,8 +43,74 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
         self.title = "\(questionModel!.user_name)的提问"
         self.view.backgroundColor = UIColor.whiteColor()
         
-//        setInterface()
-//        setLayout()
+        setInterface()
+        setLayout()
+        
+        loadDataFromServer()
+        
+    }
+    
+    func loadDataFromServer() {
+    
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "Answer",
+            "a": "getQuestionAnswer",
+            "question_id": questionModel?.id,
+        ]
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpQuestionDetail().getQuestionAnswerWithParams(params, successFull: { (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            if let status = json["status"] as? Int {
+                
+                print(json)
+                
+                if status == 1 {
+                    
+                    let tempdata = json["data"] as! NSArray
+                    
+                    if tempdata.count > 0 {
+                        
+                        for item in tempdata {
+                            
+                            let model = YNAnswerModel(dict: item as! NSDictionary)
+                            
+                            
+                            self.dataArray.append(model)
+                        }
+                        
+                        self.tableView?.reloadData()
+                        
+                    } else {
+                        
+                        //没有数据
+                        
+                        YNProgressHUD().showText("没有回答", toView: self.view)
+                        
+                    }
+                    
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText("数据加载失败", toView: self.view)
+                        print("问题列表数据获取失败: \(msg)")
+                    }
+                }
+                
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("数据加载失败", toView: self.view)
+        }
     }
     
     func setInterface() {
@@ -78,6 +146,7 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
         
     }
     
+    //MARK: event response
     func answerButtonDidClick() {
         
         let answerVc = YNNewAnswerQuestionViewController()
@@ -125,7 +194,7 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
             return 1
         }
         
-        return 10
+        return self.dataArray.count
         
     }
     
@@ -136,18 +205,18 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
            return 1
         }
         
-        return 30
+        return 10
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        if section == 1 {
-        
-            return "回答"
-        }
-        
-        return nil
-    }
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        
+//        if section == 1 {
+//        
+//            return "回答"
+//        }
+//        
+//        return nil
+//    }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
@@ -189,16 +258,26 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
         
         //回答
         let identify = "CELL_Answer"
-        var cell = tableView.dequeueReusableCellWithIdentifier(identify)
+        var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNQuestionAnswerTableViewCell
         
         if cell == nil {
         
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
+            cell = YNQuestionAnswerTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
         }
         
-        cell?.textLabel?.text = "rose"
+        cell?.answeModel = self.dataArray[indexPath.row]
         
         return cell!
+        
+    }
+    
+    //MARK: tableview delegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let vc = YNNewAnswerQuestionViewController()
+        vc.questionModel = self.questionModel
+        vc.answerModel = self.dataArray[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     

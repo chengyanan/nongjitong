@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNInputViewDelegate {
+class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNInputViewDelegate, YNAnswerTableViewCellDelegate {
 
     var tableView: UITableView?
     //添加一个随键盘弹出的view
@@ -22,15 +22,17 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
     
     var questionModel: YNQuestionModel?
     
+    var answerModel: YNAnswerModel?
+    
     var isKeyboardShowing = false
     
-    var dataarray = [YNAnswerModel]()
+    var dataArray = [YNAnswerModel]()
     
     var cellHeight: CGFloat {
     
         var cellHeight: CGFloat = 0
         
-        for item in dataarray {
+        for item in dataArray {
             
             cellHeight += item.cellHeight!
         }
@@ -46,23 +48,24 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         self.title = "用户的提问"
         self.view.backgroundColor = UIColor.whiteColor()
         
-        let dict1: NSDictionary = ["descriptiom": "roseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroserose"]
+        //设置左上角和右上角
+        setLeftItemAndRightItem()
         
-        let model1 = YNAnswerModel(dict: dict1)
-        model1.isQuestionOwner = true
-        self.dataarray.append(model1)
+        let questionDict: NSDictionary = ["content": "问: \(questionModel!.descript)"]
+        let model = YNAnswerModel(dict: questionDict)
+        model.user_id = questionModel?.user_id
+        model.user_name = questionModel?.user_name
+        model.avatar = questionModel?.avatar
+        model.add_time = questionModel?.add_time
+        model.isQuestionOwner = true
+        model.isFinish = true
+        self.dataArray.append(model)
         
-        
-        let dict2: NSDictionary = ["descriptiom": "roseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroseroserose"]
-        
-        let model2 = YNAnswerModel(dict: dict2)
-        model2.isQuestionOwner = false
-        
-        self.dataarray.append(model2)
-    
         setInterface()
         
+        loadDataFromServer()
     }
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -80,6 +83,32 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    
+    func setLeftItemAndRightItem() {
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "sapi-nav-back-btn-bg"), style: .Plain, target: self, action: "popViewController")
+        
+        if questionModel?.user_id == kUser_ID() as? String {
+            
+            //提问者可以采纳回答
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采纳", style: .Plain, target: self, action: "acceptAnswer")
+            
+        } else {
+            
+            //不是提问者
+        }
+        
+        
+    }
+    func popViewController() {
+        
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    func acceptAnswer() {
+        
+        //TODO: 彩奈回答
+    }
+    
     //MARK: interface
     func setInterface() {
     
@@ -92,28 +121,193 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
         
-        let tempinputView = YNInputView()
-        tempinputView.delegate = self
-        tempinputView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(tempinputView)
-        self.bottomInputView = tempinputView
+        let userId = kUser_ID() as? String
+        
+        if let _ = answerModel {
+        
+            if userId != questionModel?.user_id && userId != answerModel?.user_id {
+                
+                //既不是回答者 也不是提问者
+                
+            } else {
+                
+                let tempinputView = YNInputView()
+                tempinputView.delegate = self
+                tempinputView.translatesAutoresizingMaskIntoConstraints = false
+                self.view.addSubview(tempinputView)
+                self.bottomInputView = tempinputView
+            }
+            
+            
+        } else {
+        
+            
+            let tempinputView = YNInputView()
+            tempinputView.delegate = self
+            tempinputView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(tempinputView)
+            self.bottomInputView = tempinputView
+        }
         
         setLayout()
     }
     
     func setLayout() {
         
-        //inputView
-        Layout().addBottomConstraint(bottomInputView!, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addHeightConstraint(bottomInputView!, toView: nil, multiplier: 0, constant: inputViewHeight)
-        Layout().addLeftConstraint(bottomInputView!, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(bottomInputView!, toView: self.view, multiplier: 1, constant: 0)
         
-        //tableView
-        Layout().addTopConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addLeftConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addBottomToTopConstraint(tableView!, toView: bottomInputView!, multiplier: 1, constant: margin)
+        let userId = kUser_ID() as? String
+        
+        
+        if let _ = answerModel {
+            
+            
+            if userId != questionModel?.user_id && userId != answerModel?.user_id {
+                
+                //既不是回答者 也不是提问者
+                //tableView
+                Layout().addTopConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+                Layout().addLeftConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+                Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+                Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+                
+                
+            } else {
+                
+                
+                //inputView
+                Layout().addBottomConstraint(bottomInputView!, toView: self.view, multiplier: 1, constant: 0)
+                Layout().addHeightConstraint(bottomInputView!, toView: nil, multiplier: 0, constant: inputViewHeight)
+                Layout().addLeftConstraint(bottomInputView!, toView: self.view, multiplier: 1, constant: 0)
+                Layout().addRightConstraint(bottomInputView!, toView: self.view, multiplier: 1, constant: 0)
+                
+                //tableView
+                Layout().addTopConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+                Layout().addLeftConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+                Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+                Layout().addBottomToTopConstraint(tableView!, toView: bottomInputView!, multiplier: 1, constant: margin)
+                
+            }
+        
+            
+        } else {
+        
+            //inputView
+            Layout().addBottomConstraint(bottomInputView!, toView: self.view, multiplier: 1, constant: 0)
+            Layout().addHeightConstraint(bottomInputView!, toView: nil, multiplier: 0, constant: inputViewHeight)
+            Layout().addLeftConstraint(bottomInputView!, toView: self.view, multiplier: 1, constant: 0)
+            Layout().addRightConstraint(bottomInputView!, toView: self.view, multiplier: 1, constant: 0)
+            
+            //tableView
+            Layout().addTopConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+            Layout().addLeftConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+            Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+            Layout().addBottomToTopConstraint(tableView!, toView: bottomInputView!, multiplier: 1, constant: margin)
+        }
+        
+        
+        
+    }
+    
+    //MARK: load data
+    func loadDataFromServer() {
+        
+        let userId = kUser_ID() as? String
+        
+        var choiceId = ""
+    
+        
+            if let _ = answerModel {
+            
+                if userId != questionModel?.user_id && userId != answerModel?.user_id  {
+                
+                    
+                    //既不是提问者 也不是回答者
+                    choiceId = answerModel!.user_id!
+                    
+                } else {
+                
+                    choiceId = userId!
+                }
+                
+            } else {
+            
+                choiceId = userId!
+            }
+        
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "Answer",
+            "a": "getAnswer",
+            "question_id": questionModel?.id,
+            "user_id": choiceId
+        ]
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpAnswerQuestion().getAnswerWithParams(params, successFull: { (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            if let status = json["status"] as? Int {
+                
+                print(json)
+                
+                if status == 1 {
+                    
+                    let tempdata = json["data"] as! NSArray
+                    
+                    if tempdata.count > 0 {
+                        
+                        for item in tempdata {
+                            
+                            let model = YNAnswerModel(dict: item as! NSDictionary)
+                            
+                            model.questionId = self.questionModel?.id
+                            model.isFinish = true
+                            if model.user_id == self.questionModel!.user_id {
+                                
+                                //是问题的主人
+                                model.isQuestionOwner = true
+
+                            } else {
+                                
+                                //是回答者
+                                model.isQuestionOwner = false
+                
+                            }
+                            
+                            
+                            self.dataArray.append(model)
+                        }
+                        
+                        self.tableView?.reloadData()
+                        
+                    } else {
+                        
+                        //没有数据
+                        
+                        YNProgressHUD().showText("没有回答", toView: self.view)
+                        
+                    }
+                    
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText("数据加载失败", toView: self.view)
+                        print("问题列表数据获取失败: \(msg)")
+                    }
+                }
+                
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("数据加载失败", toView: self.view)
+        }
         
     }
 
@@ -220,14 +414,30 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         } else {
         
             //有内容发送
-            let dict1: NSDictionary = ["descriptiom": self.messageStr]
+            let dict1: NSDictionary = ["content": self.messageStr]
             
             let model1 = YNAnswerModel(dict: dict1)
-            model1.isQuestionOwner = false
+            
+            if questionModel?.user_id == kUser_ID() as? String {
+                
+                //提问者自己追问
+                model1.isQuestionOwner = true
+                model1.avatar = questionModel?.avatar
+                //对方的id
+                model1.to_user_id = dataArray[1].user_id
+                
+            } else {
+                
+                model1.isQuestionOwner = false
+                model1.to_user_id = questionModel?.user_id
+                
+                //TODO: 传自己的头像
+//                model1.avatar = dataArray[1].avatar
+            }
+            
             model1.isFinish = false
             model1.questionId = questionModel?.id
-            self.dataarray.append(model1)
-            
+            self.dataArray.append(model1)
             self.tableView?.reloadData()
             
             //判断tableView是否需要向上移动
@@ -267,7 +477,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         if tableViewNeedScrollHeight > 0 {
             
             //需要滚动
-            self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.dataarray.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+            self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.dataArray.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
             
             
         } else {
@@ -289,7 +499,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
                 
                 if needScroolHeight > self.keyBoardHeight! {
                     //如果需要向上移动的距离大于键盘的距离， 就向下移动tableview
-                    self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.dataarray.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                    self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.dataArray.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
                     
                     self.tableView?.transform = CGAffineTransformMakeTranslation(0, -maxScrollHeight)
                     
@@ -318,7 +528,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.dataarray.count
+        return self.dataArray.count
         
     }
     
@@ -333,14 +543,16 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
             cell = YNAnswerTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
         }
         
-        cell?.questionModel = dataarray[indexPath.row]
+        cell?.delegate = self
+        cell?.indexPath = indexPath
+        cell?.questionModel = dataArray[indexPath.row]
         return cell!
         
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return self.dataarray[indexPath.row].cellHeight!
+        return self.dataArray[indexPath.row].cellHeight!
     }
     
     //MARK: scrollViewDelegate
@@ -348,5 +560,12 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         hideKeyBoard()
     }
     
-   
+    //MARK: YNAnswerTableViewCellDelegate
+    func answered(indexPath: NSIndexPath) {
+        
+        self.dataArray[indexPath.row].isFinish = true
+    }
+    
+    
+    
 }

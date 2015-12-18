@@ -95,9 +95,9 @@ class YNAnswerQuestionViewController: UIViewController, UITextViewDelegate {
 //                    print("回答成功")
                     
                     let model = YNAnswerModel()
-                    model.avatarUrl = ""
-                    model.username = username
-                    model.description = self.textViewText
+                    model.avatar = ""
+                    model.user_name = username
+                    model.content = self.textViewText
                     
                     self.delegate?.answerSuccessfully(model)
                     

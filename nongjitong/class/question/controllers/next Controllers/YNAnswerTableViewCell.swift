@@ -8,7 +8,16 @@
 
 import UIKit
 
+protocol YNAnswerTableViewCellDelegate {
+
+    func answered(indexPath: NSIndexPath)
+}
+
 class YNAnswerTableViewCell: UITableViewCell {
+    
+    var indexPath: NSIndexPath?
+    
+    var delegate: YNAnswerTableViewCellDelegate?
     
     var questionModel: YNAnswerModel? {
     
@@ -20,7 +29,12 @@ class YNAnswerTableViewCell: UITableViewCell {
                 setLayout()
                 
                 //TODO: 设置头像 和文字
-                self.contentButton.setTitle(questionModel?.description, forState: .Normal)
+                self.contentButton.setTitle(questionModel?.content, forState: .Normal)
+                if let _ = questionModel!.avatar {
+                
+                     self.avatarImageView.getImageWithURL(questionModel!.avatar!, contentMode: .ScaleToFill)
+                }
+               
                 
                 if questionModel!.isQuestionOwner! {
                   self.contentButton.setBackgroundImage(resizeImage("bubble_left_blue"), forState: .Normal)
@@ -52,6 +66,8 @@ class YNAnswerTableViewCell: UITableViewCell {
         let userId = kUser_ID() as? String
         let username = kUser_NiceName() as? String
         
+        
+        
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
             "c": "Answer",
@@ -59,8 +75,11 @@ class YNAnswerTableViewCell: UITableViewCell {
             "question_id": questionModel!.questionId,
             "user_id": userId,
             "user_name": username,
-            "content": questionModel?.description
+            "content": questionModel?.content,
+            "to_user_id": questionModel?.to_user_id
         ]
+        
+        print("userId: \(userId), touserid: \(questionModel?.to_user_id)")
         
         self.sendButton.hidden = true
         self.activityIndicatorView.startAnimating()
@@ -76,7 +95,7 @@ class YNAnswerTableViewCell: UITableViewCell {
                     
                     
                     print("回答成功")
-                    
+                    self.delegate?.answered(self.indexPath!)
                     
                 } else if status == 0 {
                     
@@ -151,7 +170,7 @@ class YNAnswerTableViewCell: UITableViewCell {
     
         let tempView = UIImageView()
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.image = UIImage(named: "admin")
+//        tempView.image = UIImage(named: "admin")
         tempView.contentMode = .ScaleToFill
         return tempView
         

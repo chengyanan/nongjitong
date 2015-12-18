@@ -20,9 +20,9 @@ class YNAnswerModel {
         
         let width = kScreenWidth - marginTopBottomLeftOrRight - avatarWidthHeight - marginBetweenAvatarAndContent - marginContent
         
-        let size = Tools().heightForText(self.description!, font: UIFont.systemFontOfSize(15), width: width)
+        let size = Tools().heightForText(self.content!, font: UIFont.systemFontOfSize(15), width: width)
         
-        let secondsize = Tools().heightForText(self.description!, font: UIFont.systemFontOfSize(15), width: width - 40)
+        let secondsize = Tools().heightForText(self.content!, font: UIFont.systemFontOfSize(15), width: width - 40)
         
         var realSize = CGSizeZero
         
@@ -42,11 +42,13 @@ class YNAnswerModel {
         return realSize
     }
     
-    var avatarUrl: String?
-    var username: String?
-    var description: String?
-    
+    var user_id: String?
+    var user_name: String?
+    var avatar: String?
+    var content: String?
     var questionId: String?
+    var add_time: String?
+    var to_user_id: String?
 
     var isQuestionOwner: Bool?
     
@@ -58,25 +60,37 @@ class YNAnswerModel {
     
     init(dict: NSDictionary) {
     
-        self.avatarUrl = dict["avatarUrl"] as? String
-        self.username = dict["username"] as? String
-        self.description = dict["descriptiom"] as? String
-        self.isQuestionOwner = dict["isQuestionOwner"] as? Bool
+        self.user_id = dict["user_id"] as? String
+        self.user_name = dict["user_name"] as? String
+        self.avatar = dict["avatar"] as? String
+        self.content = dict["content"] as? String
+        self.add_time = dict["add_time"] as? String
+        self.to_user_id = dict["to_user_id"] as? String
         
         //头像的高度
         let avatarheight = avatarWidthHeight + marginTopBottomLeftOrRight*2
         
-        //文字的高度
-        let contentHeight = self.contentSize.height + marginTopBottomLeftOrRight*2
+        if let _ = self.content {
         
-        if avatarheight > contentHeight {
+            //文字的高度
+            let contentHeight = self.contentSize.height + marginTopBottomLeftOrRight*2
             
-            self.cellHeight = avatarheight
+            if avatarheight > contentHeight {
+                
+                self.cellHeight = avatarheight
+                
+            } else {
+                
+                self.cellHeight = contentHeight
+            }
             
         } else {
-            
-            self.cellHeight = contentHeight
+        
+            self.cellHeight = avatarheight
+            print("回答的 content 为nil")
         }
+        
+        
         
     }
 
