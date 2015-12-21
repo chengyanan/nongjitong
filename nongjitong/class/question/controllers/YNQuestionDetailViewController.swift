@@ -72,6 +72,7 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
                         for item in tempdata {
                             
                             let model = YNAnswerModel(dict: item as! NSDictionary)
+                            model.questionId = self.questionModel?.id
                             model.isQuestionOwner = (self.questionModel?.user_id == kUser_ID() as? String)
                             self.dataArray.append(model)
                         }

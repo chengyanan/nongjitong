@@ -10,14 +10,11 @@ import UIKit
 
 class YNQuestionAnswerTableViewCell: UITableViewCell {
     
-
     var isFirstLayout = true
     
     var answeModel: YNAnswerModel? {
     
         didSet {
-        
-            
             
             self.textLabel?.text = answeModel?.content
             self.avatorImage.getImageWithURL(answeModel!.avatar!, contentMode: UIViewContentMode.ScaleToFill)
@@ -33,10 +30,9 @@ class YNQuestionAnswerTableViewCell: UITableViewCell {
                 acceptAnswer.hidden = true
             }
             
+            //TODO: 判断是否被踩纳
+            
             setLayout()
-            
-//            setNeedsLayout()
-            
             
         }
     }
@@ -46,12 +42,62 @@ class YNQuestionAnswerTableViewCell: UITableViewCell {
         
         setInterface()
         
-        questionContent.numberOfLines = 0
+        acceptAnswer.addTarget(self, action: "acceptButtonClick", forControlEvents: UIControlEvents.TouchUpInside)
         
+        let acceptImageWidth: CGFloat = 32.5
+        let acceptImageHeight: CGFloat = 33
+        
+        let acceptImageX = kScreenWidth - acceptImageWidth
+        
+        acceptImage.frame = CGRectMake(acceptImageX, 0, acceptImageWidth, acceptImageHeight)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: event resopnse
+    func acceptButtonClick() {
+
+        
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "User",
+            "a": "acceptAnswer",
+            "question_id": answeModel?.questionId,
+            "user_id": answeModel?.user_id
+        ]
+        
+        YNHttpQuestionDetail().acceptAnswerWithParams(params, successFull: { (json) -> Void in
+            
+            
+            if let status = json["status"] as? Int {
+                
+                print(json)
+                
+                if status == 1 {
+                    
+//                    let tempdata = json["data"] as! String
+                    
+                    self.acceptImage.hidden = false
+                    self.acceptAnswer.hidden = true
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        print("接口请求失败: \(msg)")
+                    }
+                }
+                
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                print("网络出错")
+        }
+        
     }
     
     func setInterface() {
@@ -61,20 +107,16 @@ class YNQuestionAnswerTableViewCell: UITableViewCell {
         self.contentView.addSubview(postTime)
         self.contentView.addSubview(questionContent)
         self.contentView.addSubview(acceptAnswer)
-        
-    }
+        self.contentView.addSubview(acceptImage)
     
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//    
-////        setLayout()
-//        
-//    }
+    }
     
     func setLayout() {
         
         if let _  = answeModel {
         
+            //acceptImage
+            
             //avatorImage
             let avatorImageX = answeModel!.marginTopBottomLeftOrRight
             let avatorImageY = answeModel!.marginTopBottomLeftOrRight
@@ -178,7 +220,7 @@ class YNQuestionAnswerTableViewCell: UITableViewCell {
         tempView.font = UIFont.systemFontOfSize(15)
         tempView.lineBreakMode = NSLineBreakMode.ByWordWrapping
         tempView.sizeToFit()
-        tempView.backgroundColor = UIColor.redColor()
+//        tempView.backgroundColor = UIColor.redColor()
         return tempView
     }()
     
@@ -196,6 +238,15 @@ class YNQuestionAnswerTableViewCell: UITableViewCell {
         return tempView
     }()
     
-    
+    let acceptImage: UIImageView = {
+        
+        //接纳的标志
+        let tempView = UIImageView()
+        tempView.image = UIImage(named: "newqb_evaluate_best")
+        tempView.hidden = true
+        tempView.clipsToBounds = true
+        //        tempView.backgroundColor = UIColor.redColor()
+        return tempView
+    }()
     
 }
