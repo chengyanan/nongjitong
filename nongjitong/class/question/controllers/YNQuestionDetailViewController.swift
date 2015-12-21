@@ -17,14 +17,7 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
     
     var dataArray = [YNAnswerModel]()
     
-    var questionModel: YNQuestionModel? {
-    
-        didSet {
-        
-//            setInterface()
-//            setLayout()
-        }
-    }
+    var questionModel: YNQuestionModel?
     
     var tableView: UITableView?
     
@@ -72,13 +65,14 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
                     
                     let tempdata = json["data"] as! NSArray
                     
+                    
+                    
                     if tempdata.count > 0 {
                         
                         for item in tempdata {
                             
                             let model = YNAnswerModel(dict: item as! NSDictionary)
-                            
-                            
+                            model.isQuestionOwner = (self.questionModel?.user_id == kUser_ID() as? String)
                             self.dataArray.append(model)
                         }
                         
@@ -121,6 +115,8 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
         tempTableView.dataSource = self
         tempTableView.separatorStyle = .None
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
+        tempTableView.rowHeight = UITableViewAutomaticDimension
+        tempTableView.estimatedRowHeight = 50
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
         
@@ -207,17 +203,7 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
         
         return 10
     }
-    
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        
-//        if section == 1 {
-//        
-//            return "回答"
-//        }
-//        
-//        return nil
-//    }
-    
+        
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
         if section == 1 {
@@ -234,7 +220,10 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
             return questionModel!.height!
         }
         
-        return 44
+        let model = self.dataArray[indexPath.row]
+        
+        return model.marginTopBottomLeftOrRight * 3 + model.avatarWidthHeight + model.contentRealSize.height + 30
+    
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

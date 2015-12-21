@@ -16,6 +16,15 @@ class YNAnswerModel {
     let marginBetweenAvatarAndContent: CGFloat = 3
     let marginContent:CGFloat = 20
     
+    var contentRealSize: CGSize {
+    
+        let width = kScreenWidth - marginTopBottomLeftOrRight * 2
+        
+        let size = Tools().heightForText(self.content!, font: UIFont.systemFontOfSize(15), width: width)
+        
+        return CGSizeMake(width, size.height + 12)
+    }
+    
     var contentSize: CGSize {
         
         let width = kScreenWidth - marginTopBottomLeftOrRight - avatarWidthHeight - marginBetweenAvatarAndContent - marginContent

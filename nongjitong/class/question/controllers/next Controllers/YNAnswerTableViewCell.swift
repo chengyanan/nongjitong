@@ -28,7 +28,7 @@ class YNAnswerTableViewCell: UITableViewCell {
                 setInterface()
                 setLayout()
                 
-                //TODO: 设置头像 和文字
+                //设置头像 和文字
                 self.contentButton.setTitle(questionModel?.content, forState: .Normal)
                 if let _ = questionModel!.avatar {
                 
@@ -65,8 +65,6 @@ class YNAnswerTableViewCell: UITableViewCell {
         
         let userId = kUser_ID() as? String
         let username = kUser_NiceName() as? String
-        
-        
         
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
