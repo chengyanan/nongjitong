@@ -13,6 +13,7 @@ let kUserKey = "User_MobileNumber"
 let kUserID = "User_ID"
 let kUserNiceName = "User_NiceName"
 let kUserIsInformationFinish = "User_Information"
+let kUserWatchListFinish = "UserWatchListFinish"
 
 func kUser_ID() ->AnyObject? {
     
@@ -27,6 +28,11 @@ func kUser_NiceName() ->AnyObject? {
 func kUser_IsInformationFinish() ->AnyObject?  {
 
     return NSUserDefaults.standardUserDefaults().valueForKey(kUserIsInformationFinish)
+}
+
+func kUser_IsWatchListFinish() ->AnyObject?  {
+    
+    return NSUserDefaults.standardUserDefaults().valueForKey(kUserWatchListFinish)
 }
 
 func kUser_MobileNumber() ->AnyObject? {

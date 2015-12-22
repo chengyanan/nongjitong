@@ -218,7 +218,7 @@ class YNAnswerTableViewCell: UITableViewCell {
             //avatarImageView
             Layout().addLeftConstraint(avatarImageView, toView: self.contentView, multiplier: 1, constant: questionModel!.marginTopBottomLeftOrRight)
             
-            //contentLabel
+            //contentButton
             Layout().addLeftToRightConstraint(contentButton, toView: avatarImageView, multiplier: 1, constant: questionModel!.marginBetweenAvatarAndContent)
             
             

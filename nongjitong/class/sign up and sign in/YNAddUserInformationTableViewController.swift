@@ -627,7 +627,11 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
                     Tools().saveValue("YES", forKey: kUserIsInformationFinish)
                     Tools().saveValue(self.nickNameTextFiled.text, forKey: kUserNiceName)
                     
-                    YNExchangeRootController().showHome()
+                    //显示关注领域界面
+                    let vc = YNMyWatchListViewController()
+                    vc.isFirst = true
+                    let navVc = UINavigationController(rootViewController: vc)
+                    UIApplication.sharedApplication().keyWindow?.rootViewController = navVc
                     
                 } else if status == 0 {
                     

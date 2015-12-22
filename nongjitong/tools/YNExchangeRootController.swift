@@ -33,4 +33,10 @@ class YNExchangeRootController: UIViewController {
 
     }
     
+    func showWatchList() {
+    
+        let vc = YNMyWatchListViewController()
+        UIApplication.sharedApplication().keyWindow?.rootViewController = vc
+
+    }
 }

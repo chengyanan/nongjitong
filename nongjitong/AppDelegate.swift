@@ -15,41 +15,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        if kUser_ID() != nil {//已登陆
         
-//        //个人资料完善
-        let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-        window?.rootViewController = rootstoryboard.instantiateInitialViewController()
+            let temp = kUser_IsInformationFinish()
+            
+            if  temp != nil {
         
-//        
-//        if kUser_ID() != nil {//已登陆
-//        
-//            let temp = kUser_IsInformationFinish()
-//            
-//            if  temp != nil {
-//            
-//                //个人资料完善
-//                let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-//                window?.rootViewController = rootstoryboard.instantiateInitialViewController()
-//                
-//            } else {
-//                
-//                //个人资料不完善 显示个人资料页面
-//                
-//                let rootstoryboardVc = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SB_Add_User_Information") as! UINavigationController
-//                
-//                window?.rootViewController = rootstoryboardVc
-//                
-//            }
-//            
-//            
-//        
-//        } else {//未登录
-//        
+                //个人资料完善判断是否选择了关注领域
+                if let _ = kUser_IsWatchListFinish() {
+                
+                    //关注领域完善，显示主界面
+                    let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+                    window?.rootViewController = rootstoryboard.instantiateInitialViewController()
+                    
+                } else {
+                    
+                    //关注领域不完善，显示关注领域界面
+                    let vc = YNMyWatchListViewController()
+                    vc.isFirst = true
+                    let navVc = UINavigationController(rootViewController: vc)
+                    UIApplication.sharedApplication().keyWindow?.rootViewController = navVc
+                    
+                }
+                
+                
+            } else {
+                
+                //个人资料不完善 显示个人资料页面
+                
+                let rootstoryboardVc = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SB_Add_User_Information") as! UINavigationController
+                
+                window?.rootViewController = rootstoryboardVc
+                
+            }
+            
+        
+        } else {
+        
 //            let signinVc = YNSignInViewController()
 //            let NavVc = YNNavigationController(rootViewController: signinVc)
 //            window?.rootViewController = NavVc
-//            
-//        }
+            
+            //未登录, 显示主界面
+            let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+            window?.rootViewController = rootstoryboard.instantiateInitialViewController()
+            
+        }
         
         window?.makeKeyAndVisible()
         

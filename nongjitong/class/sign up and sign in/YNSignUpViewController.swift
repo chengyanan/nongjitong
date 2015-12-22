@@ -288,19 +288,8 @@ class YNSignUpViewController: UIViewController {
                     Tools().saveValue(self.userNameTextFiled.text, forKey: kUserKey)
                     Tools().saveValue(json["data"], forKey: kUserID)
                     
-                    //转到主界面
-                    
-                    YNProgressHUD().showText("注册成功", toView: UIApplication.sharedApplication().keyWindow!)
-                    
+                    //转到个人信息页面
                     YNExchangeRootController().showInformation()
-                    
-//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-//                        
-////                         YNExchangeRootController().showHome()
-//                        
-//
-//                        
-//                    }
                     
                     
                 } else if status == 0 {

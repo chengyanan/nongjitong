@@ -58,7 +58,8 @@ class YNAnswerModel {
     var questionId: String?
     var add_time: String?
     var to_user_id: String?
-
+    var is_accept: String?
+    
     var isQuestionOwner: Bool?
     
     var isFinish: Bool = true
@@ -75,6 +76,8 @@ class YNAnswerModel {
         self.content = dict["content"] as? String
         self.add_time = dict["add_time"] as? String
         self.to_user_id = dict["to_user_id"] as? String
+        self.is_accept = dict["is_accept"] as? String
+        
         
         //头像的高度
         let avatarheight = avatarWidthHeight + marginTopBottomLeftOrRight*2

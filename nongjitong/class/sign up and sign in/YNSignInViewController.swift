@@ -123,9 +123,33 @@ class YNSignInViewController: UIViewController {
                         self.delegate?.logInSuccess()
                     }
                     
-                    YNProgressHUD().showText("登录成功", toView: UIApplication.sharedApplication().keyWindow!)
+                    let isFillOutInformation = (dataDict!["area_id"] as? String == "0")
+                    let isFillOutWatchList = (dataDict!["is_set_question_class"] as? String == "0")
                     
-                    YNExchangeRootController().showHome()
+                    if isFillOutInformation {
+                    
+                        //没有填过个人信息,显示个人信息页面
+                        YNExchangeRootController().showInformation()
+                        
+                    } else {
+                    
+                        //个人信息完整, 判断关注领域是否完整
+                        if isFillOutWatchList {
+                        
+                            //关注领域不完整
+                            let vc = YNMyWatchListViewController()
+                            vc.isFirst = true
+                            let navVc = UINavigationController(rootViewController: vc)
+                            UIApplication.sharedApplication().keyWindow?.rootViewController = navVc
+                            
+                        } else {
+                        
+                            //关注领域完整, 显示主界面
+                            YNExchangeRootController().showHome()
+                        }
+                        
+                        
+                    }
                     
                     
                 } else if status == 0 {

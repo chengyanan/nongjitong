@@ -52,6 +52,7 @@ class YNQuestionModel {
     var avatar: String?
     
     var height: CGFloat?
+    var myQuestionCellHeight:  CGFloat?
     
     init() {}
     
@@ -127,17 +128,10 @@ class YNQuestionModel {
     
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        
-        
-        // add a calendar
-//        dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierChinese)
-//        dateFormatter.timeZone = NSTimeZone.localTimeZone()
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
         
-        //TODO: 时间不对
         let createTime = dateFormatter.dateFromString(time)
     
-        
         if createTime!.isToday() {
         
             if createTime?.deltaWithNow().hour >= 1 {
@@ -198,7 +192,7 @@ class YNQuestionModel {
         }
         
         self.height = height + 10 + marginModel.answerCountHeight
-        
+        self.myQuestionCellHeight = marginModel.topMargin*2 + contentHeight + marginModel.answerCountHeight
     }
     
     //计算label的高度

@@ -8,8 +8,17 @@
 
 import UIKit
 
+protocol YNNewAnswerQuestionViewControllerDelegate {
+
+    func newAnswerQuestionViewController(indexPath: NSIndexPath)
+}
+
 class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNInputViewDelegate, YNAnswerTableViewCellDelegate {
 
+    var delegate: YNNewAnswerQuestionViewControllerDelegate?
+    
+    var dataIndexPath: NSIndexPath?
+    
     var tableView: UITableView?
     //添加一个随键盘弹出的view
     var bottomInputView: YNInputView?
@@ -40,6 +49,8 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
     }
     
     var messageStr = ""
+    
+    var rightBarButtonItem: UIBarButtonItem?
     
     //MARK: life cycle
     override func viewDidLoad() {
@@ -90,8 +101,16 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         
         if questionModel?.user_id == kUser_ID() as? String {
             
-            //提问者可以采纳回答
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "采纳", style: .Plain, target: self, action: "acceptAnswer")
+            if questionModel?.status == "2" || questionModel?.status == "3" {
+            
+                //问题已解决，不需要显示解决按钮
+                
+            } else {
+            
+                //问题未解决提问者可以采纳回答
+                self.rightBarButtonItem = UIBarButtonItem(title: "采纳", style: .Plain, target: self, action: "acceptAnswer")
+                self.navigationItem.rightBarButtonItem = self.rightBarButtonItem
+            }
             
         } else {
             
@@ -106,7 +125,48 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
     }
     func acceptAnswer() {
         
-        //TODO: 彩奈回答
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "User",
+            "a": "acceptAnswer",
+            "question_id": answerModel?.questionId,
+            "user_id": answerModel?.user_id
+        ]
+        
+        YNHttpQuestionDetail().acceptAnswerWithParams(params, successFull: { (json) -> Void in
+            
+            
+            if let status = json["status"] as? Int {
+                
+                print(json)
+                
+                if status == 1 {
+                
+                self.rightBarButtonItem?.enabled = false
+                
+                    if let _ = self.dataIndexPath {
+                    
+                        //如果是从回答列表点进来的 
+                        self.delegate?.newAnswerQuestionViewController(self.dataIndexPath!)
+                    }
+                    
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        print("接口请求失败: \(msg)")
+                    }
+                }
+                
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                print("网络出错")
+        }
+        
     }
     
     //MARK: interface

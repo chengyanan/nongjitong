@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNNewAnswerQuestionViewControllerDelegate, YNQuestionAnswerTableViewCellDelegate {
     
     let answerButtonHeight: CGFloat = 44
     let margin: CGFloat = 5
@@ -242,7 +242,6 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
             }
             
             cell?.model = questionModel
-            
             return cell!
         }
         
@@ -255,8 +254,19 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
             cell = YNQuestionAnswerTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
         }
         
-        cell?.answeModel = self.dataArray[indexPath.row]
+        if questionModel?.status == "2" || questionModel?.status == "3" {
+            
+            //该问题已解决
+            cell?.isAcceptAnswer = true
+            
+        } else {
         
+            cell?.isAcceptAnswer = false
+        }
+        
+        cell?.answeModel = self.dataArray[indexPath.row]
+        cell?.dataIndexPath = indexPath
+        cell?.delegate = self
         return cell!
         
     }
@@ -267,10 +277,26 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
         let vc = YNNewAnswerQuestionViewController()
         vc.questionModel = self.questionModel
         vc.answerModel = self.dataArray[indexPath.row]
+        vc.dataIndexPath = indexPath
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
+    //MARK: YNNewAnswerQuestionViewControllerDelegate
+    func newAnswerQuestionViewController(indexPath: NSIndexPath) {
+        
+        self.dataArray[indexPath.row].is_accept = "Y"
+        self.tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+    }
     
+    //MARK: YNQuestionAnswerTableViewCellDelegate
+    func questionAnswerTableViewCellHasAcceptAnswer(IndexPath: NSIndexPath) {
+        
+        self.dataArray[IndexPath.row].is_accept = "Y"
+        self.questionModel?.status = "2"
+        
+        self.tableView?.reloadData()
+    }
     
 }

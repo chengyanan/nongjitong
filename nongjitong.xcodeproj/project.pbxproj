@@ -40,6 +40,7 @@
 		406732AB1BFC56570071F6EA /* YNQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406732AA1BFC56570071F6EA /* YNQuestionTableViewCell.swift */; };
 		406CBBEC1BFEDBCE000584D4 /* YNScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */; };
 		408BE0541BE704CD00A210A4 /* YNTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BE0531BE704CD00A210A4 /* YNTextView.swift */; };
+		408BE8A81C294BFA00B980AD /* YNMYQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */; };
 		4092048E1C0FFCAF00CA30CF /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092048D1C0FFCAF00CA30CF /* UIImageViewExtension.swift */; };
 		40983C891BFAEDB400EA2B04 /* YNWatchProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40983C881BFAEDB400EA2B04 /* YNWatchProductTableViewCell.swift */; };
 		40983C8B1BFB1CDD00EA2B04 /* YNWatchHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40983C8A1BFB1CDD00EA2B04 /* YNWatchHttp.swift */; };
@@ -161,6 +162,7 @@
 		406732AA1BFC56570071F6EA /* YNQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNScaleView.swift; sourceTree = "<group>"; };
 		408BE0531BE704CD00A210A4 /* YNTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNTextView.swift; sourceTree = "<group>"; };
+		408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMYQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		4092048D1C0FFCAF00CA30CF /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		40983C881BFAEDB400EA2B04 /* YNWatchProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNWatchProductTableViewCell.swift; sourceTree = "<group>"; };
 		40983C8A1BFB1CDD00EA2B04 /* YNWatchHttp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNWatchHttp.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				40D70F041C22666700672A10 /* YNMyQuestionsViewController.swift */,
+				408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */,
 			);
 			path = "my questions";
 			sourceTree = "<group>";
@@ -607,10 +610,10 @@
 		40ED438B1BC612F9004713C9 /* sign up and sign in */ = {
 			isa = PBXGroup;
 			children = (
-				40ED43A81BC64D20004713C9 /* model */,
 				40ED438C1BC612F9004713C9 /* YNSignInViewController.swift */,
 				40ED438D1BC612F9004713C9 /* YNSignUpViewController.swift */,
 				40A168F61BEB3E82001E3C76 /* YNAddUserInformationTableViewController.swift */,
+				40ED43A81BC64D20004713C9 /* model */,
 			);
 			path = "sign up and sign in";
 			sourceTree = "<group>";
@@ -644,10 +647,10 @@
 		40ED43951BC61556004713C9 /* home */ = {
 			isa = PBXGroup;
 			children = (
-				40E039811BF5C5F4007FFF2A /* location */,
 				40E0397F1BF5C5A8007FFF2A /* YNNearbyViewController.swift */,
-				40E0397D1BF5C5A4007FFF2A /* YNNearbyTitleView.swift */,
 				40ED439E1BC61ADE004713C9 /* YNHomeViewController.swift */,
+				40E0397D1BF5C5A4007FFF2A /* YNNearbyTitleView.swift */,
+				40E039811BF5C5F4007FFF2A /* location */,
 				40FA6FEF1BD4DF0800CFE69C /* conreoller */,
 				40FA6FF01BD4DF0800CFE69C /* model */,
 				40FA6FF11BD4DF0800CFE69C /* view */,
@@ -929,6 +932,7 @@
 				404E0BB21C16A01200924D5A /* YNNewAnswerQuestionViewController.swift in Sources */,
 				40ED43861BC60B76004713C9 /* Macro.swift in Sources */,
 				40ED43891BC60B76004713C9 /* tools.swift in Sources */,
+				408BE8A81C294BFA00B980AD /* YNMYQuestionTableViewCell.swift in Sources */,
 				40E0398D1BF5C61E007FFF2A /* Restaurant.swift in Sources */,
 				406732AB1BFC56570071F6EA /* YNQuestionTableViewCell.swift in Sources */,
 				40E236FE1BFD782400321B12 /* YNMySubscriptionViewController.swift in Sources */,

@@ -13,9 +13,9 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
     enum YNReloadDataType {
         case tableViewCatagory, tableViewProduct
     }
-
     
     let maxNumberOfWatch = 5
+    var isFirst = false
     
     var collectionViewHeight: CGFloat {
     
@@ -71,6 +71,28 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
         setLayout()
         
         loadDataFromServer()
+        
+        if isFirst {
+        
+            let rightItem = UIBarButtonItem(title: "完成", style: .Plain, target: self, action: "finfishAddWatchList")
+            self.navigationItem.rightBarButtonItem = rightItem
+        }
+        
+        
+    }
+    
+    func finfishAddWatchList() {
+    
+        if selectedArray.count > 0 {
+        
+            //显示主界面
+            YNExchangeRootController().showHome()
+            
+        } else {
+        
+            YNProgressHUD().showText("请选择关注领域", toView: self.view)
+        }
+        
     }
     
     //MARK: 数据加载
@@ -424,9 +446,8 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
                 if status == 1 {
                     
                    print(json["msg"])
-                    
-                    
-                    
+        
+                    Tools().saveValue("YES", forKey: kUserWatchListFinish)
                     
                 } else if status == 0 {
                     

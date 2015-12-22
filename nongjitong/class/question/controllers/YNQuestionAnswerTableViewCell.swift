@@ -8,29 +8,57 @@
 
 import UIKit
 
+protocol YNQuestionAnswerTableViewCellDelegate {
+
+    func questionAnswerTableViewCellHasAcceptAnswer(IndexPath: NSIndexPath)
+}
+
 class YNQuestionAnswerTableViewCell: UITableViewCell {
     
-    var isFirstLayout = true
-    
+    var dataIndexPath: NSIndexPath?
+    var delegate: YNQuestionAnswerTableViewCellDelegate?
+    var isAcceptAnswer = false
     var answeModel: YNAnswerModel? {
     
         didSet {
             
-            self.textLabel?.text = answeModel?.content
+            self.questionContent.text = answeModel?.content
             self.avatorImage.getImageWithURL(answeModel!.avatar!, contentMode: UIViewContentMode.ScaleToFill)
             self.nickName.text = answeModel?.user_name
             self.postTime.text = answeModel?.add_time
             
-            if answeModel!.isQuestionOwner! {
+            //判断是否被踩纳
+            if answeModel?.is_accept == "Y" {
             
-                acceptAnswer.hidden = false
+                //被采纳
+                self.acceptImage.hidden = false
+                self.acceptAnswer.hidden = true
                 
             } else {
-            
-                acceptAnswer.hidden = true
+                
+                 //没有被采纳
+                if isAcceptAnswer {
+                    
+                    //问题已解决
+                    self.acceptImage.hidden = true
+                    self.acceptAnswer.hidden = true
+                    
+                } else {
+                    
+                    //问题没解决
+                    self.acceptImage.hidden = true
+                    
+                    if answeModel!.isQuestionOwner! {
+                        
+                        acceptAnswer.hidden = false
+                        
+                    } else {
+                        
+                        acceptAnswer.hidden = true
+                    }
+                }
+                
             }
-            
-            //TODO: 判断是否被踩纳
             
             setLayout()
             
@@ -58,7 +86,6 @@ class YNQuestionAnswerTableViewCell: UITableViewCell {
     
     //MARK: event resopnse
     func acceptButtonClick() {
-
         
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
@@ -77,10 +104,10 @@ class YNQuestionAnswerTableViewCell: UITableViewCell {
                 
                 if status == 1 {
                     
-//                    let tempdata = json["data"] as! String
-                    
                     self.acceptImage.hidden = false
                     self.acceptAnswer.hidden = true
+                    //通知代理 问题已采纳 不需要再显示采纳按钮
+                    self.delegate?.questionAnswerTableViewCellHasAcceptAnswer(self.dataIndexPath!)
                     
                 } else if status == 0 {
                     
