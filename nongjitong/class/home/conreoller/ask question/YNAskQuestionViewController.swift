@@ -161,23 +161,26 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBAction func postQuestion(sender: AnyObject) {
         
-        if self.askQuestionModel.descript?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
         
+        if self.askQuestionModel.descript?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
+            
             if let _ = self.askQuestionModel.class_id {
                 
                 //满足条件上传问题
                 sendQusetionToServer()
                 
             } else {
-            
+                
                 YNProgressHUD().showText("请选择品类", toView: self.view)
             }
             
             
         } else {
-        
+            
             YNProgressHUD().showText("请填写问题描述", toView: self.view)
         }
+    
+        
     }
     
     //MARK: Http send 
@@ -248,7 +251,6 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     //MARK: UICollectionViewDelegateFlowLayout
-    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         if indexPath.section == 0 {

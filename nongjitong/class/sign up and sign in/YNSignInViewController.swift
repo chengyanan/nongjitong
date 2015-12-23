@@ -55,6 +55,8 @@ class YNSignInViewController: UIViewController {
     }
     
     func signInButtonHasClicked() {
+        
+        self.view.endEditing(true)
    
         if let userName = self.userNameTextFiled.text {
             
@@ -133,6 +135,9 @@ class YNSignInViewController: UIViewController {
                         
                     } else {
                     
+                        
+                        Tools().saveValue("YES", forKey: kUserIsInformationFinish)
+                        
                         //个人信息完整, 判断关注领域是否完整
                         if isFillOutWatchList {
                         
@@ -143,9 +148,24 @@ class YNSignInViewController: UIViewController {
                             UIApplication.sharedApplication().keyWindow?.rootViewController = navVc
                             
                         } else {
-                        
-                            //关注领域完整, 显示主界面
-                            YNExchangeRootController().showHome()
+                            
+                             //关注领域完整, 显示主界面
+                            Tools().saveValue("YES", forKey: kUserWatchListFinish)
+                            
+                            let nav = self.navigationController
+                            
+                            if let _ = nav {
+                            
+                                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                                    
+                                })
+                                
+                            } else {
+                            
+                                YNExchangeRootController().showHome()
+                            }
+                            
+                            
                         }
                         
                         
@@ -184,7 +204,7 @@ class YNSignInViewController: UIViewController {
         
         get {
             
-            return UIBarButtonItem(image: UIImage(named: "system_back"), style: UIBarButtonItemStyle.Plain, target: self, action: "backBarButtonItemHasClicked")
+            return UIBarButtonItem(image: UIImage(named: "sapi-nav-back-btn-bg"), style: UIBarButtonItemStyle.Plain, target: self, action: "backBarButtonItemHasClicked")
         }
     }
 

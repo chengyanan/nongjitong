@@ -595,7 +595,7 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
         
         if let tempImage = self.imageData {
             
-//            let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("1.jpg")
+//            let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("avatar.jpg")
 //            
 //            //        print(path)
 //            
@@ -626,12 +626,19 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
                     
                     Tools().saveValue("YES", forKey: kUserIsInformationFinish)
                     Tools().saveValue(self.nickNameTextFiled.text, forKey: kUserNiceName)
+           
                     
-                    //显示关注领域界面
+                    if let tempImage = self.imageData {
+                       
+                        tempImage.writeToFile(kUser_AvatarPath()!, atomically: true)
+                        
+                    }
+                    
+                    
                     let vc = YNMyWatchListViewController()
                     vc.isFirst = true
-                    let navVc = UINavigationController(rootViewController: vc)
-                    UIApplication.sharedApplication().keyWindow?.rootViewController = navVc
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
                     
                 } else if status == 0 {
                     

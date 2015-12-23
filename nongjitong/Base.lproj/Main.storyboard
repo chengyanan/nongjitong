@@ -116,9 +116,6 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="aqR-An-TPw" kind="show" identifier="Segue_Informatiom" id="25N-uB-gLU"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -153,9 +150,6 @@
                                                 <constraint firstItem="r9a-Tr-lzT" firstAttribute="top" secondItem="RWA-th-j1K" secondAttribute="top" constant="13" id="snV-AC-FrX"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="zxp-r1-Vj1" kind="show" id="Iqi-fi-rJb"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="48" id="N1h-dF-PIS">
                                         <rect key="frame" x="0.0" y="219" width="600" height="48"/>
@@ -186,9 +180,6 @@
                                                 <constraint firstItem="Nk0-eu-PXB" firstAttribute="leading" secondItem="7Jf-rL-UmF" secondAttribute="leading" constant="12" id="qRs-49-4da"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="3PI-Xs-6kz" kind="show" id="peT-7R-JoT"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -287,9 +278,6 @@
                                                 <constraint firstItem="XI2-GN-Bsf" firstAttribute="leading" secondItem="bB1-RQ-Zb8" secondAttribute="trailing" constant="12" id="v7C-iB-ab7"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="av5-1d-YkO" kind="show" id="uxt-Yd-nU4"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -300,51 +288,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ND1-3O-VU2"/>
+                    <connections>
+                        <outlet property="avatarImageView" destination="4Kl-Q0-nJT" id="W9T-9c-WCp"/>
+                        <outlet property="nickNameLabel" destination="WOR-FS-qdk" id="huy-eA-6z0"/>
+                        <outlet property="userIdlabel" destination="v2z-Ro-lYy" id="GVA-1g-lMp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paR-Rw-8T6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3112" y="4937"/>
-        </scene>
-        <!--我的提问-->
-        <scene sceneID="Tn4-zf-gUQ">
-            <objects>
-                <viewController title="我的提问" id="zxp-r1-Vj1" customClass="YNMyQuestionsViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kDl-Q6-BP2"/>
-                        <viewControllerLayoutGuide type="bottom" id="LX6-7l-SsC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qSp-XR-Ujn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J4n-dh-mTz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2321" y="4503"/>
-        </scene>
-        <!--我的回答-->
-        <scene sceneID="5U1-6K-Qhp">
-            <objects>
-                <viewController title="我的回答" id="3PI-Xs-6kz" customClass="YNMyAnawesViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nNV-67-U4V"/>
-                        <viewControllerLayoutGuide type="bottom" id="feR-Ed-oaa"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="d4P-jd-J14">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qla-te-ZXF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2321" y="5159"/>
+            <point key="canvasLocation" x="-3158" y="3375"/>
         </scene>
         <!--Setting Table View Controller-->
         <scene sceneID="plj-cl-HAf">
             <objects>
-                <tableViewController id="av5-1d-YkO" customClass="YNSettingTableViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SB_Setting_detail" id="av5-1d-YkO" customClass="YNSettingTableViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="TXG-Xf-Cog">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -473,12 +430,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sG-Nr-47L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3112" y="5829"/>
+            <point key="canvasLocation" x="-3158" y="4041"/>
         </scene>
         <!--完善个人资料-->
         <scene sceneID="50f-Oq-V3V">
             <objects>
-                <tableViewController id="bdc-vf-XlR" customClass="YNAddUserInformationTableViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SB_Add_User_Information" id="bdc-vf-XlR" customClass="YNAddUserInformationTableViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qsq-Xw-OwC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -781,7 +738,7 @@
         <!--Navigation Controller-->
         <scene sceneID="A4q-Mg-87b">
             <objects>
-                <navigationController storyboardIdentifier="SB_Add_User_Information" id="9SZ-jh-OwF" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SB_Add_User_Information_nav" id="9SZ-jh-OwF" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UD2-uC-kjE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -898,10 +855,10 @@
             </objects>
             <point key="canvasLocation" x="-858" y="3191"/>
         </scene>
-        <!--个人资料-->
+        <!--个人信息-->
         <scene sceneID="o0C-kd-jh8">
             <objects>
-                <tableViewController storyboardIdentifier="user_information" title="个人资料" hidesBottomBarWhenPushed="YES" id="aqR-An-TPw" customClass="YNPersionalSettingTableViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="user_information" title="个人信息" hidesBottomBarWhenPushed="YES" id="aqR-An-TPw" customClass="YNPersionalSettingTableViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="2M1-YJ-dTT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1224,7 +1181,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nwT-O2-99B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2321" y="3615"/>
+            <point key="canvasLocation" x="-2417" y="3375"/>
         </scene>
         <!--农技通-->
         <scene sceneID="L07-P1-bms">

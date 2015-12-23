@@ -24,7 +24,7 @@ class YNSignUpViewController: UIViewController {
     var second: Int = 60
     var timer: NSTimer?
     var code: String?
-    var originalContentSize: CGSize!
+    var originalContentSize: CGSize?
     
     //MARK:- life cycle
     override func viewDidLoad() {
@@ -146,12 +146,17 @@ class YNSignUpViewController: UIViewController {
     }
    
      func keyboardWillHide(notification: NSNotification) {
-   
-        if kIS_iPhone4() || kIS_iPhone5() {
-       
-            self.scrollView.contentSize = self.originalContentSize
-            
+        
+        if let _ = self.originalContentSize {
+        
+            if kIS_iPhone4() || kIS_iPhone5() {
+                
+                self.scrollView.contentSize = self.originalContentSize!
+                
+            }
         }
+   
+        
     }
     
      func tapBackView() {
@@ -289,7 +294,12 @@ class YNSignUpViewController: UIViewController {
                     Tools().saveValue(json["data"], forKey: kUserID)
                     
                     //转到个人信息页面
-                    YNExchangeRootController().showInformation()
+//                    YNExchangeRootController().showInformation()
+                    
+                    let rootstoryboardVc = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SB_Add_User_Information") as! YNAddUserInformationTableViewController
+                    
+                    self.navigationController?.pushViewController(rootstoryboardVc, animated: true)
+                    
                     
                     
                 } else if status == 0 {

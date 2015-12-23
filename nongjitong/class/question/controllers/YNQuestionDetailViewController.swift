@@ -146,10 +146,31 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
     //MARK: event response
     func answerButtonDidClick() {
         
-        let answerVc = YNNewAnswerQuestionViewController()
-        answerVc.questionModel = self.questionModel
+        
+        let userId = kUser_ID() as? String
+        
+        if let _ = userId {
+            
+            //已登陆，进入问答界面
+            let answerVc = YNNewAnswerQuestionViewController()
+            answerVc.questionModel = self.questionModel
+            
+            self.navigationController?.pushViewController(answerVc, animated: true)
+            
+        } else {
+            
+            //没有登录，直接跳到登录界面
+            let signInVc = YNSignInViewController()
+            
+            let navVc = UINavigationController(rootViewController: signInVc)
+            
+            self.presentViewController(navVc, animated: true, completion: { () -> Void in
+                
+            })
+            
+        }
+
     
-        self.navigationController?.pushViewController(answerVc, animated: true)
     }
     
     func setLayout() {

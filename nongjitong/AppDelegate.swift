@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let vc = YNMyWatchListViewController()
                     vc.isFirst = true
                     let navVc = UINavigationController(rootViewController: vc)
-                    UIApplication.sharedApplication().keyWindow?.rootViewController = navVc
+                    window?.rootViewController = navVc
                     
                 }
                 
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 //个人资料不完善 显示个人资料页面
                 
-                let rootstoryboardVc = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SB_Add_User_Information") as! UINavigationController
+                let rootstoryboardVc = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("SB_Add_User_Information_nav") as! UINavigationController
                 
                 window?.rootViewController = rootstoryboardVc
                 

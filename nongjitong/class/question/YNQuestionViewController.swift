@@ -39,13 +39,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         setupInterface()
         setLayout()
         
-        loadDataFromServer()
+//        loadDataFromServer()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-//        loadDataFromServer()
+        loadDataFromServer()
     }
     
     //MARK: event response
@@ -63,8 +63,24 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: 数据加载
     func loadDataFromServer() {
         
-        // 加载关注数据
-        loadWatchList()
+        if let _ = kUser_ID() as? String {
+        
+            //已登陆，加载关注数据
+            loadWatchList()
+            
+        } else {
+            
+            //未登录
+            self.selectedArray.removeAll()
+            let newmodel = YNSelectedProductModel()
+            newmodel.class_name = "最新"
+            newmodel.isSelected = true
+            self.selectedArray.append(newmodel)
+            
+            self.collectionView?.reloadData()
+            self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
+        }
+        
         
         //加载问题数据
         getQuestionListWithClassID(self.classId)
@@ -160,13 +176,15 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                             self.selectedArray.append(model)
                         }
                         
+                        self.collectionView?.reloadData()
+                        self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
+                        
                     }  else {
                     
-                        YNProgressHUD().showText("没有数据", toView: self.view)
+//                        YNProgressHUD().showText("没有数据", toView: self.view)
                     }
                     
-                    self.collectionView?.reloadData()
-                    self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
+                    
                     
                 } else if status == 0 {
                     

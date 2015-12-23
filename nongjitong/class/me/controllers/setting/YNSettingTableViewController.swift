@@ -18,8 +18,20 @@ class YNSettingTableViewController: UITableViewController {
             
                 //退出登录
                 Tools().removeValueForKey(kUserID)
+                Tools().removeValueForKey(kUserIsInformationFinish)
+                Tools().removeValueForKey(kUserWatchListFinish)
                 
-                YNExchangeRootController().showSign()
+//                YNExchangeRootController().showSign()
+                
+                //没有登录，直接跳到登录界面
+                let signInVc = YNSignInViewController()
+                
+                let navVc = UINavigationController(rootViewController: signInVc)
+                
+                self.presentViewController(navVc, animated: true, completion: { () -> Void in
+                    
+                })
+                
                 
             }
         }

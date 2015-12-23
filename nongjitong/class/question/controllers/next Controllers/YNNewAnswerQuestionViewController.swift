@@ -272,27 +272,26 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
     func loadDataFromServer() {
         
         let userId = kUser_ID() as? String
-        
+
         var choiceId = ""
-    
         
-            if let _ = answerModel {
+        if let _ = answerModel {
             
-                if userId != questionModel?.user_id && userId != answerModel?.user_id  {
+            if userId != questionModel?.user_id && userId != answerModel?.user_id  {
                 
-                    
-                    //既不是提问者 也不是回答者
-                    choiceId = answerModel!.user_id!
-                    
-                } else {
                 
-                    choiceId = userId!
-                }
+                //既不是提问者 也不是回答者
+                choiceId = answerModel!.user_id!
                 
             } else {
-            
+                
                 choiceId = userId!
             }
+            
+        } else {
+            
+            choiceId = userId!
+        }
         
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
@@ -327,12 +326,12 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
                                 
                                 //是问题的主人
                                 model.isQuestionOwner = true
-
+                                
                             } else {
                                 
                                 //是回答者
                                 model.isQuestionOwner = false
-                
+                                
                             }
                             
                             
@@ -368,6 +367,8 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
                 progress.hideUsingAnimation()
                 YNProgressHUD().showText("数据加载失败", toView: self.view)
         }
+
+        
         
     }
 

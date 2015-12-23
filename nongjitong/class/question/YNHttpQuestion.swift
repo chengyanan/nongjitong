@@ -26,15 +26,23 @@ class YNHttpQuestion {
         
         Network.post(kURL, params: params, success: { (data, response, error) -> Void in
             
-            let json: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+            do {
             
-            //            print("data - \(json)")
-            
-            if let _ = successFull {
+                let json: NSDictionary = try NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                 
-                successFull!(json: json)
+                //            print("data - \(json)")
+                
+                if let _ = successFull {
+                    
+                    successFull!(json: json)
+                }
+                
+            } catch {
+            
+                print("catch 数据加载失败")
             }
             
+
             
             }) { (error) -> Void in
                 

@@ -52,6 +52,8 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        self.title = "个人信息"
+        
         self.avatorImageView.layer.cornerRadius = 3
         self.avatorImageView.clipsToBounds = true
         
@@ -655,9 +657,6 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
             
             sendImageToServer(imageData!)
             
-             //MARK: - 上传成功改变该页面的头像
-            self.avatorImageView.image = image
-            
         } else {
         
             //不是图片
@@ -675,13 +674,6 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
     //MARK: 上传头像
     func sendImageToServer(imagedata: NSData) {
         
-//        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("1.jpg")
-//        
-////        print(path)
-//        
-//        imagedata.writeToFile(path!, atomically: true)
-//        let imageUrl = NSURL(fileURLWithPath: path!)
-        
         var files = [File]()
         files.append(File(name: "avatar", imageData: imagedata))
         
@@ -695,11 +687,16 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                 if status == 1 {
                     
                     let msg = json["msg"] as! String
+                    print("\n \(msg) \n")
+                    //MARK: - 上传成功改变该页面的头像
+                    self.avatorImageView.image = UIImage(data: imagedata)
+                    imagedata.writeToFile(kUser_AvatarPath()!, atomically: true)
                     
-                    YNProgressHUD().showText(msg, toView: self.view)
+                    
+//                    YNProgressHUD().showText(msg, toView: self.view)
                     
                     //#warning: msg是更新成功 不是登陆成功
-//                    print("\n \(msg) \n")
+                    
                     
                     
                 } else if status == 0 {

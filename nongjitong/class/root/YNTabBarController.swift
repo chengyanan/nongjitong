@@ -24,13 +24,29 @@ class YNTabBarController: UITabBarController, YNNJTTabBarDeleagte {
     
     func njtTabBarAskQuestionButtonDidClick() {
         
-        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-        let askVc = mainStoryBoard.instantiateViewControllerWithIdentifier("SB_AskQuestion")
+                if let _ = kUser_ID() as? String {
+        
+                    //已登陆
+                    let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+                    let askVc = mainStoryBoard.instantiateViewControllerWithIdentifier("SB_AskQuestion")
+                    
+                    
+                    self.presentViewController(askVc, animated: true) { () -> Void in
+                        
+                    }
         
         
-        self.presentViewController(askVc, animated: true) { () -> Void in
-            
-        }
+                } else {
+        
+                    //未登录
+                    let signInVc = YNSignInViewController()
+                    let signInNaVc = UINavigationController(rootViewController: signInVc)
+                    self.presentViewController(signInNaVc, animated: true, completion: { () -> Void in
+                        
+                    })
+                    
+                }
+        
         
     }
 

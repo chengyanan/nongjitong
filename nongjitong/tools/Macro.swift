@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+func kUser_AvatarPath() ->String? {
+
+    return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("avatar.jpg")
+}
+
 let kUserKey = "User_MobileNumber"
 let kUserID = "User_ID"
 let kUserNiceName = "User_NiceName"

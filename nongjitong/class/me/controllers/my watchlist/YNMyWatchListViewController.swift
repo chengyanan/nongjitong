@@ -81,12 +81,30 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
         
     }
     
+    //MARK: event response
     func finfishAddWatchList() {
     
         if selectedArray.count > 0 {
-        
-            //显示主界面
-            YNExchangeRootController().showHome()
+            
+            Tools().saveValue("YES", forKey: kUserWatchListFinish)
+            
+            let vc = UIApplication.sharedApplication().keyWindow?.rootViewController
+            
+            if vc is YNTabBarController {
+            
+                self.navigationController?.childViewControllers[0].dismissViewControllerAnimated(true, completion: { () -> Void in
+                    
+                    
+                })
+                
+            } else {
+            
+                //显示主界面
+                let rootstoryboard = UIStoryboard.init(name: "Main", bundle: nil)
+                UIApplication.sharedApplication().keyWindow?.rootViewController = rootstoryboard.instantiateInitialViewController()
+            }
+            
+
             
         } else {
         
@@ -447,7 +465,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
                     
                    print(json["msg"])
         
-                    Tools().saveValue("YES", forKey: kUserWatchListFinish)
+//                    Tools().saveValue("YES", forKey: kUserWatchListFinish)
                     
                 } else if status == 0 {
                     
