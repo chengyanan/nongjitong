@@ -16,6 +16,7 @@ class YNQuestionTableViewCell: UITableViewCell {
     
         didSet {
         
+//            self.removePictures()
             
             self.nickName.text = model?.user_name
             self.postTime.text = model?.createTime
@@ -24,23 +25,26 @@ class YNQuestionTableViewCell: UITableViewCell {
             self.catagoryButton.setTitle(model?.class_name, forState: .Normal)
             self.answerCountButton.setTitle(model?.answer_count, forState: .Normal)
             
-            if let _ = model?.avatar {
-            
-                self.avatorImage.getImageWithURL(model!.avatar!, contentMode: UIViewContentMode.ScaleToFill)
-            }
+            self.avatorImage.getImageWithURL(model!.avatar!, contentMode: UIViewContentMode.ScaleToFill)
             
             if model?.photo.count > 0 {
             
-                self.removePictures()
-                
                 //添加图片
                 self.addPictures()
+                
+                
             } else {
             
-                self.removePictures()
+
             }
             
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.removePictures()
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

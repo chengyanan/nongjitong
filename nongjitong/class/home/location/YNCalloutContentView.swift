@@ -22,7 +22,7 @@ class YNCalloutContentView: UIView {
         return tempLabel
         }()
     
-    var dataModel: Restaurant? {
+    var dataModel: YNNearByModel? {
   
         willSet {
        
@@ -31,18 +31,18 @@ class YNCalloutContentView: UIView {
         
         didSet {
        
-            if let tempImage = dataModel?.image {
-                
-                Network.getImageWithURL(tempImage, success: { (data) -> Void in
-                    
-                    self.imageView.image = UIImage(data: data)
-                    
-                })
-                
-                
-            }
+//            if let tempImage = dataModel?.image {
+//                
+//                Network.getImageWithURL(tempImage, success: { (data) -> Void in
+//                    
+//                    self.imageView.image = UIImage(data: data)
+//                    
+//                })
+//                
+//                
+//            }
         
-            titleLabel.text = dataModel?.title
+            titleLabel.text = dataModel?.user_name
             
         }
     }

@@ -33,6 +33,17 @@ class YNAnswerTableViewCell: UITableViewCell {
                 if let _ = questionModel!.avatar {
                 
                      self.avatarImageView.getImageWithURL(questionModel!.avatar!, contentMode: .ScaleToFill)
+                } else {
+                 
+                    if let imagePath = kUser_AvatarPath() {
+                    
+                        self.avatarImageView.image = UIImage(data: NSData(contentsOfFile: imagePath)!)
+                        
+                    } else {
+                    
+                        self.avatarImageView.image = UIImage(named: "user_default_avatar")
+                    }
+                    
                 }
                
                 

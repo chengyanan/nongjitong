@@ -493,6 +493,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
                 model1.to_user_id = questionModel?.user_id
                 
                 //TODO: 传自己的头像
+                
 //                model1.avatar = dataArray[1].avatar
             }
             

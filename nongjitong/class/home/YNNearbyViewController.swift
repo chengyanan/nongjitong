@@ -59,13 +59,16 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         didSet {
         
             if isLoadData {
+                
+                self.updateUserLocation()
            
-//                self.getDataFromServer()
+                self.getNearUserPositionFromServer(nil)
             }
             
         }
        
     }
+    
     var callOutAnnotationView: YNCallOutAnnotationView?
     var callOutAnnotation: YNCallOutAnnotation?
     
@@ -82,10 +85,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         return NSMutableArray()
         }()
     
-    lazy var dataArray: Array<Restaurant> = {
-        
-        return Array()
-        }()
+    var dataArray = [YNNearByModel]()
     
     //MARK: life cycle
     override func viewDidLoad() {
@@ -95,7 +95,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         self.view.addSubview(self.mapView)
        
-//        self.navigationItem.titleView = self.titleView
+        self.navigationItem.titleView = self.titleView
         
     
     }
@@ -110,66 +110,125 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         self.navigationController?.pushViewController(settingVc, animated: true)
     }
    
+    func updateUserLocation() {
+    
+        if let userId = kUser_ID() as? String {
+        
+            //登陆了更新
+            let params: [String: String?] = ["m": "Appapi",
+                "key": "KSECE20XE15DKIEX3",
+                "c": "UserPosition",
+                "a": "updatePosition",
+                "user_id": userId,
+                "longitude":String(coordinate!.longitude),
+                "latitude": String(coordinate!.latitude)
+            ]
+            
+            YNHttpNearBy().updatePositionWithParam(params, successFull: { (json) -> Void in
+                
+                
+                if let status = json["status"] as? Int {
+                    
+                    if status == 1 {
+                        
+                        print("用户位置更新成功")
+                        
+                    } else if status == 0 {
+                        
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            YNProgressHUD().showText(msg, toView: self.view)
+                            print("用户位置更新失败: \(msg)")
+                        }
+                    }
+                    
+                }
+                
+                
+                }, failureFul: { (error) -> Void in
+                    
+                    
+                    YNProgressHUD().showText("数据加载失败", toView: self.view)
+            })
+        
+        } else {
+        
+            //没登录不用更新
+        }
+        
+    }
     
     //MARK: - get data from server
-    func getDataFromServer() {
+    func getNearUserPositionFromServer(role: String?) {
+
+        if let _ = self.coordinate {
         
-        let lat = "\(self.coordinate!.latitude)"
-        let lon = "\(self.coordinate!.longitude)"
-        
-        let params: [String: String?] = ["key":"edge5de7se4b5xd",
-                   "action": "getnearmark",
-                     "type": "restaurant",
-                      "lat": lat,
-                      "lon": lon]
-        
-        self.titleView.start()
-        
-        Network.get(kURL, params: params  , success: { (data, response, error) -> Void in
-    
-            self.titleView.end()
-            self.isLoadData = false
+            
+            let params: [String: String?] = ["m": "Appapi",
+                "key": "KSECE20XE15DKIEX3",
+                "c": "UserPosition",
+                "a": "nearUser",
+                "user_id": nil,
+                "longitude": String(coordinate!.longitude),
+                "latitude": String(coordinate!.latitude),
+                "role": role
+            ]
+            
+            self.titleView.start()
+            
+            YNHttpNearBy().nearUserPositionWithParam(params, successFull: { (json) -> Void in
+                
+                self.titleView.end()
+                self.isLoadData = false
+                
+                print("data - \(json)\n")
+                
+                if let status = json["status"] as? Int {
+                    
+                    if status == 1 {
+                        
+                        if let tempArray = json["data"] as? NSArray {
+                            
+                            
+                            self.dataProcessing(tempArray)
+                            
+                        } else {
+                            
+                            YNProgressHUD().showText("数组不存在,此地区没有数据", toView: self.view)
+                        }
+                        
+                        
+                    } else if status == 0 {
+                        
+                        self.isLoadData = true
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            YNProgressHUD().showText(msg, toView: self.view)
+                        }
+                        
+                    }
+                    
+                }
+                
+                
+                
+                }) { (error) -> Void in
+                    
+                    self.titleView.end()
+                    YNProgressHUD().showText("请求失败,请检查网络", toView: self.view)
+                    self.isLoadData = true
+                    
+            }
             
             
-//            let json: NSDictionary! =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
-//           
-////                print("data - \(json)\n")
-//            
-//                if let status = json["status"] as? Int {
-//                    
-//                    if status == 1 {
-//                        
-//                        if let restaurantArray = json["data"] as? NSArray {
-//                        
-//                            
-//                            self.dataProcessing(restaurantArray)
-//                            
-//                        } else {
-//                       
-//                            YNProgressHUD().showText("数组不存在,此地区没有数据", toView: self.view)
-//                        }
-//                        
-//                        
-//                    } else if status == 0 {
-//                        
-//                        self.isLoadData = true
-//                        
-//                        if let msg = json["msg"] as? String {
-//                            
-//                            YNProgressHUD().showText(msg, toView: self.view)
-//                        }
-//                        
-//                    }
-//                    
-//                }
-            
-            
-        }) { (error) -> Void in
+        } else {
         
-            self.titleView.end()
-            YNProgressHUD().showText("请求失败,请检查网络", toView: self.view)
-            self.isLoadData = true
+            print("无法加载附近数据")
         }
+       
+        
     }
     
     func dataProcessing(dataArray: NSArray) {
@@ -178,7 +237,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
        
             for restaurant in dataArray {
                 
-                let tempRestaurant = Restaurant(dict: restaurant as! NSDictionary)
+                let tempRestaurant = YNNearByModel(dict: restaurant as! NSDictionary)
                 self.dataArray.append(tempRestaurant)
                 
             }
@@ -234,8 +293,8 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         for var index = 0; index < self.dataArray.count; ++index {
        
-            let restaurant: Restaurant = self.dataArray[index]
-            let baseAnnotation: YNBaseAnnotation = YNBaseAnnotation(coordinate: restaurant.coordinate!)
+            let model: YNNearByModel = self.dataArray[index]
+            let baseAnnotation: YNBaseAnnotation = YNBaseAnnotation(coordinate: model.coordinate!)
             baseAnnotation.index = index
             self.mapView.addAnnotation(baseAnnotation)
             self.baseAnnocationArray?.addObject(baseAnnotation)
@@ -442,8 +501,16 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                 self.callOutAnnotation = callOutAnnotation
             }
             
-        } else {
             
+            
+        } else if view.annotation is YNCallOutAnnotation {
+            
+            //TODO: 进入个人主页界面
+            let tempCallOutAnnotation = view.annotation as? YNCallOutAnnotation
+            let introduceVc = YNUserIntroduceViewController()
+            introduceVc.model = self.dataArray[tempCallOutAnnotation!.index!]
+            self.navigationController?.pushViewController(introduceVc, animated: true)
+
             let temp:MKAnnotation = view.annotation!
             
             print(temp, terminator: "")
@@ -463,9 +530,13 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                 
             }, completion: { (finished) -> Void in
                 
+                if let _ = self.callOutAnnotation {
                 
-                self.mapView.removeAnnotation(self.callOutAnnotation!)
-                self.callOutAnnotation = nil
+                    self.mapView.removeAnnotation(self.callOutAnnotation!)
+                    self.callOutAnnotation = nil
+                }
+                
+               
                 
 //                if self.isDeleteAnnotation {
 //               
