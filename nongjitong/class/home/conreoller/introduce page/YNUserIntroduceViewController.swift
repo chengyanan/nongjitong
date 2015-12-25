@@ -24,4 +24,7 @@ class YNUserIntroduceViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.whiteColor()
     }
+    
+    
+    
 }

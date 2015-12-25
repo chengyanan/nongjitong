@@ -56,7 +56,7 @@ class YNSelectedCategoryViewController: UIViewController, UITableViewDataSource,
             
             progress.hideUsingAnimation()
             
-            print(json)
+//            print(json)
             
             if let status = json["status"] as? Int {
                 

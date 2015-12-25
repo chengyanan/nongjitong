@@ -10,19 +10,19 @@ import Foundation
 
 class YNHttpQuestion {
     
-    func getQuestionListWithClassID(classId: String?, successFull: ((json: NSDictionary)->Void)?, failureFul: ((error: NSError!)->Void)?) {
+    func getQuestionListWithClassID(params:[String: String?], successFull: ((json: NSDictionary)->Void)?, failureFul: ((error: NSError!)->Void)?) {
         
         //分类ID,如果指定了该ID，则返回该分类下的问题列表，否则返回全部问题列表
         //page默认20条
         
-        let params: [String: String?] = ["m": "Appapi",
-            "key": "KSECE20XE15DKIEX3",
-            "c": "QuestionManage",
-            "a": "getQuestionList",
-            "class_id": classId,
-            "page": nil,
-            "descript_length": nil
-        ]
+//        let params: [String: String?] = ["m": "Appapi",
+//            "key": "KSECE20XE15DKIEX3",
+//            "c": "QuestionManage",
+//            "a": "getQuestionList",
+//            "class_id": classId,
+//            "page": nil,
+//            "descript_length": nil
+//        ]
         
         Network.post(kURL, params: params, success: { (data, response, error) -> Void in
             

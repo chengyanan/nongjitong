@@ -90,8 +90,18 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: 加载问题数据
     func getQuestionListWithClassID(classId: String?) {
     
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "QuestionManage",
+            "a": "getQuestionList",
+            "class_id": classId,
+            "page": nil,
+            "descript_length": nil,
+            "is_outline": nil
+        ]
+        
         let progress = YNProgressHUD().showWaitingToView(self.view)
-        YNHttpQuestion().getQuestionListWithClassID(classId, successFull: { (json) -> Void in
+        YNHttpQuestion().getQuestionListWithClassID(params, successFull: { (json) -> Void in
             
             progress.hideUsingAnimation()
             
@@ -143,6 +153,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                 progress.hideUsingAnimation()
                 YNProgressHUD().showText("数据加载失败", toView: self.view)
         }
+        
     }
     
     //MARK: 加载关注数据

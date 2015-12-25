@@ -9,12 +9,17 @@
 import UIKit
 import CoreLocation
 import MapKit
-class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     let kAccuracy = 0.01
     
     let kLatitudeDelta = 0.0142737102703023
     let kLongitudeDelta = 0.0122213804488638
+    let tableViewHeight: CGFloat = 44
+    let itemSpacing: CGFloat = 3
+    
+    // 当前选中的Id
+    var classId: String = "0"
     
     lazy var titleView: YNNearbyTitleView = {
     
@@ -32,7 +37,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     }()
     
     lazy var locationManger: CLLocationManager = {
-        var tempLocationManager = CLLocationManager()
+        let tempLocationManager = CLLocationManager()
         tempLocationManager.pausesLocationUpdatesAutomatically = true
         tempLocationManager.delegate = self
         tempLocationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -45,7 +50,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         }()
     
     lazy var mapView: MKMapView = {
-        var tempMapView = MKMapView(frame: self.view.bounds)
+        let tempMapView = MKMapView(frame: self.view.bounds)
         tempMapView.mapType = MKMapType.Standard
         tempMapView.showsUserLocation = true
         tempMapView.userTrackingMode = MKUserTrackingMode.Follow
@@ -53,6 +58,8 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         return tempMapView
         }()
     
+    var collectionView: UICollectionView?
+    var nearByQuestionView: YNNearByQuestionView?
     
     var coordinate: CLLocationCoordinate2D? {
         
@@ -63,6 +70,8 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                 self.updateUserLocation()
            
                 self.getNearUserPositionFromServer(nil)
+                
+                self.nearByQuestionView?.coordinate = coordinate
             }
             
         }
@@ -87,6 +96,17 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     var dataArray = [YNNearByModel]()
     
+    //collectionViewdatasource
+    var selectedArray = [YNSelectedProductModel]() {
+    
+        didSet {
+
+            self.collectionView?.reloadData()
+            self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
+        }
+    
+    }
+    
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,13 +114,79 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         startLocate()
         
         self.view.addSubview(self.mapView)
-       
         self.navigationItem.titleView = self.titleView
+        
+        setInterface()
+    
+        var tempArray = [YNSelectedProductModel]()
+        let model0 = YNSelectedProductModel(id: "0", name: "全部")
+        model0.isSelected = true
+        let model1 = YNSelectedProductModel(id: "1", name: "生产者")
+        let model2 = YNSelectedProductModel(id: "2", name: "农资人")
+        let model3 = YNSelectedProductModel(id: "3", name: "经纪人")
+        tempArray.append(model0)
+        tempArray.append(model1)
+        tempArray.append(model2)
+        tempArray.append(model3)
+        
+        self.selectedArray = tempArray
+        
         
     
     }
     
+    func setInterface() {
+    
+        //collectionView
+        let flow = UICollectionViewFlowLayout()
+        flow.minimumInteritemSpacing = itemSpacing
+        flow.sectionInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        flow.scrollDirection = .Horizontal
+        
+        let tempCollectionView = UICollectionView(frame: CGRectMake(0, 64, self.view.frame.size.width, 44), collectionViewLayout: flow)
+        tempCollectionView.delegate = self
+        tempCollectionView.dataSource = self
+        tempCollectionView.backgroundColor = kRGBA(244, g: 244, b: 244, a: 0.8)
+        
+        tempCollectionView.registerClass(YNQuestionCollectionViewCell.self, forCellWithReuseIdentifier: "Cell_Collection_Question_List")
+        tempCollectionView.showsHorizontalScrollIndicator = false
+        self.view.addSubview(tempCollectionView)
+        self.collectionView = tempCollectionView
+        
+        //nearByQuestionView
+        let tempView = YNNearByQuestionView()
+        let leftMargin: CGFloat = 10
+        let bottomMargin: CGFloat = 8
+        let height: CGFloat = 88
+        let y = self.view.frame.size.height - bottomMargin - height - 49
+        let width = self.view.frame.size.width - leftMargin*2
+        tempView.frame = CGRectMake(leftMargin, y, width, height)
+        self.view.addSubview(tempView)
+        self.nearByQuestionView = tempView
+        
+        //addQuestionButton
+        let button = UIButton()
+        button.setImage(UIImage(named: "addNewNearQuestion"), forState: .Normal)
+        button.bounds = CGRectMake(0, 0, 49, 49)
+        let buttonX = self.view.frame.size.width - 30 - 12
+        let buttonY = y + height * 0.5
+        button.center = CGPointMake(buttonX, buttonY)
+        button.addTarget(self, action: "askQuestionButtonClick", forControlEvents: .TouchUpInside)
+        self.view.addSubview(button)
+        
+    }
+    
     //MARK: event response
+    
+    func askQuestionButtonClick() {
+    
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let askVc = mainStoryBoard.instantiateViewControllerWithIdentifier("SB_AskquestionVc") as! YNAskQuestionViewController
+        askVc.isOfflineQuestion = true
+        
+        self.navigationController?.pushViewController(askVc, animated: true)
+    }
+    
     @IBAction func leftBarButtonClicke(sender: AnyObject) {
         
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
@@ -164,7 +250,6 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
 
         if let _ = self.coordinate {
         
-            
             let params: [String: String?] = ["m": "Appapi",
                 "key": "KSECE20XE15DKIEX3",
                 "c": "UserPosition",
@@ -182,7 +267,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                 self.titleView.end()
                 self.isLoadData = false
                 
-                print("data - \(json)\n")
+//                print("data - \(json)\n")
                 
                 if let status = json["status"] as? Int {
                     
@@ -196,6 +281,8 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                         } else {
                             
                             YNProgressHUD().showText("数组不存在,此地区没有数据", toView: self.view)
+                            
+                            
                         }
                         
                         
@@ -234,6 +321,8 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     func dataProcessing(dataArray: NSArray) {
    
         if dataArray.count > 0 {
+            
+            self.dataArray.removeAll()
        
             for restaurant in dataArray {
                 
@@ -246,6 +335,11 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             
         } else {
        
+            self.dataArray.removeAll()
+            let tempArray = NSArray(array: self.baseAnnocationArray!)
+            self.mapView.removeAnnotations(tempArray as! [MKAnnotation])
+            self.baseAnnocationArray?.removeAllObjects()
+            
             YNProgressHUD().showText("此地区没有数据", toView: self.view)
         }
         
@@ -587,6 +681,73 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
 //        
 //        self.locationManger.stopUpdatingLocation()
         
+    }
+    
+    
+    
+    //MARK:UICollectionViewDataSource
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if selectedArray.count > 0 {
+            
+            return selectedArray.count
+        }
+        
+        return 0
+    }
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let identify = "Cell_Collection_Question_List"
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNQuestionCollectionViewCell
+        cell.productModel = selectedArray[indexPath.item]
+        
+        return cell
+        
+    }
+    
+    //MARK:UICollectionViewDelegateFlowLayout
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        let model = selectedArray[indexPath.item]
+        let width = widthForView(model.class_name, font: UIFont.systemFontOfSize(17))
+        
+        return CGSize(width: width + 12, height: tableViewHeight - 1)
+        
+    }
+    
+    func widthForView(text:String, font:UIFont) -> CGFloat{
+        let label:UILabel = UILabel(frame: CGRectMake(0, 0, CGFloat.max, CGFloat.max))
+        label.numberOfLines = 1
+        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        return label.frame.width
+    }
+    
+    //MARK: collectionView delegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let model = self.selectedArray[indexPath.row]
+        model.isSelected = true
+        
+        self.classId = model.class_id
+        
+        //加载新数据
+        self.getNearUserPositionFromServer(model.class_id)
+        
+        collectionView.reloadItemsAtIndexPaths([indexPath])
+        collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let model = self.selectedArray[indexPath.row]
+        model.isSelected = false
+        
+        collectionView.reloadItemsAtIndexPaths([indexPath])
     }
     
     

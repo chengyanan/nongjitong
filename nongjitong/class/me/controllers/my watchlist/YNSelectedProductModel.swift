@@ -18,6 +18,12 @@ class YNSelectedProductModel {
 
     init() {}
     
+    init(id: String, name: String) {
+    
+        self.class_id = id
+        self.class_name = name
+    }
+    
     init(dict: NSDictionary) {
         
         self.class_id = dict["class_id"] as! String

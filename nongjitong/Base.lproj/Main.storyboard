@@ -1323,7 +1323,7 @@
         <!--提问-->
         <scene sceneID="8zQ-7O-29x">
             <objects>
-                <viewController id="Fsx-bZ-U0G" customClass="YNAskQuestionViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SB_AskquestionVc" hidesBottomBarWhenPushed="YES" id="Fsx-bZ-U0G" customClass="YNAskQuestionViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5xg-P0-jyw"/>
                         <viewControllerLayoutGuide type="bottom" id="5p3-dx-HBu"/>

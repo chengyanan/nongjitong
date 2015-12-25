@@ -13,6 +13,9 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var isOfflineQuestion = false
+    
+    
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,10 +155,19 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     //MARK: event response
     @IBAction func cancle(sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true) { () -> Void in
+       if self.navigationController?.viewControllers.count <= 1 {
+        
+            self.dismissViewControllerAnimated(true) { () -> Void in
+                
+                
+            }
             
+       } else {
+        
+            self.navigationController?.popViewControllerAnimated(true)
             
-        }
+       }
+        
         
     }
     
@@ -186,11 +198,13 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     //MARK: Http send 
     func sendQusetionToServer() {
         
+        let action = self.isOfflineQuestion ? "addOfflineQuestion" : "addQuestion"
+        
         //TODO: 还没有加图片  然后测试
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
             "c": "QuestionManage",
-            "a": "addQuestion",
+            "a": action,
             "user_id": self.askQuestionModel.user_id,
             "descript": self.askQuestionModel.descript,
             "class_id": self.askQuestionModel.class_id,
@@ -222,10 +236,19 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.8 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
                         
                         //退出控制器
-                        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                        if self.navigationController?.viewControllers.count <= 1 {
                             
+                            self.dismissViewControllerAnimated(true) { () -> Void in
+                                
+                                
+                            }
                             
-                        })
+                        } else {
+                            
+                            self.navigationController?.popViewControllerAnimated(true)
+                            
+                        }
+                        
                     }
                     
                     
