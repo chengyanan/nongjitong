@@ -12,7 +12,7 @@ class YNCallOutAnnotationView: MKAnnotationView {
 
     let kArror_height: CGFloat = 12//气泡尖角的高度
     let kCenterOffsetY: CGFloat = -73//中心点的Y向上偏移的高度
-    let kSelfViewWidth: CGFloat = 170//自己的宽度
+    let kSelfViewWidth: CGFloat = 160//自己的宽度
     let kSelfViewHeight: CGFloat = 76//自己的高度
     
     lazy var contentView: UIView = {

@@ -9,14 +9,14 @@
 import UIKit
 import CoreLocation
 import MapKit
-class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, YNNearByQuestionViewDelegate {
 
     let kAccuracy = 0.01
     
     let kLatitudeDelta = 0.0142737102703023
     let kLongitudeDelta = 0.0122213804488638
     let tableViewHeight: CGFloat = 44
-    let itemSpacing: CGFloat = 3
+    let itemSpacing: CGFloat = 6
     
     // 当前选中的Id
     var classId: String = "0"
@@ -107,6 +107,36 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     }
     
+    var collectionViewLeftRightInset: CGFloat {
+    
+        var temp: CGFloat = 0
+        var margin: CGFloat = 0
+        
+        if self.selectedArray.count > 0 {
+        
+            for item in self.selectedArray {
+        
+                let width = widthForView(item.class_name, font: UIFont.systemFontOfSize(17))
+                
+                temp += width + 12
+            }
+            
+            let distant = self.view.frame.size.width - 15*2 - temp
+            
+            if  distant > 0 {
+            
+                margin = (self.view.frame.size.width - temp) * 0.5
+                
+            } else {
+            
+                margin = 15
+            }
+            
+        }
+        
+        return margin
+    }
+    
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,8 +145,6 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         self.view.addSubview(self.mapView)
         self.navigationItem.titleView = self.titleView
-        
-        setInterface()
     
         var tempArray = [YNSelectedProductModel]()
         let model0 = YNSelectedProductModel(id: "0", name: "全部")
@@ -130,9 +158,19 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         tempArray.append(model3)
         
         self.selectedArray = tempArray
-        
-        
     
+        setInterface()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let _ = self.coordinate {
+        
+            self.nearByQuestionView?.coordinate = self.coordinate
+        }
+        
+        
     }
     
     func setInterface() {
@@ -140,7 +178,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         //collectionView
         let flow = UICollectionViewFlowLayout()
         flow.minimumInteritemSpacing = itemSpacing
-        flow.sectionInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        flow.sectionInset = UIEdgeInsets(top: 0, left: collectionViewLeftRightInset, bottom: 0, right: collectionViewLeftRightInset)
         flow.scrollDirection = .Horizontal
         
         let tempCollectionView = UICollectionView(frame: CGRectMake(0, 64, self.view.frame.size.width, 44), collectionViewLayout: flow)
@@ -152,15 +190,24 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         tempCollectionView.showsHorizontalScrollIndicator = false
         self.view.addSubview(tempCollectionView)
         self.collectionView = tempCollectionView
+        //默认选中第一个
+        self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
         
         //nearByQuestionView
         let tempView = YNNearByQuestionView()
         let leftMargin: CGFloat = 10
         let bottomMargin: CGFloat = 8
-        let height: CGFloat = 88
+        var height: CGFloat = 120
+        
+        if kIS_iPhone6Above() {
+        
+            height = 150
+        }
+        
         let y = self.view.frame.size.height - bottomMargin - height - 49
         let width = self.view.frame.size.width - leftMargin*2
         tempView.frame = CGRectMake(leftMargin, y, width, height)
+        tempView.delegate = self
         self.view.addSubview(tempView)
         self.nearByQuestionView = tempView
         
@@ -270,6 +317,8 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
 //                print("data - \(json)\n")
                 
                 if let status = json["status"] as? Int {
+                    
+                    self.showMyLocation(self.coordinate!)
                     
                     if status == 1 {
                         
@@ -599,15 +648,16 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             
         } else if view.annotation is YNCallOutAnnotation {
             
-            //TODO: 进入个人主页界面
+            //进入个人主页界面
             let tempCallOutAnnotation = view.annotation as? YNCallOutAnnotation
-            let introduceVc = YNUserIntroduceViewController()
-            introduceVc.model = self.dataArray[tempCallOutAnnotation!.index!]
-            self.navigationController?.pushViewController(introduceVc, animated: true)
-
-            let temp:MKAnnotation = view.annotation!
             
-            print(temp, terminator: "")
+            let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+            let introduceVc = mainStoryBoard.instantiateViewControllerWithIdentifier("SB_User_introduce") as? YNUserIntroduceViewController
+            introduceVc?.model = self.dataArray[tempCallOutAnnotation!.index!]
+            
+            self.navigationController?.pushViewController(introduceVc!, animated: true)
+
+
         }
         
     }
@@ -732,7 +782,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         let model = self.selectedArray[indexPath.row]
         model.isSelected = true
         
-        self.classId = model.class_id
+        self.classId = model.class_id!
         
         //加载新数据
         self.getNearUserPositionFromServer(model.class_id)
@@ -750,5 +800,12 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         collectionView.reloadItemsAtIndexPaths([indexPath])
     }
     
+    //MARK: YNNearByQuestionViewDelegate
+    func nearByQuestionViewDidSelectedRow() {
+        
+        let offlineQuestionvc = YNOfflineQuestionListViewController()
+        self.navigationController?.pushViewController(offlineQuestionvc, animated: true)
+        
+    }
     
 }

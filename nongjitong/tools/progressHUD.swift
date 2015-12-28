@@ -43,7 +43,7 @@ class ProgressHUD: UIView {
     let kFont = UIFont.boldSystemFontOfSize(16)
     let kCornerRadius: CGFloat = 10
     let kBackgroundColor = kRGBA(0, g: 0, b: 0, a: 0.9)
-    
+    var timeInterval: Int = 60
     var timer: NSTimer?
     var textRealWidth: CGFloat?
     var mode: ProgressHUDMode? {
@@ -157,6 +157,8 @@ class ProgressHUD: UIView {
         }) { (Bool) -> Void in
             
             self.removeFromSuperview()
+            
+            self.timer?.invalidate()
         }
         
     }
@@ -167,11 +169,34 @@ class ProgressHUD: UIView {
         
         self.backgroundColor = UIColor.clearColor()
         self.alpha = 0
+        
+        self.timer = NSTimer(timeInterval: 1, target: self, selector: "addOneSecond", userInfo: nil, repeats: true)
+        self.timer?.fire()
+        
+        NSRunLoop.mainRunLoop().addTimer(self.timer!, forMode: NSRunLoopCommonModes)
+    }
+    
+    func addOneSecond() {
+        
+        self.timeInterval -= 1
+        
+        print(self.timeInterval)
+        if self.timeInterval > 0 {
+            
+            
+        } else {
+            
+            self.timer?.invalidate()
+            
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
+    
+    
     
 }

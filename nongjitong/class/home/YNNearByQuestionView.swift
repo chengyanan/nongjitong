@@ -9,8 +9,15 @@
 import UIKit
 import CoreLocation
 
+protocol YNNearByQuestionViewDelegate {
+
+    func nearByQuestionViewDidSelectedRow()
+}
+
 class YNNearByQuestionView: UIView, UITableViewDataSource, UITableViewDelegate {
 
+    
+    var delegate: YNNearByQuestionViewDelegate?
     
     var coordinate: CLLocationCoordinate2D? {
     
@@ -33,14 +40,14 @@ class YNNearByQuestionView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         self.layer.cornerRadius = 3
         self.clipsToBounds = true
+        self.hidden = true
+        self.alpha = 0.9
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        
-        self.hidden = true
-        
         self.addSubview(tableView)
+    
     }
 
     
@@ -58,11 +65,10 @@ class YNNearByQuestionView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         YNHttpQuestion().getQuestionListWithClassID(params, successFull: { (json) -> Void in
             
-
             
             if let status = json["status"] as? Int {
                 
-            print(json)
+//            print(json)
                 
                 if status == 1 {
                     
@@ -81,12 +87,14 @@ class YNNearByQuestionView: UIView, UITableViewDataSource, UITableViewDelegate {
                         
                         self.tableView.reloadData()
                         
+                        self.hidden = false
+                        
                     } else {
                         
                         //没有数据
     
-                        self.tableViewDataArray.removeAll()
-                        self.tableView.reloadData()
+//                        self.tableViewDataArray.removeAll()
+//                        self.tableView.reloadData()
                     }
                     
                     
@@ -112,22 +120,35 @@ class YNNearByQuestionView: UIView, UITableViewDataSource, UITableViewDelegate {
     //MARK:UITableViewDataSource 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        return self.tableViewDataArray.count
     }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let identifier = "CELL_NearByQuestion"
+        let identifier = "CELL_MyQuestion"
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier)
+        var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? YNMYQuestionTableViewCell
         
         if cell == nil {
-        
-            cell = UITableViewCell(style: .Default, reuseIdentifier: identifier)
+            
+            cell = YNMYQuestionTableViewCell(style: .Default, reuseIdentifier: identifier)
         }
         
-        cell?.textLabel?.text = "reose"
+        cell?.model = self.tableViewDataArray[indexPath.row]
         
         return cell!
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        let model = self.tableViewDataArray[indexPath.row]
+        
+        if model.descript == "" {
+            
+            return model.myQuestionCellHeight! + 20
+        }
+        
+        return model.myQuestionCellHeight!
     }
     
     override func layoutSubviews() {
@@ -140,5 +161,13 @@ class YNNearByQuestionView: UIView, UITableViewDataSource, UITableViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    //MARK: tableView delegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //告诉代理跳到线下救援列表
+        self.delegate?.nearByQuestionViewDidSelectedRow()
+        
+    }
     
 }

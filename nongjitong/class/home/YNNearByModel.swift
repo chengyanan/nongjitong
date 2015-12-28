@@ -15,8 +15,15 @@ class YNNearByModel {
     var user_name: String?
     var latitude: String?
     var longitude: String?
-    var range: String?
+    var range: Int?
+    var avatar: String?
+    var role: String?
+    
+    var area: String?
+    var mobile: String?
+    
     var coordinate: CLLocationCoordinate2D?
+    
     
     init() {
         
@@ -28,7 +35,12 @@ class YNNearByModel {
         self.user_name = dict["user_name"] as? String
         self.latitude = dict["latitude"] as? String
         self.longitude = dict["longitude"] as? String
-        self.range = dict["range"] as? String
+        self.range = dict["range"] as? Int
+        self.avatar = dict["avatar"] as? String
+        self.role = dict["role"] as? String
+        
+        self.area = dict["area"] as? String
+        self.mobile = dict["mobile"] as? String
         
         self.coordinate = CLLocationCoordinate2DMake(Double(self.latitude!)!, Double(self.longitude!)!)
 

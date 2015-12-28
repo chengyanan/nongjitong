@@ -492,11 +492,11 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
         
             if i == (selectedArray.count - 1) {
             
-                classId += selectedArray[i].class_id
+                classId += selectedArray[i].class_id!
                 
             } else {
             
-                classId += selectedArray[i].class_id + ","
+                classId += selectedArray[i].class_id! + ","
             }
         }
         

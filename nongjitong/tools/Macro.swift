@@ -53,7 +53,7 @@ let kScreenHeight = UIScreen.mainScreen().bounds.size.height
 
 func kIS_iPhone4() ->Bool { return kScreenHeight == 480}
 func kIS_iPhone5() ->Bool { return kScreenHeight == 568}
-func kIS_iPhone6() ->Bool {return kScreenHeight == 667}
+func kIS_iPhone6Above() ->Bool {return kScreenHeight >= 667}
 
 func kIOS7() ->Bool { return atof(UIDevice.currentDevice().systemVersion) < 8 }
 

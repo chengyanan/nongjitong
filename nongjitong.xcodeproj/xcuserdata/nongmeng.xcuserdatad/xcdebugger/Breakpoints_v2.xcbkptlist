@@ -37,22 +37,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "nongjitong/class/question/YNQuestionViewController.swift"
-            timestampString = "472728087.037004"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "loadWatchList()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "nongjitong/class/home/conreoller/ask question/YNAskQuestionViewController.swift"
             timestampString = "472725182.234987"
             startingColumnNumber = "9223372036854775807"
@@ -60,22 +44,6 @@
             startingLineNumber = "201"
             endingLineNumber = "201"
             landmarkName = "sendQusetionToServer()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "nongjitong/class/home/YNNearByQuestionView.swift"
-            timestampString = "472728613.02571"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "loadDataFromServer()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

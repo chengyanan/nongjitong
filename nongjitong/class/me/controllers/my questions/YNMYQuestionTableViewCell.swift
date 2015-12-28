@@ -48,6 +48,8 @@ class YNMYQuestionTableViewCell: UITableViewCell {
         self.contentView.addSubview(state)
         self.contentView.addSubview(answerCountAndPostTime)
         
+        self.selectionStyle = .None
+        
         setLayout()
     }
 

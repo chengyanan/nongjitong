@@ -1,17 +1,17 @@
 //
-//  YNQuestionViewController.swift
+//  YNOfflineQuestionListViewController.swift
 //  nongjitong
 //
-//  Created by 农盟 on 15/11/16.
+//  Created by 农盟 on 15/12/28.
 //  Copyright © 2015年 农盟. All rights reserved.
 //
 
 import UIKit
 
-class YNQuestionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    var isOutLine = "N"
-
+    var isOutLine = "Y"
+    
     let leftRightMargin: CGFloat = 10
     let itemSpacing: CGFloat = 3
     let tableViewHeight: CGFloat = 44
@@ -28,13 +28,20 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     // 当前问题的classId
     var classId: String? = nil
-    //
-    var currentClassIdIndex: Int = 0
     
     //加载当前的页数
     var pageCount = 1
     
     //MARK: life cycle
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        
+        self.hidesBottomBarWhenPushed = true
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +54,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         setupInterface()
         setLayout()
         
-//        loadDataFromServer()
+        //        loadDataFromServer()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -72,7 +79,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     func loadDataFromServer() {
         
         if let _ = kUser_ID() as? String {
-        
+            
             //已登陆，加载关注数据
             loadWatchList()
             
@@ -97,15 +104,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     //MARK: 加载问题数据
     func getQuestionListWithClassID(classId: String?) {
-    
-        
         
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
             "c": "QuestionManage",
             "a": "getQuestionList",
             "class_id": classId,
-            "page": "\(pageCount)",
+            "page": nil,
             "descript_length": nil,
             "is_outline": isOutLine
         ]
@@ -117,7 +122,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
             
             if let status = json["status"] as? Int {
                 
-//                print(json)
+                //                print(json)
                 
                 if status == 1 {
                     
@@ -135,11 +140,10 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                         }
                         
                         self.tableView?.reloadData()
-                        
                         self.pageCount += 1
                         
                     } else {
-                    
+                        
                         //没有数据
                         
                         YNProgressHUD().showText("当前分类下没有相关问题", toView: self.view)
@@ -161,7 +165,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
             
             
             }) { (error) -> Void in
-               
+                
                 progress.hideUsingAnimation()
                 YNProgressHUD().showText("数据加载失败", toView: self.view)
         }
@@ -170,12 +174,12 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     //MARK: 加载关注数据
     func loadWatchList() {
-    
+        
         let progress = YNProgressHUD().showWaitingToView(self.view)
         YNWatchHttp.getUserSpecialty({ (json) -> Void in
             progress.hideUsingAnimation()
             
-//            print("data - \(json)")
+            //            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -187,11 +191,8 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                     
                     let newmodel = YNSelectedProductModel()
                     newmodel.class_name = "最新"
-                    newmodel.class_id = nil
-//                    newmodel.isSelected = true
+                    newmodel.isSelected = true
                     self.selectedArray.append(newmodel)
-                    
-                    var isExist = false
                     
                     if tempdata.count > 0 {
                         
@@ -199,38 +200,15 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                             
                             let model = YNSelectedProductModel(dict: tempdata[i] as! NSDictionary)
                             
-                            if self.classId == model.class_id {
-                            
-                                model.isSelected = true
-                                isExist = true
-                                
-                                self.currentClassIdIndex = i + 1
-                            }
-                            
                             self.selectedArray.append(model)
-                            
                         }
-                        
-                        if isExist {
-                        
-                            self.collectionView?.reloadData()
-                            self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: self.currentClassIdIndex, inSection: 0), animated: false, scrollPosition: .None)
-                            
-                        } else {
-                        
-                            newmodel.isSelected = true
-                            self.collectionView?.reloadData()
-                            self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
-                        }
-                        
-                        
-                    }  else {
-                        
-                        //没有数据
-                        newmodel.isSelected = true
                         
                         self.collectionView?.reloadData()
                         self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
+                        
+                    }  else {
+                        
+                        //                        YNProgressHUD().showText("没有数据", toView: self.view)
                     }
                     
                     
@@ -267,15 +245,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         tempTableView.dataSource = self
         tempTableView.separatorStyle = .None
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
-        tempTableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0)
-        
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
         
         //collectionView
         let flow = UICollectionViewFlowLayout()
         flow.minimumInteritemSpacing = itemSpacing
-        flow.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        flow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         flow.scrollDirection = .Horizontal
         
         let tempCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: flow)
@@ -291,7 +267,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func setLayout() {
-    
+        
         //collectionView
         Layout().addTopConstraint(collectionView!, toView: self.view, multiplier: 1, constant: 64)
         Layout().addLeftConstraint(collectionView!, toView: self.view, multiplier: 1, constant: 0)
@@ -302,7 +278,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         Layout().addTopToBottomConstraint(tableView!, toView: collectionView!, multiplier: 1, constant: 0)
         Layout().addLeftConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: -49)
+        Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         
     }
     
@@ -325,7 +301,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNQuestionTableViewCell
         
         if cell == nil {
-        
+            
             cell = YNQuestionTableViewCell(style: .Default, reuseIdentifier: identify)
         }
         
@@ -359,7 +335,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if selectedArray.count > 0 {
-        
+            
             return selectedArray.count
         }
         
@@ -371,7 +347,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNQuestionCollectionViewCell
         cell.productModel = selectedArray[indexPath.item]
-
+        
         return cell
         
     }
@@ -399,18 +375,16 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: collectionView delegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-            let model = self.selectedArray[indexPath.row]
-            model.isSelected = true
+        let model = self.selectedArray[indexPath.row]
+        model.isSelected = true
         
-            self.classId = model.class_id
+        self.classId = model.class_id
+        self.pageCount = 1
+        //加载新数据
+        getQuestionListWithClassID(model.class_id)
         
-            self.pageCount = 1
-        
-            //加载新数据
-            getQuestionListWithClassID(model.class_id)
-        
-            collectionView.reloadItemsAtIndexPaths([indexPath])
-            collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
+        collectionView.reloadItemsAtIndexPaths([indexPath])
+        collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
         
     }
     
@@ -426,13 +400,5 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         
         print("YNQuestionViewController didReceiveMemoryWarning")
     }
-    
-    //MARK: scrollView delegate
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        
-//       print("scrollView.contentOffset.y \(scrollView.contentOffset.y)")
-//        
-//    }
-    
     
 }
