@@ -46,7 +46,6 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
         super.viewWillAppear(animated)
         
         self.view.endEditing(true)
-//        self.view.addSubview(self.finishView!)
         
         UIApplication.sharedApplication().keyWindow?.addSubview(self.finishView!)
     }
@@ -57,8 +56,7 @@ class YNSearchViewController: UIViewController, UISearchBarDelegate, UITableView
         self.finishView?.removeFromSuperview()
     }
     
-    //MARK: event response
-    
+    //MARK: event response    
     @IBAction func leftBarButtonClick(sender: AnyObject) {
         
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
