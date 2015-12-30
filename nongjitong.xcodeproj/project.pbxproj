@@ -43,7 +43,6 @@
 		40519C5B1BD74B2F00A8BE65 /* YNSearchResaultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40519C5A1BD74B2F00A8BE65 /* YNSearchResaultModel.swift */; };
 		406732AB1BFC56570071F6EA /* YNQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406732AA1BFC56570071F6EA /* YNQuestionTableViewCell.swift */; };
 		406805AE1C324E9C009FC170 /* YNNewSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406805AD1C324E9C009FC170 /* YNNewSearchViewController.swift */; };
-		406805B01C3271E1009FC170 /* YNSearchResaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406805AF1C3271E1009FC170 /* YNSearchResaultViewController.swift */; };
 		406CBBEC1BFEDBCE000584D4 /* YNScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */; };
 		408BE0541BE704CD00A210A4 /* YNTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BE0531BE704CD00A210A4 /* YNTextView.swift */; };
 		408BE8A81C294BFA00B980AD /* YNMYQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */; };
@@ -170,7 +169,6 @@
 		40519C5A1BD74B2F00A8BE65 /* YNSearchResaultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchResaultModel.swift; sourceTree = "<group>"; };
 		406732AA1BFC56570071F6EA /* YNQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		406805AD1C324E9C009FC170 /* YNNewSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNNewSearchViewController.swift; sourceTree = "<group>"; };
-		406805AF1C3271E1009FC170 /* YNSearchResaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchResaultViewController.swift; sourceTree = "<group>"; };
 		406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNScaleView.swift; sourceTree = "<group>"; };
 		408BE0531BE704CD00A210A4 /* YNTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNTextView.swift; sourceTree = "<group>"; };
 		408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMYQuestionTableViewCell.swift; sourceTree = "<group>"; };
@@ -362,7 +360,6 @@
 			isa = PBXGroup;
 			children = (
 				406805AD1C324E9C009FC170 /* YNNewSearchViewController.swift */,
-				406805AF1C3271E1009FC170 /* YNSearchResaultViewController.swift */,
 				40292E4D1BD6311B0028F87C /* YNSearchViewController.swift */,
 				40F830E41BD7878A00C1F0BB /* controllers */,
 				40F830E11BD781CB00C1F0BB /* view */,
@@ -916,7 +913,6 @@
 				40DDBCE41C0C3A5B0007211A /* YNQuestionModel.swift in Sources */,
 				404E0BB01C1696D500924D5A /* YNAnswerModel.swift in Sources */,
 				4048E3FB1C2BBEDB0035C415 /* YNNearByModel.swift in Sources */,
-				406805B01C3271E1009FC170 /* YNSearchResaultViewController.swift in Sources */,
 				401AD6931BF0522200E747BF /* YNCategoeyModel.swift in Sources */,
 				40F830E61BD787B600C1F0BB /* YNSearchResaultDetailViewController.swift in Sources */,
 				4010A6861C30DDF700A38075 /* YNOfflineQuestionListViewController.swift in Sources */,

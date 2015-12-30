@@ -81,7 +81,7 @@ class YNSearchResaultDetailViewController: UIViewController, UIWebViewDelegate {
             
             let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
             
-//            print("data - \(json)")
+            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -99,7 +99,7 @@ class YNSearchResaultDetailViewController: UIViewController, UIWebViewDelegate {
                     
                     if let msg = json["msg"] as? String {
                         
-                        YNProgressHUD().showText(msg, toView: self.view)
+                        YNProgressHUD().showText("没有文章详情", toView: self.view)
                     }
                 }
                 
