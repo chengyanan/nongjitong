@@ -1554,7 +1554,7 @@
         <!--Search Resault Detail View Controller-->
         <scene sceneID="h41-m7-LSe">
             <objects>
-                <viewController storyboardIdentifier="SB_Resault_Details" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1rA-Dk-cw1" customClass="YNSearchResaultDetailViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SB_Resault_Details" id="1rA-Dk-cw1" customClass="YNSearchResaultDetailViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oaV-qw-fV5"/>
                         <viewControllerLayoutGuide type="bottom" id="V2Z-e9-IaX"/>
@@ -1646,19 +1646,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RhW-aQ-BwN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1739" y="272"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="map-IQ-R3g">
-            <objects>
-                <navigationController id="CXx-Za-Mfb" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="faV-34-atx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nyg-S9-8qc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="253" y="240"/>
         </scene>
         <!--预警-->
         <scene sceneID="Lb9-8i-nFb">

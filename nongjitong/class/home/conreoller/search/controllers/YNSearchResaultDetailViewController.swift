@@ -97,7 +97,7 @@ class YNSearchResaultDetailViewController: UIViewController, UIWebViewDelegate {
                     
                 } else if status == 0 {
                     
-                    if let msg = json["msg"] as? String {
+                    if let _ = json["msg"] as? String {
                         
                         YNProgressHUD().showText("没有文章详情", toView: self.view)
                     }
