@@ -113,4 +113,24 @@ class YNSearchResaultDetailViewController: UIViewController, UIWebViewDelegate {
 
     }
     
+    
+    //MARK: event response
+    
+    @IBAction func relatedQuestions(sender: AnyObject) {
+        
+        let vc = YNSearchResaultQuestionViewController()
+        vc.docId = self.searchresault?.id
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    @IBAction func solutionList(sender: AnyObject) {
+        
+        let vc = YNSearchResaultSolutionViewController()
+        vc.searchresault = self.searchresault
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
 }

@@ -10,22 +10,11 @@ import UIKit
 
 
 class YNSearchResaultCell: UITableViewCell {
-    
-    
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        let tgr = UITapGestureRecognizer(target: self, action: "clickme")
-//        
-//        self.contentView.addGestureRecognizer(tgr)
     }
-
-//    func clickme() {
-//    
-//        print
-//    }
-    
     
     
     //MARK: - public proporty

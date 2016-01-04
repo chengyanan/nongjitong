@@ -14,7 +14,17 @@ protocol YNSearchViewControllerDelegate {
 }
 
 class YNSearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
-
+    
+    var isSearchResault = true
+    
+    var model: YNSearchCatagoryModel? {
+    
+        didSet {
+        
+            //MARK: 加载搜索结果
+            search()
+        }
+    }
     
     var delegate: YNSearchViewControllerDelegate?
     
@@ -65,6 +75,8 @@ class YNSearchViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "相关文章"
         
 //        self.searchBar.delegate = self
 //        self.navigationItem.titleView = self.searchBar
@@ -216,15 +228,34 @@ class YNSearchViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func search() {
         
-        let params: [String: String?] = ["m": "Appapi",
+        let params: [String: String?]
+        
+        
+        if isSearchResault {
+            //搜索结果(默认)
+            params = ["m": "Appapi",
                 "key": "KSECE20XE15DKIEX3",
                 "c": "Search",
                 "a": "search",
                 "keyword": self.searchText,
                 "page": String(page),
                 "pagecount": "\(pagecount)"
-                ]
+            ]
             
+        } else {
+        
+            //相关文章列表
+            params = ["m": "Appapi",
+                "key": "KSECE20XE15DKIEX3",
+                "c": "Search",
+                "a": "getCatDocs",
+                "cid": model?.cid,
+                "page": String(page),
+                "page_size": "\(pagecount)"
+            ]
+            
+        }
+        
             let progress = YNProgressHUD().showWaitingToView(self.view)
             
             Network.post(kURL, params: params, success: { (data, response, error) -> Void in
@@ -352,10 +383,23 @@ class YNSearchViewController: UIViewController, UITableViewDataSource, UITableVi
         
         } else {
         
-            //MARK: 通知代理跳到详情页面
+            if self.isSearchResault {
             
-            let model = self.resaultArray![indexPath.row]
-            self.delegate?.searchViewControllerDidSelectRowAtIndexPath(model)
+                //MARK: 通知代理跳到详情页面
+                let model = self.resaultArray![indexPath.row]
+                self.delegate?.searchViewControllerDidSelectRowAtIndexPath(model)
+                
+            } else {
+            
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                
+                let vc = storyBoard.instantiateViewControllerWithIdentifier("SB_Resault_Details") as! YNSearchResaultDetailViewController
+                
+                vc.searchresault = self.resaultArray![indexPath.row]
+                
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            
             
         }
         

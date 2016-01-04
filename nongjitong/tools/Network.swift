@@ -85,7 +85,7 @@ class NetworkManager {
     
     init(method: String, url: String, params: [String: String?], files : Array<File> = [File](), success: (data: NSData, response: NSURLResponse, error: NSError?)->Void, failure: (error: NSError)->Void) {
    
-        self.method = method
+        self.method = method 
         self.url = url
         self.params = params
         self.success = success

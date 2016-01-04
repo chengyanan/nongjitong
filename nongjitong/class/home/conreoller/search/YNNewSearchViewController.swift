@@ -20,6 +20,15 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
     
     var searchBar: UISearchBar!
     
+    var resaultArray = [YNSearchCatagoryModel]() {
+    
+        didSet {
+        
+            self.tableView.reloadData()
+        }
+        
+    }
+    
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,19 +64,80 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
         
         
         //MARK: 加载文章分类数据
-        
+        getCategoryFromServer()
     }
     
     func getCategoryFromServer() {
     
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "Search",
+            "a": "getCategory"
+        ]
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        
+        Network.post(kURL, params: params, success: { (data, response, error) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
+            
+            print("data - \(json)")
+            
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    let resaultData = json["data"] as! NSArray
+                    if resaultData.count > 0 {
+                        
+                        var tempArray = [YNSearchCatagoryModel]()
+                        
+                        for item in resaultData {
+                            
+                            let dict = item as! NSDictionary
+                            
+                            let resaultModel = YNSearchCatagoryModel(dict: dict)
+                            
+                            tempArray.append(resaultModel)
+                        }
+                        
+                        self.resaultArray = tempArray
+                        
+                    } else {
+                        
+                        //没数据
+                        YNProgressHUD().showText("对不起，没有相关文章分类", toView: self.view)
+                    }
+                    
+                    
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: self.view)
+                    }
+                }
+                
+            }
+            
+            }) { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("加载失败", toView: self.view)
+        }
+        
+        
         
     }
     
-    
-    
+
     //MARK: tableView datasource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        
+        return self.resaultArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -81,7 +151,11 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
             cell = UITableViewCell(style: .Value1, reuseIdentifier: identifer)
         }
         
-        cell?.textLabel?.text = "rose"
+        let model = self.resaultArray[indexPath.row]
+        
+        cell?.textLabel?.text = model.name
+        cell?.detailTextLabel?.text = "\(model.docs!)篇相关文章"
+        cell?.detailTextLabel?.font = UIFont.systemFontOfSize(13)
         
         return cell!
         
@@ -90,27 +164,11 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
     //MARK: tableView delegate 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if tableView == self.tableView {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SB_Search_Resault") as! YNSearchViewController
         
-        
-            
-            
-        } else {
-        
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let vc = storyBoard.instantiateViewControllerWithIdentifier("SB_Resault_Details") as! YNSearchResaultDetailViewController
-            
-//            vc.searchresault = model
-            
-            navigationController?.pushViewController(vc, animated: true)
-        }
-        
-    }
-    
-    //
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        
+        vc.isSearchResault = false
+        vc.model = self.resaultArray[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
         
     }
     
