@@ -24,6 +24,8 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
+    var rightItem: UIBarButtonItem?
+    
     @IBOutlet var segmentController: UISegmentedControl!
     @IBOutlet var tableView: UITableView!
     
@@ -33,9 +35,43 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
 
         self.tableView.tableFooterView = UIView()
         
-        loadData()
+        self.rightItem = UIBarButtonItem(title: "登录", style: .Plain, target: self, action: "login")
+        navigationItem.rightBarButtonItem = rightItem
     }
+    
+    func login() {
+    
+        //没有登录 跳登录界面
+        let signInVc = YNSignInViewController()
 
+        let navVc = UINavigationController(rootViewController: signInVc)
+
+        self.presentViewController(navVc, animated: true, completion: { () -> Void in
+            
+        })
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let uesrId = kUser_ID()
+        
+        if let _ = uesrId {
+            
+            navigationItem.rightBarButtonItem = nil
+            
+            self.tempResaultArray.removeAll()
+            
+            //登录加载数据
+            loadData()
+            
+        } else {
+        
+            navigationItem.rightBarButtonItem = self.rightItem
+        }
+        
+    }
     
     //MARK: event response
     @IBAction func leftbarButtonClick(sender: AnyObject) {
@@ -94,7 +130,7 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
             }
             
             cell?.earlyToMyProgramModel = self.resaultArray[indexPath.row]
-            
+                       
             return cell!
         }
         
@@ -217,7 +253,7 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
                     } else {
                         
                         //没数据
-                        YNProgressHUD().showText("还没有别人给我写的预警方案", toView: self.view)
+                        YNProgressHUD().showText("还没有相关数据", toView: self.view)
                         
                         self.resaultArray = [YNEarlyToMyProgramModel]()
                     }

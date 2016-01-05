@@ -20,7 +20,9 @@ class YNSearchSolutionCell: UITableViewCell {
             
             self.state.text = "推荐级别\(solutionModel!.recommend!)"
             
-            self.answerCountAndPostTime.text = solutionModel?.add_time
+            let str = "查看次数:\(solutionModel!.read_num!)  \(solutionModel!.add_time!)"
+            
+            self.answerCountAndPostTime.text = str
         }
         
     }
@@ -29,9 +31,24 @@ class YNSearchSolutionCell: UITableViewCell {
     
         didSet {
         
-            self.questionContent.text = earlyToMyProgramModel!.summary!
-            self.state.text = "作者: \(earlyToMyProgramModel!.user_name!)"
-            self.answerCountAndPostTime.text = earlyToMyProgramModel!.add_time!
+            if let _ = earlyToMyProgramModel {
+            
+                if let _ = earlyToMyProgramModel?.summary {
+                    
+                    self.questionContent.text = earlyToMyProgramModel!.summary!
+                } else {
+                    
+                    self.questionContent.text = earlyToMyProgramModel?.content
+                }
+                
+                
+                self.state.text = "作者: \(earlyToMyProgramModel!.user_name!)"
+                
+                let str = "查看次数:\(earlyToMyProgramModel!.read_num!)  \(earlyToMyProgramModel!.add_time!)"
+                
+                self.answerCountAndPostTime.text = str
+            }
+    
             
         }
         
@@ -44,7 +61,7 @@ class YNSearchSolutionCell: UITableViewCell {
         self.contentView.addSubview(state)
         self.contentView.addSubview(answerCountAndPostTime)
         
-        self.selectionStyle = .None
+//        self.selectionStyle = .None
         
         setLayout()
     }

@@ -137,6 +137,8 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         return margin
     }
     
+    var rightItem: UIBarButtonItem?
+    
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,16 +162,47 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         self.selectedArray = tempArray
     
         setInterface()
+        
+        
+        self.rightItem = UIBarButtonItem(title: "登录", style: .Plain, target: self, action: "login")
+        navigationItem.rightBarButtonItem = rightItem
+    }
+    
+    func login() {
+        
+        //没有登录 跳登录界面
+        let signInVc = YNSignInViewController()
+        
+        let navVc = UINavigationController(rootViewController: signInVc)
+        
+        self.presentViewController(navVc, animated: true, completion: { () -> Void in
+            
+        })
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let _ = self.coordinate {
         
-            self.nearByQuestionView?.coordinate = self.coordinate
+        let uesrId = kUser_ID()
+        
+        if let _ = uesrId {
+            
+            navigationItem.rightBarButtonItem = nil
+            
+            if let _ = self.coordinate {
+                
+                self.nearByQuestionView?.coordinate = self.coordinate
+            }
+            
+            
+        } else {
+            
+            
+            navigationItem.rightBarButtonItem = self.rightItem
         }
         
+
         
     }
     

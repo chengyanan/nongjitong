@@ -34,7 +34,7 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         
         self.tableView.tableFooterView = UIView()
-        
+        self.tableView.showsVerticalScrollIndicator = false
         
         if kIOS7() {
         
@@ -133,12 +133,38 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+    
+    //MARK: event response
+    
+    @IBAction func settingPage(sender: AnyObject) {
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        
+        let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting")
+        
+        self.navigationController?.pushViewController(settingVc, animated: true)
+        
+    }
 
     //MARK: tableView datasource
+    
+//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        return self.resaultArray.count
+//    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.resaultArray.count
     }
+    
+//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 1
+//    }
+//    
+//    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        
+//        return 6
+//    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -152,6 +178,8 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
         }
         
         let model = self.resaultArray[indexPath.row]
+        
+        cell?.accessoryType = .DisclosureIndicator
         
         cell?.textLabel?.text = model.name
         cell?.detailTextLabel?.text = "\(model.docs!)篇相关文章"

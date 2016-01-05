@@ -11,7 +11,10 @@ import UIKit
 class YNQuestionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var isOutLine = "N"
-
+    
+    //是否显示加载更多
+    var isShowLoadMore = true
+    
     let leftRightMargin: CGFloat = 10
     let itemSpacing: CGFloat = 3
     let tableViewHeight: CGFloat = 44
@@ -52,6 +55,8 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.pageCount = 1
         
         loadDataFromServer()
     }
@@ -97,8 +102,6 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     //MARK: 加载问题数据
     func getQuestionListWithClassID(classId: String?) {
-    
-        
         
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
@@ -124,8 +127,22 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                     let tempdata = json["data"] as! NSArray
                     
                     if tempdata.count > 0 {
+
                         
-                        self.tableViewDataArray.removeAll()
+                        if tempdata.count < 20 {
+                            
+                            //显示加载更多
+                            self.isShowLoadMore = false
+                        } else {
+                            
+                            //不显示加载更多
+                            self.isShowLoadMore = true
+                        }
+                        
+                        if self.pageCount == 1 {
+                            
+                            self.tableViewDataArray.removeAll()
+                        }
                         
                         for var i = 0; i < tempdata.count; i++ {
                             
@@ -136,15 +153,18 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                         
                         self.tableView?.reloadData()
                         
-                        self.pageCount += 1
+                        self.tableView?.hidden = false
+                       
                         
                     } else {
                     
                         //没有数据
                         
-                        YNProgressHUD().showText("当前分类下没有相关问题", toView: self.view)
+                        YNProgressHUD().showText("没有相关数据", toView: self.view)
                         self.tableViewDataArray.removeAll()
                         self.tableView?.reloadData()
+                        
+                        self.tableView?.hidden = true
                     }
                     
                     
@@ -263,12 +283,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         
         //tableView
         let tempTableView = UITableView(frame: CGRectZero, style: .Grouped)
+        
         tempTableView.delegate = self
         tempTableView.dataSource = self
         tempTableView.separatorStyle = .None
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
         tempTableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0)
-        
+        tempTableView.hidden = true
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
         
@@ -309,8 +330,15 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if self.isShowLoadMore {
         
-        return self.tableViewDataArray.count
+            return self.tableViewDataArray.count + 1
+            
+        } else {
+        
+            return self.tableViewDataArray.count
+        }
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -319,6 +347,21 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if indexPath.section == self.tableViewDataArray.count {
+        
+            let identify: String = "Cell_Resault_LoadMore_code"
+            var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(identify)
+            
+            if cell == nil {
+                
+                cell = YNResaultLoadModeCell(style: .Default, reuseIdentifier: identify)
+                
+            }
+            
+            return cell!
+            
+        }
         
         let identify = "CELL_Question"
         
@@ -336,6 +379,10 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
+        if indexPath.section == self.tableViewDataArray.count {
+        
+            return 44
+        }
         return self.tableViewDataArray[indexPath.section].height!
     }
     
@@ -349,10 +396,26 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let questionDetailVc = YNQuestionDetailViewController()
-        questionDetailVc.questionModel = self.tableViewDataArray[indexPath.section]
+        if indexPath.section == self.tableViewDataArray.count {
         
-        self.navigationController?.pushViewController(questionDetailVc, animated: true)
+            self.loadMore()
+            
+        } else {
+        
+            let questionDetailVc = YNQuestionDetailViewController()
+            questionDetailVc.questionModel = self.tableViewDataArray[indexPath.section]
+            self.navigationController?.pushViewController(questionDetailVc, animated: true)
+        }
+        
+        
+    }
+    
+    func loadMore() {
+    
+        self.pageCount++
+        
+        //加载问题数据
+        getQuestionListWithClassID(self.classId)
     }
     
     //MARK:UICollectionViewDataSource

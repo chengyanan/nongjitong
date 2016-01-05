@@ -40,8 +40,10 @@ class YNSearchSolutionListModel {
     //方案的摘要
     var summary: String?
     
+    var content: String?
+    
     //方案的配图,数组类型
-    var photos = []
+    var photos: Array<String>?
     
     //cell高度
     var height:  CGFloat?
@@ -59,10 +61,24 @@ class YNSearchSolutionListModel {
         self.read_num = dict["read_num"] as? String
         
         self.add_time = dict["add_time"] as? String
-        self.summary = dict["summary"] as? String
-        self.photos = dict["photos"] as! NSArray
+        self.photos = dict["photos"] as? Array
         
-        calcuateCellHeight(self.summary!)
+        
+        if let _ = dict["summary"] as? String {
+        
+            self.summary = dict["summary"] as? String
+           calcuateCellHeight(self.summary!)
+        }
+        
+        if let _ = dict["content"] as? String {
+        
+            self.content = dict["content"] as? String
+            calcuateCellHeight(self.content!)
+        }
+        
+        
+        
+        
     }
     
     

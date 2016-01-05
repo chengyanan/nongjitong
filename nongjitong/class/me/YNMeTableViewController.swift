@@ -27,7 +27,7 @@ class YNMeTableViewController: UITableViewController {
             //已登陆
             if let _ = kUser_AvatarPath() {
                 
-                if let _ = NSData(contentsOfFile: kUser_AvatarPath()!) {
+                if let _ = NSData(contentsOfFile: kUser_AvatarPath()! ) {
                     
                     avatarImageView.image = UIImage(data: NSData(contentsOfFile: kUser_AvatarPath()!)!)
                 }
@@ -121,6 +121,26 @@ class YNMeTableViewController: UITableViewController {
                 
                 
             } else if indexPath.section == 3 {
+            
+                
+                if indexPath.row == 0 {
+                
+                    //我写的文章方案
+                    let vc = YNSearchResaultSolutionViewController()
+                    vc.solutionType = SolutionType.MyselfArticle
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                    
+                } else if indexPath.row == 1 {
+                
+                    //我写的预警方案
+                    let vc = YNMYWriteWaringViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                }
+                
+                
+            } else if indexPath.section == 4 {
             
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting_detail")

@@ -200,7 +200,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         let action = self.isOfflineQuestion ? "addOfflineQuestion" : "addQuestion"
         
-        //TODO: 还没有加图片  然后测试
+        //还没有加图片  然后测试
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
             "c": "QuestionManage",

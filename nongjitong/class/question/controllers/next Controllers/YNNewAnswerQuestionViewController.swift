@@ -51,6 +51,8 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
     var messageStr = ""
     
     var rightBarButtonItem: UIBarButtonItem?
+    var information: YNUserInformationModel?
+    
     
     //MARK: life cycle
     override func viewDidLoad() {
@@ -75,6 +77,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         setInterface()
         
         loadDataFromServer()
+        
     }
 
     
@@ -82,6 +85,8 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         super.viewWillAppear(animated)
         
         addKeyBoardNotication()
+        
+        
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -94,6 +99,54 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    
+    func loadSelfInformation() {
+    
+        if let _ = kUser_ID() {
+        
+            
+            let progress = YNProgressHUD().showWaitingToView(self.view)
+            YNHttpTool().getUserInformation({ (json) -> Void in
+                
+                progress.hideUsingAnimation()
+                
+                if let status = json["status"] as? Int {
+                    
+                    if status == 1 {
+                        
+                        let dict = json["data"] as! NSDictionary
+                        
+                        //                    print(dict)
+                        
+                        let tempInfo = YNUserInformationModel(dict: dict)
+                        
+                        self.information = tempInfo
+                        
+                        
+                    } else if status == 0 {
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            YNProgressHUD().showText(msg, toView: self.view)
+                            
+                            print("\n \(msg) \n")
+                        }
+                    }
+                    
+                }
+                
+                
+                }) { (error) -> Void in
+                    
+                    progress.hideUsingAnimation()
+                    YNProgressHUD().showText("请求失败", toView: self.view)
+                    
+            }
+            
+        }
+        
+        
+    }
     
     func setLeftItemAndRightItem() {
         
@@ -493,8 +546,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
                 model1.to_user_id = questionModel?.user_id
                 
                 //TODO: 传自己的头像
-                
-//                model1.avatar = dataArray[1].avatar
+                model1.avatar = information?.avatar
             }
             
             model1.isFinish = false
@@ -507,6 +559,8 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
             
             self.messageStr = ""
         }
+        
+        
     }
     
     //判断tableView是否需要向上移动

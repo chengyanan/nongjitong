@@ -44,6 +44,9 @@
 		406732AB1BFC56570071F6EA /* YNQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406732AA1BFC56570071F6EA /* YNQuestionTableViewCell.swift */; };
 		406805AE1C324E9C009FC170 /* YNNewSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406805AD1C324E9C009FC170 /* YNNewSearchViewController.swift */; };
 		406CBBEC1BFEDBCE000584D4 /* YNScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */; };
+		407F6B5A1C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B591C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift */; };
+		407F6B5C1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */; };
+		407F6B5E1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B5D1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift */; };
 		408BE0541BE704CD00A210A4 /* YNTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BE0531BE704CD00A210A4 /* YNTextView.swift */; };
 		408BE8A81C294BFA00B980AD /* YNMYQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */; };
 		4092048E1C0FFCAF00CA30CF /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092048D1C0FFCAF00CA30CF /* UIImageViewExtension.swift */; };
@@ -181,6 +184,9 @@
 		406732AA1BFC56570071F6EA /* YNQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		406805AD1C324E9C009FC170 /* YNNewSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNNewSearchViewController.swift; sourceTree = "<group>"; };
 		406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNScaleView.swift; sourceTree = "<group>"; };
+		407F6B591C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMYWriteWaringViewController.swift; sourceTree = "<group>"; };
+		407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYWaringDetailViewController.swift; sourceTree = "<group>"; };
+		407F6B5D1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMotifyPasswordViewController.swift; sourceTree = "<group>"; };
 		408BE0531BE704CD00A210A4 /* YNTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNTextView.swift; sourceTree = "<group>"; };
 		408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMYQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		4092048D1C0FFCAF00CA30CF /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
@@ -433,6 +439,15 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		407F6B581C3BACD300EDDC2F /* mine write warning */ = {
+			isa = PBXGroup;
+			children = (
+				407F6B591C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift */,
+				407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */,
+			);
+			path = "mine write warning";
+			sourceTree = "<group>";
+		};
 		409A393B1C1574E000E84F2D /* next Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,6 +569,7 @@
 		40E939E21BD9CDC8001A5D35 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				407F6B581C3BACD300EDDC2F /* mine write warning */,
 				40D70F001C22661800672A10 /* my answers */,
 				40D70F011C22661800672A10 /* my questions */,
 				40E236FC1BFD773200321B12 /* my subscription */,
@@ -580,6 +596,7 @@
 			isa = PBXGroup;
 			children = (
 				40E939EB1BD9CDC8001A5D35 /* YNSettingTableViewController.swift */,
+				407F6B5D1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift */,
 			);
 			path = setting;
 			sourceTree = "<group>";
@@ -976,6 +993,7 @@
 				40FA6FF51BD4E61500CFE69C /* YNNewQuestionHeaderView.swift in Sources */,
 				40ED43881BC60B76004713C9 /* progressHUD.swift in Sources */,
 				40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */,
+				407F6B5E1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift in Sources */,
 				40DEA7D61C3A187F00BEB608 /* YNSearchResaultQuestionViewController.swift in Sources */,
 				40ED43871BC60B76004713C9 /* Network.swift in Sources */,
 				40D70EFF1C22573400672A10 /* YNAskQuestionModel.swift in Sources */,
@@ -989,7 +1007,9 @@
 				404E0BB61C16A7CB00924D5A /* YNAnswerTableViewCell.swift in Sources */,
 				40ED43841BC60B76004713C9 /* Layout.swift in Sources */,
 				40DEA7DE1C3A372B00BEB608 /* YNAnswerQuestionViewController.swift in Sources */,
+				407F6B5C1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift in Sources */,
 				40E1C9041C23F8D700F054AE /* YNQuestionAnswerTableViewCell.swift in Sources */,
+				407F6B5A1C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift in Sources */,
 				40ED438E1BC612F9004713C9 /* YNSignInViewController.swift in Sources */,
 				40E268471C2A46EC00E17B13 /* YNHttpMyQuestion.swift in Sources */,
 				40519C591BD7312300A8BE65 /* YNSearchParamater.swift in Sources */,

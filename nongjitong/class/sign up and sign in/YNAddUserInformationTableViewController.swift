@@ -461,7 +461,7 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
             
         } else if actionSheet.tag == 3 {
             
-            //TODO: 身份
+            //身份
             switch buttonIndex {
                 
             case 0:

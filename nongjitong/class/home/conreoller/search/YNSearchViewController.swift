@@ -84,6 +84,7 @@ class YNSearchViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.delegate = self
         self.tableView.hidden = true
         self.tableView.allowsSelection = true
+        self.tableView.showsVerticalScrollIndicator = false
         
 //        addViewWithKeyBoard()
     }
@@ -287,7 +288,7 @@ class YNSearchViewController: UIViewController, UITableViewDataSource, UITableVi
                             
                         } else {
                         
-                            //TODO:没数据
+                            //没数据
                             YNProgressHUD().showText("对不起，没有相关文章", toView: self.view)
                         }
                         

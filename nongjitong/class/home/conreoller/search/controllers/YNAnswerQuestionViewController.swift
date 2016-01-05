@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum ActionType {
+
+    case WriteProgram, WriteWarning
+}
+
 protocol YNAnswerQuestionViewControllerDelegate {
 
     func answerSuccessfully(model: YNAnswerModel)
@@ -21,10 +26,27 @@ class YNAnswerQuestionViewController: UIViewController, UITextViewDelegate {
     
     var delegate: YNAnswerQuestionViewControllerDelegate?
     
+    var actionType: ActionType = .WriteProgram {
+    
+        didSet {
+        
+            if actionType == .WriteProgram {
+                
+                self.title = "写方案"
+                inputTextView.placeHolder = "请输入方案详情"
+                
+            } else if actionType == .WriteWarning {
+                self.title = "写预警"
+                inputTextView.placeHolder = "请输入预警详情"
+            }
+        }
+    }
+    
+    var warningModel: YNEarlyToMyProgramModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "写方案"
         self.view.backgroundColor = kRGBA(229, g: 229, b: 229, a: 1)
 
         inputTextView.delegate = self
@@ -71,15 +93,34 @@ class YNAnswerQuestionViewController: UIViewController, UITextViewDelegate {
         
         let userId = kUser_ID() as? String
     
-        let params: [String: String?] = ["m": "Appapi",
-            "key": "KSECE20XE15DKIEX3",
-            "c": "DocPrograms",
-            "a": "createPrograms",
-            "doc_id": searchresault?.id,
-            "user_id": userId,
-            "content": self.textViewText,
-            "title":self.textViewText
-        ]
+        let params: [String: String?]
+        
+        if self.actionType == .WriteProgram {
+        
+            //写方案
+            params  = ["m": "Appapi",
+                "key": "KSECE20XE15DKIEX3",
+                "c": "DocPrograms",
+                "a": "createPrograms",
+                "doc_id": searchresault?.id,
+                "user_id": userId,
+                "content": self.textViewText,
+                "title":self.textViewText
+            ]
+            
+        } else {
+            //写预警
+            
+            params  = ["m": "Appapi",
+                "key": "KSECE20XE15DKIEX3",
+                "c": "Warning",
+                "a": "createWarn",
+                "subscribe_id": warningModel?.subscribe[0].id,
+                "user_id": userId,
+                "content": self.textViewText,
+            ]
+            
+        }
         
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
@@ -98,7 +139,14 @@ class YNAnswerQuestionViewController: UIViewController, UITextViewDelegate {
                     
                     //                    print("写方案成功")
                     
-                   self.navigationController?.popViewControllerAnimated(true)
+                    
+                    YNProgressHUD().showText("上传成功", toView: self.view)
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+                        
+                        self.navigationController?.popViewControllerAnimated(true)
+                    }
+                    
                     
                 } else if status == 0 {
                     
@@ -146,7 +194,7 @@ class YNAnswerQuestionViewController: UIViewController, UITextViewDelegate {
     let inputTextView: YNTextView = {
         
         let tempView = YNTextView()
-        tempView.placeHolder = "请输入方案详情"
+        
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.font = UIFont.systemFontOfSize(17)
         return tempView

@@ -120,7 +120,7 @@ class YNCityTableViewController: UITableViewController {
             let addVc = vc as! YNPersionalSettingTableViewController
             addVc.cityName = city.city_name
             
-            //TODO: 上传到服务器
+            //上传到服务器
             sendCityDataToSever(basemodel)
         }
         

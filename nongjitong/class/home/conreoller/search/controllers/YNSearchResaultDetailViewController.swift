@@ -128,6 +128,7 @@ class YNSearchResaultDetailViewController: UIViewController, UIWebViewDelegate {
     @IBAction func solutionList(sender: AnyObject) {
         
         let vc = YNSearchResaultSolutionViewController()
+         vc.solutionType = SolutionType.MyselfArticle
         vc.searchresault = self.searchresault
         self.navigationController?.pushViewController(vc, animated: true)
     }

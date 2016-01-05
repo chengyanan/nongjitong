@@ -11,7 +11,12 @@ import UIKit
 
 func kUser_AvatarPath() ->String? {
 
-    return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("avatar.jpg")
+    let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).first
+    
+    let avatarPath = path!.stringByAppendingString("/avatar.jpg")
+    
+    
+    return avatarPath
 }
 
 let kUserKey = "User_MobileNumber"

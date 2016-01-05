@@ -138,7 +138,7 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
     
     func addButtonDidClick() {
         
-        //TODO:添加订阅
+        //添加订阅
         let vc = YNAddSubscriptionViewController()
         
         self.navigationController?.pushViewController(vc, animated: true)

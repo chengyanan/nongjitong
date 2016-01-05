@@ -1,32 +1,19 @@
 //
-//  YNSearchResaultSolutionViewController.swift
+//  YNMYWriteWaringViewController.swift
 //  nongjitong
 //
-//  Created by 农盟 on 16/1/4.
+//  Created by 农盟 on 16/1/5.
 //  Copyright © 2016年 农盟. All rights reserved.
-//解决方案
+//
 
 import UIKit
 
-enum SolutionType {
-
-    //Article表示文章的解决方案,Myself表示我自己写的文章方案
-    case Article, MyselfArticle, MyWaring
-}
-
-
-class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    var solutionType: SolutionType?
-    
-    var searchresault: YNSearchResaultModel?
-    
-    var delegate: YNSearchViewControllerDelegate?
+class YNMYWriteWaringViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: - private proporty
     
     var tableView: UITableView = {
-    
+        
         let tempView = UITableView()
         
         return tempView
@@ -37,9 +24,9 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
     var page: Int = 1
     var pagecount: Int = 20
     
-    var tempResaultArray = [YNSearchSolutionListModel]()
+    var tempResaultArray = [YNEarlyToMyProgramModel]()
     
-    var resaultArray: Array<YNSearchSolutionListModel>? {
+    var resaultArray: Array<YNEarlyToMyProgramModel>? {
         
         didSet {
             
@@ -60,100 +47,33 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
         self.tableView.delegate = self
         self.tableView.allowsSelection = true
         self.tableView.frame = self.view.bounds
-        self.tableView.showsVerticalScrollIndicator = false
+        
         self.view.addSubview(tableView)
         self.view.backgroundColor = UIColor.whiteColor()
-        
-        
-        if solutionType == SolutionType.Article {
             
-            self.title = "相关解决方案"
-            
-            let rightBarItem = UIBarButtonItem(image: UIImage(named: "addNewSubscription"), style: .Plain, target: self, action: "writeSolution")
-            
-            self.navigationItem.rightBarButtonItem = rightBarItem
-            
-        } else {
+        self.title = "我写的预警方案"
         
-            self.title = "我写的文章方案"
-        }
-        
-        
-        
+        search()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
-        if solutionType == SolutionType.Article {
-        
-            if let _ = self.searchresault {
-                
-                self.page = 1
-                
-                search()
-            }
-            
-        } else {
-        
-            self.page = 1
-            
-            search()
-        }
+    
         
     }
-    
-    //MARK: event response
-    func writeSolution() {
-    
-        let vc = YNAnswerQuestionViewController()
-        vc.actionType = ActionType.WriteProgram
-        vc.searchresault = self.searchresault
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
+
     
     func search() {
         
-        let params: [String: String?]
-        
-        if solutionType == SolutionType.Article {
-        
-            //文章解决方案列表
-            params = ["m": "Appapi",
-                "key": "KSECE20XE15DKIEX3",
-                "c": "DocPrograms",
-                "a": "getDocProgramsList",
-                "doc_id": searchresault?.id,
-                "page": String(page),
-                "pagecount": "\(pagecount)"
-            ]
-            
-        } else if solutionType == SolutionType.MyselfArticle {
-        
-            //用户写的文章解决方案列表
-            params = ["m": "Appapi",
-                "key": "KSECE20XE15DKIEX3",
-                "c": "DocPrograms",
-                "a": "getUserProgramsList",
-                "user_id": kUser_ID() as? String,
-                "page": String(page),
-                "page_size": "\(pagecount)"
-            ]
-            
-        } else {
-        
-            //用户写的预警方案列表
-            params = ["m": "Appapi",
-                "key": "KSECE20XE15DKIEX3",
-                "c": "Warning",
-                "a": "getToOther",
-                "user_id": kUser_ID() as? String,
-                "page": String(page),
-                "page_size": "\(pagecount)"
-            ]
-        }
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "Warning",
+            "a": "getToOther",
+            "user_id": kUser_ID() as? String,
+            "page": String(page),
+            "page_size": "\(pagecount)"
+        ]
+    
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
         
@@ -173,17 +93,17 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
                     if resaultData.count > 0 {
                         
                         if resaultData.count < 20 {
-                        
+                            
                             //显示加载更多
                             self.isShowLoadMore = false
                         } else {
-                        
+                            
                             //不显示加载更多
                             self.isShowLoadMore = true
                         }
                         
                         if self.page == 1 {
-                        
+                            
                             self.tempResaultArray.removeAll()
                         }
                         
@@ -193,7 +113,7 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
                             
                             let dict = item as! NSDictionary
                             
-                            let resaultModel = YNSearchSolutionListModel(dict: dict)
+                            let resaultModel = YNEarlyToMyProgramModel(dict: dict)
                             
                             self.tempResaultArray.append(resaultModel)
                         }
@@ -203,7 +123,7 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
                     } else {
                         
                         //没数据
-                        YNProgressHUD().showText("没有相关解决方案", toView: self.view)
+                        YNProgressHUD().showText("没有数据", toView: self.view)
                     }
                     
                     
@@ -233,11 +153,11 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
         if let tempArray = self.resaultArray {
             
             if self.isShowLoadMore {
-            
+                
                 return tempArray.count + 1
                 
             } else {
-            
+                
                 return tempArray.count
             }
             
@@ -253,7 +173,7 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
             return 50
         }
         
-        return self.resaultArray![indexPath.row].height!
+        return self.resaultArray![indexPath.row].summaryHeight!
         
     }
     
@@ -283,7 +203,7 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
             
         }
         
-        cell?.solutionModel = self.resaultArray![indexPath.row]
+        cell?.earlyToMyProgramModel = self.resaultArray![indexPath.row]
         
         return cell!
         
@@ -298,11 +218,9 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
             
         } else {
             
-            // 方案详情
-            
-            let vc = YNCheckMyProogramViewController()
-            vc.solutionType = self.solutionType!
-            vc.solutionModel = self.resaultArray![indexPath.row]
+            // 预警详情
+            let vc = MYWaringDetailViewController()
+            vc.resaultModel = self.resaultArray![indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
             
         }
@@ -315,6 +233,6 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
         self.search()
     }
     
-   
+    
     
 }

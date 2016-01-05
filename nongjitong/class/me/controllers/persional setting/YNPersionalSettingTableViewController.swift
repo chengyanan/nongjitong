@@ -162,15 +162,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         
         self.avatorImageView.image = UIImage(data: imagedata!)
         
-//        if data.avatar?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
-//        
-//            Network.getImageWithURL(data.avatar!, success: { (data) -> Void in
-//                
-//                self.avatorImageView.image = UIImage(data: data)
-//                
-//            })
-//            
-//        }
+        imagedata?.writeToFile(kUser_AvatarPath()!, atomically: true)
         
         if data.sex == "0" {
         
@@ -546,7 +538,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
         
         } else if actionSheet.tag == 3 {
         
-            //TODO: 身份
+            //身份
             
             var roleID = ""
             
@@ -690,9 +682,12 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                     print("\n \(msg) \n")
                     //MARK: - 上传成功改变该页面的头像
                     self.avatorImageView.image = UIImage(data: imagedata)
-                    imagedata.writeToFile(kUser_AvatarPath()!, atomically: true)
                     
+//                    print(kUser_AvatarPath()!)
                     
+                    let succes = imagedata.writeToFile(kUser_AvatarPath()!, atomically: true)
+                    
+//                    print(succes)
 //                    YNProgressHUD().showText(msg, toView: self.view)
                     
                     //#warning: msg是更新成功 不是登陆成功

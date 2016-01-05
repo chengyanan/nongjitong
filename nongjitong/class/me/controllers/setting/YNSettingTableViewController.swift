@@ -12,28 +12,56 @@ class YNSettingTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 2 {
-        
-            if indexPath.row == 0 {
+        if let _ = kUser_ID() as? String {
             
-                //退出登录
-                Tools().removeValueForKey(kUserID)
-                Tools().removeValueForKey(kUserIsInformationFinish)
-                Tools().removeValueForKey(kUserWatchListFinish)
+            //已登陆
+            
+            if indexPath.section == 1 {
                 
-//                YNExchangeRootController().showSign()
-                
-                //没有登录，直接跳到登录界面
-                let signInVc = YNSignInViewController()
-                
-                let navVc = UINavigationController(rootViewController: signInVc)
-                
-                self.presentViewController(navVc, animated: true, completion: { () -> Void in
+                if indexPath.row == 0 {
                     
-                })
+                    //退出登录
+                    Tools().removeValueForKey(kUserID)
+                    Tools().removeValueForKey(kUserIsInformationFinish)
+                    Tools().removeValueForKey(kUserWatchListFinish)
+                    
+                    //                YNExchangeRootController().showSign()
+                    
+                    //没有登录，直接跳到登录界面
+                    let signInVc = YNSignInViewController()
+                    
+                    let navVc = UINavigationController(rootViewController: signInVc)
+                    
+                    self.presentViewController(navVc, animated: true, completion: { () -> Void in
+                        
+                    })
+                    
+                    
+                }
                 
-                
+            } else if indexPath.section == 0 {
+            
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SB_Motift_Password")
+                self.navigationController?.pushViewController(vc, animated: true)
             }
+            
+            
+        } else {
+            
+            //没有登录，直接跳到登录界面
+            let signInVc = YNSignInViewController()
+            
+            let navVc = UINavigationController(rootViewController: signInVc)
+            
+            self.presentViewController(navVc, animated: true, completion: { () -> Void in
+                
+            })
         }
+        
+        
+        
     }
+    
+    
+    
 }

@@ -37,13 +37,61 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "nongjitong/class/home/conreoller/ask question/YNAskQuestionViewController.swift"
-            timestampString = "472725182.234987"
+            filePath = "nongjitong/class/me/controllers/persional setting/YNPersionalSettingTableViewController.swift"
+            timestampString = "473683329.242876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "sendQusetionToServer()"
+            startingLineNumber = "690"
+            endingLineNumber = "690"
+            landmarkName = "sendImageToServer(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "nongjitong.YNPersionalSettingTableViewController.(sendImageToServer (nongjitong.YNPersionalSettingTableViewController) -&gt; (__ObjC.NSData) -&gt; ()).(closure #1)"
+                  moduleName = "nongjitong"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nongmeng/Desktop/nongjitong/nongjitong/class/me/controllers/persional%20setting/YNPersionalSettingTableViewController.swift"
+                  timestampString = "473685878.740963"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "697"
+                  endingLineNumber = "697"
+                  offsetFromSymbolStart = "1528">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "nongjitong.YNPersionalSettingTableViewController.(sendImageToServer (nongjitong.YNPersionalSettingTableViewController) -&gt; (__ObjC.NSData) -&gt; ()).(closure #1)"
+                  moduleName = "nongjitong"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nongmeng/Desktop/nongjitong/nongjitong/class/me/controllers/persional%20setting/YNPersionalSettingTableViewController.swift"
+                  timestampString = "473685878.741176"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "697"
+                  endingLineNumber = "697"
+                  offsetFromSymbolStart = "1536">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "nongjitong/class/me/controllers/persional setting/YNPersionalSettingTableViewController.swift"
+            timestampString = "473683318.731723"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "686"
+            endingLineNumber = "686"
+            landmarkName = "sendImageToServer(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

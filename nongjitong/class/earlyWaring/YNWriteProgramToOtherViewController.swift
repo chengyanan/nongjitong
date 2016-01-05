@@ -22,6 +22,15 @@ class YNWriteProgramToOtherViewController: UIViewController, UITableViewDataSour
     
     var tableView: UITableView?
     
+    //MARK: life cycle
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        
+        self.hidesBottomBarWhenPushed = true
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -118,6 +127,20 @@ class YNWriteProgramToOtherViewController: UIViewController, UITableViewDataSour
         cell?.accessoryType = .DisclosureIndicator
         
         return cell!
+        
+    }
+    
+    //MARK: tableView delegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if indexPath.section == 1 {
+        
+            let vc = YNAnswerQuestionViewController()
+            vc.actionType = ActionType.WriteWarning
+            vc.warningModel = self.model
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     

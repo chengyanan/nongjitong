@@ -413,7 +413,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
                     self.selectedArray.append(model)
                     self.collectionView?.reloadData()
                     
-                    //TODO: 添加到个人关注上
+                    // 添加到个人关注上
                     updateUserWatchList()
                     
                 } else {
@@ -429,7 +429,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
                 removeItemWithId(cell.productModel!.id)
                 self.collectionView?.reloadData()
                 
-                //TODO: 删除个人关注
+                //删除个人关注
                  updateUserWatchList()
             }
             

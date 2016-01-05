@@ -39,14 +39,31 @@ class YNEarlyToMyProgramModel {
         self.content = dict["content"] as? String
         
         let tempArray = dict["subscribe"] as? NSArray
-        for item in tempArray! {
         
-            let dict = item as? NSDictionary
+        if let _ = tempArray {
             
-            let model = YNSubscribeModel(dict: dict!)
+            ////subscribe是数组
+        
+            for item in tempArray! {
+                
+                let dict = item as? NSDictionary
+                
+                let model = YNSubscribeModel(dict: dict!)
+                
+                self.subscribe.append(model)
+            }
             
+        } else {
+        
+            //subscribe是字典
+            let tempDic = dict["subscribe"] as? NSDictionary
+            let model = YNSubscribeModel(dict: tempDic!)
             self.subscribe.append(model)
+            
         }
+        
+        
+       
         
         let tempPhotoArray = dict[photos] as? NSArray
         

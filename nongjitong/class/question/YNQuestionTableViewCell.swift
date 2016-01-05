@@ -132,7 +132,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         //questionContent
         Layout().addLeftConstraint(questionContent, toView: avatorImage, multiplier: 1, constant: 0)
         Layout().addRightConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: -marginModel.leftRightMargin)
-        Layout().addTopToBottomConstraint(questionContent, toView: avatorImage, multiplier: 1, constant: 10)
+        Layout().addTopToBottomConstraint(questionContent, toView: avatorImage, multiplier: 1, constant: 15)
         
         //answerCountButton
         Layout().addBottomConstraint(answerCountButton, toView: self.contentView, multiplier: 1, constant: 0)

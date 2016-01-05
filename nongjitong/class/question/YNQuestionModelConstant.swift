@@ -28,7 +28,7 @@ class YNQuestionModelConstant {
     let imageMargin: CGFloat = 6
     
     //底部回答数量的高度
-    let answerCountHeight: CGFloat = 36
+    let answerCountHeight: CGFloat = 30
     
     var imageWidthHeight: CGFloat?
     
