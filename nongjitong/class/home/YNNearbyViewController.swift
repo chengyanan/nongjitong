@@ -168,18 +168,6 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         navigationItem.rightBarButtonItem = rightItem
     }
     
-    func login() {
-        
-        //没有登录 跳登录界面
-        let signInVc = YNSignInViewController()
-        
-        let navVc = UINavigationController(rootViewController: signInVc)
-        
-        self.presentViewController(navVc, animated: true, completion: { () -> Void in
-            
-        })
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -257,6 +245,17 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     }
     
     //MARK: event response
+    func login() {
+        
+        //没有登录 跳登录界面
+        let signInVc = YNSignInViewController()
+        
+        let navVc = UINavigationController(rootViewController: signInVc)
+        
+        self.presentViewController(navVc, animated: true, completion: { () -> Void in
+            
+        })
+    }
     
     func askQuestionButtonClick() {
     
@@ -274,6 +273,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting")
         
         self.navigationController?.pushViewController(settingVc, animated: true)
+        
     }
    
     func updateUserLocation() {

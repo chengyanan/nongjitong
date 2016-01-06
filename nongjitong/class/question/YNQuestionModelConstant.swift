@@ -11,7 +11,7 @@ import UIKit
 class YNQuestionModelConstant {
     
     //左右距离
-    let leftRightMargin: CGFloat = 10
+    let leftRightMargin: CGFloat = 20
     
     //头像离顶部的高度
     let topMargin: CGFloat = 10

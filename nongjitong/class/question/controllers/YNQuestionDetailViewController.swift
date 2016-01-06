@@ -39,8 +39,15 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
         setInterface()
         setLayout()
         
-        loadDataFromServer()
+//
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.dataArray.removeAll()
+        loadDataFromServer()
     }
     
     func loadDataFromServer() {
@@ -83,7 +90,7 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
                         
                         //没有数据
                         
-                        YNProgressHUD().showText("没有回答", toView: self.view)
+//                        YNProgressHUD().showText("没有回答", toView: self.view)
                         
                     }
                     

@@ -16,13 +16,27 @@ class YNSearchSolutionCell: UITableViewCell {
         
         didSet {
             
-            self.questionContent.text = solutionModel?.summary!
+            if let _ = solutionModel {
             
-            self.state.text = "推荐级别\(solutionModel!.recommend!)"
+                if let _ = solutionModel?.summary {
+                
+                    self.questionContent.text = solutionModel?.summary!
+                }
+                
+                if let _ = solutionModel?.content {
+                
+                    self.questionContent.text = solutionModel?.content!
+                }
+                
+                
+                self.state.text = "推荐级别\(solutionModel!.recommend!)"
+                
+                let str = "查看次数:\(solutionModel!.read_num!)  \(solutionModel!.add_time!)"
+                
+                self.answerCountAndPostTime.text = str
+            }
             
-            let str = "查看次数:\(solutionModel!.read_num!)  \(solutionModel!.add_time!)"
             
-            self.answerCountAndPostTime.text = str
         }
         
     }

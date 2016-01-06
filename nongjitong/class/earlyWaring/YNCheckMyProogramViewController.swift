@@ -4,7 +4,7 @@
 //
 //  Created by 农盟 on 16/1/4.
 //  Copyright © 2016年 农盟. All rights reserved.
-//
+// 别人给我的预警方案内容
 
 import UIKit
 
@@ -25,17 +25,7 @@ class YNCheckMyProogramViewController: UIViewController, UITableViewDataSource, 
             self.loaddata()
         }
     }
-    
-    var solutionType: SolutionType = .Article
-    
-    var solutionModel: YNSearchSolutionListModel? {
-    
-        didSet {
-            
-            self.tableView?.reloadData()
-            
-        }
-    }
+
     
     func loaddata() {
     
@@ -119,7 +109,7 @@ class YNCheckMyProogramViewController: UIViewController, UITableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "方案"
+        self.title = "预警方案"
         
         self.view.backgroundColor = UIColor.whiteColor()
         
@@ -140,28 +130,13 @@ class YNCheckMyProogramViewController: UIViewController, UITableViewDataSource, 
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 0 {
-            
-            if solutionType == SolutionType.Article {
-            
-                return "订阅内容"
-                
-            } else {
-            
-                return "方案针对的文章标题"
-            }
-            
+        
+                return "我的订阅内容"
             
         }
-        
-        if solutionType == SolutionType.Article {
             
-            return "解决方案"
-            
-        } else {
-            
-            return "方案内容"
-        }
-        
+        return "预警内容"
+
         
     }
     
@@ -172,21 +147,10 @@ class YNCheckMyProogramViewController: UIViewController, UITableViewDataSource, 
             return 44
         }
         
-        if solutionType == SolutionType.Article {
-        
-            if let _ = self.model?.contentHeight {
-                
-                return self.model!.contentHeight!
-            }
+        if let _ = self.model?.contentHeight {
             
-        } else {
-        
-            if let _ = self.solutionModel?.height {
-            
-                return self.solutionModel!.height!
-            }
+            return self.model!.contentHeight!
         }
-    
         
         return 0
     }
@@ -198,21 +162,14 @@ class YNCheckMyProogramViewController: UIViewController, UITableViewDataSource, 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if solutionType == .Article {
-
             if let _ = self.model {
                 
                 if section == 0 {
                     
                     return model!.subscribe.count
                     
-                } else {
-                    
-                    return 1
                 }
-                
             }
-        }
     
         
         return 1
@@ -223,37 +180,24 @@ class YNCheckMyProogramViewController: UIViewController, UITableViewDataSource, 
         
         if indexPath.section == 0 {
             
-           
-                
-                let identify = "CELL_MyScrible"
-                
-                var cell = tableView.dequeueReusableCellWithIdentifier(identify)
-                
-                if cell == nil {
-                    
-                    cell = UITableViewCell(style: .Default, reuseIdentifier: identify)
-                }
+            let identify = "CELL_MyScrible"
             
-            if solutionType == .Article {
+            var cell = tableView.dequeueReusableCellWithIdentifier(identify)
             
-                let subscribeModel = self.model?.subscribe[indexPath.row]
+            if cell == nil {
                 
-                if let _ = subscribeModel {
-                    
-                    cell?.textLabel?.text = "\(subscribeModel!.class_name!)  \(subscribeModel!.city_name!)  \(subscribeModel!.range!)"
-                }
-                
-            } else {
-                
-                if let _ = self.solutionModel?.doc_title {
-                
-                     cell?.textLabel?.text = self.solutionModel!.doc_title!
-                }
-            
-               
+                cell = UITableViewCell(style: .Default, reuseIdentifier: identify)
             }
-        
-                return cell!
+            
+            
+            let subscribeModel = self.model?.subscribe[indexPath.row]
+            
+            if let _ = subscribeModel {
+                
+                cell?.textLabel?.text = "\(subscribeModel!.class_name!)  \(subscribeModel!.city_name!)  \(subscribeModel!.range!)"
+            }
+            
+            return cell!
             
         }
         
@@ -265,18 +209,7 @@ class YNCheckMyProogramViewController: UIViewController, UITableViewDataSource, 
             cell = YNSearchSolutionCell(style: .Default, reuseIdentifier: idenfier)
         }
         
-        if solutionType == .Article {
-        
-             cell?.earlyToMyProgramModel = self.model
-            
-        } else if solutionType == SolutionType.MyselfArticle {
-        
-            cell?.solutionModel = self.solutionModel
-            
-        } else {
-        
-            cell?.earlyToMyProgramModel = self.model
-        }
+        cell?.earlyToMyProgramModel = self.model
         
         return cell!
         

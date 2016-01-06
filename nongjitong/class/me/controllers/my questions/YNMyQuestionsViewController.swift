@@ -156,7 +156,7 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
                         
                     }  else {
                         
-                        YNProgressHUD().showText("没有回答过问题", toView: self.view)
+                        YNProgressHUD().showText("您还没有回答过问题", toView: self.view)
                     }
                     
                     

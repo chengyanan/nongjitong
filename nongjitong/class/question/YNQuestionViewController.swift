@@ -13,7 +13,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     var isOutLine = "N"
     
     //是否显示加载更多
-    var isShowLoadMore = true
+    var isShowLoadMore = false
     
     let leftRightMargin: CGFloat = 10
     let itemSpacing: CGFloat = 3
@@ -22,6 +22,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     var tableView: UITableView?
     var collectionView: UICollectionView?
+    var addButton: UIButton?
     
     //collectionViewdatasource
     var selectedArray = [YNSelectedProductModel]()
@@ -72,6 +73,30 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
+    func addButtonClick() {
+        
+        if let _ = kUser_ID() {
+        
+            //已登陆我的关注
+            let vc = YNMyWatchListViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        } else {
+        
+            //没有登录，直接跳到登录界面
+            let signInVc = YNSignInViewController()
+            
+            let navVc = UINavigationController(rootViewController: signInVc)
+            
+            self.presentViewController(navVc, animated: true, completion: { () -> Void in
+                
+            })
+            
+            
+        }
+    
+        
+    }
     
     //MARK: 数据加载
     func loadDataFromServer() {
@@ -160,11 +185,11 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                     
                         //没有数据
                         
-                        YNProgressHUD().showText("没有相关数据", toView: self.view)
-                        self.tableViewDataArray.removeAll()
-                        self.tableView?.reloadData()
+                        YNProgressHUD().showText("没有数据了", toView: self.view)
                         
-                        self.tableView?.hidden = true
+                        self.isShowLoadMore = false
+                        
+                        self.tableView?.reloadData()
                     }
                     
                     
@@ -309,6 +334,15 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         self.view.addSubview(tempCollectionView)
         self.collectionView = tempCollectionView
         
+        //addButton
+        let tempButton = UIButton()
+        tempButton.setImage(UIImage(named: "addNewSubscription"), forState: UIControlState.Normal)
+        tempButton.translatesAutoresizingMaskIntoConstraints = false
+        tempButton.addTarget(self, action: "addButtonClick", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(tempButton)
+        self.addButton = tempButton
+        
+        
     }
     
     func setLayout() {
@@ -316,8 +350,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         //collectionView
         Layout().addTopConstraint(collectionView!, toView: self.view, multiplier: 1, constant: 64)
         Layout().addLeftConstraint(collectionView!, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(collectionView!, toView: self.view, multiplier: 1, constant: 0)
+        Layout().addRightConstraint(collectionView!, toView: self.view, multiplier: 1, constant: -44)
         Layout().addHeightConstraint(collectionView!, toView: nil, multiplier: 0, constant: 44)
+        
+        //addButton
+        Layout().addTopBottomConstraints(addButton!, toView: collectionView!, multiplier: 1, constant: 0)
+        Layout().addRightConstraint(addButton!, toView: self.view, multiplier: 1, constant: 0)
+        Layout().addLeftToRightConstraint(addButton!, toView: collectionView!, multiplier: 1, constant: 0)
         
         //tableView
         Layout().addTopToBottomConstraint(tableView!, toView: collectionView!, multiplier: 1, constant: 0)
@@ -325,11 +364,13 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: -49)
         
+        
     }
     
     //MARK: UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         if self.isShowLoadMore {
         
             return self.tableViewDataArray.count + 1

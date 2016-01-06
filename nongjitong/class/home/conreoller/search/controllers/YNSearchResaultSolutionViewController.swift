@@ -11,7 +11,7 @@ import UIKit
 enum SolutionType {
 
     //Article表示文章的解决方案,Myself表示我自己写的文章方案
-    case Article, MyselfArticle, MyWaring
+    case Article, MyselfArticle
 }
 
 
@@ -130,7 +130,7 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
                 "pagecount": "\(pagecount)"
             ]
             
-        } else if solutionType == SolutionType.MyselfArticle {
+        } else {
         
             //用户写的文章解决方案列表
             params = ["m": "Appapi",
@@ -142,17 +142,6 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
                 "page_size": "\(pagecount)"
             ]
             
-        } else {
-        
-            //用户写的预警方案列表
-            params = ["m": "Appapi",
-                "key": "KSECE20XE15DKIEX3",
-                "c": "Warning",
-                "a": "getToOther",
-                "user_id": kUser_ID() as? String,
-                "page": String(page),
-                "page_size": "\(pagecount)"
-            ]
         }
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
@@ -203,7 +192,7 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
                     } else {
                         
                         //没数据
-                        YNProgressHUD().showText("没有相关解决方案", toView: self.view)
+                        YNProgressHUD().showText("没有数据了", toView: self.view)
                     }
                     
                     
@@ -298,11 +287,10 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
             
         } else {
             
-            // 方案详情
+            // TODO:方案详情
             
-            let vc = YNCheckMyProogramViewController()
-            vc.solutionType = self.solutionType!
-            vc.solutionModel = self.resaultArray![indexPath.row]
+            let vc = YNSolutionDetailsViewController()
+            vc.resaultModel = self.resaultArray![indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
             
         }

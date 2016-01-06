@@ -12,6 +12,10 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
     
     var isOutLine = "Y"
     
+    //是否显示加载更多
+    var isShowLoadMore = true
+    
+    
     let leftRightMargin: CGFloat = 10
     let itemSpacing: CGFloat = 3
     let tableViewHeight: CGFloat = 44
@@ -45,7 +49,7 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "问答"
+        self.title = "线下救援问题"
         
         self.automaticallyAdjustsScrollViewInsets = false
         
@@ -59,6 +63,8 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.pageCount = 1
         
         loadDataFromServer()
     }
@@ -110,7 +116,7 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
             "c": "QuestionManage",
             "a": "getQuestionList",
             "class_id": classId,
-            "page": nil,
+            "page": "\(self.pageCount)",
             "descript_length": nil,
             "is_outline": isOutLine
         ]
@@ -130,7 +136,20 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
                     
                     if tempdata.count > 0 {
                         
-                        self.tableViewDataArray.removeAll()
+                        if tempdata.count < 20 {
+                            
+                            //显示加载更多
+                            self.isShowLoadMore = false
+                        } else {
+                            
+                            //不显示加载更多
+                            self.isShowLoadMore = true
+                        }
+                        
+                        if self.pageCount == 1 {
+                            
+                            self.tableViewDataArray.removeAll()
+                        }
                         
                         for var i = 0; i < tempdata.count; i++ {
                             
@@ -140,15 +159,18 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
                         }
                         
                         self.tableView?.reloadData()
-                        self.pageCount += 1
+                        self.tableView?.hidden = false
                         
                     } else {
                         
                         //没有数据
                         
-                        YNProgressHUD().showText("当前分类下没有相关问题", toView: self.view)
-                        self.tableViewDataArray.removeAll()
+                        YNProgressHUD().showText("没有数据了", toView: self.view)
+                        
+                        self.isShowLoadMore = false
+                        
                         self.tableView?.reloadData()
+                        
                     }
                     
                     
@@ -170,6 +192,14 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
                 YNProgressHUD().showText("数据加载失败", toView: self.view)
         }
         
+    }
+    
+    func loadMore() {
+        
+        self.pageCount++
+        
+        //加载问题数据
+        getQuestionListWithClassID(self.classId)
     }
     
     //MARK: 加载关注数据
@@ -244,6 +274,7 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
         tempTableView.delegate = self
         tempTableView.dataSource = self
         tempTableView.separatorStyle = .None
+        tempTableView.hidden = true
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
@@ -286,7 +317,14 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return self.tableViewDataArray.count
+        if self.isShowLoadMore {
+            
+            return self.tableViewDataArray.count + 1
+            
+        } else {
+            
+            return self.tableViewDataArray.count
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -295,6 +333,21 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if indexPath.section == self.tableViewDataArray.count {
+            
+            let identify: String = "Cell_Resault_LoadMore_code"
+            var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(identify)
+            
+            if cell == nil {
+                
+                cell = YNResaultLoadModeCell(style: .Default, reuseIdentifier: identify)
+                
+            }
+            
+            return cell!
+            
+        }
         
         let identify = "CELL_Question"
         
@@ -311,7 +364,10 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
+        if indexPath.section == self.tableViewDataArray.count {
+            
+            return 44
+        }
         return self.tableViewDataArray[indexPath.section].height!
     }
     
@@ -325,10 +381,19 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let questionDetailVc = YNQuestionDetailViewController()
-        questionDetailVc.questionModel = self.tableViewDataArray[indexPath.section]
+        if indexPath.section == self.tableViewDataArray.count {
+            
+            self.loadMore()
+            
+        } else {
+            
+            let questionDetailVc = YNQuestionDetailViewController()
+            questionDetailVc.questionModel = self.tableViewDataArray[indexPath.section]
+            
+            self.navigationController?.pushViewController(questionDetailVc, animated: true)
+        }
         
-        self.navigationController?.pushViewController(questionDetailVc, animated: true)
+        
     }
     
     //MARK:UICollectionViewDataSource

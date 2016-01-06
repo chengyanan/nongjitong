@@ -397,7 +397,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
                         
                         //没有数据
                         
-                        YNProgressHUD().showText("没有回答", toView: self.view)
+//                        YNProgressHUD().showText("没有回答", toView: self.view)
                         
                     }
                     

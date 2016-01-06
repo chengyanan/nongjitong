@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        
+        Tools().registerNotification()
+        
+        
         if kUser_ID() != nil {//已登陆
         
             let temp = kUser_IsInformationFinish()
@@ -66,7 +70,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    //MARK: 通知
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
+        let characterSet = NSCharacterSet(charactersInString: "<>")
+        
+        let tokenStr = String(deviceToken).stringByTrimmingCharactersInSet(characterSet)
+        
+        let finalTokenStr = tokenStr.stringByReplacingOccurrencesOfString(" ", withString: "")
 
+        print(finalTokenStr)
+        
+        senderToken(finalTokenStr)
+    }
+    
+    func senderToken(token: String) {
+    
+        Tools().sendDeviceTokenToServer(token, successful: { (json) -> Void in
+            
+                if let status = json["status"] as? Int {
+
+                    if status == 1 {
+
+
+                        print("Token上传成功")
+
+                    } else if status == 0 {
+
+                        print("Token上传失败")
+                        
+                        print(json["msg"])
+                    }
+                    
+                }
+            
+            }) { (error) -> Void in
+                
+                        print("error - Token上传失败")
+        }
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        
+        print(error, "注册通知失败")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        
+        print(userInfo)
+        
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

@@ -87,5 +87,66 @@ struct Tools {
         return newimage
     }
     
+    
+    //注册推送
+    func registerNotification() {
+        
+        if #available(iOS 8.0, *) {
+            UIApplication.sharedApplication().registerForRemoteNotifications()
+            
+            let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            
+            UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+            
+        } else {
+            // Fallback on earlier versions
+            
+            let notificationTypes: UIRemoteNotificationType = [.Badge,.Sound,.Alert]
+            UIApplication.sharedApplication().registerForRemoteNotificationTypes(notificationTypes)
+            
+        }
+        
+    }
+    
+    //上传deviceToken
+    func sendDeviceTokenToServer(token: String, successful: ((json: NSDictionary)->Void)?, failure: ((error:NSError)->Void)?) {
+    
+        let userid = kUser_ID() as? String
+            
+            //已登陆请求数据
+            let params: [String: String?] = ["m": "Appapi",
+                "key": "KSECE20XE15DKIEX3",
+                "c": "User",
+                "a": "addToken",
+                "token": token,
+                "user_id": userid
+            ]
+
+            Network.post(kURL, params: params, success: { (data, response, error) -> Void in
+                
+                let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
+                
+                if let _ = successful {
+                
+                    successful!(json: json)
+                }
+                
+                
+                }) { (error) -> Void in
+                    
+                    
+                    if let _ = failure {
+                    
+                        failure!(error: error)
+                    }
+                    
+
+            }
+            
+            
+    }
+    
+  
+    
 }
 

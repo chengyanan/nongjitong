@@ -289,7 +289,8 @@ class YNSearchViewController: UIViewController, UITableViewDataSource, UITableVi
                         } else {
                         
                             //没数据
-                            YNProgressHUD().showText("对不起，没有相关文章", toView: self.view)
+                            YNProgressHUD().showText("没有数据啦", toView: self.view)
+                            
                         }
                         
                         

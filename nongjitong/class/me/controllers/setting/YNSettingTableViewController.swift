@@ -9,6 +9,13 @@
 import UIKit
 
 class YNSettingTableViewController: UITableViewController {
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "设置"
+    }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         

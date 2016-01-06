@@ -27,6 +27,7 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
             self.tableView.reloadData()
         }
         
+        
     }
     
     //MARK: life cycle
@@ -62,6 +63,13 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
         
         definesPresentationContext = true
         
+        
+//        //MARK: 加载文章分类数据
+//        getCategoryFromServer()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         //MARK: 加载文章分类数据
         getCategoryFromServer()

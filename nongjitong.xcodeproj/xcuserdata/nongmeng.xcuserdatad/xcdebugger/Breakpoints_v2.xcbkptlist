@@ -54,7 +54,7 @@
                   moduleName = "nongjitong"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nongmeng/Desktop/nongjitong/nongjitong/class/me/controllers/persional%20setting/YNPersionalSettingTableViewController.swift"
-                  timestampString = "473685878.740963"
+                  timestampString = "473769808.185686"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "697"
@@ -69,7 +69,7 @@
                   moduleName = "nongjitong"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/nongmeng/Desktop/nongjitong/nongjitong/class/me/controllers/persional%20setting/YNPersionalSettingTableViewController.swift"
-                  timestampString = "473685878.741176"
+                  timestampString = "473769808.185869"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "697"
@@ -92,6 +92,22 @@
             startingLineNumber = "686"
             endingLineNumber = "686"
             landmarkName = "sendImageToServer(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "nongjitong/AppDelegate.swift"
+            timestampString = "473749763.849636"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "application(_:didReceiveRemoteNotification:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

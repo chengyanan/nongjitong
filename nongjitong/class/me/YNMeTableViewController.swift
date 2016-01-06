@@ -17,6 +17,15 @@ class YNMeTableViewController: UITableViewController {
     
     @IBOutlet var userIdlabel: UILabel!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "我"
+        
+        self.avatarImageView.layer.cornerRadius = 42
+        self.avatarImageView.clipsToBounds = true
+    }
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

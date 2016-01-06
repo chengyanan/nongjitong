@@ -192,7 +192,7 @@ class YNQuestionModel {
         }
         
         self.height = height + 10 + marginModel.answerCountHeight
-        self.myQuestionCellHeight = marginModel.topMargin*2 + contentHeight + marginModel.answerCountHeight
+        self.myQuestionCellHeight = marginModel.topMargin*1.5 + contentHeight + marginModel.answerCountHeight
     }
     
     //计算label的高度

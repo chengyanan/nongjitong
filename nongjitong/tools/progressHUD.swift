@@ -180,7 +180,7 @@ class ProgressHUD: UIView {
         
         self.timeInterval -= 1
         
-        print(self.timeInterval)
+//        print(self.timeInterval)
         if self.timeInterval > 0 {
             
             

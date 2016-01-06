@@ -49,7 +49,7 @@ class YNMYQuestionTableViewCell: UITableViewCell {
         self.contentView.addSubview(answerCountAndPostTime)
         
         self.selectionStyle = .None
-        
+        self.accessoryType = .DisclosureIndicator
         setLayout()
     }
 
@@ -62,11 +62,16 @@ class YNMYQuestionTableViewCell: UITableViewCell {
         //questionContent
         Layout().addTopConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: marginModel.topMargin)
         Layout().addLeftConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: marginModel.leftRightMargin)
-        Layout().addRightConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: -marginModel.leftRightMargin)
+//        Layout().addRightConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: -marginModel.leftRightMargin)
+        
+        Layout().addRightConstraint(questionContent, toView: self.contentView, multiplier: 1, constant: 0)
         
         //state
         Layout().addLeftConstraint(state, toView: questionContent, multiplier: 1, constant: 0)
-        Layout().addTopToBottomConstraint(state, toView: questionContent, multiplier: 1, constant: marginModel.topMargin)
+        Layout().addTopToBottomConstraint(state, toView: questionContent, multiplier: 1, constant: marginModel.topMargin*0.5)
+        
+       
+        
         Layout().addHeightConstraint(state, toView: nil, multiplier: 0, constant: marginModel.answerCountHeight)
         Layout().addWidthConstraint(state, toView: nil, multiplier: 0, constant: 80)
         

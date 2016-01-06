@@ -10,7 +10,7 @@
         <scene sceneID="RKa-NB-kEY">
             <objects>
                 <navigationController id="TLJ-hy-rP9" customClass="YNNavigationController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="问答" image="tabBar_help" id="3Yj-DV-TpJ"/>
+                    <tabBarItem key="tabBarItem" title="问答" image="tab_question" id="3Yj-DV-TpJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aUt-j4-6Gv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -37,7 +37,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="问答" id="lhu-cF-hfS">
-                        <barButtonItem key="leftBarButtonItem" image="tabBar_me" id="r8v-SR-WrE">
+                        <barButtonItem key="leftBarButtonItem" image="item_me" id="r8v-SR-WrE">
                             <connections>
                                 <action selector="leftbarButtonClick:" destination="qyf-m8-zJv" id="d3m-bH-G8W"/>
                             </connections>
@@ -128,7 +128,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_seting_my_question" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-Tr-lzT">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_seting_question_feedback" translatesAutoresizingMaskIntoConstraints="NO" id="r9a-Tr-lzT">
                                                     <rect key="frame" x="12" y="13" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="d6P-0R-fdw"/>
@@ -192,7 +192,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_seting_question_feedback" translatesAutoresizingMaskIntoConstraints="NO" id="iJb-hG-JQj">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_attention" translatesAutoresizingMaskIntoConstraints="NO" id="iJb-hG-JQj">
                                                     <rect key="frame" x="12" y="12" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="0Kr-F8-wdf"/>
@@ -222,7 +222,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_seting_about_our" translatesAutoresizingMaskIntoConstraints="NO" id="Cet-fb-uxU">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_subscribe" translatesAutoresizingMaskIntoConstraints="NO" id="Cet-fb-uxU">
                                                     <rect key="frame" x="12" y="12" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="aRM-EJ-gg3"/>
@@ -256,7 +256,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_seting_question_feedback" translatesAutoresizingMaskIntoConstraints="NO" id="bB1-RQ-Zb8">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_article" translatesAutoresizingMaskIntoConstraints="NO" id="bB1-RQ-Zb8">
                                                     <rect key="frame" x="12" y="12" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="8wt-sK-KD4"/>
@@ -286,7 +286,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_seting_question_feedback" translatesAutoresizingMaskIntoConstraints="NO" id="u79-nW-pAD">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myWaring" translatesAutoresizingMaskIntoConstraints="NO" id="u79-nW-pAD">
                                                     <rect key="frame" x="12" y="12" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="4Wp-HV-Uh9"/>
@@ -320,7 +320,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tabBar_me" translatesAutoresizingMaskIntoConstraints="NO" id="lmN-cX-JSV">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_center_seting" translatesAutoresizingMaskIntoConstraints="NO" id="lmN-cX-JSV">
                                                     <rect key="frame" x="12" y="12" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="4T5-Be-zTb"/>
@@ -1423,7 +1423,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="救援" id="7dm-mO-zdl">
-                        <barButtonItem key="leftBarButtonItem" image="tabBar_me" id="l1m-uS-i8C">
+                        <barButtonItem key="leftBarButtonItem" image="item_me" id="l1m-uS-i8C">
                             <connections>
                                 <action selector="leftBarButtonClicke:" destination="xBG-Kn-Obk" id="0Ym-CE-aCG"/>
                             </connections>
@@ -1709,7 +1709,7 @@
         <scene sceneID="Lb9-8i-nFb">
             <objects>
                 <navigationController id="ca2-Bq-3tl" customClass="YNNavigationController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="预警" image="tabBar_me" id="2Kc-XL-5Cw"/>
+                    <tabBarItem key="tabBarItem" title="预警" image="tab_waring" id="2Kc-XL-5Cw"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DT1-bD-bJG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1752,7 +1752,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="搜索" id="CFk-Tp-dBH">
-                        <barButtonItem key="leftBarButtonItem" image="tabBar_me" id="rgk-59-nIH">
+                        <barButtonItem key="leftBarButtonItem" image="item_me" id="rgk-59-nIH">
                             <connections>
                                 <action selector="settingPage:" destination="tBa-EM-NZM" id="7G5-9F-Rop"/>
                             </connections>
@@ -1858,7 +1858,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hKB-wy-fum">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="tabBar_me" id="jgc-BB-qS1">
+                        <barButtonItem key="leftBarButtonItem" image="item_me" id="jgc-BB-qS1">
                             <connections>
                                 <action selector="leftbarButtonClick:" destination="weu-DS-vJc" id="7vf-o0-Zyw"/>
                             </connections>
@@ -1908,12 +1908,17 @@
     </scenes>
     <resources>
         <image name="home_page_default_avatar_image" width="42" height="42"/>
-        <image name="tabBar_help" width="27" height="27"/>
+        <image name="item_me" width="20" height="21"/>
+        <image name="myWaring" width="23" height="23"/>
+        <image name="my_article" width="24" height="24"/>
+        <image name="my_attention" width="24" height="24"/>
+        <image name="my_center_seting" width="23" height="23"/>
+        <image name="my_subscribe" width="24" height="24"/>
         <image name="tabBar_home" width="25" height="25"/>
-        <image name="tabBar_me" width="25" height="25"/>
         <image name="tabBar_waring" width="22" height="22"/>
+        <image name="tab_question" width="20" height="20"/>
+        <image name="tab_waring" width="20" height="20"/>
         <image name="user_default_avatar" width="100" height="100"/>
-        <image name="user_seting_about_our" width="23" height="23"/>
         <image name="user_seting_my_question" width="23" height="23"/>
         <image name="user_seting_question_feedback" width="23" height="23"/>
     </resources>
