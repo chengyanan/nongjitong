@@ -139,6 +139,8 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         self.collectionView.registerClass(YNAskQuestionLocationCollectionViewCell.self , forCellWithReuseIdentifier: "Cell_Ask_Qustion_Location")
         
+        self.collectionView.registerClass(YNAskQuestionExplianCollectionCell.self, forCellWithReuseIdentifier: "Cell_Ask_Qustion_explain")
+        
         let flow = UICollectionViewFlowLayout()
         
         flow.minimumInteritemSpacing = 6
@@ -278,11 +280,15 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         
         if indexPath.section == 0 {
         
-            return CGSizeMake(self.view.frame.size.width, 120)
+            return CGSizeMake(self.view.frame.size.width, 150)
             
         } else if indexPath.section == 2 || indexPath.section == 3{
         
             return CGSizeMake(self.view.frame.size.width, 50)
+            
+        } else if indexPath.section == 4 {
+        
+            return CGSizeMake(self.view.frame.size.width, 200)
         }
         
         let widthHeight = (self.view.frame.size.width - 2*6) / 3 - 1
@@ -293,7 +299,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
     //MARK:UICollectionViewDataSource
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         
-        return 4
+        return 5
     }
     
     
@@ -344,6 +350,17 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             cell.detaileTitle = self.locationDetail
             cell.isShowRightError = false
             
+            return cell
+            
+        } else if indexPath.section == 4 {
+        
+            //提问说明
+            let identify = "Cell_Ask_Qustion_explain"
+            
+            
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNAskQuestionExplianCollectionCell
+            
+            cell.explainLabel.text = self.explainText
             return cell
             
         }
@@ -686,5 +703,8 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    
+    //提示文字
+    let explainText = "【提问注意事项】\n1.标本选取要有代表性;\n2.明确地区和品种;\n3.说明是露地种植还是大棚种植;\n4.说明最近天气情况和墒情;\n5.列举最近用药用肥品种;\n6.描述最近农事操作;\n7.需要图片的请至少提供一张标本局部特写照片，一张受害全景照片，最好一张光学显微镜下的病原菌照片;\n8.详细描述受害状况."
     
 }
