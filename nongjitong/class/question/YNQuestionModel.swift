@@ -181,14 +181,35 @@ class YNQuestionModel {
         
         if self.photo.count > 0 {
             
-            let imageWidthHeight = (kScreenWidth - marginModel.leftRightMargin*2 -  CGFloat(self.photo.count - 1) * marginModel.imageMargin ) / 3 - 1
+            var imageWidthHeight: CGFloat = 0
+            
+            let photoAiiWidth = kScreenWidth - marginModel.leftRightMargin*2
+            
+            var marginAllWidth: CGFloat = 0
+            
+            //MARK: 图片最大数量为3
+            if self.photo.count < 3 {
+                
+                marginAllWidth = CGFloat(self.photo.count - 1) * marginModel.imageMargin
+                
+            } else {
+            
+                marginAllWidth = 2*marginModel.imageMargin
+                
+            }
+            
+            imageWidthHeight = (photoAiiWidth - marginAllWidth) / 3 - 1
+            
             marginModel.imageWidthHeight = imageWidthHeight
         
             height += marginModel.marginBetweenDescriptionAndImages + marginModel.imageWidthHeight!
             
         } else {
         
-            marginModel.imageWidthHeight = (kScreenWidth - marginModel.leftRightMargin*2) / 3 - 1
+            //没有图片
+//            marginModel.imageWidthHeight = (kScreenWidth - marginModel.leftRightMargin*2) / 3 - 1
+            
+            
         }
         
         self.height = height + 10 + marginModel.answerCountHeight

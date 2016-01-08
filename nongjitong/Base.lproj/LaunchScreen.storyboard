@@ -29,6 +29,7 @@
                             <constraint firstItem="LH4-Mi-Yls" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="lGE-ks-1rN"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>

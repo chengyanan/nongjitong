@@ -79,27 +79,35 @@ class YNQuestionTableViewCell: UITableViewCell {
     func addPictures() {
     
         for var i = 0; i < model?.photo.count; i++ {
+            
+            // 图片最大数量
+            if i < 3 {
+            //图片最多显示3张
+                
+                let imageView = UIImageView()
+                //            imageView.backgroundColor = UIColor.redColor()
+                imageView.tag = i+1
+                
+                let leftRightMargin = model!.marginModel.leftRightMargin
+                
+                let imageWidthHeight = model!.marginModel.imageWidthHeight!
+                
+                let imageY = model!.marginModel.imageY!
+                
+                let imageMargin = model!.marginModel.imageMargin
+                
+                let x =  leftRightMargin + CGFloat(i) * imageWidthHeight + CGFloat(i) * imageMargin
+                
+                imageView.frame = CGRectMake(x, imageY, imageWidthHeight, imageWidthHeight)
+                
+                imageView.getImageWithURL(model!.photo[i], contentMode: UIViewContentMode.ScaleToFill)
+                imageView.clipsToBounds = true
+                
+                self.contentView.addSubview(imageView)
+                
+            }
         
-            let imageView = UIImageView()
-//            imageView.backgroundColor = UIColor.redColor()
-            imageView.tag = i+1
             
-            let leftRightMargin = model!.marginModel.leftRightMargin
-            
-            let imageWidthHeight = model!.marginModel.imageWidthHeight!
-            
-            let imageY = model!.marginModel.imageY!
-            
-            let imageMargin = model!.marginModel.imageMargin
-            
-            let x =  leftRightMargin + CGFloat(i) * imageWidthHeight + CGFloat(i) * imageMargin
-            
-            imageView.frame = CGRectMake(x, imageY, imageWidthHeight, imageWidthHeight)
-            
-            imageView.getImageWithURL(model!.photo[i], contentMode: UIViewContentMode.ScaleToFill)
-            imageView.clipsToBounds = true
-            
-            self.contentView.addSubview(imageView)
         }
     }
     
