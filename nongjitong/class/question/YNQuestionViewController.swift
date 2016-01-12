@@ -38,6 +38,8 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //加载当前的页数
     var pageCount = 1
     
+    var isFirst = true
+    
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +53,37 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         setupInterface()
         setLayout()
         
-//        loadDataFromServer()
+        loadDataFromServer()
+        
+        self.tableView?.addHeaderRefreshWithActionHandler({ () -> Void in
+            
+            self.loadDataHeaderRefresh()
+            
+        })
+        
+        self.tableView?.addFooterRefreshWithActionHandler({ () -> Void in
+            
+            self.loadMore()
+        })
+    }
+    
+    func loadDataHeaderRefresh() {
+    
+        self.pageCount = 1
+        //加载问题数据
+        getQuestionListWithClassID(self.classId)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.pageCount = 1
+        self.tableView?.addRefresh()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        loadDataFromServer()
+        self.tableView?.removeRefresh()
     }
     
     //MARK: event response
@@ -138,10 +162,26 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
             "is_outline": isOutLine
         ]
         
-        let progress = YNProgressHUD().showWaitingToView(self.view)
+        var progress : ProgressHUD?
+        
+        if isFirst {
+        
+            progress = YNProgressHUD().showWaitingToView(self.view)
+            
+        }
+        
         YNHttpQuestion().getQuestionListWithClassID(params, successFull: { (json) -> Void in
             
-            progress.hideUsingAnimation()
+            
+            self.tableView?.stopRefresh()
+            
+            if self.isFirst {
+            
+                progress!.hideUsingAnimation()
+                
+                self.isFirst = false
+            }
+            
             
             if let status = json["status"] as? Int {
                 
@@ -207,7 +247,14 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
             
             }) { (error) -> Void in
                
-                progress.hideUsingAnimation()
+                self.tableView?.stopRefresh()
+                
+                if self.isFirst {
+                    
+                    progress!.hideUsingAnimation()
+                    
+                    self.isFirst = false
+                }
                 YNProgressHUD().showText("数据加载失败", toView: self.view)
         }
         
@@ -313,7 +360,6 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         tempTableView.dataSource = self
         tempTableView.separatorStyle = .None
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
-        tempTableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0)
         tempTableView.hidden = true
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
@@ -371,15 +417,16 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        if self.isShowLoadMore {
+//        if self.isShowLoadMore {
+//        
+//            return self.tableViewDataArray.count + 1
+//            
+//        } else {
+//        
+//            return self.tableViewDataArray.count
+//        }
         
-            return self.tableViewDataArray.count + 1
-            
-        } else {
-        
-            return self.tableViewDataArray.count
-        }
-        
+        return self.tableViewDataArray.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
