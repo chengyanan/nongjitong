@@ -106,8 +106,8 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
     
     //MARK: event response
     func writeSolution() {
-    
-        let vc = YNAnswerQuestionViewController()
+        
+        let vc = YNWriteSolutionViewController()
         vc.actionType = ActionType.WriteProgram
         vc.searchresault = self.searchresault
         self.navigationController?.pushViewController(vc, animated: true)

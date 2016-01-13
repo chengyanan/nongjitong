@@ -134,11 +134,10 @@ class YNWriteProgramToOtherViewController: UIViewController, UITableViewDataSour
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 1 {
-        
-            let vc = YNAnswerQuestionViewController()
+            
+            let vc = YNWriteSolutionViewController()
             vc.actionType = ActionType.WriteWarning
             vc.warningModel = self.model
-            
             navigationController?.pushViewController(vc, animated: true)
         }
         

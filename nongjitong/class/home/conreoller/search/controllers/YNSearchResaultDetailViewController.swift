@@ -20,6 +20,8 @@ class YNSearchResaultDetailViewController: UIViewController, UIWebViewDelegate {
     
     }
     
+    
+    
     //MARK: - private proporty
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var webView: UIWebView!

@@ -65,15 +65,15 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
         
         
 //        //MARK: 加载文章分类数据
-//        getCategoryFromServer()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //MARK: 加载文章分类数据
         getCategoryFromServer()
     }
+    
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        //MARK: 加载文章分类数据
+//        getCategoryFromServer()
+//    }
     
     func getCategoryFromServer() {
     

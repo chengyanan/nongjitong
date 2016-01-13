@@ -4,14 +4,9 @@
 //
 //  Created by 农盟 on 15/12/7.
 //  Copyright © 2015年 农盟. All rights reserved.
-//暂时为写方案界面
+//暂时不用这个界面
 
 import UIKit
-
-enum ActionType {
-
-    case WriteProgram, WriteWarning
-}
 
 protocol YNAnswerQuestionViewControllerDelegate {
 
