@@ -40,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Default" width="320" height="480"/>
+        <image name="Default" width="640" height="960"/>
     </resources>
 </document>

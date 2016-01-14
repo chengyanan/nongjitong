@@ -264,7 +264,7 @@ class YNWriteSolutionViewController: UIViewController, YNAskQuestionTextCollecti
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
         
-        Network.post(kURL, params: params, success: { (data, response, error) -> Void in
+        Network.post(kURL, params: params, files: self.uploadImageFilesArray, success: { (data, response, error) -> Void in
             
             progress.hideUsingAnimation()
             
@@ -301,12 +301,17 @@ class YNWriteSolutionViewController: UIViewController, YNAskQuestionTextCollecti
                 
             }
             
+            
             }) { (error) -> Void in
+                
                 
                 progress.hideUsingAnimation()
                 
                 YNProgressHUD().showText("数据上传失败", toView: self.view)
+                
         }
+        
+       
         
         
     }

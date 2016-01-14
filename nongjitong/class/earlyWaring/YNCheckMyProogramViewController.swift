@@ -201,6 +201,22 @@ class YNCheckMyProogramViewController: UIViewController, UITableViewDataSource, 
             
         }
         
+        if self.model?.photos?.count > 0 {
+        
+            let idenfier = "CELL_ToMyProgram_WithImage"
+            var cell = tableView.dequeueReusableCellWithIdentifier(idenfier) as? YNSearchSolutionWithImageCell
+            
+            if cell == nil {
+                
+                cell = YNSearchSolutionWithImageCell(style: .Default, reuseIdentifier: idenfier)
+            }
+            
+            cell?.earlyToMyProgramModel = self.model
+            
+            return cell!
+            
+        }
+        
         let idenfier = "CELL_ToMyProgram"
         var cell = tableView.dequeueReusableCellWithIdentifier(idenfier) as? YNSearchSolutionCell
         

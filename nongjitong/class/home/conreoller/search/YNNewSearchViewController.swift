@@ -33,9 +33,10 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         self.tableView.tableFooterView = UIView()
         self.tableView.showsVerticalScrollIndicator = false
+        self.automaticallyAdjustsScrollViewInsets = false
         
         if kIOS7() {
         
@@ -66,14 +67,26 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
         
 //        //MARK: 加载文章分类数据
         getCategoryFromServer()
+        
+        self.tableView.addHeaderRefreshWithActionHandler { () -> Void in
+            
+            self.getCategoryFromServer()
+            
+        }
     }
     
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//        //MARK: 加载文章分类数据
-//        getCategoryFromServer()
-//    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+       
+        self.tableView.addHeaderRefresh()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+         self.tableView.removeHeaderRefresh()
+    }
     
     func getCategoryFromServer() {
     
@@ -87,11 +100,12 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
         
         Network.post(kURL, params: params, success: { (data, response, error) -> Void in
             
+            self.tableView.stopHeaderRefresh()
             progress.hideUsingAnimation()
             
             let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
             
-            print("data - \(json)")
+//            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -133,6 +147,7 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
             
             }) { (error) -> Void in
                 
+                self.tableView.stopHeaderRefresh()
                 progress.hideUsingAnimation()
                 YNProgressHUD().showText("加载失败", toView: self.view)
         }
@@ -188,7 +203,7 @@ class YNNewSearchViewController: UIViewController, UITableViewDataSource, UITabl
         let model = self.resaultArray[indexPath.row]
         
         cell?.accessoryType = .DisclosureIndicator
-        
+        cell?.selectionStyle = .None
         cell?.textLabel?.text = model.name
         cell?.detailTextLabel?.text = "\(model.docs!)篇相关文章"
         cell?.detailTextLabel?.font = UIFont.systemFontOfSize(13)

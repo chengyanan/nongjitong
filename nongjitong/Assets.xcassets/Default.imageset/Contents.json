@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Default.png"
+      "filename" : "Default.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
@@ -17,8 +17,8 @@
     },
     {
       "idiom" : "iphone",
-      "scale" : "1x",
-      "filename" : "launch1242x2208.png"
+      "filename" : "launch.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "iphone",

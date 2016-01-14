@@ -178,6 +178,22 @@ class YNSolutionDetailsViewController: UIViewController, UITableViewDataSource, 
             
         }
         
+        if self.model?.photos?.count > 0 {
+        
+            let identify: String = "Cell_Search_Resault_listWithImage"
+            var cell: YNSearchSolutionWithImageCell? = tableView.dequeueReusableCellWithIdentifier(identify) as? YNSearchSolutionWithImageCell
+            
+            if cell == nil {
+                
+                cell = YNSearchSolutionWithImageCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
+                
+            }
+            
+            cell?.solutionModel = self.model
+            
+            return cell!
+        }
+        
         let idenfier = "CELL_ToMyProgram"
         var cell = tableView.dequeueReusableCellWithIdentifier(idenfier) as? YNSearchSolutionCell
         

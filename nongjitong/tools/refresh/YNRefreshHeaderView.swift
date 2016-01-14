@@ -208,17 +208,23 @@ class YNRefreshHeaderView: UIView, UIScrollViewDelegate {
     
     func setOriginalScrollViewContentInset() {
         
-        var currentInsets = scrollView()!.contentInset
-        currentInsets.top = 0
+        if let _ = scrollView() {
         
-        UIView.animateWithDuration(0.3, delay: 0, options: [UIViewAnimationOptions.AllowUserInteraction, .BeginFromCurrentState], animations: { () -> Void in
+            var currentInsets = scrollView()!.contentInset
+            currentInsets.top = 0
             
-            self.scrollView()!.contentInset = currentInsets
-            
-            }) { (isfinish) -> Void in
+            UIView.animateWithDuration(0.3, delay: 0, options: [UIViewAnimationOptions.AllowUserInteraction, .BeginFromCurrentState], animations: { () -> Void in
                 
-
+                self.scrollView()!.contentInset = currentInsets
+                
+                }) { (isfinish) -> Void in
+                    
+                    
+            }
+            
         }
+        
+        
     }
     
     //MARK: custom motheds

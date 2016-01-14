@@ -188,6 +188,8 @@ class ProgressHUD: UIView {
             
             self.timer?.invalidate()
             
+            self.removeFromSuperview()
+            
         }
         
     }

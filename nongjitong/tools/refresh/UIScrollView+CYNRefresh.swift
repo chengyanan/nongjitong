@@ -139,35 +139,51 @@ extension UIScrollView {
 
     func addHeaderRefresh() {
         
-        addSubview(self.headerRefreshView!)
-        self.headerRefreshView?.state = YNPullRefreshState.Normal
-        self.headerRefreshView?.observing = true
+        if self.headerRefreshView?.superview == nil {
+        
+            addSubview(self.headerRefreshView!)
+            self.headerRefreshView?.state = YNPullRefreshState.Normal
+            self.headerRefreshView?.observing = true
+        }
+        
+       
         
     }
     
     func removeHeaderRefresh() {
     
-        self.headerRefreshView?.state = YNPullRefreshState.Normal
-        self.headerRefreshView?.observing = false
+        if let _ = self.headerRefreshView {
         
-        self.headerRefreshView?.removeFromSuperview()
+            self.headerRefreshView?.state = YNPullRefreshState.Normal
+            self.headerRefreshView?.observing = false
+            
+            self.headerRefreshView?.removeFromSuperview()
+        }
+        
+        
     }
     
     func addFooterRefresh() {
     
-        addSubview(self.footerRefreshView!)
-        self.footerRefreshView?.state = YNPullRefreshState.Normal
-        self.footerRefreshView?.observing = true
+        if self.footerRefreshView?.superview == nil {
         
+            addSubview(self.footerRefreshView!)
+            self.footerRefreshView?.state = YNPullRefreshState.Normal
+            self.footerRefreshView?.observing = true
+        }
         
     }
     
     func removeFooterRefresh() {
     
-        self.footerRefreshView?.state = YNPullRefreshState.Normal
-        self.footerRefreshView?.observing = false
+        if let _ = self.footerRefreshView?.superview {
         
-        self.footerRefreshView?.removeFromSuperview()
+            self.footerRefreshView?.state = YNPullRefreshState.Normal
+            self.footerRefreshView?.observing = false
+            
+            self.footerRefreshView?.removeFromSuperview()
+        }
+        
     }
     
     func addRefresh() {

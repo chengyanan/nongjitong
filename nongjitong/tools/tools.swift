@@ -124,12 +124,21 @@ struct Tools {
 
             Network.post(kURL, params: params, success: { (data, response, error) -> Void in
                 
-                let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
+                do {
                 
-                if let _ = successful {
+                    let json: NSDictionary = try NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                    
+                    if let _ = successful {
+                        
+                        successful!(json: json)
+                    }
+                    
+                } catch {
                 
-                    successful!(json: json)
+                    
                 }
+                
+               
                 
                 
                 }) { (error) -> Void in

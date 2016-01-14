@@ -10,10 +10,9 @@ import UIKit
 
 class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    
     var page: Int = 1
     var pagecount: Int = 20
-    
+    var isFirstLoadData = true
     var tempResaultArray = [YNEarlyToMyProgramModel]()
     
     var resaultArray = [YNEarlyToMyProgramModel]() {
@@ -37,6 +36,24 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
         
         self.rightItem = UIBarButtonItem(title: "登录", style: .Plain, target: self, action: "login")
         navigationItem.rightBarButtonItem = rightItem
+        
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        self.tableView.addHeaderRefreshWithActionHandler { () -> Void in
+            
+            self.loadData()
+        }
+        
+        self.tableView.addFooterRefreshWithActionHandler { () -> Void in
+            
+            self.page++
+            self.loadData()
+            
+        }
+        
+        //登录加载数据
+        loadData()
     }
     
     func login() {
@@ -49,11 +66,22 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
         self.presentViewController(navVc, animated: true, completion: { () -> Void in
             
         })
+        
+        
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.tableView?.removeRefresh()
+    }
+
     
     override func viewWillAppear(animated: Bool) {
+        
         super.viewWillAppear(animated)
+        
+        self.tableView?.addRefresh()
         
         let uesrId = kUser_ID()
         
@@ -61,14 +89,17 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
             
             navigationItem.rightBarButtonItem = nil
             
-            self.tempResaultArray.removeAll()
-            
-            //登录加载数据
-            loadData()
+//           //登录加载数据
+//            loadData()
             
         } else {
         
             navigationItem.rightBarButtonItem = self.rightItem
+            //没有登录
+            self.resaultArray = [YNEarlyToMyProgramModel]()
+            
+            YNProgressHUD().showText("请先登录", toView: self.view)
+            
         }
         
     }
@@ -107,11 +138,11 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
         
         if self.resaultArray[indexPath.row].subscribe.count >= 2 {
         
-            return 70
+            return 86
             
         } else {
         
-            return 50
+            return 60
         }
         
     }
@@ -119,6 +150,25 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if segmentController.selectedSegmentIndex == 0 {
+            
+            let model = self.resaultArray[indexPath.row]
+            
+            if model.photos?.count > 0 {
+            
+                let identify = "CELL_Waring_MyWithImage"
+                var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNSearchSolutionWithImageCell
+                
+                if cell == nil {
+                    
+                    cell = YNSearchSolutionWithImageCell(style: .Default, reuseIdentifier: identify)
+                    
+                }
+                
+                cell?.earlyToMyProgramModel = self.resaultArray[indexPath.row]
+                
+                return cell!
+                
+            }
         
             let identify = "CELL_Waring_My"
             var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNSearchSolutionCell
@@ -155,6 +205,7 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
         if self.segmentController.selectedSegmentIndex == 0 {
         
             let vc = YNCheckMyProogramViewController()
+            
             vc.resaultModel = self.resaultArray[indexPath.row]
             
             self.navigationController?.pushViewController(vc, animated: true)
@@ -164,12 +215,10 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
             let vc = YNWriteProgramToOtherViewController()
             vc.model = self.resaultArray[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
+            
         }
         
     }
-    
-    //MARK: UI components
-    
     
     //MARK: load data
     func loadData() {
@@ -184,6 +233,8 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
         } else {
         
             //没有登录
+            self.resaultArray = [YNEarlyToMyProgramModel]()
+            
             YNProgressHUD().showText("请先登录", toView: self.view)
             
         }
@@ -221,15 +272,28 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
         }
         
         
-        let progress = YNProgressHUD().showWaitingToView(self.view)
+        var progress : ProgressHUD?
+        
+        if isFirstLoadData {
+            
+            progress = YNProgressHUD().showWaitingToView(self.view)
+            
+        }
         
         Network.post(kURL, params: params, success: { (data, response, error) -> Void in
             
-            progress.hideUsingAnimation()
+            self.tableView?.stopRefresh()
+            
+            if self.isFirstLoadData {
+                
+                progress!.hideUsingAnimation()
+                
+                self.isFirstLoadData = false
+            }
             
             let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
             
-            print("data - \(json)")
+//            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -238,6 +302,13 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
                     let resaultData = json["data"] as! NSArray
                     
                     if resaultData.count > 0 {
+                        
+                        
+                        if self.page == 1 {
+                            
+                            self.tempResaultArray.removeAll()
+                        }
+                        
                         
                         for item in resaultData {
                             
@@ -253,9 +324,10 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
                     } else {
                         
                         //没数据
-                        YNProgressHUD().showText("还没有相关数据", toView: self.view)
+                        YNProgressHUD().showText("没有数据了", toView: self.view)
                         
-                        self.resaultArray = [YNEarlyToMyProgramModel]()
+//                        self.resaultArray = [YNEarlyToMyProgramModel]()
+                        
                     }
                     
                     
@@ -272,7 +344,15 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
             
             }) { (error) -> Void in
                 
-                progress.hideUsingAnimation()
+                self.tableView?.stopRefresh()
+                
+                if self.isFirstLoadData {
+                    
+                    progress!.hideUsingAnimation()
+                    
+                    self.isFirstLoadData = false
+                }
+                
                 YNProgressHUD().showText("加载失败", toView: self.view)
         }
         
@@ -280,14 +360,5 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
     
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

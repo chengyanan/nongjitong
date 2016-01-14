@@ -4,7 +4,7 @@
 //
 //  Created by 农盟 on 15/12/28.
 //  Copyright © 2015年 农盟. All rights reserved.
-//
+// 线下救援问题列表
 
 import UIKit
 
@@ -13,8 +13,19 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
     var isOutLine = "Y"
     
     //是否显示加载更多
-    var isShowLoadMore = true
-    
+    var isShowLoadMore = true {
+        
+        didSet {
+            
+            if isShowLoadMore {
+                
+                self.tableView?.addFooterRefresh()
+            } else {
+                
+                self.tableView?.removeFooterRefresh()
+            }
+        }
+    }
     
     let leftRightMargin: CGFloat = 10
     let itemSpacing: CGFloat = 3
@@ -35,6 +46,9 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
     
     //加载当前的页数
     var pageCount = 1
+    
+    var isFirstLoadData = true
+    
     
     //MARK: life cycle
     init() {
@@ -58,15 +72,39 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
         setupInterface()
         setLayout()
         
-        //        loadDataFromServer()
+        loadDataFromServer()
+        
+        
+        self.tableView?.addHeaderRefreshWithActionHandler({ () -> Void in
+            
+            self.loadDataHeaderRefresh()
+            
+        })
+        
+        self.tableView?.addFooterRefreshWithActionHandler({ () -> Void in
+            
+            self.loadMore()
+        })
+        
     }
     
+    func loadDataHeaderRefresh() {
+        
+        self.pageCount = 1
+        //加载问题数据
+        getQuestionListWithClassID(self.classId)
+    }
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.pageCount = 1
+        self.tableView?.addRefresh()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        loadDataFromServer()
+        self.tableView?.removeRefresh()
     }
     
     //MARK: event response
@@ -121,10 +159,24 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
             "is_outline": isOutLine
         ]
         
-        let progress = YNProgressHUD().showWaitingToView(self.view)
+        var progress : ProgressHUD?
+        
+        if isFirstLoadData {
+            
+            progress = YNProgressHUD().showWaitingToView(self.view)
+            
+        }
+        
         YNHttpQuestion().getQuestionListWithClassID(params, successFull: { (json) -> Void in
             
-            progress.hideUsingAnimation()
+            self.tableView?.stopRefresh()
+            
+            if self.isFirstLoadData {
+                
+                progress!.hideUsingAnimation()
+                
+                self.isFirstLoadData = false
+            }
             
             if let status = json["status"] as? Int {
                 
@@ -188,9 +240,18 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
             
             }) { (error) -> Void in
                 
-                progress.hideUsingAnimation()
+                self.tableView?.stopRefresh()
+                
+                if self.isFirstLoadData {
+                    
+                    progress!.hideUsingAnimation()
+                    
+                    self.isFirstLoadData = false
+                }
+                
                 YNProgressHUD().showText("数据加载失败", toView: self.view)
         }
+        
         
     }
     
@@ -259,6 +320,12 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
             }) { (error) -> Void in
                 
                 progress.hideUsingAnimation()
+                
+                let newmodel = YNSelectedProductModel()
+                newmodel.class_name = "最新"
+                newmodel.class_id = nil
+                self.selectedArray.append(newmodel)
+                newmodel.isSelected = true
                 
                 YNProgressHUD().showText("数据加载失败", toView: self.view)
         }

@@ -88,8 +88,46 @@ class YNSearchSolutionListModel {
         
         let contentHeight = heightForText(text, font: UIFont.systemFontOfSize(15), width: contentWidth)
         
+        
+        var height = marginModel.topMargin + contentHeight
+        
+        
+        if let _ = self.photos {
+            
+            if self.photos!.count > 0 {
+                
+                var imageWidthHeight: CGFloat = 0
+                
+                let photoAiiWidth = kScreenWidth - marginModel.leftRightMargin*2
+                
+                var marginAllWidth: CGFloat = 0
+                
+                //MARK: 图片最大数量为3
+                if self.photos!.count < 3 {
+                    
+                    marginAllWidth = CGFloat(self.photos!.count - 1) * marginModel.imageMargin
+                    
+                } else {
+                    
+                    marginAllWidth = 2*marginModel.imageMargin
+                    
+                }
+                
+                imageWidthHeight = (photoAiiWidth - marginAllWidth) / 3 - 1
+                
+                marginModel.imageWidthHeight = imageWidthHeight
+                
+                height += marginModel.marginBetweenDescriptionAndImages + marginModel.imageWidthHeight!
+                
+            }
+            
+        }
+        
+       
+        
+        self.height = height + marginModel.topMargin + marginModel.answerCountHeight
     
-        self.height = marginModel.topMargin*2 + contentHeight + marginModel.answerCountHeight
+        
     }
     
     //计算label的高度
@@ -102,5 +140,8 @@ class YNSearchSolutionListModel {
         label.sizeToFit()
         return label.frame.height
     }
+    
+    
+    
     
 }

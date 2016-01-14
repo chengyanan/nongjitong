@@ -194,6 +194,27 @@ class YNMYWriteWaringViewController: UIViewController, UITableViewDataSource, UI
             
         }
         
+        let tempmodel = self.resaultArray![indexPath.row]
+        
+        if tempmodel.photos!.count > 0 {
+        
+            let identify: String = "Cell_Search_Resault_WithImage"
+            
+            var cell: YNSearchSolutionWithImageCell? = tableView.dequeueReusableCellWithIdentifier(identify) as? YNSearchSolutionWithImageCell
+            
+            if cell == nil {
+                
+                cell = YNSearchSolutionWithImageCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
+                
+            }
+            
+            cell?.earlyToMyProgramModel = tempmodel
+            
+            return cell!
+            
+            
+        }
+        
         let identify: String = "Cell_Search_Resault_code"
         var cell: YNSearchSolutionCell? = tableView.dequeueReusableCellWithIdentifier(identify) as? YNSearchSolutionCell
         
@@ -203,7 +224,7 @@ class YNMYWriteWaringViewController: UIViewController, UITableViewDataSource, UI
             
         }
         
-        cell?.earlyToMyProgramModel = self.resaultArray![indexPath.row]
+        cell?.earlyToMyProgramModel = tempmodel
         
         return cell!
         

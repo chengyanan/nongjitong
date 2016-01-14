@@ -16,7 +16,6 @@ class YNSearchResaultCell: UITableViewCell {
         
     }
     
-    
     //MARK: - public proporty
     var resault: YNSearchResaultModel? {
     

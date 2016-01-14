@@ -13,7 +13,19 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     var isOutLine = "N"
     
     //是否显示加载更多
-    var isShowLoadMore = false
+    var isShowLoadMore = false {
+    
+        didSet {
+        
+            if isShowLoadMore {
+            
+                self.tableView?.addFooterRefresh()
+            } else {
+            
+                self.tableView?.removeFooterRefresh()
+            }
+        }
+    }
     
     let leftRightMargin: CGFloat = 10
     let itemSpacing: CGFloat = 3
@@ -78,6 +90,11 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         super.viewWillAppear(animated)
         
         self.tableView?.addRefresh()
+        
+//        self.loadDataFromServer()
+        
+        self.loadWatchList()
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -185,7 +202,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
             
             if let status = json["status"] as? Int {
                 
-//                print(json)
+                print(json)
                 
                 if status == 1 {
                     
@@ -255,6 +272,7 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                     
                     self.isFirst = false
                 }
+                
                 YNProgressHUD().showText("数据加载失败", toView: self.view)
         }
         
@@ -263,91 +281,122 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: 加载关注数据
     func loadWatchList() {
     
-        let progress = YNProgressHUD().showWaitingToView(self.view)
-        YNWatchHttp.getUserSpecialty({ (json) -> Void in
-            progress.hideUsingAnimation()
-            
-//            print("data - \(json)")
-            
-            if let status = json["status"] as? Int {
+//        let progress = YNProgressHUD().showWaitingToView(self.view)
+        
+        //判断 登录 没登录
+        let userId = kUser_ID()
+        
+        if let _ = userId {
+        
+            YNWatchHttp.getUserSpecialty({ (json) -> Void in
+                //            progress.hideUsingAnimation()
                 
-                if status == 1 {
+                //            print("data - \(json)")
+                
+                if let status = json["status"] as? Int {
                     
-                    let tempdata = json["data"] as! NSArray
-                    
-                    self.selectedArray.removeAll()
-                    
-                    let newmodel = YNSelectedProductModel()
-                    newmodel.class_name = "最新"
-                    newmodel.class_id = nil
-//                    newmodel.isSelected = true
-                    self.selectedArray.append(newmodel)
-                    
-                    var isExist = false
-                    
-                    if tempdata.count > 0 {
+                    if status == 1 {
                         
-                        for var i = 0; i < tempdata.count; i++ {
+                        let tempdata = json["data"] as! NSArray
+                        
+                        self.selectedArray.removeAll()
+                        
+                        let newmodel = YNSelectedProductModel()
+                        newmodel.class_name = "最新"
+                        newmodel.class_id = nil
+                        //                    newmodel.isSelected = true
+                        self.selectedArray.append(newmodel)
+                        
+                        var isExist = false
+                        
+                        if tempdata.count > 0 {
                             
-                            let model = YNSelectedProductModel(dict: tempdata[i] as! NSDictionary)
-                            
-                            if self.classId == model.class_id {
-                            
-                                model.isSelected = true
-                                isExist = true
+                            for var i = 0; i < tempdata.count; i++ {
                                 
-                                self.currentClassIdIndex = i + 1
+                                let model = YNSelectedProductModel(dict: tempdata[i] as! NSDictionary)
+                                
+                                if self.classId == model.class_id {
+                                    
+                                    model.isSelected = true
+                                    isExist = true
+                                    
+                                    self.currentClassIdIndex = i + 1
+                                }
+                                
+                                self.selectedArray.append(model)
+                                
                             }
                             
-                            self.selectedArray.append(model)
+                            if isExist {
+                                
+                                self.collectionView?.reloadData()
+                                self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: self.currentClassIdIndex, inSection: 0), animated: false, scrollPosition: .None)
+                                
+                            } else {
+                                
+                                newmodel.isSelected = true
+                                self.collectionView?.reloadData()
+                                self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
+                            }
                             
-                        }
-                        
-                        if isExist {
-                        
-                            self.collectionView?.reloadData()
-                            self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: self.currentClassIdIndex, inSection: 0), animated: false, scrollPosition: .None)
                             
-                        } else {
-                        
+                        }  else {
+                            
+                            //没有数据
                             newmodel.isSelected = true
+                            
                             self.collectionView?.reloadData()
                             self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
                         }
                         
                         
-                    }  else {
                         
-                        //没有数据
-                        newmodel.isSelected = true
+                    } else if status == 0 {
                         
-                        self.collectionView?.reloadData()
-                        self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            YNProgressHUD().showText(msg, toView: self.view)
+                            print("关注数据获取失败: \(msg)")
+                        }
                     }
                     
-                    
-                    
-                } else if status == 0 {
-                    
-                    
-                    if let msg = json["msg"] as? String {
-                        
-                        YNProgressHUD().showText(msg, toView: self.view)
-                        print("关注数据获取失败: \(msg)")
-                    }
                 }
                 
+                
+                }) { (error) -> Void in
+                    
+                    //                progress.hideUsingAnimation()
+                    
+                    
+                   self.noWatchLiset()
+                    
+                    YNProgressHUD().showText("数据加载失败", toView: self.view)
             }
             
-            
-            }) { (error) -> Void in
-                
-                progress.hideUsingAnimation()
-                
-                YNProgressHUD().showText("数据加载失败", toView: self.view)
+        } else {
+        
+            //没登录
+            noWatchLiset()
         }
         
         
+        
+        
+    }
+    
+    func noWatchLiset() {
+    
+        self.selectedArray.removeAll()
+        
+        let newmodel = YNSelectedProductModel()
+        newmodel.class_name = "最新"
+        newmodel.class_id = nil
+        self.selectedArray.append(newmodel)
+        newmodel.isSelected = true
+        
+        self.collectionView?.reloadData()
+        self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
     }
     
     //MARK: 设置界面
@@ -355,7 +404,6 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         
         //tableView
         let tempTableView = UITableView(frame: CGRectZero, style: .Grouped)
-        
         tempTableView.delegate = self
         tempTableView.dataSource = self
         tempTableView.separatorStyle = .None

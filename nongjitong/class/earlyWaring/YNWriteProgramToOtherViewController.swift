@@ -10,7 +10,6 @@ import UIKit
 
 class YNWriteProgramToOtherViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    
     var model: YNEarlyToMyProgramModel? {
         
         didSet {
@@ -19,9 +18,7 @@ class YNWriteProgramToOtherViewController: UIViewController, UITableViewDataSour
         }
     }
     
-    
     var tableView: UITableView?
-    
     //MARK: life cycle
     init() {
         super.init(nibName: nil, bundle: nil)

@@ -33,6 +33,7 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView?.separatorStyle = .SingleLine
         self.title = "\(questionModel!.user_name)的提问"
         self.view.backgroundColor = UIColor.whiteColor()
         
@@ -302,12 +303,17 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
     //MARK: tableview delegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let vc = YNNewAnswerQuestionViewController()
-        vc.questionModel = self.questionModel
-        vc.answerModel = self.dataArray[indexPath.row]
-        vc.dataIndexPath = indexPath
-        vc.delegate = self
-        self.navigationController?.pushViewController(vc, animated: true)
+        if indexPath.section != 0 {
+        
+            let vc = YNNewAnswerQuestionViewController()
+            vc.questionModel = self.questionModel
+            vc.answerModel = self.dataArray[indexPath.row]
+            vc.dataIndexPath = indexPath
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+        
         
     }
     

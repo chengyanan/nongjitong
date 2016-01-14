@@ -841,4 +841,6 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
     }
     
+    
+    
 }

@@ -12,6 +12,9 @@ class YNNearbyTitleView: UIView {
 
     let kIndicatorWidth: CGFloat = 20
     
+    var timer: NSTimer?
+    var timeInterval: Int = 60
+    
     lazy var indicator: UIActivityIndicatorView = {
         
         var tempIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
@@ -39,8 +42,29 @@ class YNNearbyTitleView: UIView {
         self.addSubview(titleLabel)
         
         titleLabel.frame = self.bounds
+        
+        self.timer = NSTimer(timeInterval: 1, target: self, selector: "addOneSecond", userInfo: nil, repeats: true)
+         NSRunLoop.mainRunLoop().addTimer(self.timer!, forMode: NSRunLoopCommonModes)
+        
     }
 
+    
+    func addOneSecond() {
+        
+        self.timeInterval -= 1
+        
+        //        print(self.timeInterval)
+        if self.timeInterval > 0 {
+            
+            
+        } else {
+            
+            self.end()
+            
+        }
+        
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -56,6 +80,8 @@ class YNNearbyTitleView: UIView {
     }
     
     func start() {
+        
+        self.timer?.fire()
         
         self.titleLabel.textAlignment = NSTextAlignment.Left
         self.addSubview(indicator)
@@ -84,6 +110,7 @@ class YNNearbyTitleView: UIView {
     
     func end() {
         
+        self.timer?.invalidate()
         
         self.indicator.removeFromSuperview()
         self.titleLabel.text = "农技通"

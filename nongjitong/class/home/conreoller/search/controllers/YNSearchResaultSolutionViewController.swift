@@ -4,7 +4,8 @@
 //
 //  Created by 农盟 on 16/1/4.
 //  Copyright © 2016年 农盟. All rights reserved.
-//解决方案
+
+//文章解决方案列表和用户写的解决方案列表
 
 import UIKit
 
@@ -263,7 +264,27 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
             
         }
         
-        let identify: String = "Cell_Search_Resault_code"
+        let model = self.resaultArray![indexPath.row]
+        
+        if model.photos?.count > 0 {
+        
+            
+            let identify: String = "Cell_Search_Resault_listWithImage"
+            var cell: YNSearchSolutionWithImageCell? = tableView.dequeueReusableCellWithIdentifier(identify) as? YNSearchSolutionWithImageCell
+            
+            if cell == nil {
+                
+                cell = YNSearchSolutionWithImageCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
+                
+            }
+            
+            cell?.solutionModel = self.resaultArray![indexPath.row]
+            
+            return cell!
+            
+        }
+        
+        let identify: String = "Cell_Search_Resault_list"
         var cell: YNSearchSolutionCell? = tableView.dequeueReusableCellWithIdentifier(identify) as? YNSearchSolutionCell
         
         if cell == nil {
@@ -287,8 +308,7 @@ class YNSearchResaultSolutionViewController: UIViewController, UITableViewDataSo
             
         } else {
             
-            // TODO:方案详情
-            
+            //方案详情
             let vc = YNSolutionDetailsViewController()
             vc.resaultModel = self.resaultArray![indexPath.row]
             navigationController?.pushViewController(vc, animated: true)

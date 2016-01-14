@@ -21,7 +21,7 @@ class YNEarlyToMyProgramModel {
     var read_num: String?
     var add_time: String?
     var subscribe = [YNSubscribeModel]()
-    var photos = [String]()
+    var photos: Array<String>?
     
     //cell高度
     var summaryHeight:  CGFloat?
@@ -37,7 +37,8 @@ class YNEarlyToMyProgramModel {
         self.read_num = dict["read_num"] as? String
         self.add_time = dict["add_time"] as? String
         self.content = dict["content"] as? String
-        
+        self.photos = dict["photos"] as? Array
+
         let tempArray = dict["subscribe"] as? NSArray
         
         if let _ = tempArray {
@@ -61,21 +62,7 @@ class YNEarlyToMyProgramModel {
             self.subscribe.append(model)
             
         }
-        
-        
-       
-        
-        let tempPhotoArray = dict[photos] as? NSArray
-        
-        if let _ = tempPhotoArray {
-        
-            for item in tempPhotoArray! {
-                
-                let str = item as? String
-                
-                self.photos.append(str!)
-            }
-        }
+    
         
         if let _ = self.summary {
         
@@ -87,6 +74,7 @@ class YNEarlyToMyProgramModel {
             self.calcuateCellHeight(self.content!)
         }
         
+        
     }
 
     
@@ -94,17 +82,54 @@ class YNEarlyToMyProgramModel {
         
         let contentWidth = kScreenWidth - marginModel.leftRightMargin*2
         
+        var imageHeight: CGFloat = 0
+        
+        if let _ = self.photos {
+        
+            
+            if self.photos!.count > 0 {
+                
+                var imageWidthHeight: CGFloat = 0
+                
+                let photoAiiWidth = kScreenWidth - marginModel.leftRightMargin*2
+                
+                var marginAllWidth: CGFloat = 0
+                
+                //MARK: 图片最大数量为3
+                if self.photos!.count < 3 {
+                    
+                    marginAllWidth = CGFloat(self.photos!.count - 1) * marginModel.imageMargin
+                    
+                } else {
+                    
+                    marginAllWidth = 2*marginModel.imageMargin
+                    
+                }
+                
+                imageWidthHeight = (photoAiiWidth - marginAllWidth) / 3 - 1
+                
+                marginModel.imageWidthHeight = imageWidthHeight
+                
+                imageHeight = marginModel.marginBetweenDescriptionAndImages + marginModel.imageWidthHeight!
+                
+            }
+            
+            
+        }
+        
+        
         if let _ = self.summary {
         
             let contentHeight = heightForText(text, font: UIFont.systemFontOfSize(15), width: contentWidth, lines: 3)
-            self.summaryHeight = marginModel.topMargin*2 + contentHeight + marginModel.answerCountHeight
+            self.summaryHeight = marginModel.topMargin*2 + contentHeight + marginModel.answerCountHeight + imageHeight
         }
         
         if let _ = self.content {
         
             let allContentHeight = heightForText(text, font: UIFont.systemFontOfSize(15), width: contentWidth, lines: 0)
-            self.contentHeight = marginModel.topMargin*2 + allContentHeight + marginModel.answerCountHeight
+            self.contentHeight = marginModel.topMargin*2 + allContentHeight + marginModel.answerCountHeight + imageHeight
         }
+        
         
     }
     
