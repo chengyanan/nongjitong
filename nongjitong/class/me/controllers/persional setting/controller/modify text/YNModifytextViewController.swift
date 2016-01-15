@@ -169,10 +169,10 @@ class YNModifytextViewController: UIViewController {
                         Tools().saveValue(self.textfield.text!, forKey: kUserNiceName)
                     }
                     
-                    let msg = json["msg"] as! String
-                    
-                    //#warning: msg是更新成功 不是登陆成功
-                    print("\n \(msg) \n")
+//                    let msg = json["msg"] as! String
+//                    
+//                    //#warning: msg是更新成功 不是登陆成功
+////                    print("\n \(msg) \n")
                     
                     //提交成功之后把数据传给代理控制器
                     self.delegate?.modifytextViewController(self, text: self.textfield.text)
@@ -184,7 +184,7 @@ class YNModifytextViewController: UIViewController {
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 

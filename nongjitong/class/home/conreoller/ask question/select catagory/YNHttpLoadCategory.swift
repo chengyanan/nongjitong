@@ -58,7 +58,7 @@ class YNHttpLoadCategory {
             
             let json: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
             
-            print("data - \(json)")
+//            print("data - \(json)")
             
             if let _ = successFull {
                 

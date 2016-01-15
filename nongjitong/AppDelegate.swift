@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let finalTokenStr = tokenStr.stringByReplacingOccurrencesOfString(" ", withString: "")
 
-        print(finalTokenStr)
+//        print(finalTokenStr)
         
         senderToken(finalTokenStr)
     }
@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                         print("Token上传失败")
                         
-                        print(json["msg"])
+//                        print(json["msg"])
                     }
                     
                 }

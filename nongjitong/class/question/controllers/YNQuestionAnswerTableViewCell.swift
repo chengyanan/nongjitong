@@ -100,7 +100,7 @@ class YNQuestionAnswerTableViewCell: UITableViewCell {
             
             if let status = json["status"] as? Int {
                 
-                print(json)
+//                print(json)
                 
                 if status == 1 {
                     

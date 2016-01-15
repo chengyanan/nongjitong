@@ -67,7 +67,7 @@ class YNQuestionDetailViewController: UIViewController, UITableViewDataSource, U
             
             if let status = json["status"] as? Int {
                 
-                print(json)
+//                print(json)
                 
                 if status == 1 {
                     

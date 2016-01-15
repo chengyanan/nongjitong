@@ -116,8 +116,6 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
                         
                         let dict = json["data"] as! NSDictionary
                         
-                        //                    print(dict)
-                        
                         let tempInfo = YNUserInformationModel(dict: dict)
                         
                         self.information = tempInfo
@@ -129,7 +127,6 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
                             
                             YNProgressHUD().showText(msg, toView: self.view)
                             
-                            print("\n \(msg) \n")
                         }
                     }
                     
@@ -191,7 +188,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
             
             if let status = json["status"] as? Int {
                 
-                print(json)
+//                print(json)
                 
                 if status == 1 {
                 
@@ -361,7 +358,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
             
             if let status = json["status"] as? Int {
                 
-                print(json)
+//                print(json)
                 
                 if status == 1 {
                     

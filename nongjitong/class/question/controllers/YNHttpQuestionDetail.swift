@@ -27,7 +27,7 @@ class YNHttpQuestionDetail {
                 
             } catch {
             
-                print("json parse fail")
+                print("catch acceptAnswerWithParams")
             }
             
             

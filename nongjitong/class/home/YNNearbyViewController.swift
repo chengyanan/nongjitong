@@ -297,7 +297,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                     
                     if status == 1 {
                         
-                        print("用户位置更新成功")
+//                        print("用户位置更新成功")
                         
                     } else if status == 0 {
                         
@@ -545,8 +545,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         let status = CLLocationManager.authorizationStatus()
         
         if status == .NotDetermined {
-        
-            print("Requesting when in use auth");
+            
             if #available(iOS 8.0, *) {
                 self.locationManger.requestWhenInUseAuthorization()
                 self.locationManger.requestAlwaysAuthorization()
@@ -747,24 +746,24 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
 //       print("\n\(mapView.region.span.latitudeDelta), \(mapView.region.span.longitudeDelta)\n")
 //    }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-//        if let location = locations.last {
-//            
-//            let locationTool = Location()
-//            
-//            let coorinate = locationTool.transformFromWGSToGCJ(location.coordinate)
-//            
-//            let span = MKCoordinateSpanMake(0.011, 0.0089)
-//            
-//            let region = MKCoordinateRegionMake(coorinate, span)
-//            
-//            self.mapView.setRegion(region, animated: true)
-//        }
+//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        
-//        self.locationManger.stopUpdatingLocation()
-        
-    }
+////        if let location = locations.last {
+////            
+////            let locationTool = Location()
+////            
+////            let coorinate = locationTool.transformFromWGSToGCJ(location.coordinate)
+////            
+////            let span = MKCoordinateSpanMake(0.011, 0.0089)
+////            
+////            let region = MKCoordinateRegionMake(coorinate, span)
+////            
+////            self.mapView.setRegion(region, animated: true)
+////        }
+////        
+////        self.locationManger.stopUpdatingLocation()
+//        
+//    }
     
     
     

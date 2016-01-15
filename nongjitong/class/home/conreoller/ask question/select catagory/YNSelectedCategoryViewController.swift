@@ -97,7 +97,7 @@ class YNSelectedCategoryViewController: UIViewController, UITableViewDataSource,
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 

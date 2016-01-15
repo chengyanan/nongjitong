@@ -80,7 +80,7 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
             
             progress.hideUsingAnimation()
             
-            print("data - \(json)")
+//            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -108,10 +108,10 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
                 } else if status == 0 {
                     
                     
-                    if let msg = json["msg"] as? String {
+                    if let _ = json["msg"] as? String {
                         
                         YNProgressHUD().showText("数据获取失败", toView: self.view)
-                        print("数据获取失败: \(msg)")
+//                        print("数据获取失败: \(msg)")
                     }
                 }
                 
@@ -135,7 +135,7 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
             
             progress.hideUsingAnimation()
             
-            print("data - \(json)")
+//            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -163,10 +163,10 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
                 } else if status == 0 {
                     
                     
-                    if let msg = json["msg"] as? String {
+                    if let _ = json["msg"] as? String {
                         
                         YNProgressHUD().showText("数据获取失败", toView: self.view)
-                        print("数据获取失败: \(msg)")
+//                        print("数据获取失败: \(msg)")
                     }
                 }
                 

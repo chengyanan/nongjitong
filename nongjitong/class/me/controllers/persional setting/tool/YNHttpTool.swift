@@ -17,8 +17,6 @@ class YNHttpTool {
             
             let json: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
             
-            print("data - \(json)")
-            
             if let _ = successFull {
                 
                 successFull!(json: json)
@@ -53,8 +51,6 @@ class YNHttpTool {
         Network.post(kURL, params: params, files: files, success: { (data, response, error) -> Void in
             
             let json: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-            
-            print("data - \(json)")
             
             if let _ = successFull {
                 
@@ -94,8 +90,6 @@ class YNHttpTool {
             
             let json: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
             
-            print("data - \(json)")
-            
             if let _ = successFull {
                 
                 successFull!(json: json)
@@ -130,8 +124,6 @@ class YNHttpTool {
         Network.post(kURL, params: params, success: { (data, response, error) -> Void in
             
             let json: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-            
-//            print("data - \(json)")
             
             if let _ = successFull {
                 

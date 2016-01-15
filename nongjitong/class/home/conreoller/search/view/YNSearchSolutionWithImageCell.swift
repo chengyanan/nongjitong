@@ -121,9 +121,10 @@ class YNSearchSolutionWithImageCell: UITableViewCell {
         self.contentView.addSubview(imageViewTwo)
         self.contentView.addSubview(imageViewThree)
         
-        //        self.selectionStyle = .None
+        self.selectionStyle = .None
         
 //        setLayout()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

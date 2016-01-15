@@ -135,7 +135,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 
@@ -597,10 +597,10 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                 
                 if status == 1 {
                     
-                    let msg = json["msg"] as! String
+//                    let msg = json["msg"] as! String
                     
                     //#warning: msg是更新成功 不是登陆成功
-                    print("\n \(msg) \n")
+//                    print("\n \(msg) \n")
                     
 //                    YNProgressHUD().showText(msg, toView: self.view)
 
@@ -611,7 +611,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 
@@ -678,14 +678,15 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                 
                 if status == 1 {
                     
-                    let msg = json["msg"] as! String
-                    print("\n \(msg) \n")
+//                    let msg = json["msg"] as! String
+//                    print("\n \(msg) \n")
+                    
                     //MARK: - 上传成功改变该页面的头像
                     self.avatorImageView.image = UIImage(data: imagedata)
                     
 //                    print(kUser_AvatarPath()!)
                     
-                    let succes = imagedata.writeToFile(kUser_AvatarPath()!, atomically: true)
+                    imagedata.writeToFile(kUser_AvatarPath()!, atomically: true)
                     
 //                    print(succes)
 //                    YNProgressHUD().showText(msg, toView: self.view)
@@ -700,7 +701,7 @@ class YNPersionalSettingTableViewController: UITableViewController, YNModifytext
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 

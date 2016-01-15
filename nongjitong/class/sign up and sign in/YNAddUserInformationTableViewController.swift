@@ -115,8 +115,6 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
             
             let keyboardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
             
-            //            print(keyboardBounds)
-            
             let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
             
             let keyboardBoundsRect = self.view.convertRect(keyboardBounds, toView: nil)
@@ -493,8 +491,6 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
     //MARK: - UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        //        print("\ndidFinishPickingMediaWithInfo - \(info)\n")
-        
         let mediaType = info["UIImagePickerControllerMediaType"] as! String
         
         if mediaType == "public.image" {
@@ -594,13 +590,6 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
         var files = [File]()
         
         if let tempImage = self.imageData {
-            
-//            let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last?.stringByAppendingString("avatar.jpg")
-//            
-//            //        print(path)
-//            
-//            tempImage.writeToFile(path!, atomically: true)
-//            let imageUrl = NSURL(fileURLWithPath: path!)
 
             files.append(File(name: "avatar", imageData: tempImage))
         }
@@ -619,10 +608,10 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
                         self.avatorImage.image = UIImage(data: self.imageData!)
                     }
                     
-                    let msg = json["msg"] as! String
+//                    let msg = json["msg"] as! String
                     
                     //#warning: msg是更新成功 不是登陆成功
-                    print("\n \(msg) \n")
+//                    print("\n \(msg) \n")
                     
                     Tools().saveValue("YES", forKey: kUserIsInformationFinish)
                     Tools().saveValue(self.nickNameTextFiled.text, forKey: kUserNiceName)
@@ -646,7 +635,7 @@ class YNAddUserInformationTableViewController: UITableViewController, UIActionSh
                         
                         YNProgressHUD().showText(msg, toView: UIApplication.sharedApplication().keyWindow!)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 

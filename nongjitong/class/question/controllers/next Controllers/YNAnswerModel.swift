@@ -99,7 +99,7 @@ class YNAnswerModel {
         } else {
         
             self.cellHeight = avatarheight
-            print("回答的 content 为nil")
+//            print("回答的 content 为nil")
         }
         
         

@@ -99,7 +99,7 @@ class YNSelectAreaViewController: UIViewController, UITableViewDataSource, UITab
             
             progress.hideUsingAnimation()
             
-            print(json)
+//            print(json)
             
             if let status = json["status"] as? Int {
                 
@@ -136,7 +136,7 @@ class YNSelectAreaViewController: UIViewController, UITableViewDataSource, UITab
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 

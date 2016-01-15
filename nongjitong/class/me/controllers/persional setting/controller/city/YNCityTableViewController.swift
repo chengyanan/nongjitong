@@ -58,7 +58,7 @@ class YNCityTableViewController: UITableViewController {
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 
@@ -145,10 +145,10 @@ class YNCityTableViewController: UITableViewController {
                 
                 if status == 1 {
                     
-                    let msg = json["msg"] as! String
+//                    _ = json["msg"] as! String
                     
                     //#warning: msg是更新成功 不是登陆成功
-                    print("\n \(msg) \n")
+//                    print("\n \(msg) \n")
                     
                 } else if status == 0 {
                     
@@ -156,7 +156,7 @@ class YNCityTableViewController: UITableViewController {
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 

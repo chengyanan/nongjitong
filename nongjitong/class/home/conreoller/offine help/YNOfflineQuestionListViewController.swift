@@ -216,11 +216,10 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
                     } else {
                         
                         //没有数据
-                        
-                        YNProgressHUD().showText("没有数据了", toView: self.view)
+                        YNProgressHUD().showText("没有数据", toView: self.view)
                         
                         self.isShowLoadMore = false
-                        
+                        self.tableViewDataArray.removeAll()
                         self.tableView?.reloadData()
                         
                     }

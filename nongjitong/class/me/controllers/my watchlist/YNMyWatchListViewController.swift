@@ -121,7 +121,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
         YNWatchHttp.getUserSpecialty({ (json) -> Void in
             progress.hideUsingAnimation()
             
-            print("data - \(json)")
+//            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -457,13 +457,13 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
         
         YNWatchHttp.updateQusetionClassWithClassId(classId, successFull: { (json) -> Void in
             
-            print("data - \(json)")
+//            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
                 if status == 1 {
                     
-                   print(json["msg"])
+//                   print(json["msg"])
         
 //                    Tools().saveValue("YES", forKey: kUserWatchListFinish)
                     
@@ -555,7 +555,7 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 

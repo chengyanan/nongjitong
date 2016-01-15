@@ -261,7 +261,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 
@@ -642,7 +642,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
             
             }) { (error) -> Void in
                 
-                print(error)
+//                print(error)
                 var address = ""
                 address += "定位失败"
                 self.locationDetail = address

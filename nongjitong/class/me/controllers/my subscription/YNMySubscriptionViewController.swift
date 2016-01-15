@@ -55,7 +55,7 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
                 
                 if status == 1 {
                     
-                    print(json)
+//                    print(json)
                     
                     let tempdata = json["data"] as! NSArray
                 
@@ -75,7 +75,7 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 
@@ -199,7 +199,7 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
                 
                 if status == 1 {
                     
-                    print(json)
+//                    print(json)
 
                     //删除成功
                     self.dataArray.removeAtIndex(indexPath.row)
@@ -211,7 +211,7 @@ class YNMySubscriptionViewController: UIViewController, UITableViewDataSource, U
                         
                         YNProgressHUD().showText(msg, toView: self.view)
                         
-                        print("\n \(msg) \n")
+//                        print("\n \(msg) \n")
                     }
                 }
                 

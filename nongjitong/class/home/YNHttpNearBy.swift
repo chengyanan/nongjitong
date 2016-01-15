@@ -100,7 +100,7 @@ class YNHttpNearBy {
                 
             } catch {
                 
-                print("catch 数据加载失败")
+                print("catch nearQuestionWithParam数据加载失败")
             }
             
             

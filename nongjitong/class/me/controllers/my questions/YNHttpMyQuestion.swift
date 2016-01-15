@@ -72,7 +72,7 @@ class YNHttpMyQuestion {
                 
             } catch {
                 
-                print("数据加载失败")
+                print("catch getInvolvedQuestionWithUserID数据加载失败")
             }
             
             

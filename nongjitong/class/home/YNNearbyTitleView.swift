@@ -53,7 +53,6 @@ class YNNearbyTitleView: UIView {
         
         self.timeInterval -= 1
         
-        //        print(self.timeInterval)
         if self.timeInterval > 0 {
             
             

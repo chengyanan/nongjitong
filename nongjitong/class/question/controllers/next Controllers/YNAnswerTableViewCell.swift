@@ -88,7 +88,7 @@ class YNAnswerTableViewCell: UITableViewCell {
             "to_user_id": questionModel?.to_user_id
         ]
         
-        print("userId: \(userId), touserid: \(questionModel?.to_user_id)")
+//        print("userId: \(userId), touserid: \(questionModel?.to_user_id)")
         
         self.sendButton.hidden = true
         self.activityIndicatorView.startAnimating()
@@ -103,19 +103,19 @@ class YNAnswerTableViewCell: UITableViewCell {
                 if status == 1 {
                     
                     
-                    print("回答成功")
+//                    print("回答成功")
                     self.delegate?.answered(self.indexPath!)
                     
                 } else if status == 0 {
                     
                     self.sendButton.hidden = false
                     
-                    if let msg = json["msg"] as? String {
-                        
-                        print(msg)
-                        
-                        
-                    }
+//                    if let msg = json["msg"] as? String {
+//                        
+//                        print(msg)
+//                        
+//                        
+//                    }
                 }
                 
             }
@@ -179,7 +179,6 @@ class YNAnswerTableViewCell: UITableViewCell {
     
         let tempView = UIImageView()
         tempView.translatesAutoresizingMaskIntoConstraints = false
-//        tempView.image = UIImage(named: "admin")
         tempView.contentMode = .ScaleToFill
         return tempView
         

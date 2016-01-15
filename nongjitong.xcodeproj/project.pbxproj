@@ -22,8 +22,6 @@
 		401AD6911BF04E5400E747BF /* YNHttpLoadCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401AD6901BF04E5400E747BF /* YNHttpLoadCategory.swift */; };
 		401AD6931BF0522200E747BF /* YNCategoeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401AD6921BF0522200E747BF /* YNCategoeyModel.swift */; };
 		401CCAEE1BD0DB7F00023F66 /* YNBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401CCAED1BD0DB7F00023F66 /* YNBaseModel.swift */; };
-		401CCAF21BD0E9A700023F66 /* cityData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 401CCAF01BD0E9A700023F66 /* cityData.plist */; };
-		401CCAF31BD0E9A700023F66 /* areaList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 401CCAF11BD0E9A700023F66 /* areaList.plist */; };
 		401CCAF51BD0EB1E00023F66 /* YNCityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401CCAF41BD0EB1E00023F66 /* YNCityModel.swift */; };
 		401F4FB61C02C92A00F45EBA /* YNSelectAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F4FB51C02C92A00F45EBA /* YNSelectAreaViewController.swift */; };
 		401F4FB81C030A4400F45EBA /* YNHttpSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F4FB71C030A4400F45EBA /* YNHttpSubscription.swift */; };
@@ -48,6 +46,7 @@
 		407F6B5A1C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B591C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift */; };
 		407F6B5C1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */; };
 		407F6B5E1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B5D1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift */; };
+		4085B88B1C48DA6A009F0B95 /* YNSecondSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4085B88A1C48DA6A009F0B95 /* YNSecondSearchViewController.swift */; };
 		408BE0541BE704CD00A210A4 /* YNTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BE0531BE704CD00A210A4 /* YNTextView.swift */; };
 		408BE8A81C294BFA00B980AD /* YNMYQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */; };
 		4092048E1C0FFCAF00CA30CF /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092048D1C0FFCAF00CA30CF /* UIImageViewExtension.swift */; };
@@ -169,8 +168,6 @@
 		401AD6901BF04E5400E747BF /* YNHttpLoadCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHttpLoadCategory.swift; sourceTree = "<group>"; };
 		401AD6921BF0522200E747BF /* YNCategoeyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCategoeyModel.swift; sourceTree = "<group>"; };
 		401CCAED1BD0DB7F00023F66 /* YNBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNBaseModel.swift; sourceTree = "<group>"; };
-		401CCAF01BD0E9A700023F66 /* cityData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cityData.plist; sourceTree = "<group>"; };
-		401CCAF11BD0E9A700023F66 /* areaList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areaList.plist; sourceTree = "<group>"; };
 		401CCAF41BD0EB1E00023F66 /* YNCityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCityModel.swift; sourceTree = "<group>"; };
 		401F4FB51C02C92A00F45EBA /* YNSelectAreaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSelectAreaViewController.swift; sourceTree = "<group>"; };
 		401F4FB71C030A4400F45EBA /* YNHttpSubscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHttpSubscription.swift; sourceTree = "<group>"; };
@@ -195,6 +192,7 @@
 		407F6B591C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMYWriteWaringViewController.swift; sourceTree = "<group>"; };
 		407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYWaringDetailViewController.swift; sourceTree = "<group>"; };
 		407F6B5D1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMotifyPasswordViewController.swift; sourceTree = "<group>"; };
+		4085B88A1C48DA6A009F0B95 /* YNSecondSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSecondSearchViewController.swift; sourceTree = "<group>"; };
 		408BE0531BE704CD00A210A4 /* YNTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNTextView.swift; sourceTree = "<group>"; };
 		408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMYQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		4092048D1C0FFCAF00CA30CF /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
@@ -389,18 +387,10 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		401CCAEF1BD0E98D00023F66 /* data */ = {
-			isa = PBXGroup;
-			children = (
-				401CCAF01BD0E9A700023F66 /* cityData.plist */,
-				401CCAF11BD0E9A700023F66 /* areaList.plist */,
-			);
-			path = data;
-			sourceTree = "<group>";
-		};
 		40292E4C1BD630E80028F87C /* search */ = {
 			isa = PBXGroup;
 			children = (
+				4085B88A1C48DA6A009F0B95 /* YNSecondSearchViewController.swift */,
 				406805AD1C324E9C009FC170 /* YNNewSearchViewController.swift */,
 				40292E4D1BD6311B0028F87C /* YNSearchViewController.swift */,
 				40F830E41BD7878A00C1F0BB /* controllers */,
@@ -652,7 +642,6 @@
 			children = (
 				40ED438A1BC6119D004713C9 /* class */,
 				40ED437D1BC60B76004713C9 /* tools */,
-				401CCAEF1BD0E98D00023F66 /* data */,
 				4048E3F51C2B9F670035C415 /* Supporting Files */,
 			);
 			path = nongjitong;
@@ -908,10 +897,12 @@
 					};
 					40ED435F1BC60A28004713C9 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = JML588N2LF;
 						TestTargetID = 40ED434B1BC60A28004713C9;
 					};
 					40ED436A1BC60A28004713C9 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 3VUNCM856D;
 						TestTargetID = 40ED434B1BC60A28004713C9;
 					};
 				};
@@ -941,11 +932,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				401CCAF31BD0E9A700023F66 /* areaList.plist in Resources */,
 				40ED43571BC60A28004713C9 /* Assets.xcassets in Resources */,
 				40ED43551BC60A28004713C9 /* Main.storyboard in Resources */,
 				40292E4B1BD5F7840028F87C /* LaunchScreen.storyboard in Resources */,
-				401CCAF21BD0E9A700023F66 /* cityData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1027,6 +1016,7 @@
 				40ED43881BC60B76004713C9 /* progressHUD.swift in Sources */,
 				40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */,
 				407F6B5E1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift in Sources */,
+				4085B88B1C48DA6A009F0B95 /* YNSecondSearchViewController.swift in Sources */,
 				40DEA7D61C3A187F00BEB608 /* YNSearchResaultQuestionViewController.swift in Sources */,
 				40ED43871BC60B76004713C9 /* Network.swift in Sources */,
 				40D70EFF1C22573400672A10 /* YNAskQuestionModel.swift in Sources */,
@@ -1161,8 +1151,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1170,7 +1160,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1184,9 +1174,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "81f475cb-e70b-44f4-8bec-f69f3aeb0b8e";
+				PROVISIONING_PROFILE = "15690f47-0278-4f73-bacf-24fc0ba0eb72";
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1208,8 +1198,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1224,10 +1214,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "81f475cb-e70b-44f4-8bec-f69f3aeb0b8e";
+				PROVISIONING_PROFILE = "15690f47-0278-4f73-bacf-24fc0ba0eb72";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -1236,14 +1226,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
+				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = nongjitong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.24ag.nongjitong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "81f475cb-e70b-44f4-8bec-f69f3aeb0b8e";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1254,15 +1245,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
+				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = nongjitong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.24ag.nongjitong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "81f475cb-e70b-44f4-8bec-f69f3aeb0b8e";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Release;
 		};
@@ -1270,10 +1263,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = nongjitongTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sd.nongjitongTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/nongjitong.app/nongjitong";
 			};
 			name = Debug;
@@ -1282,10 +1278,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = nongjitongTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sd.nongjitongTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/nongjitong.app/nongjitong";
 			};
 			name = Release;
@@ -1293,10 +1292,13 @@
 		40ED437B1BC60A28004713C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = nongjitongUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sd.nongjitongUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = nongjitong;
 				USES_XCTRUNNER = YES;
 			};
@@ -1305,10 +1307,13 @@
 		40ED437C1BC60A28004713C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = nongjitongUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sd.nongjitongUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = nongjitong;
 				USES_XCTRUNNER = YES;
 			};
