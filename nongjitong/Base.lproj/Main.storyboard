@@ -1480,7 +1480,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="94" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jWl-bB-E6a">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell_Search_Resault" rowHeight="94" id="Wjx-zS-Ip7" customClass="YNSearchResaultCell" customModule="nongjitong" customModuleProvider="target">
@@ -1551,7 +1551,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="jWl-bB-E6a" firstAttribute="top" secondItem="azI-sz-Rvw" secondAttribute="top" constant="64" id="Yyz-lb-UPe"/>
+                            <constraint firstItem="jWl-bB-E6a" firstAttribute="top" secondItem="azI-sz-Rvw" secondAttribute="top" id="Yyz-lb-UPe"/>
                             <constraint firstItem="eqK-Jt-xK6" firstAttribute="top" secondItem="jWl-bB-E6a" secondAttribute="bottom" id="bkc-7c-l30"/>
                             <constraint firstAttribute="trailing" secondItem="jWl-bB-E6a" secondAttribute="trailing" id="nHD-xb-i6g"/>
                             <constraint firstItem="jWl-bB-E6a" firstAttribute="leading" secondItem="azI-sz-Rvw" secondAttribute="leading" id="sTE-Bi-5x4"/>

@@ -8,12 +8,12 @@
 
 import UIKit
 
+enum YNReloadDataType {
+    case tableViewCatagory, tableViewProduct
+}
+
 class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate, YNWatchProductTableViewCellDelegate {
 
-    enum YNReloadDataType {
-        case tableViewCatagory, tableViewProduct
-    }
-    
     let maxNumberOfWatch = 5
     var isFirst = false
     
@@ -23,20 +23,21 @@ class YNMyWatchListViewController: UIViewController, UICollectionViewDataSource,
     }
     
     let tableViewCatagoryWidthPercent: CGFloat = 0.33
+    
     let numbersOfOneLine = 3
     let leftRightMargin: CGFloat = 10
     let topBottomMargin: CGFloat = 10
     let itemSpacing: CGFloat = 16
     let minimumLineSpacing: CGFloat = 13
 
+    //collectionViewdatasource
+    var selectedArray = [YNSelectedProductModel]()
+    
     //tableViewCatagory数据源
     var cayegoryArray = [YNCategoryModel]()
     
     //tableViewProduct数据源
     var productArray = [YNCategoryModel]()
-    
-    //collectionViewdatasource
-    var selectedArray = [YNSelectedProductModel]()
     
     var tableViewCatagory: UITableView?
     var tableViewProduct: UITableView?

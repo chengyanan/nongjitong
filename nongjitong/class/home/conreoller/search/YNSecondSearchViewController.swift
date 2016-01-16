@@ -8,122 +8,363 @@
 
 import UIKit
 
-@available(iOS 8.0, *)
-class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, UISearchControllerDelegate, YNSearchViewControllerDelegate, UISearchResultsUpdating {
-
-    var searchController: UISearchController!
+class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFinishInputViewDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    var resaultController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SB_Search_Resault") as! YNSearchViewController
+    let finishViewHeight: CGFloat = 40
     
-    var searchBar: UISearchBar!
+    //添加一个随键盘弹出的view
+    var finishView: YNFinishInputView?
     
+    var searchBar: UISearchBar = {
+    
+        let tempView = UISearchBar()
+        tempView.placeholder = "请输入关键词"
+        return tempView
+    }()
+    
+    //tableViewCatagory数据源
+    var cayegoryArray = [YNCategoryModel]()
+    
+    //tableViewProduct数据源
+    var productArray = [YNCategoryModel]()
+    
+    var tableViewCatagory: UITableView?
+    var tableViewProduct: UITableView?
+    let tableViewCatagoryWidthPercent: CGFloat = 0.33
+    
+    //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if kIOS7() {
-            
-            self.searchBar = UISearchBar(frame: CGRectMake(0, 0, self.view.frame.size.width, 44))
-            self.searchBar.placeholder = "请输入关键词"
-            self.searchBar.delegate = self
+        self.searchBar.frame = CGRectMake(0, 64, self.view.frame.size.width, 44)
+        self.searchBar.delegate = self
 
-            
-        } else {
-            
-            self.resaultController.delegate = self
-            
-            self.searchController = UISearchController(searchResultsController: self.resaultController)
-            self.searchController.delegate = self
-            self.searchController.dimsBackgroundDuringPresentation = false
-            self.searchController.searchBar.sizeToFit()
-            self.searchController.searchBar.placeholder = "请输入关键词"
-            self.searchController.searchBar.delegate = self
+        self.view.addSubview(self.searchBar)
 
-            
-            self.searchController.searchBar.backgroundColor = UIColor.redColor()
-            
-            self.view.addSubview(self.searchController.searchBar)
-            self.searchController.searchBar.frame = CGRectMake(0, 64, self.view.frame.size.width, 44)
-            
-        }
+        addViewWithKeyBoard()
+        setTableViewCatagory()
+        setTableViewProduct()
+        
+        //加载选项数据
+        loadHttpData("0", reloadData: .tableViewCatagory)
+        
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UIApplication.sharedApplication().keyWindow?.addSubview(self.finishView!)
+    }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.finishView?.removeFromSuperview()
+    }
+    
+    deinit {
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
-        definesPresentationContext = true
-        
-//        self.navigationController?.automaticallyAdjustsScrollViewInsets = true
-    }
+
     
-    
-    //MARK:UISearchResultsUpdating
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func setTableViewCatagory() {
         
-        
-        
-    }
-    
-    //MARK:UISearchControllerDelegate
-    func willPresentSearchController(searchController: UISearchController) {
-        
-        self.navigationController?.navigationBar.translucent = true
-        
-        self.searchController.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44)
-        self.tabBarController?.tabBar.hidden = true
-        
-//        print(self.searchController.searchBar.frame, self.searchController.searchBar.hidden)
+        //tableViewCatagory
+        let Y = self.finishViewHeight + 64 + 2
+        let width = self.view.frame.size.width * tableViewCatagoryWidthPercent
+        let height = self.view.frame.size.height - Y - 49
+        let tempTableView = UITableView()
+        tempTableView.delegate = self
+        tempTableView.dataSource = self
+        tempTableView.frame = CGRectMake(0, Y, width, height)
+        tempTableView.tag = 1
+        tempTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(tempTableView)
+        self.tableViewCatagory = tempTableView
         
     }
     
-    func willDismissSearchController(searchController: UISearchController) {
+    func setTableViewProduct() {
         
-        self.navigationController?.navigationBar.translucent = false
+        //tableViewProduct
+        let x = self.view.frame.size.width * tableViewCatagoryWidthPercent
+        let width = self.view.frame.size.width - x
+        let Y = self.finishViewHeight + 64 + 2
+        let height = self.view.frame.size.height - Y - 49
         
-        self.searchController.searchBar.frame = CGRectMake(0, 64, self.view.frame.size.width, 44)
-        self.tabBarController?.tabBar.hidden = false
+        let tempTableView = UITableView()
+        tempTableView.delegate = self
+        tempTableView.dataSource = self
+        tempTableView.frame = CGRectMake(x, Y, width, height)
+        tempTableView.tag = 2
+        tempTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(tempTableView)
+        self.tableViewProduct = tempTableView
         
-//        print(self.searchController.searchBar.frame)
     }
     
-    //MARK: scrollView delegate
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    
+    func addViewWithKeyBoard() {
         
-        self.view.endEditing(true)
-    }
-    
-    //MARK: YNSearchResaultViewControllerDelegate
-    func searchResaultViewControllerScrollViewDidScrollEndEdit() {
+        //添加跟随键盘出现的View
+        addFinishView()
         
-        self.view.endEditing(true)
+        //添加键盘通知
+        addKeyBoardNotication()
     }
     
-    //MARK: UISearchBarDelegate
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        self.navigationController?.navigationBarHidden = true
+    func addFinishView() {
+        
+        let finishView = YNFinishInputView()
+        finishView.delegate = self
+        finishView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, finishViewHeight)
+        self.finishView = finishView
+        
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        self.navigationController?.navigationBarHidden = false
+    func addKeyBoardNotication() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    //MARK:UISearchBarDelegate
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
-        //MARK: 加载搜索结果
-        self.resaultController.searchText = searchBar.text!
+        if let text = searchBar.text where text != "" {
+            
+            let resaultController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SB_Search_Resault") as! YNSearchViewController
+            
+            resaultController.searchText = searchBar.text!
+            
+            self.navigationController?.pushViewController(resaultController, animated: true)
+            
+            searchBar.text = ""
+            self.searchBar.endEditing(true)
+        }
+        
         
     }
     
-    //MARK: YNSearchViewControllerDelegate
-    func searchViewControllerDidSelectRowAtIndexPath(model: YNSearchResaultModel) {
+    //MARK: YNFinishInputViewDelegate
+    func finishInputViewFinishButtonDidClick() {
         
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        self.searchBar.text = ""
         
-        let vc = storyBoard.instantiateViewControllerWithIdentifier("SB_Resault_Details") as! YNSearchResaultDetailViewController
+        //退出键盘
+        hideKeyBoard()
+    }
+    
+    func hideKeyBoard() {
         
-        vc.searchresault = model
+        self.view.endEditing(true)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
         
-        navigationController?.pushViewController(vc, animated: true)
+        if let userInfo = notification.userInfo {
+            
+            let keyboardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+            
+            //            print(keyboardBounds)
+            
+            let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+            
+            let keyboardBoundsRect = self.view.convertRect(keyboardBounds, toView: nil)
+            
+            let deltaY = keyboardBoundsRect.size.height + finishViewHeight
+            
+            let animations: (()->Void) = {
+                
+                self.finishView!.transform = CGAffineTransformMakeTranslation(0, -deltaY)
+            }
+            
+            if duration > 0 {
+                
+                let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue << 16))
+                
+                UIView.animateWithDuration(duration, delay: 0, options:options, animations: animations, completion: nil)
+                
+            } else {
+                
+                animations()
+            }
+            
+            
+        }
+        
         
     }
     
+    func keyboardWillHide(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+            let animations:(() -> Void) = {
+                
+                self.finishView!.transform = CGAffineTransformIdentity
+            }
+            
+            if duration > 0 {
+                
+                let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue << 16))
+                UIView.animateWithDuration(duration, delay: 0, options:options, animations: animations, completion: nil)
+                
+            } else{
+                
+                animations()
+            }
+        }
+        
+    }
+    
+    //MARK: UITableViewDataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if tableView.tag == 1 {
+            
+            return self.cayegoryArray.count
+            
+        } else if tableView.tag == 2 {
+            
+            return self.productArray.count
+        }
+        
+        return 0
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if tableView.tag == 1 {
+            
+            let identify = "Cell_Catagory"
+            
+            var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNCategoryTableViewCell
+            
+            if cell == nil {
+                
+                cell = YNCategoryTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
+            }
+            
+            cell?.categoryModel = self.cayegoryArray[indexPath.row]
+            
+            return cell!
+        }
+        
+        let identify = "Cell_Product"
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNCategoryTableViewCell
+        
+        if cell == nil {
+            
+            cell = YNCategoryTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
+        }
+        
+        cell?.categoryModel = self.productArray[indexPath.row]
+        cell?.nameLabel.textColor = UIColor.blackColor()
+        cell?.backgroundColor = UIColor.whiteColor()
+        
+        return cell!
+        
+    }
+    //MARK: UITableViewDelegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if tableView.tag == 1 {
+            
+            let model = self.cayegoryArray[indexPath.row]
+            model.isSelected = true
+            
+            self.tableViewCatagory?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+            self.tableViewCatagory?.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
+            
+            //发送网络请求二级数据
+            loadHttpData(model.id, reloadData: .tableViewProduct)
+            
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if tableView.tag == 1 {
+            
+            self.cayegoryArray[indexPath.row].isSelected = false
+            self.tableViewCatagory?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+            
+        }
+        
+    }
+    
+    //MARK: 加载网络数据
+    func loadHttpData(parentId: String, reloadData: YNReloadDataType) {
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        YNHttpLoadCategory().getQuestionClassWithParentId(parentId, successFull: { (json) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            //            print(json)
+            
+            if let status = json["status"] as? Int {
+                
+                if status == 1 {
+                    
+                    let tempdata = json["data"] as! NSArray
+                    
+                    if reloadData == .tableViewCatagory {
+                        
+                        for var i = 0; i < tempdata.count; i++ {
+                            
+                            let model = YNCategoryModel(dict: tempdata[i] as! NSDictionary)
+                            
+                            self.cayegoryArray.append(model)
+                        }
+                        
+                        self.tableViewCatagory!.reloadData()
+                        self.tableView(self.tableViewCatagory!, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+                        
+                    } else if reloadData == .tableViewProduct {
+                        
+                        self.productArray = [YNCategoryModel]()
+                        
+                        for item in tempdata {
+                            
+                            let model = YNCategoryModel(dict: item as! NSDictionary)
+                            self.productArray.append(model)
+                            
+                        }
+                        
+//                        //把选中的做上标记
+//                        self.markSelected()
+                        
+                        self.tableViewProduct!.reloadData()
+                    }
+                    
+                    
+                } else if status == 0 {
+                    
+                    if let msg = json["msg"] as? String {
+                        
+                        YNProgressHUD().showText(msg, toView: self.view)
+                        
+                        //                        print("\n \(msg) \n")
+                    }
+                }
+                
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("请求失败", toView: self.view)
+        }
+        
+    }
+    
+
     
     
 }
