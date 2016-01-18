@@ -231,7 +231,6 @@ class YNSearchViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let params: [String: String?]
         
-        
         if isSearchResault {
             //搜索结果(默认)
             params = ["m": "Appapi",

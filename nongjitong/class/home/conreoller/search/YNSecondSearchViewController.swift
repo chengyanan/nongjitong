@@ -23,14 +23,14 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
     }()
     
     //tableViewCatagory数据源
-    var cayegoryArray = [YNCategoryModel]()
+    var cayegoryArray = [YNSearchCatagoryModel]()
     
     //tableViewProduct数据源
-    var productArray = [YNCategoryModel]()
+    var productArray = [YNSearchCatagoryModel]()
     
     var tableViewCatagory: UITableView?
     var tableViewProduct: UITableView?
-    let tableViewCatagoryWidthPercent: CGFloat = 0.33
+    let tableViewCatagoryWidthPercent: CGFloat = 0.45
     
     //MARK: life cycle
     override func viewDidLoad() {
@@ -46,7 +46,9 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
         setTableViewProduct()
         
         //加载选项数据
-        loadHttpData("0", reloadData: .tableViewCatagory)
+//        loadHttpData("0", reloadData: .tableViewCatagory)
+        
+        getCategoryFromServer("0", reloadData: .tableViewCatagory)
         
     }
     override func viewWillAppear(animated: Bool) {
@@ -78,8 +80,8 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
         tempTableView.delegate = self
         tempTableView.dataSource = self
         tempTableView.frame = CGRectMake(0, Y, width, height)
+    
         tempTableView.tag = 1
-        tempTableView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tempTableView)
         self.tableViewCatagory = tempTableView
         
@@ -97,11 +99,13 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
         tempTableView.delegate = self
         tempTableView.dataSource = self
         tempTableView.frame = CGRectMake(x, Y, width, height)
+        
         tempTableView.tag = 2
-        tempTableView.translatesAutoresizingMaskIntoConstraints = false
+
         self.view.addSubview(tempTableView)
         self.tableViewProduct = tempTableView
         
+
     }
     
     
@@ -247,12 +251,13 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
                 cell = YNCategoryTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
             }
             
-            cell?.categoryModel = self.cayegoryArray[indexPath.row]
+//            cell?.categoryModel = self.cayegoryArray[indexPath.row]
+            cell?.searchCategoryModel = self.cayegoryArray[indexPath.row]
             
             return cell!
         }
         
-        let identify = "Cell_Product"
+        let identify = "Cell_Catagory"
         
         var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNCategoryTableViewCell
         
@@ -261,7 +266,8 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
             cell = YNCategoryTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: identify)
         }
         
-        cell?.categoryModel = self.productArray[indexPath.row]
+//        cell?.categoryModel = self.productArray[indexPath.row]
+        cell?.searchCategoryModel = self.productArray[indexPath.row]
         cell?.nameLabel.textColor = UIColor.blackColor()
         cell?.backgroundColor = UIColor.whiteColor()
         
@@ -280,9 +286,20 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
             self.tableViewCatagory?.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.None)
             
             //发送网络请求二级数据
-            loadHttpData(model.id, reloadData: .tableViewProduct)
+//            loadHttpData(model.cid!, reloadData: .tableViewProduct)
+            getCategoryFromServer(model.cid!, reloadData: .tableViewProduct)
             
+        } else {
+        
+            
+            let model = self.productArray[indexPath.row]
+            
+            let vc = YNDocNameListViewController()
+            vc.cid = model.cid
+           
+            self.navigationController?.pushViewController(vc, animated: true)
         }
+        
         
     }
     
@@ -298,49 +315,81 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
     }
     
     //MARK: 加载网络数据
-    func loadHttpData(parentId: String, reloadData: YNReloadDataType) {
+    
+    func getCategoryFromServer(parentId: String, reloadData: YNReloadDataType) {
+        
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "Search",
+            "a": "getCategory",
+            "parent_id": parentId
+        ]
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
-        YNHttpLoadCategory().getQuestionClassWithParentId(parentId, successFull: { (json) -> Void in
+        
+        Network.post(kURL, params: params, success: { (data, response, error) -> Void in
             
             progress.hideUsingAnimation()
             
-            //            print(json)
+            let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
+            
+            //            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
                 if status == 1 {
                     
-                    let tempdata = json["data"] as! NSArray
+                    let resaultData = json["data"] as! NSArray
                     
-                    if reloadData == .tableViewCatagory {
+                    if resaultData.count > 0 {
                         
-                        for var i = 0; i < tempdata.count; i++ {
+                        
+                        if reloadData == .tableViewCatagory {
                             
-                            let model = YNCategoryModel(dict: tempdata[i] as! NSDictionary)
+                            for var i = 0; i < resaultData.count; i++ {
+                                
+                                let model = YNSearchCatagoryModel(dict: resaultData[i] as! NSDictionary)
+                                
+                                self.cayegoryArray.append(model)
+                            }
                             
-                            self.cayegoryArray.append(model)
+                            self.tableViewCatagory!.reloadData()
+                            self.tableView(self.tableViewCatagory!, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+                            
+                        } else if reloadData == .tableViewProduct {
+                            
+                            self.productArray = [YNSearchCatagoryModel]()
+                            
+                            for item in resaultData {
+                                
+                                let model = YNSearchCatagoryModel(dict: item as! NSDictionary)
+                                self.productArray.append(model)
+                                
+                            }
+                            
+                            //                        //把选中的做上标记
+                            //                        self.markSelected()
+                            
+                            self.tableViewProduct!.reloadData()
                         }
                         
-                        self.tableViewCatagory!.reloadData()
-                        self.tableView(self.tableViewCatagory!, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
                         
-                    } else if reloadData == .tableViewProduct {
+                    } else {
                         
-                        self.productArray = [YNCategoryModel]()
+                        //没数据
+                        YNProgressHUD().showText("该分类下暂时还没有数据", toView: self.view)
                         
-                        for item in tempdata {
+                        if reloadData == .tableViewProduct {
                             
-                            let model = YNCategoryModel(dict: item as! NSDictionary)
-                            self.productArray.append(model)
+                            self.productArray = [YNSearchCatagoryModel]()
                             
+                            self.tableViewProduct!.reloadData()
                         }
                         
-//                        //把选中的做上标记
-//                        self.markSelected()
                         
-                        self.tableViewProduct!.reloadData()
+                        
                     }
+                    
                     
                     
                 } else if status == 0 {
@@ -348,22 +397,22 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
                     if let msg = json["msg"] as? String {
                         
                         YNProgressHUD().showText(msg, toView: self.view)
-                        
-                        //                        print("\n \(msg) \n")
                     }
                 }
                 
             }
             
-            
             }) { (error) -> Void in
                 
                 progress.hideUsingAnimation()
-                YNProgressHUD().showText("请求失败", toView: self.view)
+                YNProgressHUD().showText("加载失败", toView: self.view)
         }
+        
+        
         
     }
     
+   
 
     
     

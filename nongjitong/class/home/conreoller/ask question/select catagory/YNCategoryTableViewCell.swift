@@ -31,6 +31,29 @@ class YNCategoryTableViewCell: UITableViewCell {
     }
     
     
+    var searchCategoryModel: YNSearchCatagoryModel? {
+    
+        didSet {
+        
+            self.nameLabel.text = searchCategoryModel!.name
+            
+            if searchCategoryModel!.isSelected {
+            
+                self.nameLabel.textColor = UIColor.blueColor()
+                self.backgroundColor = UIColor.whiteColor()
+            
+            } else {
+            
+                self.nameLabel.textColor = UIColor.blackColor()
+                self.backgroundColor = kRGBA(215, g: 215, b: 215, a: 1)
+                
+            }
+            
+            
+        }
+        
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

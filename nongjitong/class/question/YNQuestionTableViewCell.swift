@@ -184,7 +184,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.font = UIFont.boldSystemFontOfSize(17)
-//        tempView.backgroundColor = UIColor.redColor()
+//        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     
@@ -196,7 +196,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         tempView.font = UIFont.systemFontOfSize(11)
         tempView.textColor = UIColor.grayColor()
         tempView.adjustsFontSizeToFitWidth = true
-//        tempView.backgroundColor = UIColor.redColor()
+//        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     
@@ -206,7 +206,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         let tempView = UIButton()
 //        tempView.setTitle("河南省, 郑州市, 金水区", forState: .Normal)
         tempView.setImage(UIImage(named: "home_page_location_image"), forState: .Normal)
-//        tempView.backgroundColor = UIColor.redColor()
+//        tempView.backgroundColor = UIColor.whiteColor()
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.titleLabel?.font = UIFont.systemFontOfSize(11)
         tempView.setTitleColor(UIColor.grayColor(), forState: .Normal)
@@ -223,7 +223,8 @@ class YNQuestionTableViewCell: UITableViewCell {
         tempView.numberOfLines = 3
         tempView.font = UIFont.systemFontOfSize(15)
         tempView.lineBreakMode = NSLineBreakMode.ByWordWrapping
-//        tempView.backgroundColor = UIColor.redColor()
+//        tempView.backgroundColor = UIColor.whiteColor()
+       
         return tempView
     }()
     
@@ -237,6 +238,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         tempView.setTitleColor(UIColor.grayColor(), forState: .Normal)
         tempView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 6)
         tempView.userInteractionEnabled = false
+//        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     
@@ -250,6 +252,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         tempView.setTitleColor(UIColor.grayColor(), forState: .Normal)
         tempView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 6)
         tempView.userInteractionEnabled = false
+//        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     

@@ -13,6 +13,7 @@ class YNSearchCatagoryModel {
     var cid: String?
     var name: String?
     var docs: String?
+    var isSelected: Bool = false
     
     init(dict: NSDictionary) {
         
