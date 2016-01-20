@@ -394,6 +394,9 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             
         } else {
         
+            
+            YNProgressHUD().showText("定位失败,无法加载附近数据", toView: self.view)
+            
             print("无法加载附近数据")
         }
        

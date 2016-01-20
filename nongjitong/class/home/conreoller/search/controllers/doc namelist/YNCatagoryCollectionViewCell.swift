@@ -42,6 +42,9 @@ class YNCatagoryCollectionViewCell: UICollectionViewCell {
         
         setInterface()
         setLayout()
+        
+        self.layer.cornerRadius = 3
+        self.clipsToBounds = true
     }
     
     required init?(coder aDecoder: NSCoder) {

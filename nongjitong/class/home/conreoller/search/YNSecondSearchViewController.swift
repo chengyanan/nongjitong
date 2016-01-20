@@ -36,6 +36,7 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor.whiteColor()
         self.searchBar.frame = CGRectMake(0, 64, self.view.frame.size.width, 44)
         self.searchBar.delegate = self
 

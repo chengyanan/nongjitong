@@ -242,11 +242,26 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
                     
                         //没有数据
                         
-                        YNProgressHUD().showText("没有数据了", toView: self.view)
+                        if self.pageCount == 1 {
+                            
+                            //刷新
+                            YNProgressHUD().showText("没有数据", toView: self.view)
+                            
+                            self.tableViewDataArray.removeAll()
+                            
+                        } else {
+                            
+                            //加载更多
+                            
+                            //没有数据
+                            YNProgressHUD().showText("没有更多数据了", toView: self.view)
+                            
+                            self.isShowLoadMore = false                            
+                           
+                        }
                         
-                        self.isShowLoadMore = false
+                         self.tableView?.reloadData()
                         
-                        self.tableView?.reloadData()
                     }
                     
                     
@@ -598,18 +613,23 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: collectionView delegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-            let model = self.selectedArray[indexPath.row]
+        let model = self.selectedArray[indexPath.row]
+        
+        if !model.isSelected {
+        
             model.isSelected = true
-        
+            
             self.classId = model.class_id
-        
+            
             self.pageCount = 1
-        
+            
             //加载新数据
             getQuestionListWithClassID(model.class_id)
-        
+            
             collectionView.reloadItemsAtIndexPaths([indexPath])
             collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
+            
+        }
         
     }
     

@@ -384,25 +384,36 @@ class YNSearchViewController: UIViewController, UITableViewDataSource, UITableVi
         
         } else {
         
-            if self.isSearchResault {
             
-                //MARK: 通知代理跳到详情页面
-                let model = self.resaultArray![indexPath.row]
-                self.delegate?.searchViewControllerDidSelectRowAtIndexPath(model)
-                
-            } else {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             
-                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                
-                let vc = storyBoard.instantiateViewControllerWithIdentifier("SB_Resault_Details") as! YNSearchResaultDetailViewController
-                
-                vc.searchresault = self.resaultArray![indexPath.row]
-                
-                navigationController?.pushViewController(vc, animated: true)
-            }
+            let vc = storyBoard.instantiateViewControllerWithIdentifier("SB_Resault_Details") as! YNSearchResaultDetailViewController
+            
+            vc.searchresault = self.resaultArray![indexPath.row]
+            
+            navigationController?.pushViewController(vc, animated: true)
+            
+            
+//            if self.isSearchResault {
+//            
+//                //MARK: 通知代理跳到详情页面
+//                let model = self.resaultArray![indexPath.row]
+//                self.delegate?.searchViewControllerDidSelectRowAtIndexPath(model)
+//                
+//            } else {
+//            
+//                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+//                
+//                let vc = storyBoard.instantiateViewControllerWithIdentifier("SB_Resault_Details") as! YNSearchResaultDetailViewController
+//                
+//                vc.searchresault = self.resaultArray![indexPath.row]
+//                
+//                navigationController?.pushViewController(vc, animated: true)
+//            }
             
             
         }
+        
         
     }
     
@@ -410,7 +421,9 @@ class YNSearchViewController: UIViewController, UITableViewDataSource, UITableVi
     
         self.page++
         self.search()
+        
     }
+    
     
 //    //MARK: - prepare segue
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -456,6 +469,8 @@ class YNSearchViewController: UIViewController, UITableViewDataSource, UITableVi
 //        return tempSearchBar
 //        
 //        }()
+    
+    
     
 //    deinit {
 //        

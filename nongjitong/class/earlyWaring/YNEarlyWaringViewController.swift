@@ -15,6 +15,21 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
     var isFirstLoadData = true
     var tempResaultArray = [YNEarlyToMyProgramModel]()
     
+    //是否显示加载更多
+    var isShowLoadMore = false {
+        
+        didSet {
+            
+            if isShowLoadMore {
+                
+                self.tableView?.addFooterRefresh()
+            } else {
+                
+                self.tableView?.removeFooterRefresh()
+            }
+        }
+    }
+    
     var resaultArray = [YNEarlyToMyProgramModel]() {
     
         didSet {
@@ -303,6 +318,16 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
                     
                     if resaultData.count > 0 {
                         
+                        
+                        if resaultData.count < 20 {
+                            
+                            //显示加载更多
+                            self.isShowLoadMore = false
+                        } else {
+                            
+                            //不显示加载更多
+                            self.isShowLoadMore = true
+                        }
                         
                         if self.page == 1 {
                             

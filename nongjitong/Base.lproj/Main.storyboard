@@ -1702,7 +1702,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tSg-4r-O1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1545" y="261"/>
+            <point key="canvasLocation" x="1629" y="261"/>
         </scene>
         <!--救援-->
         <scene sceneID="d2s-7G-2Gx">
@@ -1824,7 +1824,7 @@
         <!--搜索-->
         <scene sceneID="eN4-mu-tin">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="qEV-VL-D7s" customClass="YNSecondSearchViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="qEV-VL-D7s" customClass="YNSecondSearchViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cvP-31-P4x"/>
                         <viewControllerLayoutGuide type="bottom" id="s5X-Qo-ygf"/>

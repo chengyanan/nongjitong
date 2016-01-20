@@ -215,12 +215,26 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
                         
                     } else {
                         
-                        //没有数据
-                        YNProgressHUD().showText("没有数据", toView: self.view)
-                        
-                        self.isShowLoadMore = false
-                        self.tableViewDataArray.removeAll()
-                        self.tableView?.reloadData()
+
+                        if self.pageCount == 1 {
+                            
+                            //刷新
+                            YNProgressHUD().showText("没有数据", toView: self.view)
+                            
+                            self.tableViewDataArray.removeAll()
+                            self.tableView?.reloadData()
+                            
+                        } else {
+                            
+                            //加载更多
+                            
+                            //没有数据
+                            YNProgressHUD().showText("没有更多数据了", toView: self.view)
+                            
+                            self.isShowLoadMore = false
+                            
+                            self.tableView?.reloadData()
+                        }
                         
                     }
                     
@@ -383,14 +397,16 @@ class YNOfflineQuestionListViewController: UIViewController, UITableViewDataSour
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        if self.isShowLoadMore {
-            
-            return self.tableViewDataArray.count + 1
-            
-        } else {
-            
-            return self.tableViewDataArray.count
-        }
+//        if self.isShowLoadMore {
+//            
+//            return self.tableViewDataArray.count + 1
+//            
+//        } else {
+//            
+//            return self.tableViewDataArray.count
+//        }
+        
+        return self.tableViewDataArray.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

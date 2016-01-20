@@ -31,6 +31,7 @@ class YNSearchResaultDetailViewController: UIViewController, UIWebViewDelegate {
         didSet {
         
             self.titleLabel.text = serachResaultDetail!.title
+            
             self.webView.loadHTMLString(self.serachResaultDetail!.content, baseURL: nil)
             
         }

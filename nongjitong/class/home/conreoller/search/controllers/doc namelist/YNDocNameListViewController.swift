@@ -11,7 +11,9 @@ import UIKit
 class YNDocNameListViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     var page: Int = 1
-    var pagecount: Int = 20
+    var page_size: Int = 30
+    var moreWidth: CGFloat = 25
+    var marinLeftRight: CGFloat = 20
     
     var collectionViewLeftRightInset: CGFloat {
         
@@ -24,10 +26,10 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
                 
                 let width = widthForView(item.name!, font: UIFont.systemFontOfSize(17))
                 
-                temp += width + 12
+                temp += width + moreWidth
             }
             
-            let distant = self.view.frame.size.width - 15*2 - temp
+            let distant = self.view.frame.size.width - marinLeftRight*2 - temp
             
             if  distant > 0 {
                 
@@ -35,7 +37,7 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
                 
             } else {
                 
-                margin = 15
+                margin = marinLeftRight
             }
             
         }
@@ -58,19 +60,25 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
         }
     }
     
+    var docListCollectionView: UICollectionView?
     var docListArray = [YNSearchResaultModel]()
+    var docItemSize = CGSizeZero
     
-    var cid: String? {
+    var cid: String?
     
-        didSet {
+    //MARK: life cycle
+    init() {
+        super.init(nibName: nil, bundle: nil)
         
-//            self.loadDataWithId(cid!)
-        }
+        self.hidesBottomBarWhenPushed = true
     }
-    
-    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "方案"
         
         self.automaticallyAdjustsScrollViewInsets = false
         
@@ -84,6 +92,45 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
     
     func setupInterface() {
     
+       
+        setCatagoryCollectionView()
+        setDocListCollectionView()
+ 
+    }
+    
+    func setDocListCollectionView() {
+    
+        // 文章列表collectionView
+        let flow = UICollectionViewFlowLayout()
+        flow.minimumInteritemSpacing = itemSpacing
+        flow.sectionInset = UIEdgeInsets(top: 10, left: marinLeftRight*0.5, bottom: 0, right: marinLeftRight*0.5)
+        flow.scrollDirection = .Vertical
+    
+        let itemWidth = (self.view.frame.size.width - marinLeftRight - itemSpacing*2)/3 - 1
+        let itemHeight: CGFloat = 38
+        docItemSize = CGSizeMake(itemWidth, itemHeight)
+        
+        let y = CGRectGetMaxY(self.catagoryCollectionView!.frame)
+        let height = self.view.frame.size.height - y
+        
+        let tempCollectionView = UICollectionView(frame: CGRectMake(0, y, self.view.frame.size.width, height), collectionViewLayout: flow)
+        tempCollectionView.tag = 2
+        tempCollectionView.delegate = self
+        tempCollectionView.dataSource = self
+        
+        tempCollectionView.registerClass(YNDocListCollectionViewCell.self, forCellWithReuseIdentifier: "Cell_Collection_doc_List")
+        
+//        tempCollectionView.showsVerticalScrollIndicator = false
+        tempCollectionView.scrollEnabled = true
+        self.view.addSubview(tempCollectionView)
+        self.docListCollectionView = tempCollectionView
+        
+        self.docListCollectionView?.backgroundColor = UIColor.whiteColor()
+        
+    }
+    
+    func setCatagoryCollectionView() {
+    
         //分类collectionView
         let flow = UICollectionViewFlowLayout()
         flow.minimumInteritemSpacing = itemSpacing
@@ -91,31 +138,43 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
         flow.scrollDirection = .Horizontal
         
         let tempCollectionView = UICollectionView(frame: CGRectMake(0, 64, self.view.frame.size.width, catagoryCollectionViewHeight), collectionViewLayout: flow)
-        
+        tempCollectionView.tag = 1
         tempCollectionView.delegate = self
         tempCollectionView.dataSource = self
         
         tempCollectionView.backgroundColor = kRGBA(244, g: 244, b: 244, a: 0.8)
-
+        
         tempCollectionView.registerClass(YNCatagoryCollectionViewCell.self, forCellWithReuseIdentifier: "Cell_Collection_catagory_List")
         
         tempCollectionView.showsHorizontalScrollIndicator = false
         self.view.addSubview(tempCollectionView)
         self.catagoryCollectionView = tempCollectionView
         
-        tempCollectionView.backgroundColor = UIColor.redColor()
         
-        //TODO: 文章列表collectionView
+        let tempBounces = CGRectMake(0, 0, marinLeftRight*0.5, catagoryCollectionViewHeight*0.5)
+        let centerY = tempCollectionView.center.y
+        let leftCanterX = marinLeftRight*0.75
+        
+        indicationLeftImage.center = CGPointMake(leftCanterX, centerY)
+        indicationLeftImage.bounds = tempBounces
+        self.view.addSubview(indicationLeftImage)
+        
+        let rightCenterX = self.view.frame.size.width - marinLeftRight*0.75
+        indicationRightImage.center = CGPointMake(rightCenterX, centerY)
+        indicationRightImage.bounds = tempBounces
+        self.view.addSubview(indicationRightImage)
     }
     
     //MARK:UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        print(catagoryDataArray.count)
+        if collectionView.tag == 1 {
         
-        if catagoryDataArray.count > 0 {
-            
             return catagoryDataArray.count
+            
+        } else if collectionView.tag == 2 {
+        
+            return docListArray.count
         }
         
         return 0
@@ -123,15 +182,24 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
+        if collectionView.tag == 1 {
         
-        let identify = "Cell_Collection_catagory_List"
-    
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNCatagoryCollectionViewCell
+            let identify = "Cell_Collection_catagory_List"
+            
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNCatagoryCollectionViewCell
+            
+            cell.model = catagoryDataArray[indexPath.item]
+            
+            return cell
+        }
         
-        cell.model = catagoryDataArray[indexPath.item]
-                
+        let identify = "Cell_Collection_doc_List"
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNDocListCollectionViewCell
+        
+        cell.model = docListArray[indexPath.item]
+
         return cell
-        
         
     }
     
@@ -139,35 +207,65 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
     //MARK:UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        let model = catagoryDataArray[indexPath.item]
-        let width = widthForView(model.name!, font: UIFont.systemFontOfSize(17))
+        if collectionView.tag == 1 {
         
-        return CGSize(width: width + 12, height: catagoryCollectionViewHeight - 17)
+            let model = catagoryDataArray[indexPath.item]
+            let width = widthForView(model.name!, font: UIFont.systemFontOfSize(17))
+            
+            return CGSize(width: width + moreWidth, height: catagoryCollectionViewHeight - 12)
+        }
+       
+        return docItemSize
         
     }
     
     //MARK: collectionView delegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let model = self.catagoryDataArray[indexPath.row]
-        model.isSelected = true
+        if collectionView.tag == 1 {
         
-        self.classId = model.cid
+            let model = self.catagoryDataArray[indexPath.item]
+            
+            if !model.isSelected {
+            
+                model.isSelected = true
+                
+                self.classId = model.cid
+                
+                //加载新数据
+                getDocList(model.cid!)
+                
+                collectionView.reloadItemsAtIndexPaths([indexPath])
+                collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
+                
+            }
+         
+            
+        } else if collectionView.tag == 2 {
         
-        //加载新数据
-        getDocList(model.cid!)
-        
-        collectionView.reloadItemsAtIndexPaths([indexPath])
-        collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
+            //进入文章详情页面
+            
+            let vc = YNDocDetailsViewController()
+            vc.searchresault = self.docListArray[indexPath.item]
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+
         
     }
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let model = self.catagoryDataArray[indexPath.row]
-        model.isSelected = false
+        if collectionView.tag == 1 {
         
-        collectionView.reloadItemsAtIndexPaths([indexPath])
+            let model = self.catagoryDataArray[indexPath.item]
+            model.isSelected = false
+            
+            collectionView.reloadItemsAtIndexPaths([indexPath])
+        }
+        
+       
     }
     
     
@@ -213,6 +311,7 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
                                     
                                     model.isSelected = true
                                 }
+                                
                             }
                         
                         self.catagoryDataArray = tempArray
@@ -257,7 +356,7 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
         "a": "getCatDocs",
         "cid": cid,
         "page": String(page),
-        "page_size": "\(pagecount)"
+        "page_size": "\(page_size)"
         ]
         
         
@@ -289,12 +388,16 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
                         }
                         
                        
+                        self.docListCollectionView?.reloadData()
+                        
                         
                     } else {
                         
                         //没数据
                         YNProgressHUD().showText("没有数据啦", toView: self.view)
                         
+                        self.docListArray.removeAll()
+                        self.docListCollectionView?.reloadData()
                     }
                     
                     
@@ -328,6 +431,25 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
         label.sizeToFit()
         return label.frame.width
     }
+    
+   
+    let indicationLeftImage: UIImageView = {
+    
+        let tempView = UIImageView(image: UIImage(named: "sapi-nav-back-btn-bg"))
+        tempView.contentMode = .ScaleToFill
+        tempView.backgroundColor = UIColor.clearColor()
+        return tempView
+        
+    }()
+    
+    let indicationRightImage: UIImageView = {
+        
+        let tempView = UIImageView(image: UIImage(named: "sapi-nav-back-btn-right"))
+        tempView.contentMode = .ScaleToFill
+        tempView.backgroundColor = UIColor.clearColor()
+        return tempView
+        
+    }()
     
     
     
