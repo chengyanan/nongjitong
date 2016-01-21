@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol YNDocDetailListHeaderViewDelegate {
+
+    func segmentValueChange(value: Int)
+}
+
 class YNDocDetailListHeaderView: UIView {
 
+    var delegate: YNDocDetailListHeaderViewDelegate?
     
     let segmentControl: UISegmentedControl = {
     
@@ -46,9 +52,9 @@ class YNDocDetailListHeaderView: UIView {
     }
     
     func segmentClick(sender: UISegmentedControl) {
-    
-        //TODO: 通知代理
+        //通知代理
         
+        self.delegate?.segmentValueChange(sender.selectedSegmentIndex)
     }
     
   

@@ -23,6 +23,7 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
             if isShowLoadMore {
                 
                 self.tableView?.addFooterRefresh()
+                
             } else {
                 
                 self.tableView?.removeFooterRefresh()
@@ -321,11 +322,12 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
                         
                         if resaultData.count < 20 {
                             
-                            //显示加载更多
+                            //不显示加载更多
                             self.isShowLoadMore = false
+                            
                         } else {
                             
-                            //不显示加载更多
+                            //显示加载更多
                             self.isShowLoadMore = true
                         }
                         
