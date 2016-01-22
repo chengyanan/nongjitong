@@ -113,7 +113,7 @@ class YNDocDetailsViewController: UIViewController, UITableViewDataSource, UITab
             
             let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
             
-            print("data - \(json)")
+//            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -551,15 +551,17 @@ class YNDocDetailsViewController: UIViewController, UITableViewDataSource, UITab
                         
                         //没数据
                         
-                        if self.segmentCurrentIndex == 0 {
+                        self.tableView.reloadData()
                         
-                            YNProgressHUD().showText("没有相关解决方案", toView: self.view)
-                            
-                        } else if self.segmentCurrentIndex == 0 {
-                        
-                            YNProgressHUD().showText("没有相关问题", toView: self.view)
-                            
-                        }
+//                        if self.segmentCurrentIndex == 0 {
+//                        
+//                            YNProgressHUD().showText("没有相关解决方案", toView: self.view)
+//                            
+//                        } else if self.segmentCurrentIndex == 0 {
+//                        
+//                            YNProgressHUD().showText("没有相关问题", toView: self.view)
+//                            
+//                        }
                         
                         
                     }
@@ -640,7 +642,7 @@ class YNDocDetailsViewController: UIViewController, UITableViewDataSource, UITab
                         //没有数据
                         
                         YNProgressHUD().showText("没有相关问题", toView: self.view)
-                        
+                        self.isShowMore = false
                         self.questionArray = [YNQuestionModel]()
                     }
                     

@@ -11,9 +11,24 @@ import UIKit
 class YNDocNameListViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     var page: Int = 1
-    var page_size: Int = 30
+    var page_size: Int = 40
     var moreWidth: CGFloat = 25
     var marinLeftRight: CGFloat = 20
+    
+    var isShowMore = false {
+    
+        didSet {
+        
+            if isShowMore {
+            
+                self.docListCollectionView?.addFooterRefresh()
+                
+            } else {
+            
+                self.docListCollectionView?.removeFooterRefresh()
+            }
+        }
+    }
     
     var collectionViewLeftRightInset: CGFloat {
         
@@ -87,6 +102,8 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
         self.view.backgroundColor = UIColor.whiteColor()
         
         self.loadDataWithId(cid!)
+     
+        
     }
 
     
@@ -126,6 +143,29 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
         self.docListCollectionView = tempCollectionView
         
         self.docListCollectionView?.backgroundColor = UIColor.whiteColor()
+        
+        docListCollectionView?.addFooterRefreshWithActionHandler({ () -> Void in
+            
+            
+            self.loadMore()
+        })
+    
+    }
+    
+    func loadMore() {
+    
+        
+        self.page++
+        self.getDocList(self.classId!)
+        
+//        if let _ = self.classId {
+//        
+//            
+//        } else {
+//        
+//            print(self.classId)
+//        }
+        
         
     }
     
@@ -228,6 +268,7 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
             
             if !model.isSelected {
             
+                self.page = 1
                 model.isSelected = true
                 
                 self.classId = model.cid
@@ -307,6 +348,8 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
                                 if i == 0 {
                                 
                                     //加载文章数据
+                                    
+                                    self.classId = model.cid
                                     self.getDocList(model.cid!)
                                     
                                     model.isSelected = true
@@ -358,14 +401,16 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
         "page": String(page),
         "page_size": "\(page_size)"
         ]
-        
+    
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
-        
+
         Network.post(kURL, params: params, success: { (data, response, error) -> Void in
+     
+            self.docListCollectionView?.stopFooterRefresh()
             
             progress.hideUsingAnimation()
-            
+     
             let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
             
             //                print("data - \(json)")
@@ -377,6 +422,20 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
                     let resaultData = json["data"] as! NSArray
                     
                     if resaultData.count > 0 {
+                        
+                        if resaultData.count >= self.page_size {
+                        
+                            self.isShowMore = true
+                            
+                        } else {
+                        
+                            self.isShowMore = false
+                        }
+                        
+                        if self.page == 1 {
+                        
+                            self.docListArray.removeAll()
+                        }
                         
                         for item in resaultData {
                             
@@ -396,8 +455,8 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
                         //没数据
                         YNProgressHUD().showText("没有数据啦", toView: self.view)
                         
-                        self.docListArray.removeAll()
-                        self.docListCollectionView?.reloadData()
+//                        self.docListArray.removeAll()
+//                        self.docListCollectionView?.reloadData()
                     }
                     
                     
@@ -413,6 +472,8 @@ class YNDocNameListViewController: UIViewController, UICollectionViewDataSource,
             }
             
             }) { (error) -> Void in
+                
+                self.docListCollectionView?.stopFooterRefresh()
                 
                 progress.hideUsingAnimation()
                 YNProgressHUD().showText("加载失败", toView: self.view)

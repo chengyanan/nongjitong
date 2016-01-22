@@ -69,7 +69,18 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
-
+    //MARK: event response
+    @IBAction func leftItemClick(sender: AnyObject) {
+        
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        
+        let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting")
+        
+        self.navigationController?.pushViewController(settingVc, animated: true)
+        
+    }
+    
     
     func setTableViewCatagory() {
         

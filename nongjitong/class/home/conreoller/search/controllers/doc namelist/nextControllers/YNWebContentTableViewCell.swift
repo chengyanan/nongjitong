@@ -62,15 +62,15 @@ class YNWebContentTableViewCell: UITableViewCell, UIWebViewDelegate {
     var prograssHud: ProgressHUD?
     
     //MARK: UIWebViewDelegate
-    func webViewDidStartLoad(webView: UIWebView) {
-        
-        prograssHud = YNProgressHUD().showWaitingToView(self.contentView)
-        
-    }
-    func webViewDidFinishLoad(webView: UIWebView) {
-        
-        prograssHud?.hideUsingAnimation()
-    }
+//    func webViewDidStartLoad(webView: UIWebView) {
+//        
+//        prograssHud = YNProgressHUD().showWaitingToView(self.contentView)
+//        
+//    }
+//    func webViewDidFinishLoad(webView: UIWebView) {
+//        
+//        prograssHud?.hideUsingAnimation()
+//    }
     
     
     

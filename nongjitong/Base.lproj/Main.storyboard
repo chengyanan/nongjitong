@@ -1834,7 +1834,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="搜索" id="TC8-c8-tll"/>
+                    <navigationItem key="navigationItem" title="搜索" id="TC8-c8-tll">
+                        <barButtonItem key="leftBarButtonItem" image="item_me" id="qcO-1o-h9j">
+                            <connections>
+                                <action selector="leftItemClick:" destination="qEV-VL-D7s" id="nE6-yp-33X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mRS-fe-NO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

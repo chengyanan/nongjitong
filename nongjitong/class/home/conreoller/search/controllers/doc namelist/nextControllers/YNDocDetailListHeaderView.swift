@@ -34,22 +34,22 @@ class YNDocDetailListHeaderView: UIView {
         
         segmentControl.addTarget(self, action: "segmentClick:", forControlEvents: UIControlEvents.ValueChanged)
         
-        
+        Layout().addTopConstraint(segmentControl, toView: self, multiplier: 1, constant: 6)
+        Layout().addCenterXConstraint(segmentControl, toView: self, multiplier: 1, constant: 0)
+        Layout().addWidthConstraint(segmentControl, toView: self, multiplier: 0.5, constant: 0)
+        Layout().addBottomConstraint(segmentControl, toView: self, multiplier: 1, constant: -8)
     }
   
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        Layout().addTopConstraint(segmentControl, toView: self, multiplier: 1, constant: 6)
-        Layout().addCenterXConstraint(segmentControl, toView: self, multiplier: 1, constant: 0)
-        Layout().addWidthConstraint(segmentControl, toView: self, multiplier: 0.5, constant: 0)
-        Layout().addBottomConstraint(segmentControl, toView: self, multiplier: 1, constant: -8)
-        
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//        
+//        
+//    }
     
     func segmentClick(sender: UISegmentedControl) {
         //通知代理
