@@ -43,4 +43,5 @@ class YNEarlyOtherSubscribeCell: UITableViewCell {
     
     @IBOutlet var subscribeTwo: UILabel!
     
+    
 }

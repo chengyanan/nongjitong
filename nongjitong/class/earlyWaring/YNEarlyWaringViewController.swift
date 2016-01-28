@@ -139,6 +139,16 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
         loadData()
     }
     
+    @IBAction func interCircleInterface(sender: AnyObject) {
+        
+        
+        let vc = YNCircleViewController()
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    
     //MARK:UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         

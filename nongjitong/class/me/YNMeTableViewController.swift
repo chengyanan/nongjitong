@@ -151,6 +151,14 @@ class YNMeTableViewController: UITableViewController {
                 
             } else if indexPath.section == 4 {
             
+                //我的消息页面
+                let vc = YNMYMessageViewController()
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+                
+            } else if indexPath.section == 5 {
+            
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting_detail")
                 
