@@ -15,7 +15,7 @@ class YNMessageModel {
     var to_user_id: String?
     var content: String?
     var group_id: String?
-    var status: Int?
+    var status: String?
     var add_time: String?
     
     
@@ -26,7 +26,7 @@ class YNMessageModel {
         self.to_user_id = dict["to_user_id"] as? String
         self.content = dict["content"] as? String
         self.group_id = dict["group_id"] as? String
-        self.status = dict["status"] as? Int
+        self.status = dict["status"] as? String
         self.add_time = dict["add_time"] as? String
         
     }

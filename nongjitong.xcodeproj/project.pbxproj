@@ -47,6 +47,10 @@
 		407F6B5C1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */; };
 		407F6B5E1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B5D1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift */; };
 		4085B88B1C48DA6A009F0B95 /* YNSecondSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4085B88A1C48DA6A009F0B95 /* YNSecondSearchViewController.swift */; };
+		408B42381C5B447B007B7001 /* YNMembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408B42371C5B447B007B7001 /* YNMembersTableViewCell.swift */; };
+		408B423A1C5B4AF2007B7001 /* YNMembersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408B42391C5B4AF2007B7001 /* YNMembersCollectionViewCell.swift */; };
+		408B423C1C5B5567007B7001 /* YNMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408B423B1C5B5567007B7001 /* YNMemberModel.swift */; };
+		408B423E1C5B570A007B7001 /* YNCircleDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408B423D1C5B570A007B7001 /* YNCircleDetailModel.swift */; };
 		408BE0541BE704CD00A210A4 /* YNTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BE0531BE704CD00A210A4 /* YNTextView.swift */; };
 		408BE8A81C294BFA00B980AD /* YNMYQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */; };
 		408FAE451C586F98001D5B7D /* YNCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408FAE441C586F98001D5B7D /* YNCircleViewController.swift */; };
@@ -330,6 +334,10 @@
 		407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYWaringDetailViewController.swift; sourceTree = "<group>"; };
 		407F6B5D1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMotifyPasswordViewController.swift; sourceTree = "<group>"; };
 		4085B88A1C48DA6A009F0B95 /* YNSecondSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSecondSearchViewController.swift; sourceTree = "<group>"; };
+		408B42371C5B447B007B7001 /* YNMembersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMembersTableViewCell.swift; sourceTree = "<group>"; };
+		408B42391C5B4AF2007B7001 /* YNMembersCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMembersCollectionViewCell.swift; sourceTree = "<group>"; };
+		408B423B1C5B5567007B7001 /* YNMemberModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMemberModel.swift; sourceTree = "<group>"; };
+		408B423D1C5B570A007B7001 /* YNCircleDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCircleDetailModel.swift; sourceTree = "<group>"; };
 		408BE0531BE704CD00A210A4 /* YNTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNTextView.swift; sourceTree = "<group>"; };
 		408BE8A71C294BFA00B980AD /* YNMYQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMYQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		408FAE441C586F98001D5B7D /* YNCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCircleViewController.swift; sourceTree = "<group>"; };
@@ -1051,6 +1059,10 @@
 			isa = PBXGroup;
 			children = (
 				40D5EAF51C59F37C00DFCA71 /* YNCircleDetailsViewController.swift */,
+				408B42371C5B447B007B7001 /* YNMembersTableViewCell.swift */,
+				408B42391C5B4AF2007B7001 /* YNMembersCollectionViewCell.swift */,
+				408B423B1C5B5567007B7001 /* YNMemberModel.swift */,
+				408B423D1C5B570A007B7001 /* YNCircleDetailModel.swift */,
 			);
 			path = "circle details";
 			sourceTree = "<group>";
@@ -1679,6 +1691,7 @@
 				40ED43881BC60B76004713C9 /* progressHUD.swift in Sources */,
 				40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */,
 				407F6B5E1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift in Sources */,
+				408B42381C5B447B007B7001 /* YNMembersTableViewCell.swift in Sources */,
 				4085B88B1C48DA6A009F0B95 /* YNSecondSearchViewController.swift in Sources */,
 				40DEA7D61C3A187F00BEB608 /* YNSearchResaultQuestionViewController.swift in Sources */,
 				40ED43871BC60B76004713C9 /* Network.swift in Sources */,
@@ -1688,6 +1701,7 @@
 				40B8BD311C4CBF7000E9133C /* YNDocNameListViewController.swift in Sources */,
 				40E237051BFD9B4200321B12 /* YNAddSubscriptionViewController.swift in Sources */,
 				40E039871BF5C5F4007FFF2A /* YNBaseAnnotation.swift in Sources */,
+				408B423E1C5B570A007B7001 /* YNCircleDetailModel.swift in Sources */,
 				40E039881BF5C5F4007FFF2A /* YNCallOutAnnotation.swift in Sources */,
 				40D5EAF31C59E92600DFCA71 /* YNWriteReasonViewController.swift in Sources */,
 				40C6B5411C34D485003004C5 /* YNSearchCatagoryModel.swift in Sources */,
@@ -1724,6 +1738,7 @@
 				40ED43861BC60B76004713C9 /* Macro.swift in Sources */,
 				400C33721C45F06E00F7FBFC /* YNWriteSolutionViewController.swift in Sources */,
 				40ED43891BC60B76004713C9 /* tools.swift in Sources */,
+				408B423C1C5B5567007B7001 /* YNMemberModel.swift in Sources */,
 				406805AE1C324E9C009FC170 /* YNNewSearchViewController.swift in Sources */,
 				408BE8A81C294BFA00B980AD /* YNMYQuestionTableViewCell.swift in Sources */,
 				406732AB1BFC56570071F6EA /* YNQuestionTableViewCell.swift in Sources */,
@@ -1749,6 +1764,7 @@
 				4003F7831BDF2F5400137258 /* YNModifytextViewController.swift in Sources */,
 				40ED439F1BC61ADE004713C9 /* YNHomeViewController.swift in Sources */,
 				40DEA7E41C3A60E300BEB608 /* YNSubscribeModel.swift in Sources */,
+				408B423A1C5B4AF2007B7001 /* YNMembersCollectionViewCell.swift in Sources */,
 				4003F7811BDF2F5400137258 /* YNHTTPGetCityTool.swift in Sources */,
 				40D5EAEB1C59AF9800DFCA71 /* YNCircleTableViewCell.swift in Sources */,
 				40D5EAFE1C5A047800DFCA71 /* YNMYMessageViewController.swift in Sources */,

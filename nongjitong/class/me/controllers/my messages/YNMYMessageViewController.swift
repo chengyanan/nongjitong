@@ -10,7 +10,7 @@ import UIKit
 
 class YNMYMessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let page = 0
+    var page = 1
     let page_size = 20
     
     var dataArray = [YNMessageModel]()
@@ -31,12 +31,12 @@ class YNMYMessageViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
+    var segmentSelectedIndex = 0
     
     let segmentControl: UISegmentedControl = {
         
         let tempView = UISegmentedControl(items: ["我发出的消息", "我收到的消息"])
         tempView.selectedSegmentIndex = 0
-        tempView.translatesAutoresizingMaskIntoConstraints = false
         return tempView
         
     }()
@@ -68,8 +68,38 @@ class YNMYMessageViewController: UIViewController, UITableViewDataSource, UITabl
         Layout().addBottomConstraint(tableView, toView: self.view, multiplier: 1, constant: 0)
         
         loaddata()
+        
+        segmentControl.addTarget(self, action: "segmentClick:", forControlEvents: UIControlEvents.ValueChanged)
     }
     
+    //MARK: event response
+    func segmentClick(sender: UISegmentedControl) {
+    
+        if sender.selectedSegmentIndex == segmentSelectedIndex {
+        
+            //相等就什么也不做
+        } else {
+        
+            self.page = 1
+            self.segmentSelectedIndex = segmentControl.selectedSegmentIndex
+            
+            //不相等重新加载数据
+            if segmentControl.selectedSegmentIndex == 0 {
+            
+                //加载我发出的消息
+                loaddata()
+                
+            } else if segmentControl.selectedSegmentIndex == 1 {
+            
+                //加载别人发给我的消息
+                sendMessageToMe()
+            }
+            
+            
+            
+        }
+        
+    }
     
     //MARK:UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,13 +114,29 @@ class YNMYMessageViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let identifier = "Cell_circle_MySendMessage"
+        if segmentSelectedIndex == 0 {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? YNMySendMessageTableViewCell
+            let identifier = "Cell_circle_MySendMessage"
+            
+            var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? YNMySendMessageTableViewCell
+            
+            if cell == nil {
+                
+                cell = YNMySendMessageTableViewCell(style: .Default, reuseIdentifier: identifier)
+            }
+            
+            cell?.model = dataArray[indexPath.row]
+            
+            return cell!
+        }
+        
+        let identifier = "Cell_circle_SendToMeMessage"
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? YNOtherSendMessageTableViewCell
         
         if cell == nil {
             
-            cell = YNMySendMessageTableViewCell(style: .Default, reuseIdentifier: identifier)
+            cell = YNOtherSendMessageTableViewCell(style: .Default, reuseIdentifier: identifier)
         }
         
         cell?.model = dataArray[indexPath.row]
@@ -106,7 +152,103 @@ class YNMYMessageViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
+    //MARK: 我收到的消息
+    func sendMessageToMe() {
     
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "GroupUserVerifyMessage",
+            "a": "getToMeList",
+            "page": "\(page)",
+            "page_size": "\(page_size)",
+            "user_id": kUser_ID() as? String
+        ]
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        
+        Network.post(kURL, params: params, success: { (data, response, error) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            do {
+                
+                
+                let json: NSDictionary =  try NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                
+                print("data - \(json)")
+                
+                if let status = json["status"] as? Int {
+                    
+                    if status == 1 {
+                        
+                        let tempArray = json["data"] as? NSArray
+                        
+                        if tempArray?.count > 0 {
+                            
+                            
+                            if tempArray?.count < self.page_size {
+                                
+                                self.isShowLoadMore = false
+                                
+                            } else {
+                                
+                                self.isShowLoadMore = true
+                            }
+                            
+                            if self.page == 1 {
+                                
+                                self.dataArray.removeAll()
+                            }
+                            
+                            for item in tempArray! {
+                                
+                                
+                                let model = YNMessageModel(dict: item as! NSDictionary)
+                                
+                                self.dataArray.append(model)
+                                
+                            }
+                            
+                            self.tableView.reloadData()
+                            
+                        } else {
+                            
+                            YNProgressHUD().showText("没有数据", toView: self.view)
+                            
+                        }
+                        
+                        
+                    } else if status == 0 {
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            //                            print(msg)
+                            YNProgressHUD().showText(msg, toView: self.view)
+                        }
+                    }
+                    
+                }
+                
+                
+            } catch {
+                
+                YNProgressHUD().showText("请求失败", toView: self.view)
+                
+            }
+            
+            
+            
+            
+            }) { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("加载失败", toView: self.view)
+        }
+        
+        
+    }
+    
+    //MARK: 我发出的消息
     func loaddata() {
     
         let params: [String: String?] = ["m": "Appapi",

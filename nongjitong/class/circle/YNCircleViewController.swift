@@ -322,60 +322,67 @@ class YNCircleViewController: UIViewController, UITableViewDataSource, UITableVi
             
             progress.hideUsingAnimation()
             
-            let json: NSDictionary =  (try! NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
+            do {
             
-            print("data - \(json)")
-            
-            if let status = json["status"] as? Int {
+                let json: NSDictionary =  try NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                 
-                if status == 1 {
+                print("data - \(json)")
+                
+                if let status = json["status"] as? Int {
                     
-                    let tempArray = json["data"] as? NSArray
-                    
-                    if tempArray?.count > 0 {
-                    
-                    
-                        if tempArray?.count < self.page_size {
+                    if status == 1 {
                         
-                            self.isShowLoadMore = false
+                        let tempArray = json["data"] as? NSArray
+                        
+                        if tempArray?.count > 0 {
+                            
+                            
+                            if tempArray?.count < self.page_size {
+                                
+                                self.isShowLoadMore = false
+                                
+                            } else {
+                                
+                                self.isShowLoadMore = true
+                            }
+                            
+                            if self.page == 1 {
+                                
+                                self.dataArray.removeAll()
+                            }
+                            
+                            for item in tempArray! {
+                                
+                                
+                                let model = YNCircleModel(dict: item as! NSDictionary)
+                                
+                                self.dataArray.append(model)
+                                
+                            }
+                            
+                            self.tableView.reloadData()
                             
                         } else {
-                        
-                            self.isShowLoadMore = true
-                        }
-                        
-                        if self.page == 1 {
                             
-                            self.dataArray.removeAll()
-                        }
-                        
-                        for item in tempArray! {
-                        
-                        
-                            let model = YNCircleModel(dict: item as! NSDictionary)
-                            
-                            self.dataArray.append(model)
+                            YNProgressHUD().showText("没有数据", toView: self.view)
                             
                         }
                         
-                        self.tableView.reloadData()
-                    
-                    } else {
-                    
-                        YNProgressHUD().showText("没有数据", toView: self.view)
-                    
+                        
+                    } else if status == 0 {
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            //                            print(msg)
+                            YNProgressHUD().showText(msg, toView: self.view)
+                        }
                     }
                     
-                    
-                } else if status == 0 {
-                    
-                    if let msg = json["msg"] as? String {
-                        
-                        //                            print(msg)
-                        YNProgressHUD().showText(msg, toView: self.view)
-                    }
                 }
                 
+            } catch {
+            
+                YNProgressHUD().showText("请求错误", toView: self.view)
             }
             
             

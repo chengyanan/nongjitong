@@ -16,15 +16,15 @@ class YNMySendMessageTableViewCell: UITableViewCell {
         
             titleLabel.text = model?.content!
             
-            if model?.status == 0 {
+            if model?.status == "0" {
             
                 stateLabel.text = "待处理"
                 
-            } else if model?.status == 1 {
+            } else if model?.status == "1" {
             
                 stateLabel.text = "通过"
                 
-            } else if model?.status == 1 {
+            } else if model?.status == "2" {
                 
                 stateLabel.text = "拒绝"
                 
@@ -40,7 +40,7 @@ class YNMySendMessageTableViewCell: UITableViewCell {
         let tempView = UILabel()
         
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.font = UIFont.systemFontOfSize(15)
+        tempView.font = UIFont.systemFontOfSize(13)
         return tempView
         
     }()
@@ -50,7 +50,7 @@ class YNMySendMessageTableViewCell: UITableViewCell {
         let tempView = UILabel()
         
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.font = UIFont.systemFontOfSize(13)
+        tempView.font = UIFont.systemFontOfSize(12)
         tempView.textAlignment = .Right
         
         return tempView
@@ -60,6 +60,8 @@ class YNMySendMessageTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.selectionStyle = .None
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(stateLabel)
@@ -79,6 +81,9 @@ class YNMySendMessageTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    
     
     
 }
