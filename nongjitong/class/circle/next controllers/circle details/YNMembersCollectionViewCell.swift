@@ -17,7 +17,9 @@ class YNMembersCollectionViewCell: UICollectionViewCell {
         didSet {
         
             titleLabel.text = model?.user_name!
-            agreeButton.imageView?.getImageWithURL(model!.avatar!, contentMode: UIViewContentMode.ScaleAspectFill)
+            
+            imageView.getImageWithURL(model!.avatar!, contentMode: .ScaleAspectFill)
+            
         }
     }
     
@@ -27,20 +29,18 @@ class YNMembersCollectionViewCell: UICollectionViewCell {
         
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.font = UIFont.systemFontOfSize(13)
+        tempView.textAlignment = .Center
         return tempView
         
     }()
     
-    let agreeButton: UIButton = {
+    let imageView: UIImageView = {
         
-        let tempView = UIButton()
+        let tempView = UIImageView()
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.backgroundColor = UIColor.greenColor()
-        tempView.setImage(UIImage(named: "user_default_avatar"), forState: .Normal)
-        tempView.setTitleColor(UIColor.blackColor(), forState: .Normal)
         tempView.layer.cornerRadius = 3
-        tempView.titleLabel?.font = UIFont.systemFontOfSize(13)
         tempView.clipsToBounds = true
+        tempView.contentMode = .ScaleAspectFill
         return tempView
         
     }()
@@ -48,17 +48,17 @@ class YNMembersCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.addSubview(agreeButton)
+        contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
         
         //agreeButton
-        Layout().addTopConstraint(agreeButton, toView: contentView, multiplier: 1, constant: 0)
-        Layout().addLeftConstraint(agreeButton, toView: contentView, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(agreeButton, toView: contentView, multiplier: 1, constant: 0)
-        Layout().addHeightToWidthConstraints(agreeButton, toView: agreeButton, multiplier: 1, constant: 0)
+        Layout().addTopConstraint(imageView, toView: contentView, multiplier: 1, constant: 0)
+        Layout().addLeftConstraint(imageView, toView: contentView, multiplier: 1, constant: 0)
+        Layout().addRightConstraint(imageView, toView: contentView, multiplier: 1, constant: 0)
+        Layout().addHeightToWidthConstraints(imageView, toView: imageView, multiplier: 1, constant: 0)
         
         //titleLabel
-        Layout().addTopToBottomConstraint(titleLabel, toView: agreeButton, multiplier: 1, constant: 0)
+        Layout().addTopToBottomConstraint(titleLabel, toView: imageView, multiplier: 1, constant: 0)
         Layout().addLeftConstraint(titleLabel, toView: contentView, multiplier: 1, constant: 0)
         Layout().addRightConstraint(titleLabel, toView: contentView, multiplier: 1, constant: 0)
         Layout().addBottomConstraint(titleLabel, toView: contentView, multiplier: 1, constant: 0)

@@ -42,6 +42,7 @@ class YNCircleDetailModel: YNCircleModel {
         
         self.membersHeight = intLines * height + (intLines - 1)*YNMembersTableViewCell.itemSpacing + YNMembersTableViewCell.topBottomInset*2
         
+//        print(width, height, floatLines, intLines, membersHeight)
         
     }
     

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class YNCircleModel {
     
@@ -14,6 +15,8 @@ class YNCircleModel {
     var user_id: String?
     var title: String?
     var announcement: String?
+    var announcementHeight: CGFloat = 44
+    
     var add_time: String?
     var photo = [String]()
     
@@ -25,8 +28,18 @@ class YNCircleModel {
         self.announcement = dict["announcement"] as? String
         self.add_time = dict["add_time"] as? String
         
+        let size = Tools().heightForText(self.announcement!, font: UIFont.systemFontOfSize(13), width: kScreenWidth - 24)
+        
+        self.announcementHeight = size.height + 30
+        
+        if self.announcementHeight < 44 {
+        
+            self.announcementHeight = 44
+        }
+        
         
     }
+    
     
     
     

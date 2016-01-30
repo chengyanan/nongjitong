@@ -21,8 +21,8 @@ class YNMembersTableViewCell: UITableViewCell, UICollectionViewDataSource {
     static let numberOfItemsInOneLine: CGFloat = 5
     static let itemSpacing: CGFloat = 12
     
-    static let topBottomInset: CGFloat = 30
-    static let leftRightInset: CGFloat = 20
+    static let topBottomInset: CGFloat = 20
+    static let leftRightInset: CGFloat = 16
     
     
     let collectionView: UICollectionView = {
@@ -41,13 +41,14 @@ class YNMembersTableViewCell: UITableViewCell, UICollectionViewDataSource {
         tempView.registerClass(YNMembersCollectionViewCell.self, forCellWithReuseIdentifier: YNMembersCollectionViewCell.identify)
         
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        
+        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.selectionStyle = .None
         contentView.addSubview(collectionView)
         
         collectionView.dataSource = self

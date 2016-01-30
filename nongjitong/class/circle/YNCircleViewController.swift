@@ -256,11 +256,12 @@ class YNCircleViewController: UIViewController, UITableViewDataSource, UITableVi
                             
                         } else if data == 1 {
                         
-                            //是该群成员，可以进入详细页面
-                            let vc = YNCircleDetailsViewController()
+                            //是该群成员，可以聊天列表页面
+                            let vc = YNCircleChatListViewController()
                             vc.model = model
-                            
+
                             self.navigationController?.pushViewController(vc, animated: true)
+                            
                             
                         }
                         

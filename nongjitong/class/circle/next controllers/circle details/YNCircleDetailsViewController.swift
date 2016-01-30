@@ -28,7 +28,7 @@ class YNCircleDetailsViewController: UIViewController, UITableViewDataSource, UI
     
     let tableView: UITableView = {
         
-        let tempView = UITableView(frame: CGRectZero, style: .Plain)
+        let tempView = UITableView(frame: CGRectZero, style: .Grouped)
         tempView.translatesAutoresizingMaskIntoConstraints = false
         
         return tempView
@@ -52,28 +52,51 @@ class YNCircleDetailsViewController: UIViewController, UITableViewDataSource, UI
     }
     
     //MARK:UITableViewDataSource
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return 2
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return 1
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
         
             if let _ = self.modelDetail {
             
                 return modelDetail!.membersHeight
+            }
+            
+        } else if indexPath.section == 1 {
+            
+            if let _ = self.modelDetail {
+                
+                return modelDetail!.announcementHeight
             }
         }
         
         return 44
     }
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 0.1
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        return 15
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
         
             let identifier = "Cell_circle_members"
             var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? YNMembersTableViewCell
@@ -93,15 +116,20 @@ class YNCircleDetailsViewController: UIViewController, UITableViewDataSource, UI
         }
         
         let identifier = "Cell_circle"
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier)
+        var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as? YNAnnounceTableViewCell
         
         if cell == nil {
             
-            cell = UITableViewCell(style: .Default, reuseIdentifier: identifier)
+            cell = YNAnnounceTableViewCell(style: .Default, reuseIdentifier: identifier)
         }
         
-        cell?.textLabel?.text = "rose"
+        if let _ = self.modelDetail {
         
+            cell?.textStr = modelDetail?.announcement
+            
+        }
+        
+      
         return cell!
         
     }

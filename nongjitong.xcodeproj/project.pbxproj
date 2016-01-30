@@ -29,6 +29,11 @@
 		40292E4E1BD6311B0028F87C /* YNSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40292E4D1BD6311B0028F87C /* YNSearchViewController.swift */; };
 		402BF81B1C06EB7C00A62614 /* YNHttpQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402BF81A1C06EB7C00A62614 /* YNHttpQuestion.swift */; };
 		40317DBC1BF1A22600921B8D /* YNHttpAskQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40317DBB1BF1A22600921B8D /* YNHttpAskQuestion.swift */; };
+		4037548A1C5C6776002569CB /* YNAnnounceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403754891C5C6776002569CB /* YNAnnounceTableViewCell.swift */; };
+		4037548D1C5CA880002569CB /* YNCircleChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4037548C1C5CA880002569CB /* YNCircleChatListViewController.swift */; };
+		403754921C5CB81B002569CB /* barbuttonicon_InfoMulti.png in Resources */ = {isa = PBXBuildFile; fileRef = 4037548F1C5CB81B002569CB /* barbuttonicon_InfoMulti.png */; };
+		403754931C5CB81B002569CB /* barbuttonicon_InfoMulti@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 403754901C5CB81B002569CB /* barbuttonicon_InfoMulti@2x.png */; };
+		403754941C5CB81B002569CB /* barbuttonicon_InfoMulti@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 403754911C5CB81B002569CB /* barbuttonicon_InfoMulti@3x.png */; };
 		4043A4A91C1141E400F1F669 /* YNQuestionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4043A4A81C1141E400F1F669 /* YNQuestionDetailViewController.swift */; };
 		4048E3F71C2BAB400035C415 /* YNHttpNearBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4048E3F61C2BAB400035C415 /* YNHttpNearBy.swift */; };
 		4048E3FB1C2BBEDB0035C415 /* YNNearByModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4048E3FA1C2BBEDB0035C415 /* YNNearByModel.swift */; };
@@ -316,6 +321,11 @@
 		40292E4D1BD6311B0028F87C /* YNSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchViewController.swift; sourceTree = "<group>"; };
 		402BF81A1C06EB7C00A62614 /* YNHttpQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHttpQuestion.swift; sourceTree = "<group>"; };
 		40317DBB1BF1A22600921B8D /* YNHttpAskQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHttpAskQuestion.swift; sourceTree = "<group>"; };
+		403754891C5C6776002569CB /* YNAnnounceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNAnnounceTableViewCell.swift; sourceTree = "<group>"; };
+		4037548C1C5CA880002569CB /* YNCircleChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCircleChatListViewController.swift; sourceTree = "<group>"; };
+		4037548F1C5CB81B002569CB /* barbuttonicon_InfoMulti.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barbuttonicon_InfoMulti.png; sourceTree = "<group>"; };
+		403754901C5CB81B002569CB /* barbuttonicon_InfoMulti@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barbuttonicon_InfoMulti@2x.png"; sourceTree = "<group>"; };
+		403754911C5CB81B002569CB /* barbuttonicon_InfoMulti@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barbuttonicon_InfoMulti@3x.png"; sourceTree = "<group>"; };
 		4043A4A81C1141E400F1F669 /* YNQuestionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNQuestionDetailViewController.swift; sourceTree = "<group>"; };
 		4048E3F61C2BAB400035C415 /* YNHttpNearBy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHttpNearBy.swift; sourceTree = "<group>"; };
 		4048E3FA1C2BBEDB0035C415 /* YNNearByModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNNearByModel.swift; sourceTree = "<group>"; };
@@ -682,6 +692,24 @@
 			path = search;
 			sourceTree = "<group>";
 		};
+		4037548B1C5CA854002569CB /* chat list */ = {
+			isa = PBXGroup;
+			children = (
+				4037548C1C5CA880002569CB /* YNCircleChatListViewController.swift */,
+			);
+			path = "chat list";
+			sourceTree = "<group>";
+		};
+		4037548E1C5CB80B002569CB /* circle */ = {
+			isa = PBXGroup;
+			children = (
+				4037548F1C5CB81B002569CB /* barbuttonicon_InfoMulti.png */,
+				403754901C5CB81B002569CB /* barbuttonicon_InfoMulti@2x.png */,
+				403754911C5CB81B002569CB /* barbuttonicon_InfoMulti@3x.png */,
+			);
+			path = circle;
+			sourceTree = "<group>";
+		};
 		4043A4A71C1141B400F1F669 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -810,6 +838,7 @@
 		40B8BBEF1C4C927100E9133C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4037548E1C5CB80B002569CB /* circle */,
 				40B8BC441C4C991400E9133C /* homepage */,
 				40B8BC5A1C4C991400E9133C /* me */,
 				40B8BC791C4C991400E9133C /* question */,
@@ -1031,6 +1060,7 @@
 		40D5EAE31C59ADDD00DFCA71 /* next controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4037548B1C5CA854002569CB /* chat list */,
 				40D5EAF41C59F36300DFCA71 /* circle details */,
 				40D5EAF11C59E90600DFCA71 /* write reason */,
 				40D5EAEC1C59E8EF00DFCA71 /* add circle */,
@@ -1063,6 +1093,7 @@
 				408B42391C5B4AF2007B7001 /* YNMembersCollectionViewCell.swift */,
 				408B423B1C5B5567007B7001 /* YNMemberModel.swift */,
 				408B423D1C5B570A007B7001 /* YNCircleDetailModel.swift */,
+				403754891C5C6776002569CB /* YNAnnounceTableViewCell.swift */,
 			);
 			path = "circle details";
 			sourceTree = "<group>";
@@ -1534,6 +1565,7 @@
 				40B8BCF41C4C991400E9133C /* chatroom_msg_failed@2x.png in Resources */,
 				40B8BCC21C4C991400E9133C /* home_ask_question_camera@3x.png in Resources */,
 				40B8BCCC1C4C991400E9133C /* icon_cell_rightArrow.png in Resources */,
+				403754931C5CB81B002569CB /* barbuttonicon_InfoMulti@2x.png in Resources */,
 				40B8BCDE1C4C991400E9133C /* the-refresh.png in Resources */,
 				40B8BCEE1C4C991400E9133C /* bubble_green@2x.png in Resources */,
 				40B8BD031C4C991400E9133C /* addNewSubscription@2x.png in Resources */,
@@ -1543,6 +1575,7 @@
 				40B8BD1B1C4C991400E9133C /* tabBar_home@2x.png in Resources */,
 				40B8BCD11C4C991400E9133C /* my_article@3x.png in Resources */,
 				40B8BD241C4C991400E9133C /* tagUnSelected@2x.png in Resources */,
+				403754941C5CB81B002569CB /* barbuttonicon_InfoMulti@3x.png in Resources */,
 				40B8BD231C4C991400E9133C /* tagUnSelected.png in Resources */,
 				40B8BD211C4C991400E9133C /* tagSelected@2x.png in Resources */,
 				40B8BCD41C4C991400E9133C /* my_attention@3x.png in Resources */,
@@ -1558,6 +1591,7 @@
 				40B8BCEA1C4C991400E9133C /* user_seting_question_feedback.png in Resources */,
 				40B8BCE11C4C991400E9133C /* user_default_avatar.png in Resources */,
 				40B8BCFE1C4C991400E9133C /* ic_list_answer_count@3x.png in Resources */,
+				403754921C5CB81B002569CB /* barbuttonicon_InfoMulti.png in Resources */,
 				40B8BD1F1C4C991400E9133C /* tabBar_waring@3x.png in Resources */,
 				40B8BD191C4C991400E9133C /* tab_waring@3x.png in Resources */,
 				40B8BCE61C4C991400E9133C /* user_seting_about_our@3x.png in Resources */,
@@ -1703,6 +1737,7 @@
 				40E039871BF5C5F4007FFF2A /* YNBaseAnnotation.swift in Sources */,
 				408B423E1C5B570A007B7001 /* YNCircleDetailModel.swift in Sources */,
 				40E039881BF5C5F4007FFF2A /* YNCallOutAnnotation.swift in Sources */,
+				4037548D1C5CA880002569CB /* YNCircleChatListViewController.swift in Sources */,
 				40D5EAF31C59E92600DFCA71 /* YNWriteReasonViewController.swift in Sources */,
 				40C6B5411C34D485003004C5 /* YNSearchCatagoryModel.swift in Sources */,
 				40F830E31BD781F500C1F0BB /* YNSearchResaultCell.swift in Sources */,
@@ -1738,6 +1773,7 @@
 				40ED43861BC60B76004713C9 /* Macro.swift in Sources */,
 				400C33721C45F06E00F7FBFC /* YNWriteSolutionViewController.swift in Sources */,
 				40ED43891BC60B76004713C9 /* tools.swift in Sources */,
+				4037548A1C5C6776002569CB /* YNAnnounceTableViewCell.swift in Sources */,
 				408B423C1C5B5567007B7001 /* YNMemberModel.swift in Sources */,
 				406805AE1C324E9C009FC170 /* YNNewSearchViewController.swift in Sources */,
 				408BE8A81C294BFA00B980AD /* YNMYQuestionTableViewCell.swift in Sources */,
