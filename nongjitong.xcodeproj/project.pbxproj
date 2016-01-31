@@ -696,6 +696,7 @@
 			isa = PBXGroup;
 			children = (
 				4037548C1C5CA880002569CB /* YNCircleChatListViewController.swift */,
+				40AD96021C5DE8FB00B2A48A /* next controllers */,
 			);
 			path = "chat list";
 			sourceTree = "<group>";
@@ -810,6 +811,13 @@
 				40983C8C1BFB256700EA2B04 /* YNSelectedProductModel.swift */,
 			);
 			path = "my watchlist";
+			sourceTree = "<group>";
+		};
+		40AD96021C5DE8FB00B2A48A /* next controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "next controllers";
 			sourceTree = "<group>";
 		};
 		40B5B2871BEC80BC008E5F77 /* select catagory */ = {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YNCircleChatListViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class YNCircleChatListViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate {
 
     var model: YNCircleModel? {
         
@@ -22,11 +22,14 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     let tableViewHeight: CGFloat = 44
     let collectionEdgeInsetTopBottom: CGFloat = 12
     
+    var addButton: UIButton?
+    var tableView: UITableView?
     var collectionView: UICollectionView?
     //collectionViewdatasource
     var selectedArray: [YNSelectedProductModel] = {
         
         let model1 = YNSelectedProductModel(id: "1", name: "通知")
+        model1.isSelected = true
         let model2 = YNSelectedProductModel(id: "2", name: "销售")
         let model3 = YNSelectedProductModel(id: "3", name: "采购")
         let model4 = YNSelectedProductModel(id: "4", name: "分成")
@@ -39,7 +42,7 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     //tableviewDatasource
     var tableViewDataArray = [YNQuestionModel]()
     
-    var currentClassIdIndex: Int = 0
+    var currentClassIdIndex: String?
     
     //加载当前的页数
     var pageCount = 1
@@ -52,7 +55,7 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "barbuttonicon_InfoMulti"), style: .Plain, target: self, action: "rightItemClick")
         
-        setCollection()
+        setInterface()
         setLayout()
     }
     
@@ -72,12 +75,34 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         //collectionView
         Layout().addTopConstraint(collectionView!, toView: self.view, multiplier: 1, constant: 64)
         Layout().addLeftConstraint(collectionView!, toView: self.view, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(collectionView!, toView: self.view, multiplier: 1, constant: 0)
+        Layout().addRightConstraint(collectionView!, toView: self.view, multiplier: 1, constant: -44)
         Layout().addHeightConstraint(collectionView!, toView: nil, multiplier: 0, constant: 44)
+        
+        //addButton
+        Layout().addTopBottomConstraints(addButton!, toView: collectionView!, multiplier: 1, constant: 0)
+        Layout().addRightConstraint(addButton!, toView: self.view, multiplier: 1, constant: 0)
+        Layout().addLeftToRightConstraint(addButton!, toView: collectionView!, multiplier: 1, constant: 0)
+        
+        //tableView
+        Layout().addTopToBottomConstraint(tableView!, toView: collectionView!, multiplier: 1, constant: 0)
+        Layout().addLeftConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+        Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+        Layout().addBottomConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+        
     }
     
-    func setCollection() {
+    func setInterface() {
     
+        //tableView
+        let tempTableView = UITableView(frame: CGRectZero, style: .Grouped)
+        tempTableView.delegate = self
+        tempTableView.dataSource = self
+        tempTableView.separatorStyle = .None
+        tempTableView.translatesAutoresizingMaskIntoConstraints = false
+//        tempTableView.hidden = true
+        self.view.addSubview(tempTableView)
+        self.tableView = tempTableView
+        
         //collectionView
         let flow = UICollectionViewFlowLayout()
         flow.minimumInteritemSpacing = itemSpacing
@@ -93,6 +118,25 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         tempCollectionView.showsHorizontalScrollIndicator = false
         self.view.addSubview(tempCollectionView)
         self.collectionView = tempCollectionView
+        
+        self.collectionView?.selectItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), animated: false, scrollPosition: .None)
+        
+        
+        //addButton
+        let tempButton = UIButton()
+        tempButton.setImage(UIImage(named: "addNewSubscription"), forState: UIControlState.Normal)
+        tempButton.translatesAutoresizingMaskIntoConstraints = false
+        tempButton.addTarget(self, action: "addButtonClick", forControlEvents: UIControlEvents.TouchUpInside)
+        tempButton.backgroundColor = kRGBA(244, g: 244, b: 244, a: 1)
+        self.view.addSubview(tempButton)
+        self.addButton = tempButton
+        
+    }
+    
+    //MARK: event response
+    func addButtonClick() {
+    
+        
     }
     
     //MARK:UICollectionViewDataSource
@@ -137,6 +181,185 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         label.sizeToFit()
         return label.frame.width
     }
+    
+    //MARK: collectionView delegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let model = self.selectedArray[indexPath.row]
+        
+        if !model.isSelected {
+            
+            model.isSelected = true
+            
+            self.currentClassIdIndex = model.class_id
+            
+            self.pageCount = 1
+            
+            //加载新数据
+//            getQuestionListWithClassID(model.class_id)
+            
+            collectionView.reloadItemsAtIndexPaths([indexPath])
+            collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
+            
+        }
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let model = self.selectedArray[indexPath.row]
+        model.isSelected = false
+        
+        collectionView.reloadItemsAtIndexPaths([indexPath])
+    }
+    
+    //MARK: UITableViewDataSource
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return self.tableViewDataArray.count
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if indexPath.section == self.tableViewDataArray.count {
+            
+            let identify: String = "Cell_Resault_LoadMore_code"
+            var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(identify)
+            
+            if cell == nil {
+                
+                cell = YNResaultLoadModeCell(style: .Default, reuseIdentifier: identify)
+                
+            }
+            
+            return cell!
+            
+        }
+        
+        let identify = "CELL_Question"
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNQuestionTableViewCell
+        
+        if cell == nil {
+            
+            cell = YNQuestionTableViewCell(style: .Default, reuseIdentifier: identify)
+        }
+        
+        cell?.model = self.tableViewDataArray[indexPath.section]
+        
+        return cell!
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        if indexPath.section == self.tableViewDataArray.count {
+            
+            return 44
+        }
+        return self.tableViewDataArray[indexPath.section].height!
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
+    }
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        
+        return 10
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if indexPath.section == self.tableViewDataArray.count {
+            
+            self.loadMore()
+            
+        } else {
+            
+            let questionDetailVc = YNQuestionDetailViewController()
+            questionDetailVc.questionModel = self.tableViewDataArray[indexPath.section]
+            self.navigationController?.pushViewController(questionDetailVc, animated: true)
+        }
+        
+        
+    }
+    
+    func loadMore() {
+        
+        self.pageCount++
+        
+        //加载问题数据
+//        getQuestionListWithClassID(self.classId)
+    }
+    
+    
+    //MARK: loadData
+    func loaddata() {
+        
+        //已登陆请求数据
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "Group",
+            "a": "getDetail",
+            "group_id": model?.id
+        ]
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        
+        Network.post(kURL, params: params, success: { (data, response, error) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            do {
+                
+                let json: NSDictionary =  try NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                
+                print("data - \(json)")
+                
+                if let status = json["status"] as? Int {
+                    
+                    if status == 1 {
+                        
+                        let tempDict = json["data"] as? NSDictionary
+                        
+                        let tempModel = YNCircleDetailModel(dict: tempDict!)
+                        
+//                        self.modelDetail = tempModel
+                        
+                        
+                    } else if status == 0 {
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            //                            print(msg)
+                            YNProgressHUD().showText(msg, toView: self.view)
+                        }
+                    }
+                    
+                }
+                
+            } catch {
+                
+                YNProgressHUD().showText("请求错误", toView: self.view)
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("加载失败", toView: self.view)
+        }
+        
+        
+        
+    }
+    
+    
     
     
 }
