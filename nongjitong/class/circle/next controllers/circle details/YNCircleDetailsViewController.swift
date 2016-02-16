@@ -129,6 +129,7 @@ class YNCircleDetailsViewController: UIViewController, UITableViewDataSource, UI
             
         }
         
+        cell?.selectionStyle = .None
       
         return cell!
         

@@ -40,13 +40,30 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     }()
     
     //tableviewDatasource
-    var tableViewDataArray = [YNQuestionModel]()
+    var tableViewDataArray = [YNThreadModel]()
     
-    var currentClassIdIndex: String?
+    var currentClassIdIndex: String? = "1"
     
     //加载当前的页数
     var pageCount = 1
     
+    //是否显示加载更多
+    var isShowLoadMore = false {
+        
+        didSet {
+            
+            if isShowLoadMore {
+                
+                self.tableView?.addFooterRefresh()
+            } else {
+                
+                self.tableView?.removeFooterRefresh()
+            }
+        }
+    }
+    
+    
+    //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,8 +74,27 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         
         setInterface()
         setLayout()
+        
+        loaddata()
+        
+        self.tableView?.addHeaderRefreshWithActionHandler({ () -> Void in
+            
+            self.loadDataHeaderRefresh()
+            
+        })
+        
+        self.tableView?.addFooterRefreshWithActionHandler({ () -> Void in
+            
+            self.loadMore()
+        })
     }
-    
+    func loadDataHeaderRefresh() {
+        
+        self.pageCount = 1
+        //加载问题数据
+        loaddata()
+    }
+ 
     
     //MARK: event response
     func rightItemClick() {
@@ -99,7 +135,6 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         tempTableView.dataSource = self
         tempTableView.separatorStyle = .None
         tempTableView.translatesAutoresizingMaskIntoConstraints = false
-//        tempTableView.hidden = true
         self.view.addSubview(tempTableView)
         self.tableView = tempTableView
         
@@ -133,9 +168,12 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         
     }
     
-    //MARK: event response
     func addButtonClick() {
     
+        //进入创建界面
+        let vc = YNCreatViewController(calssId: self.currentClassIdIndex!, group_id: model!.id!)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -196,7 +234,7 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
             self.pageCount = 1
             
             //加载新数据
-//            getQuestionListWithClassID(model.class_id)
+            loaddata()
             
             collectionView.reloadItemsAtIndexPaths([indexPath])
             collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
@@ -244,12 +282,13 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         
         let identify = "CELL_Question"
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNQuestionTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNThreadListTableViewCell
         
         if cell == nil {
             
-            cell = YNQuestionTableViewCell(style: .Default, reuseIdentifier: identify)
+            cell = YNThreadListTableViewCell(style: .Default, reuseIdentifier: identify)
         }
+        
         
         cell?.model = self.tableViewDataArray[indexPath.section]
         
@@ -281,9 +320,11 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
             
         } else {
             
-            let questionDetailVc = YNQuestionDetailViewController()
-            questionDetailVc.questionModel = self.tableViewDataArray[indexPath.section]
-            self.navigationController?.pushViewController(questionDetailVc, animated: true)
+            //点击进入加载数据
+            
+            let detailVc = YNThreadDetailsViewController(type: self.currentClassIdIndex!, model: self.tableViewDataArray[indexPath.section])
+            self.navigationController?.pushViewController(detailVc, animated: true)
+            
         }
         
         
@@ -293,8 +334,8 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         
         self.pageCount++
         
-        //加载问题数据
-//        getQuestionListWithClassID(self.classId)
+        //加载数据
+        loaddata()
     }
     
     
@@ -304,15 +345,18 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         //已登陆请求数据
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
-            "c": "Group",
-            "a": "getDetail",
-            "group_id": model?.id
+            "c": "Thread",
+            "a": "getList",
+            "group_id": model?.id,
+            "type": self.currentClassIdIndex,
+            "page": "\(pageCount)"
         ]
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
         
         Network.post(kURL, params: params, success: { (data, response, error) -> Void in
             
+            self.tableView?.stopRefresh()
             progress.hideUsingAnimation()
             
             do {
@@ -325,11 +369,33 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
                     
                     if status == 1 {
                         
-                        let tempDict = json["data"] as? NSDictionary
+                        let temparray = json["data"] as? NSArray
                         
-                        let tempModel = YNCircleDetailModel(dict: tempDict!)
+                        if temparray?.count < 20 {
                         
-//                        self.modelDetail = tempModel
+                            //显示加载更多
+                            self.isShowLoadMore = false
+                            
+                        } else {
+                        
+                            //不显示加载更多
+                            self.isShowLoadMore = true
+                        }
+                        
+                        if self.pageCount == 1 {
+                        
+                            self.tableViewDataArray.removeAll()
+                        }
+                        
+                        for item in temparray! {
+                        
+                            let tempModel = YNThreadModel(dict: item as! NSDictionary)
+                            
+                            self.tableViewDataArray.append(tempModel)
+                            
+                        }
+                    
+                        self.tableView?.reloadData()
                         
                         
                     } else if status == 0 {
@@ -351,6 +417,7 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
             
             }) { (error) -> Void in
                 
+                self.tableView?.stopRefresh()
                 progress.hideUsingAnimation()
                 YNProgressHUD().showText("加载失败", toView: self.view)
         }

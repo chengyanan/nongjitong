@@ -24,6 +24,7 @@ class YNTitleCollectionViewCell: UICollectionViewCell, UITextViewDelegate {
         let tempView = YNTextView()
         tempView.placeHolder = "请输入标题"
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.font = UIFont.systemFontOfSize(15)
         return tempView
     
     }()
