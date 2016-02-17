@@ -106,6 +106,20 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
 
     }
     
+    func addButtonClick() {
+        
+//        //进入创建界面
+//        let vc = YNCreatViewController(calssId: self.currentClassIdIndex!, group_id: model!.id!)
+//        
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        //TODO: 
+        
+        let vc = YNCreatVoteViewController(group_id: model!.id!)
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     func setLayout() {
     
         //collectionView
@@ -168,14 +182,7 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         
     }
     
-    func addButtonClick() {
-    
-        //进入创建界面
-        let vc = YNCreatViewController(calssId: self.currentClassIdIndex!, group_id: model!.id!)
-        
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-    }
+   
     
     //MARK:UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

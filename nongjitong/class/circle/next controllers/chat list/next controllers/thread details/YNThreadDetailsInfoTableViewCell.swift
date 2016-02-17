@@ -55,7 +55,7 @@ class YNThreadDetailsInfoTableViewCell: UITableViewCell {
         Layout().addTopConstraint(nickName, toView: avatorImage, multiplier: 1, constant: 0)
         Layout().addLeftToRightConstraint(nickName, toView: avatorImage, multiplier: 1, constant: 5)
         Layout().addRightConstraint(nickName, toView: self.contentView, multiplier: 1, constant: -marginModel.leftRightMargin)
-        Layout().addHeightConstraint(nickName, toView: nil, multiplier: 0, constant: 24)
+        Layout().addHeightConstraint(nickName, toView: nil, multiplier: 0, constant: 18)
         
         //postTime
         Layout().addLeftConstraint(postTime, toView: nickName, multiplier: 1, constant: 0)
@@ -91,7 +91,8 @@ class YNThreadDetailsInfoTableViewCell: UITableViewCell {
         //昵称
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
-        tempView.font = UIFont.boldSystemFontOfSize(17)
+        tempView.font = UIFont.boldSystemFontOfSize(13)
+        tempView.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         //        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()

@@ -16,7 +16,7 @@ class YNQuestionModelConstant {
     //头像离顶部的高度
     let topMargin: CGFloat = 10
     //头像的高度
-    let avatarHeight: CGFloat = 44
+    let avatarHeight: CGFloat = 32
     
     //头像和问题之间的距离
     let marginBetweenAvatarAndDescription: CGFloat = 10

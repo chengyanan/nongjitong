@@ -99,6 +99,7 @@ class YNInputView: UIView, UITextViewDelegate {
         tempView.layer.borderColor = kRGBA(200, g: 200, b: 200, a: 1).CGColor
         tempView.clipsToBounds = true
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.font = UIFont.systemFontOfSize(15)
         return tempView
     }()
     

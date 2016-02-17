@@ -79,6 +79,8 @@ class YNDocDetailsViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         self.view.backgroundColor = UIColor.whiteColor()
         
         headerView.delegate = self
@@ -89,9 +91,18 @@ class YNDocDetailsViewController: UIViewController, UITableViewDataSource, UITab
         //tableView
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.frame = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64)
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+//        tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
     
         self.view.addSubview(tableView)
+        
+        Layout().addTopConstraint(tableView, toView: self.view, multiplier: 1, constant: 64)
+        Layout().addLeftConstraint(tableView, toView: self.view, multiplier: 1, constant: 0)
+        Layout().addBottomConstraint(tableView, toView: self.view, multiplier: 1, constant: 0)
+        Layout().addRightConstraint(tableView, toView: self.view, multiplier: 1, constant: 0)
         
     }
     

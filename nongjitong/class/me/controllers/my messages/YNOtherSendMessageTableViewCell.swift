@@ -18,6 +18,7 @@ class YNOtherSendMessageTableViewCell: UITableViewCell {
             
             self.titleLabel.text = model?.content
             
+            
             if model?.status == "0" {
             
                 self.rejectButton.hidden = false
@@ -48,12 +49,22 @@ class YNOtherSendMessageTableViewCell: UITableViewCell {
     let titleLabel: UILabel = {
         
         let tempView = UILabel()
-        
+        tempView.numberOfLines = 0
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.font = UIFont.systemFontOfSize(13)
         return tempView
         
     }()
+    
+//    let reasonLabel: UILabel = {
+//        
+//        let tempView = UILabel()
+//        tempView.numberOfLines = 0
+//        tempView.translatesAutoresizingMaskIntoConstraints = false
+//        tempView.font = UIFont.systemFontOfSize(13)
+//        return tempView
+//        
+//    }()
     
     let agreeButton: UIButton = {
     
@@ -86,6 +97,7 @@ class YNOtherSendMessageTableViewCell: UITableViewCell {
         self.selectionStyle = .None
         
         contentView.addSubview(titleLabel)
+//        contentView.addSubview(reasonLabel)
         contentView.addSubview(agreeButton)
         contentView.addSubview(rejectButton)
         
@@ -206,6 +218,12 @@ class YNOtherSendMessageTableViewCell: UITableViewCell {
         Layout().addTopBottomConstraints(titleLabel, toView: contentView, multiplier: 1, constant: 0)
         Layout().addLeftConstraint(titleLabel, toView: contentView, multiplier: 1, constant: 12)
         Layout().addRightToLeftConstraint(titleLabel, toView: rejectButton, multiplier: 1, constant: -3)
+        
+//        //reasonLabel
+//        Layout().addTopToBottomConstraint(reasonLabel, toView: titleLabel, multiplier: 1, constant: 3)
+//        Layout().addLeftConstraint(reasonLabel, toView: titleLabel, multiplier: 1, constant: 0)
+//        Layout().addRightConstraint(reasonLabel, toView: titleLabel, multiplier: 1, constant: 0)
+//        Layout().addBottomConstraint(reasonLabel, toView: contentView, multiplier: 1, constant: 0)
      
     }
     

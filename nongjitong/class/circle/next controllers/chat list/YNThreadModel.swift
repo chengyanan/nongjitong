@@ -189,7 +189,7 @@ class YNThreadModel {
             
         }
         
-        self.height = height + 10
+        self.height = height + 16
         
     }
     

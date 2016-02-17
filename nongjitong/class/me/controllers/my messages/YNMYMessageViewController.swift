@@ -109,7 +109,7 @@ class YNMYMessageViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 44
+        return dataArray[indexPath.row].cellheight!
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

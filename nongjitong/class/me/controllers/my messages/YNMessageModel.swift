@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class YNMessageModel {
     
@@ -17,7 +18,7 @@ class YNMessageModel {
     var group_id: String?
     var status: String?
     var add_time: String?
-    
+    var cellheight: CGFloat?
     
     init(dict: NSDictionary) {
         
@@ -29,7 +30,13 @@ class YNMessageModel {
         self.status = dict["status"] as? String
         self.add_time = dict["add_time"] as? String
         
+        let contentHeight = Tools().heightForText(self.content!, font: UIFont.systemFontOfSize(13), width: kScreenWidth - 24).height
+        
+        self.cellheight = contentHeight + 30
+        
     }
+    
+    
     
     
     
