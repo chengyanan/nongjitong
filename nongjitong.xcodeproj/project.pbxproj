@@ -14,6 +14,9 @@
 		4003F7841BDF2F5400137258 /* YNHttpTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4003F77E1BDF2F5400137258 /* YNHttpTool.swift */; };
 		4003F7861BDF2F9600137258 /* YNUserInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4003F7851BDF2F9600137258 /* YNUserInformationModel.swift */; };
 		4003F7881BDF625800137258 /* YNBaseCityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4003F7871BDF625800137258 /* YNBaseCityModel.swift */; };
+		400594EB1C75808E005DC5E6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 400594E81C75808E005DC5E6 /* Default.png */; };
+		400594EC1C75808E005DC5E6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400594E91C75808E005DC5E6 /* Default@2x.png */; };
+		400594ED1C75808E005DC5E6 /* Default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 400594EA1C75808E005DC5E6 /* Default@3x.png */; };
 		400C33721C45F06E00F7FBFC /* YNWriteSolutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400C33711C45F06E00F7FBFC /* YNWriteSolutionViewController.swift */; };
 		400FFC091C0ED9D10039B653 /* YNQuestionModelConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400FFC081C0ED9D10039B653 /* YNQuestionModelConstant.swift */; };
 		4010A6861C30DDF700A38075 /* YNOfflineQuestionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4010A6851C30DDF700A38075 /* YNOfflineQuestionListViewController.swift */; };
@@ -316,6 +319,9 @@
 		4003F77E1BDF2F5400137258 /* YNHttpTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHttpTool.swift; sourceTree = "<group>"; };
 		4003F7851BDF2F9600137258 /* YNUserInformationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNUserInformationModel.swift; sourceTree = "<group>"; };
 		4003F7871BDF625800137258 /* YNBaseCityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNBaseCityModel.swift; sourceTree = "<group>"; };
+		400594E81C75808E005DC5E6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		400594E91C75808E005DC5E6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		400594EA1C75808E005DC5E6 /* Default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@3x.png"; sourceTree = "<group>"; };
 		400C33711C45F06E00F7FBFC /* YNWriteSolutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNWriteSolutionViewController.swift; sourceTree = "<group>"; };
 		400FFC081C0ED9D10039B653 /* YNQuestionModelConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNQuestionModelConstant.swift; sourceTree = "<group>"; };
 		4010A6851C30DDF700A38075 /* YNOfflineQuestionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNOfflineQuestionListViewController.swift; sourceTree = "<group>"; };
@@ -675,6 +681,16 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		400594E71C75808E005DC5E6 /* launchimage */ = {
+			isa = PBXGroup;
+			children = (
+				400594E81C75808E005DC5E6 /* Default.png */,
+				400594E91C75808E005DC5E6 /* Default@2x.png */,
+				400594EA1C75808E005DC5E6 /* Default@3x.png */,
+			);
+			path = launchimage;
+			sourceTree = "<group>";
+		};
 		4010A6841C30D91500A38075 /* offine help */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,6 +908,7 @@
 		40B8BBEF1C4C927100E9133C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				400594E71C75808E005DC5E6 /* launchimage */,
 				4037548E1C5CB80B002569CB /* circle */,
 				40B8BC441C4C991400E9133C /* homepage */,
 				40B8BC5A1C4C991400E9133C /* me */,
@@ -1581,6 +1598,7 @@
 				40B8BCC01C4C991400E9133C /* home_ask_question_camera.png in Resources */,
 				40B8BD081C4C991400E9133C /* register_userName.png in Resources */,
 				40B8BD201C4C991400E9133C /* tagSelected.png in Resources */,
+				400594ED1C75808E005DC5E6 /* Default@3x.png in Resources */,
 				40B8BD181C4C991400E9133C /* tab_waring@2x.png in Resources */,
 				40B8BCFA1C4C991400E9133C /* ic_list_answer@2x.png in Resources */,
 				40B8BD021C4C991400E9133C /* addNewSubscription.png in Resources */,
@@ -1603,6 +1621,7 @@
 				40B8BCC91C4C991400E9133C /* home_page_default_avatar_image.png in Resources */,
 				40B8BD011C4C991400E9133C /* newqb_evaluate_best@3x.png in Resources */,
 				40B8BCE01C4C991400E9133C /* the-refresh@3x.png in Resources */,
+				400594EB1C75808E005DC5E6 /* Default.png in Resources */,
 				40B8BD001C4C991400E9133C /* newqb_evaluate_best@2x.png in Resources */,
 				40B8BD161C4C991400E9133C /* tab_question@3x.png in Resources */,
 				40B8BD0C1C4C991400E9133C /* askQuestionbtn@2x.png in Resources */,
@@ -1679,6 +1698,7 @@
 				40B8BCFB1C4C991400E9133C /* ic_list_answer@3x.png in Resources */,
 				40B8BCCD1C4C991400E9133C /* icon_cell_rightArrow@2x.png in Resources */,
 				40B8BCF71C4C991400E9133C /* home_page_location_image@2x.png in Resources */,
+				400594EC1C75808E005DC5E6 /* Default@2x.png in Resources */,
 				40B8BCD31C4C991400E9133C /* my_attention@2x.png in Resources */,
 				40B8BD111C4C991400E9133C /* sapi-nav-back-btn-bg.png in Resources */,
 				40B8BD0F1C4C991400E9133C /* item_me@2x.png in Resources */,
@@ -1930,6 +1950,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_OBJC_ATSYNC = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1943,8 +1964,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1966,7 +1987,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "15690f47-0278-4f73-bacf-24fc0ba0eb72";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1977,6 +1998,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_OBJC_ATSYNC = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1990,8 +2012,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2007,7 +2029,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "15690f47-0278-4f73-bacf-24fc0ba0eb72";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2021,15 +2043,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
 				ENABLE_TESTABILITY = NO;
 				INFOPLIST_FILE = nongjitong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.24ag.nongjitong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "f3e85ca4-cf67-424f-aec8-3cbbb019f8b3";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = NO;
 			};
@@ -2041,15 +2063,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				ASSETCATALOG_COMPILER_OPTIMIZATION = space;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Yubin Cheng (3VUNCM856D)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yubin Cheng (ZU8YEWJ6J6)";
 				GCC_OPTIMIZATION_LEVEL = 1;
 				INFOPLIST_FILE = nongjitong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.24ag.nongjitong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "f3e85ca4-cf67-424f-aec8-3cbbb019f8b3";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};

@@ -30,7 +30,7 @@ class YNAnswerTableViewCell: UITableViewCell {
                 
                 //设置头像 和文字
                 self.contentButton.setTitle(questionModel?.content, forState: .Normal)
-                if let _ = questionModel!.avatar {
+                if let _ = questionModel?.avatar {
                 
                      self.avatarImageView.getImageWithURL(questionModel!.avatar!, contentMode: .ScaleToFill)
                 } else {
@@ -38,6 +38,7 @@ class YNAnswerTableViewCell: UITableViewCell {
                     if let imagePath = kUser_AvatarPath() {
                     
                         self.avatarImageView.image = UIImage(data: NSData(contentsOfFile: imagePath)!)
+                 
                         
                     } else {
                     

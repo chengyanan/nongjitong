@@ -78,6 +78,8 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         
         loadDataFromServer()
         
+        loadSelfInformation()
+        
     }
 
     
@@ -678,6 +680,7 @@ class YNNewAnswerQuestionViewController: UIViewController, UITableViewDataSource
         
         self.dataArray[indexPath.row].isFinish = true
     }
+    
     
     
     
