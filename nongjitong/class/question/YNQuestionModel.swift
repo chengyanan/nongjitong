@@ -54,6 +54,8 @@ class YNQuestionModel {
     var height: CGFloat?
     var myQuestionCellHeight:  CGFloat?
     
+    var nearByCellHeight: CGFloat?
+    
     init() {}
     
     init(dict: NSDictionary) {
@@ -173,6 +175,8 @@ class YNQuestionModel {
         
         let contentWidth = kScreenWidth - marginModel.leftRightMargin*2
         
+        
+        
         let contentHeight = heightForText(text, font: UIFont.systemFontOfSize(15), width: contentWidth)
         
         var height = marginModel.topMargin + marginModel.avatarHeight + marginModel.marginBetweenAvatarAndDescription + contentHeight
@@ -212,8 +216,19 @@ class YNQuestionModel {
             
         }
         
+        //问答页面的cell高度
         self.height = height + 10 + marginModel.answerCountHeight
+        
+        //我的提问页面的cell的高度
         self.myQuestionCellHeight = marginModel.topMargin*1.5 + contentHeight + marginModel.answerCountHeight
+        
+        
+        //计算首页cell的高度
+        let contentWidthNearBy = kScreenWidth - marginModel.leftRightMargin*4
+     
+        let contentHeightNear = heightForText(text, font: UIFont.systemFontOfSize(15), width: contentWidthNearBy)
+        
+        self.nearByCellHeight = marginModel.topMargin*1.5 + contentHeightNear + marginModel.answerCountHeight
     }
     
     //计算label的高度

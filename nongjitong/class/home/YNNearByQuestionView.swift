@@ -145,10 +145,10 @@ class YNNearByQuestionView: UIView, UITableViewDataSource, UITableViewDelegate {
         
         if model.descript == "" {
             
-            return model.myQuestionCellHeight! + 20
+            return model.nearByCellHeight! + 20
         }
         
-        return model.myQuestionCellHeight!
+        return model.nearByCellHeight!
     }
     
     override func layoutSubviews() {
