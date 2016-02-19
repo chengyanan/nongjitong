@@ -102,8 +102,14 @@ class YNQuestionTableViewCell: UITableViewCell {
                 
                 imageView.getImageWithURL(model!.photo[i], contentMode: UIViewContentMode.ScaleToFill)
                 imageView.clipsToBounds = true
+                imageView.userInteractionEnabled = true
+                //添加点击事件
+                let gestureRecognizer = UITapGestureRecognizer(target: self, action: "showImageBrower:")
+                
+                imageView.addGestureRecognizer(gestureRecognizer)
                 
                 self.contentView.addSubview(imageView)
+         
                 
             }
         
@@ -111,6 +117,27 @@ class YNQuestionTableViewCell: UITableViewCell {
         }
     }
     
+    
+    func showImageBrower(sender: UITapGestureRecognizer) {
+    
+        let tempView = sender.view
+        
+        let imageBrowerView = YNPhotoBrowerView()
+        imageBrowerView.photos = self.model!.photo
+        imageBrowerView.firstIndex = tempView?.tag
+        
+//        print(tempView?.tag)
+        
+        let keyWindow = UIApplication.sharedApplication().keyWindow
+    
+        imageBrowerView.frame = keyWindow!.bounds
+        
+        keyWindow?.addSubview(imageBrowerView)
+        
+        
+    }
+    
+
     func setLayout() {
     
         //avatorImage
@@ -166,7 +193,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         self.contentView.addSubview(answerCountButton)
     }
     
-
+    //MARK: interface UI
     let avatorImage: UIImageView = {
     
         //头像
@@ -252,5 +279,8 @@ class YNQuestionTableViewCell: UITableViewCell {
 //        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
+    
+    
+    
     
 }

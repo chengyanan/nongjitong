@@ -56,6 +56,12 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
         super.viewWillAppear(animated)
         
         UIApplication.sharedApplication().keyWindow?.addSubview(self.finishView!)
+        
+        if self.cayegoryArray.count == 0 {
+        
+            getCategoryFromServer("0", reloadData: .tableViewCatagory)
+        }
+        
     }
     
     override func viewWillDisappear(animated: Bool) {

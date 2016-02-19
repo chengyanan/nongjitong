@@ -106,7 +106,12 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
             navigationItem.rightBarButtonItem = nil
             
 //           //登录加载数据
-//            loadData()
+            
+//            if resaultArray.count == 0 {
+//            
+//                loadData()
+//            }
+            
             
         } else {
         

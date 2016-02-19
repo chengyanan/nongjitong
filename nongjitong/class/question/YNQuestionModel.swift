@@ -51,9 +51,13 @@ class YNQuestionModel {
     //头像
     var avatar: String?
     
+    //问题页面cell的高度
     var height: CGFloat?
+
+    //我的提问页面cell的高度
     var myQuestionCellHeight:  CGFloat?
     
+    //首页线下救援问题cell的高度
     var nearByCellHeight: CGFloat?
     
     init() {}

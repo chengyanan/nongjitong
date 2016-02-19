@@ -243,6 +243,13 @@ class YNMYMessageViewController: UIViewController, UITableViewDataSource, UITabl
                 
                 progress.hideUsingAnimation()
                 YNProgressHUD().showText("加载失败", toView: self.view)
+                
+                if self.page == 1 {
+                    
+                    self.dataArray.removeAll()
+                    
+                    self.tableView.reloadData()
+                }
         }
         
         

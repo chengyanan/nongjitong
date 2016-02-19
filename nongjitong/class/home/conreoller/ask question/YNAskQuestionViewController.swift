@@ -235,7 +235,7 @@ class YNAskQuestionViewController: UIViewController, UICollectionViewDelegate, U
                     
                     YNProgressHUD().showText("提问成功", toView: self.view)
                     
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.8 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
                         
                         //退出控制器
                         if self.navigationController?.viewControllers.count <= 1 {

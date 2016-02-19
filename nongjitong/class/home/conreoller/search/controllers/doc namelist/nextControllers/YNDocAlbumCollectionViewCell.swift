@@ -15,7 +15,8 @@ class YNDocAlbumCollectionViewCell: UICollectionViewCell {
         didSet {
         
             imageTitle.text = "   \(photo!.title!)"
-            self.imageView.getImageWithURL(photo!.url!, contentMode: UIViewContentMode.ScaleToFill)
+            self.imageView.getImageWithURL(photo!.url!, contentMode: UIViewContentMode.ScaleAspectFit)
+            self.imageView.backgroundColor = UIColor.clearColor()
         }
     }
     
@@ -33,7 +34,7 @@ class YNDocAlbumCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
     
         let tempView = UIImageView()
-        tempView.contentMode = .ScaleToFill
+        tempView.contentMode = .ScaleAspectFit
         tempView.image = UIImage(named: "user_default_avatar")
         tempView.translatesAutoresizingMaskIntoConstraints = false
         return tempView
