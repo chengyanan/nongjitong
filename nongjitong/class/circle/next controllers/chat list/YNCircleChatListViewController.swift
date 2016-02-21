@@ -36,7 +36,10 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         let model5 = YNSelectedProductModel(id: "5", name: "台帐")
         let model6 = YNSelectedProductModel(id: "6", name: "意见")
         
-        return [model1, model2, model3, model4, model5, model6]
+        let model7 = YNSelectedProductModel(id: "7", name: "投票")
+        let model8 = YNSelectedProductModel(id: "8", name: "统计")
+        
+        return [model1, model2, model3, model4, model5, model6, model7, model8]
     }()
     
     //tableviewDatasource
@@ -108,15 +111,37 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     
     func addButtonClick() {
         
-//        //进入创建界面
-//        let vc = YNCreatViewController(calssId: self.currentClassIdIndex!, group_id: model!.id!)
-//        
-//        self.navigationController?.pushViewController(vc, animated: true)
+        //判断是哪一个前六个一样 第七第八不一样
+        switch self.currentClassIdIndex! {
+            
+        case "1", "2", "3", "4", "5", "6":
+            
+            //进入创建界面
+            let vc = YNCreatViewController(calssId: self.currentClassIdIndex!, group_id: model!.id!)
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+            break
+            
+        case "7":
+            
+            //创建投票
+            let vc = YNCreatVoteViewController(group_id: model!.id!)
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+            break
+            
+        case "8":
+            //创建统计
+            break
+            
+        default:
+            
+            break
+            
+        }
         
-        //TODO: 
         
-        let vc = YNCreatVoteViewController(group_id: model!.id!)
-        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -240,8 +265,30 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
             
             self.pageCount = 1
             
-            //加载新数据
-            loaddata()
+            //判断是哪一个前六个一样 第七第八不一样
+            switch self.currentClassIdIndex! {
+            
+                case "1", "2", "3", "4", "5", "6":
+                    //加载新数据
+                    loaddata()
+                    break
+                
+                case "7":
+                
+                    //加载投票数据
+                    break
+                
+                case "8":
+                    //加载统计数据
+                    break
+                
+            default:
+                
+                    break
+                
+            }
+            
+            
             
             collectionView.reloadItemsAtIndexPaths([indexPath])
             collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
@@ -261,6 +308,8 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     //MARK: UITableViewDataSource
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        //TODO:添加Switch
         
         return self.tableViewDataArray.count
     }
@@ -304,10 +353,7 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        if indexPath.section == self.tableViewDataArray.count {
-            
-            return 44
-        }
+        
         return self.tableViewDataArray[indexPath.section].height!
     }
     
@@ -320,20 +366,12 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+      
         
-        if indexPath.section == self.tableViewDataArray.count {
-            
-            self.loadMore()
-            
-        } else {
-            
-            //点击进入加载数据
-            
-            let detailVc = YNThreadDetailsViewController(type: self.currentClassIdIndex!, model: self.tableViewDataArray[indexPath.section])
-            self.navigationController?.pushViewController(detailVc, animated: true)
-            
-        }
-        
+        //点击进入加载数据, 前6个
+        let detailVc = YNThreadDetailsViewController(type: self.currentClassIdIndex!, model: self.tableViewDataArray[indexPath.section])
+        self.navigationController?.pushViewController(detailVc, animated: true)
+ 
         
     }
     

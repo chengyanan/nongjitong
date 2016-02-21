@@ -160,6 +160,8 @@ class YNThreadDetailsViewController: UIViewController, UITableViewDataSource, UI
         let identify = "CELL_Thread_content"
         var cell = tableView.dequeueReusableCellWithIdentifier(identify)
         
+         cell?.selectionStyle = .None
+        
         if cell == nil {
             
             cell = UITableViewCell(style: .Default, reuseIdentifier: identify)

@@ -221,6 +221,8 @@
 		40C6B5411C34D485003004C5 /* YNSearchCatagoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6B5401C34D485003004C5 /* YNSearchCatagoryModel.swift */; };
 		40D5729C1BD88EA000E19A12 /* YNResaultLoadModeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5729B1BD88EA000E19A12 /* YNResaultLoadModeCell.swift */; };
 		40D5729E1BD8A4C500E19A12 /* YNSearchResaultDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5729D1BD8A4C500E19A12 /* YNSearchResaultDetailModel.swift */; };
+		40D5AC121C79605800DE683D /* YNAVoteItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5AC111C79605800DE683D /* YNAVoteItemCollectionViewCell.swift */; };
+		40D5AC151C796E8600DE683D /* YNAddViteItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5AC141C796E8600DE683D /* YNAddViteItemViewController.swift */; };
 		40D5EAE91C59AE1900DFCA71 /* YNCircleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5EAE81C59AE1900DFCA71 /* YNCircleModel.swift */; };
 		40D5EAEB1C59AF9800DFCA71 /* YNCircleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5EAEA1C59AF9800DFCA71 /* YNCircleTableViewCell.swift */; };
 		40D5EAEF1C59E8EF00DFCA71 /* YNAddCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5EAED1C59E8EF00DFCA71 /* YNAddCircleViewController.swift */; };
@@ -528,6 +530,8 @@
 		40C6B5401C34D485003004C5 /* YNSearchCatagoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNSearchCatagoryModel.swift; path = ../YNSearchCatagoryModel.swift; sourceTree = "<group>"; };
 		40D5729B1BD88EA000E19A12 /* YNResaultLoadModeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNResaultLoadModeCell.swift; sourceTree = "<group>"; };
 		40D5729D1BD8A4C500E19A12 /* YNSearchResaultDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchResaultDetailModel.swift; sourceTree = "<group>"; };
+		40D5AC111C79605800DE683D /* YNAVoteItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNAVoteItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		40D5AC141C796E8600DE683D /* YNAddViteItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNAddViteItemViewController.swift; sourceTree = "<group>"; };
 		40D5EAE81C59AE1900DFCA71 /* YNCircleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCircleModel.swift; sourceTree = "<group>"; };
 		40D5EAEA1C59AF9800DFCA71 /* YNCircleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCircleTableViewCell.swift; sourceTree = "<group>"; };
 		40D5EAED1C59E8EF00DFCA71 /* YNAddCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNAddCircleViewController.swift; sourceTree = "<group>"; };
@@ -881,8 +885,10 @@
 		40AD96021C5DE8FB00B2A48A /* next controllers */ = {
 			isa = PBXGroup;
 			children = (
+				40D5AC131C796E6400DE683D /* add vote items */,
 				40ACDEF51C72D0E0006B4C6A /* YNCreatViewController.swift */,
 				40C1F1FA1C7467660055A43E /* YNCreatVoteViewController.swift */,
+				40D5AC111C79605800DE683D /* YNAVoteItemCollectionViewCell.swift */,
 				40ACDEFD1C730244006B4C6A /* thread details */,
 			);
 			path = "next controllers";
@@ -1132,6 +1138,14 @@
 				40B1A8541C50742D00B2D9F1 /* YNDocPhotoModel.swift */,
 			);
 			path = nextControllers;
+			sourceTree = "<group>";
+		};
+		40D5AC131C796E6400DE683D /* add vote items */ = {
+			isa = PBXGroup;
+			children = (
+				40D5AC141C796E8600DE683D /* YNAddViteItemViewController.swift */,
+			);
+			path = "add vote items";
 			sourceTree = "<group>";
 		};
 		40D5EAE31C59ADDD00DFCA71 /* next controllers */ = {
@@ -1746,6 +1760,7 @@
 				40E039891BF5C5F4007FFF2A /* YNCallOutAnnotationView.swift in Sources */,
 				40E0397E1BF5C5A4007FFF2A /* YNNearbyTitleView.swift in Sources */,
 				4043A4A91C1141E400F1F669 /* YNQuestionDetailViewController.swift in Sources */,
+				40D5AC151C796E8600DE683D /* YNAddViteItemViewController.swift in Sources */,
 				40D5EB081C5A18FD00DFCA71 /* YNMessageModel.swift in Sources */,
 				40C1F1FB1C7467660055A43E /* YNCreatVoteViewController.swift in Sources */,
 				40E5ED1B1C17C3B100897799 /* YNInputView.swift in Sources */,
@@ -1783,6 +1798,7 @@
 				40317DBC1BF1A22600921B8D /* YNHttpAskQuestion.swift in Sources */,
 				409A971B1BF9C09100F94BB1 /* YNMyWatchListViewController.swift in Sources */,
 				40ACDF081C731F91006B4C6A /* YNThreadChatAnswerModel.swift in Sources */,
+				40D5AC121C79605800DE683D /* YNAVoteItemCollectionViewCell.swift in Sources */,
 				40B8491A1C44EDD4008615CA /* UIScrollView+CYNRefresh.swift in Sources */,
 				401AD68F1BF04BC500E747BF /* YNProductCollectionViewCell.swift in Sources */,
 				40AD3B841C76FBBF003A3156 /* YNPhotoBrowerCollectionViewCell.swift in Sources */,
