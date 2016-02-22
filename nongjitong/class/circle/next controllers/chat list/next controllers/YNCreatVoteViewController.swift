@@ -15,6 +15,8 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
     var finishView: YNFinishInputView?
     var groupId: String?
     
+    var endTime: String?
+    
     init(group_id: String) {
         
         super.init(nibName: nil, bundle: nil)
@@ -97,6 +99,14 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .Plain, target: self, action: "sendButtonClick")
         
+        //计算时间 默认为一个月
+        let dateFormat = NSDateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd"
+        
+        let nowDate = NSDate(timeIntervalSinceNow: 30*24*60*60)
+        
+        self.endTime = dateFormat.stringFromDate(nowDate)
+        
         
         //设置collectionView
         setupCollectionView()
@@ -106,7 +116,7 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
         
         //添加键盘通知
         addKeyBoardNotication()
-        
+     
         
     }
     
@@ -214,6 +224,8 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
         
          self.collectionView.registerClass(YNAVoteItemCollectionViewCell.self, forCellWithReuseIdentifier: YNAVoteItemCollectionViewCell.identify)
         
+        self.collectionView.registerClass(YNEndTimeCollectionViewCell.self, forCellWithReuseIdentifier: YNEndTimeCollectionViewCell.identifier)
+        
         Layout().addTopConstraint(collectionView, toView: self.view, multiplier: 1, constant: 64)
         Layout().addLeftConstraint(collectionView, toView: self.view, multiplier: 1, constant: 0)
         Layout().addBottomConstraint(collectionView, toView: self.view, multiplier: 1, constant: 0)
@@ -281,7 +293,8 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
             "user_id": userId,
             "descript": self.textViewText,
             "title":self.textTitle,
-            "items": self.paraItems
+            "items": self.paraItems,
+            "end_time": self.endTime
         ]
         
         let progress = YNProgressHUD().showWaitingToView(self.view)
@@ -301,7 +314,16 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
                     if status == 1 {
                         
                         
-            
+                        YNProgressHUD().showText("发表成功", toView: self.view)
+                        
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+                            
+                            //退出控制器
+                            self.navigationController?.popViewControllerAnimated(true)
+                            
+                        }
+                        
+                        
                         
                     } else if status == 0 {
                         
@@ -400,13 +422,13 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
             return cell
             
         } else if indexPath.section == 3 {
+      
+        
+            let identify = YNEndTimeCollectionViewCell.identifier
             
-            let identify = YNAVoteItemCollectionViewCell.identify
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNEndTimeCollectionViewCell
             
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identify, forIndexPath: indexPath) as! YNAVoteItemCollectionViewCell
-            
-            cell.addButton.text = "请选择结束时间"
-            cell.addButton.textColor = UIColor.blueColor()
+            cell.endtimeLabel.text = self.endTime
             
             return cell
         }

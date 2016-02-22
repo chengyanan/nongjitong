@@ -219,6 +219,18 @@
 		40BDF30C1C4F8CC3006AE250 /* YNDocDetailListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BDF30B1C4F8CC3006AE250 /* YNDocDetailListHeaderView.swift */; };
 		40C1F1FB1C7467660055A43E /* YNCreatVoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1F1FA1C7467660055A43E /* YNCreatVoteViewController.swift */; };
 		40C6B5411C34D485003004C5 /* YNSearchCatagoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6B5401C34D485003004C5 /* YNSearchCatagoryModel.swift */; };
+		40D1D4091C7A9A3000107080 /* YNEndTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1D4081C7A9A3000107080 /* YNEndTimeCollectionViewCell.swift */; };
+		40D1D40C1C7AC84800107080 /* YNVotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1D40B1C7AC84800107080 /* YNVotoDetailsViewController.swift */; };
+		40D1D40E1C7ACEE100107080 /* YNVoteDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1D40D1C7ACEE100107080 /* YNVoteDetailsModel.swift */; };
+		40D1D4101C7AE2AC00107080 /* YNVoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1D40F1C7AE2AC00107080 /* YNVoteItem.swift */; };
+		40D1D4131C7AF9D800107080 /* YNVoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1D4121C7AF9D800107080 /* YNVoteViewController.swift */; };
+		40D1D4151C7AFE9000107080 /* YNVoteItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1D4141C7AFE9000107080 /* YNVoteItemTableViewCell.swift */; };
+		40D1D4191C7B023800107080 /* voteItemSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D1D4161C7B023800107080 /* voteItemSelected@2x.png */; };
+		40D1D41A1C7B023800107080 /* voteItemSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D1D4171C7B023800107080 /* voteItemSelected.png */; };
+		40D1D41B1C7B023800107080 /* voteItemSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D1D4181C7B023800107080 /* voteItemSelected@3x.png */; };
+		40D1D41F1C7B026600107080 /* voteItemUnselected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D1D41C1C7B026600107080 /* voteItemUnselected@3x.png */; };
+		40D1D4201C7B026600107080 /* voteItemUnselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D1D41D1C7B026600107080 /* voteItemUnselected@2x.png */; };
+		40D1D4211C7B026600107080 /* voteItemUnselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D1D41E1C7B026600107080 /* voteItemUnselected.png */; };
 		40D5729C1BD88EA000E19A12 /* YNResaultLoadModeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5729B1BD88EA000E19A12 /* YNResaultLoadModeCell.swift */; };
 		40D5729E1BD8A4C500E19A12 /* YNSearchResaultDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5729D1BD8A4C500E19A12 /* YNSearchResaultDetailModel.swift */; };
 		40D5AC121C79605800DE683D /* YNAVoteItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D5AC111C79605800DE683D /* YNAVoteItemCollectionViewCell.swift */; };
@@ -528,6 +540,18 @@
 		40BDF30B1C4F8CC3006AE250 /* YNDocDetailListHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDocDetailListHeaderView.swift; sourceTree = "<group>"; };
 		40C1F1FA1C7467660055A43E /* YNCreatVoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCreatVoteViewController.swift; sourceTree = "<group>"; };
 		40C6B5401C34D485003004C5 /* YNSearchCatagoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNSearchCatagoryModel.swift; path = ../YNSearchCatagoryModel.swift; sourceTree = "<group>"; };
+		40D1D4081C7A9A3000107080 /* YNEndTimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNEndTimeCollectionViewCell.swift; sourceTree = "<group>"; };
+		40D1D40B1C7AC84800107080 /* YNVotoDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNVotoDetailsViewController.swift; sourceTree = "<group>"; };
+		40D1D40D1C7ACEE100107080 /* YNVoteDetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNVoteDetailsModel.swift; sourceTree = "<group>"; };
+		40D1D40F1C7AE2AC00107080 /* YNVoteItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNVoteItem.swift; sourceTree = "<group>"; };
+		40D1D4121C7AF9D800107080 /* YNVoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNVoteViewController.swift; sourceTree = "<group>"; };
+		40D1D4141C7AFE9000107080 /* YNVoteItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNVoteItemTableViewCell.swift; sourceTree = "<group>"; };
+		40D1D4161C7B023800107080 /* voteItemSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voteItemSelected@2x.png"; sourceTree = "<group>"; };
+		40D1D4171C7B023800107080 /* voteItemSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voteItemSelected.png; sourceTree = "<group>"; };
+		40D1D4181C7B023800107080 /* voteItemSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voteItemSelected@3x.png"; sourceTree = "<group>"; };
+		40D1D41C1C7B026600107080 /* voteItemUnselected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voteItemUnselected@3x.png"; sourceTree = "<group>"; };
+		40D1D41D1C7B026600107080 /* voteItemUnselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voteItemUnselected@2x.png"; sourceTree = "<group>"; };
+		40D1D41E1C7B026600107080 /* voteItemUnselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voteItemUnselected.png; sourceTree = "<group>"; };
 		40D5729B1BD88EA000E19A12 /* YNResaultLoadModeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNResaultLoadModeCell.swift; sourceTree = "<group>"; };
 		40D5729D1BD8A4C500E19A12 /* YNSearchResaultDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchResaultDetailModel.swift; sourceTree = "<group>"; };
 		40D5AC111C79605800DE683D /* YNAVoteItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNAVoteItemCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -751,6 +775,12 @@
 		4037548E1C5CB80B002569CB /* circle */ = {
 			isa = PBXGroup;
 			children = (
+				40D1D41C1C7B026600107080 /* voteItemUnselected@3x.png */,
+				40D1D41D1C7B026600107080 /* voteItemUnselected@2x.png */,
+				40D1D41E1C7B026600107080 /* voteItemUnselected.png */,
+				40D1D4161C7B023800107080 /* voteItemSelected@2x.png */,
+				40D1D4171C7B023800107080 /* voteItemSelected.png */,
+				40D1D4181C7B023800107080 /* voteItemSelected@3x.png */,
 				4037548F1C5CB81B002569CB /* barbuttonicon_InfoMulti.png */,
 				403754901C5CB81B002569CB /* barbuttonicon_InfoMulti@2x.png */,
 				403754911C5CB81B002569CB /* barbuttonicon_InfoMulti@3x.png */,
@@ -885,10 +915,12 @@
 		40AD96021C5DE8FB00B2A48A /* next controllers */ = {
 			isa = PBXGroup;
 			children = (
-				40D5AC131C796E6400DE683D /* add vote items */,
 				40ACDEF51C72D0E0006B4C6A /* YNCreatViewController.swift */,
 				40C1F1FA1C7467660055A43E /* YNCreatVoteViewController.swift */,
 				40D5AC111C79605800DE683D /* YNAVoteItemCollectionViewCell.swift */,
+				40D1D4081C7A9A3000107080 /* YNEndTimeCollectionViewCell.swift */,
+				40D1D40A1C7AC81900107080 /* vote details */,
+				40D5AC131C796E6400DE683D /* add vote items */,
 				40ACDEFD1C730244006B4C6A /* thread details */,
 			);
 			path = "next controllers";
@@ -1138,6 +1170,26 @@
 				40B1A8541C50742D00B2D9F1 /* YNDocPhotoModel.swift */,
 			);
 			path = nextControllers;
+			sourceTree = "<group>";
+		};
+		40D1D40A1C7AC81900107080 /* vote details */ = {
+			isa = PBXGroup;
+			children = (
+				40D1D40B1C7AC84800107080 /* YNVotoDetailsViewController.swift */,
+				40D1D40D1C7ACEE100107080 /* YNVoteDetailsModel.swift */,
+				40D1D40F1C7AE2AC00107080 /* YNVoteItem.swift */,
+				40D1D4111C7AF9C200107080 /* next controller */,
+			);
+			path = "vote details";
+			sourceTree = "<group>";
+		};
+		40D1D4111C7AF9C200107080 /* next controller */ = {
+			isa = PBXGroup;
+			children = (
+				40D1D4121C7AF9D800107080 /* YNVoteViewController.swift */,
+				40D1D4141C7AFE9000107080 /* YNVoteItemTableViewCell.swift */,
+			);
+			path = "next controller";
 			sourceTree = "<group>";
 		};
 		40D5AC131C796E6400DE683D /* add vote items */ = {
@@ -1619,6 +1671,7 @@
 				40B8BD081C4C991400E9133C /* register_userName.png in Resources */,
 				40B8BD201C4C991400E9133C /* tagSelected.png in Resources */,
 				400594ED1C75808E005DC5E6 /* Default@3x.png in Resources */,
+				40D1D4191C7B023800107080 /* voteItemSelected@2x.png in Resources */,
 				40B8BD181C4C991400E9133C /* tab_waring@2x.png in Resources */,
 				40B8BCFA1C4C991400E9133C /* ic_list_answer@2x.png in Resources */,
 				40B8BD021C4C991400E9133C /* addNewSubscription.png in Resources */,
@@ -1653,7 +1706,9 @@
 				40B8BCC11C4C991400E9133C /* home_ask_question_camera@2x.png in Resources */,
 				40B8BD091C4C991400E9133C /* register_userName@2x.png in Resources */,
 				40B8BD2C1C4CAF1F00E9133C /* answer_tag.png in Resources */,
+				40D1D4201C7B026600107080 /* voteItemUnselected@2x.png in Resources */,
 				40B8BD281C4C991400E9133C /* watch_Separator@3x.png in Resources */,
+				40D1D41F1C7B026600107080 /* voteItemUnselected@3x.png in Resources */,
 				40B8BCD01C4C991400E9133C /* my_article@2x.png in Resources */,
 				40B8BCF41C4C991400E9133C /* chatroom_msg_failed@2x.png in Resources */,
 				40B8BCC21C4C991400E9133C /* home_ask_question_camera@3x.png in Resources */,
@@ -1670,6 +1725,7 @@
 				40B8BD241C4C991400E9133C /* tagUnSelected@2x.png in Resources */,
 				403754941C5CB81B002569CB /* barbuttonicon_InfoMulti@3x.png in Resources */,
 				40B8BD231C4C991400E9133C /* tagUnSelected.png in Resources */,
+				40D1D41B1C7B023800107080 /* voteItemSelected@3x.png in Resources */,
 				40B8BD211C4C991400E9133C /* tagSelected@2x.png in Resources */,
 				40B8BCD41C4C991400E9133C /* my_attention@3x.png in Resources */,
 				40B8BCF81C4C991400E9133C /* home_page_location_image@3x.png in Resources */,
@@ -1687,6 +1743,7 @@
 				403754921C5CB81B002569CB /* barbuttonicon_InfoMulti.png in Resources */,
 				40B8BD1F1C4C991400E9133C /* tabBar_waring@3x.png in Resources */,
 				40B8BD191C4C991400E9133C /* tab_waring@3x.png in Resources */,
+				40D1D4211C7B026600107080 /* voteItemUnselected.png in Resources */,
 				40B8BCE61C4C991400E9133C /* user_seting_about_our@3x.png in Resources */,
 				40B8BCBD1C4C991400E9133C /* get_cur_location_icon.png in Resources */,
 				40B8BD1C1C4C991400E9133C /* tabBar_home@3x.png in Resources */,
@@ -1729,6 +1786,7 @@
 				40B8BD131C4C991400E9133C /* sapi-nav-back-btn-bg@3x.png in Resources */,
 				40B8BD0A1C4C991400E9133C /* register_userName@3x.png in Resources */,
 				40B8BD221C4C991400E9133C /* tagSelected@3x.png in Resources */,
+				40D1D41A1C7B023800107080 /* voteItemSelected.png in Resources */,
 				40B8BD171C4C991400E9133C /* tab_waring.png in Resources */,
 				40B8BCFC1C4C991400E9133C /* ic_list_answer_count.png in Resources */,
 			);
@@ -1814,6 +1872,8 @@
 				401AD6911BF04E5400E747BF /* YNHttpLoadCategory.swift in Sources */,
 				40F30F4B1C2CFDD900EA1B95 /* YNNearByQuestionView.swift in Sources */,
 				40983C8B1BFB1CDD00EA2B04 /* YNWatchHttp.swift in Sources */,
+				40D1D40E1C7ACEE100107080 /* YNVoteDetailsModel.swift in Sources */,
+				40D1D4101C7AE2AC00107080 /* YNVoteItem.swift in Sources */,
 				40FA6FF31BD4DF6000CFE69C /* YNSearchAndQuestionCell.swift in Sources */,
 				405177821BF4498700B119CA /* YNNJTTabBar.swift in Sources */,
 				4092048E1C0FFCAF00CA30CF /* UIImageViewExtension.swift in Sources */,
@@ -1839,6 +1899,7 @@
 				40E039871BF5C5F4007FFF2A /* YNBaseAnnotation.swift in Sources */,
 				408B423E1C5B570A007B7001 /* YNCircleDetailModel.swift in Sources */,
 				40E039881BF5C5F4007FFF2A /* YNCallOutAnnotation.swift in Sources */,
+				40D1D4091C7A9A3000107080 /* YNEndTimeCollectionViewCell.swift in Sources */,
 				40ACDF061C731C5A006B4C6A /* YNThreadChatTableViewCell.swift in Sources */,
 				4037548D1C5CA880002569CB /* YNCircleChatListViewController.swift in Sources */,
 				40D5EAF31C59E92600DFCA71 /* YNWriteReasonViewController.swift in Sources */,
@@ -1893,6 +1954,7 @@
 				40A168F71BEB3E82001E3C76 /* YNAddUserInformationTableViewController.swift in Sources */,
 				4003F7841BDF2F5400137258 /* YNHttpTool.swift in Sources */,
 				40983C891BFAEDB400EA2B04 /* YNWatchProductTableViewCell.swift in Sources */,
+				40D1D4131C7AF9D800107080 /* YNVoteViewController.swift in Sources */,
 				40AD3B821C76D494003A3156 /* YNPhotoBrowerView.swift in Sources */,
 				40D5EAF01C59E8EF00DFCA71 /* YNTitleCollectionViewCell.swift in Sources */,
 				40ED43AA1BC64D7F004713C9 /* YNSignUpModel.swift in Sources */,
@@ -1909,7 +1971,9 @@
 				40DEA7E41C3A60E300BEB608 /* YNSubscribeModel.swift in Sources */,
 				408B423A1C5B4AF2007B7001 /* YNMembersCollectionViewCell.swift in Sources */,
 				4003F7811BDF2F5400137258 /* YNHTTPGetCityTool.swift in Sources */,
+				40D1D40C1C7AC84800107080 /* YNVotoDetailsViewController.swift in Sources */,
 				40D5EAEB1C59AF9800DFCA71 /* YNCircleTableViewCell.swift in Sources */,
+				40D1D4151C7AFE9000107080 /* YNVoteItemTableViewCell.swift in Sources */,
 				40D5EAFE1C5A047800DFCA71 /* YNMYMessageViewController.swift in Sources */,
 				40D5729E1BD8A4C500E19A12 /* YNSearchResaultDetailModel.swift in Sources */,
 				40ACDF041C7311B4006B4C6A /* YNThreadChatViewController.swift in Sources */,

@@ -37,9 +37,6 @@ class YNThreadModel {
     //发布时间
     var add_time: String?
     
-    //显示的时间
-    var createTime: String?
-    
     //存放图片的数组
     var photo = [String]()
     
@@ -50,6 +47,7 @@ class YNThreadModel {
     
     var titleHeight: CGFloat?
     var contentHeight: CGFloat?
+    
     
     init() {}
     
@@ -89,6 +87,7 @@ class YNThreadModel {
         self.contentHeight = Tools().heightForText(self.descript!, font: UIFont.systemFontOfSize(15), width: kScreenWidth - 24).height + 30
     
         self.add_time = dict["add_time"] as? String
+        
 //        self.createTime = calcuateTime(self.add_time!)
         
         if let _ = dict["photo"] as? Array<String> {
@@ -102,50 +101,7 @@ class YNThreadModel {
         
     }
     
-    func calcuateTime(time: String) ->String {
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
-        
-        let createTime = dateFormatter.dateFromString(time)
-        
-        if createTime!.isToday() {
-            
-            if createTime?.deltaWithNow().hour >= 1 {
-                
-                return "\(createTime!.deltaWithNow().hour)小时前"
-                
-            } else if createTime?.deltaWithNow().minute >= 1 {
-                
-                return "\(createTime!.deltaWithNow().minute)分钟前"
-                
-            } else {
-                
-                return "刚刚"
-            }
-            
-        } else if createTime!.isYesterday() {
-            
-            dateFormatter.dateFormat = "昨天 HH:MM"
-            
-            return dateFormatter.stringFromDate(createTime!)
-            
-        } else if createTime!.isThisYear() {
-            
-            dateFormatter.dateFormat = "MM-dd HH:mm"
-            
-            return dateFormatter.stringFromDate(createTime!)
-            
-        } else {
-            
-            dateFormatter.dateFormat = "YYYY-MM-dd HH:mm"
-            
-            return dateFormatter.stringFromDate(createTime!)
-        }
-        
-        
-    }
+
     
     func calcuateCellHeight(text: String) {
         

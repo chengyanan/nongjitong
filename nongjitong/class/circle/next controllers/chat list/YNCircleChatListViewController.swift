@@ -276,10 +276,14 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
                 case "7":
                 
                     //加载投票数据
+                    loadVoteList()
+                    
                     break
                 
                 case "8":
-                    //加载统计数据
+                    //TODO:加载统计数据
+                    
+                    
                     break
                 
             default:
@@ -321,20 +325,6 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if indexPath.section == self.tableViewDataArray.count {
-            
-            let identify: String = "Cell_Resault_LoadMore_code"
-            var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(identify)
-            
-            if cell == nil {
-                
-                cell = YNResaultLoadModeCell(style: .Default, reuseIdentifier: identify)
-                
-            }
-            
-            return cell!
-            
-        }
         
         let identify = "CELL_Question"
         
@@ -368,9 +358,38 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
       
         
-        //点击进入加载数据, 前6个
-        let detailVc = YNThreadDetailsViewController(type: self.currentClassIdIndex!, model: self.tableViewDataArray[indexPath.section])
-        self.navigationController?.pushViewController(detailVc, animated: true)
+        //判断是哪一个前六个一样 第七第八不一样
+        switch self.currentClassIdIndex! {
+            
+        case "1", "2", "3", "4", "5", "6":
+            
+            //点击进入加载数据, 前6个
+            let detailVc = YNThreadDetailsViewController(type: self.currentClassIdIndex!, model: self.tableViewDataArray[indexPath.section])
+            self.navigationController?.pushViewController(detailVc, animated: true)
+            
+            break
+            
+        case "7":
+            
+            //进入投票详情页
+            let detailVc = YNVotoDetailsViewController(type: self.currentClassIdIndex!, model: self.tableViewDataArray[indexPath.section])
+            self.navigationController?.pushViewController(detailVc, animated: true)
+            
+            break
+            
+        case "8":
+            //TODO:加载统计数据
+            
+            
+            break
+            
+        default:
+            
+            break
+            
+        }
+        
+       
  
         
     }
@@ -384,7 +403,7 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     }
     
     
-    //MARK: loadData
+    //MARK: 加载1到6数据列表
     func loaddata() {
         
         //已登陆请求数据
@@ -440,6 +459,93 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
                             
                         }
                     
+                        self.tableView?.reloadData()
+                        
+                        
+                    } else if status == 0 {
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            //                            print(msg)
+                            YNProgressHUD().showText(msg, toView: self.view)
+                        }
+                    }
+                    
+                }
+                
+            } catch {
+                
+                YNProgressHUD().showText("请求错误", toView: self.view)
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                self.tableView?.stopRefresh()
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("加载失败", toView: self.view)
+        }
+        
+        
+        
+    }
+    
+    //MARK: 加载投票列表
+    func loadVoteList() {
+        
+        //已登陆请求数据
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "GroupVote",
+            "a": "getList",
+            "group_id": model?.id,
+            "user_id": kUser_ID() as? String,
+            "page": "\(pageCount)"
+        ]
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        
+        Network.post(kURL, params: params, success: { (data, response, error) -> Void in
+            
+            self.tableView?.stopRefresh()
+            progress.hideUsingAnimation()
+            
+            do {
+                
+                let json: NSDictionary =  try NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                
+                print("data - \(json)")
+                
+                if let status = json["status"] as? Int {
+                    
+                    if status == 1 {
+                        
+                        let temparray = json["data"] as? NSArray
+                        
+                        if temparray?.count < 20 {
+                            
+                            //显示加载更多
+                            self.isShowLoadMore = false
+                            
+                        } else {
+                            
+                            //不显示加载更多
+                            self.isShowLoadMore = true
+                        }
+                        
+                        if self.pageCount == 1 {
+                            
+                            self.tableViewDataArray.removeAll()
+                        }
+                        
+                        for item in temparray! {
+                            
+                            let tempModel = YNThreadModel(dict: item as! NSDictionary)
+                            
+                            self.tableViewDataArray.append(tempModel)
+                            
+                        }
+                        
                         self.tableView?.reloadData()
                         
                         
