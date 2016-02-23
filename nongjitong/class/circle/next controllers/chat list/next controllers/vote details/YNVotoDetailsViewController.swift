@@ -8,11 +8,10 @@
 
 import UIKit
 
-class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNVoteViewControllerDelegate, YNFillStatisticsTableViewControllerDelegate {
 
-    
-    //7 是投票 8是统计
-    var type: String?
+
+    var type: CreatType?
     
     var model: YNThreadModel?
     
@@ -22,7 +21,7 @@ class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     var voteButton: UIButton?
     
-    init(type: String, model: YNThreadModel) {
+    init(type: CreatType, model: YNThreadModel) {
         
         super.init(nibName: nil, bundle: nil)
         
@@ -31,10 +30,10 @@ class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         switch type {
             
-        case "7":
+        case .Vote:
             self.title = "投票详情"
             break
-        case "8":
+        case .Statistics:
             self.title = "统计详情"
             break
             
@@ -81,12 +80,18 @@ class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         //voteButton
         self.voteButton = UIButton()
-        self.voteButton?.setTitle("立即投票", forState: UIControlState.Normal)
+        
+        if self.type == .Vote {
+        
+            self.voteButton?.setTitle("立即投票", forState: UIControlState.Normal)
+            
+        } else if self.type == .Statistics {
+        
+            self.voteButton?.setTitle("立即参与统计", forState: UIControlState.Normal)
+        }
+        
         self.voteButton?.setTitleColor(kRGBA(0, g: 144, b: 217, a: 1), forState: UIControlState.Normal)
         self.voteButton?.titleLabel?.font = UIFont.systemFontOfSize(15)
-        
-//        self.voteButton?.layer.borderColor = UIColor.grayColor().CGColor
-//        self.voteButton?.layer.borderWidth = 0.5
         
         self.voteButton?.layer.cornerRadius = 3
         self.voteButton?.clipsToBounds = true
@@ -106,9 +111,23 @@ class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         if let _ = self.voteDetailsModel {
         
-            let vc = YNVoteViewController(model: self.model!, detailModel: self.voteDetailsModel!)
+            if self.type == .Vote {
             
-            self.navigationController?.pushViewController(vc, animated: true)
+                //进入投票界面
+                let vc = YNVoteViewController(model: self.model!, detailModel: self.voteDetailsModel!)
+                vc.delegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            } else if self.type == .Statistics {
+            
+                //进入填写统计数字界面
+                let vc = YNFillStatisticsTableViewController(model: self.model!, detailModel: self.voteDetailsModel!)
+                vc.delegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+            
+            
             
         }
     
@@ -177,7 +196,17 @@ class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         if section == 3 {
         
-            return "投票项"
+            if self.type == .Vote {
+            
+                return "投票项"
+                
+            } else if self.type == .Statistics {
+            
+                return "统计项"
+            }
+            
+            return nil
+            
         }
         
         return nil
@@ -233,7 +262,17 @@ class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let item = self.voteDetailsModel?.items[indexPath.row]
             
             cell?.textLabel?.text = item!.title
-            cell?.detailTextLabel?.text = item!.value! + "票"
+            
+            if self.type == .Vote {
+            
+                cell?.detailTextLabel?.text = item!.value! + "票"
+                
+            } else if self.type == .Statistics {
+            
+                cell?.detailTextLabel?.text = item!.value!
+            }
+            
+            
             cell?.detailTextLabel?.font = UIFont.systemFontOfSize(13)
             
             return cell!
@@ -251,13 +290,17 @@ class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITa
             cell = UITableViewCell(style: .Default, reuseIdentifier: identify)
         }
         
+        cell?.textLabel?.font = UIFont.systemFontOfSize(15)
+        
         if indexPath.section == 1 {
             
             cell?.textLabel?.text = model?.title!
+            cell?.textLabel?.textColor = UIColor.blackColor()
             
         } else if indexPath.section == 2 {
             
             cell?.textLabel?.text = model?.descript!
+            cell?.textLabel?.textColor = UIColor.lightGrayColor()
         }
         
         
@@ -266,14 +309,40 @@ class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
     }
     
+    //MARK: YNVoteViewControllerDelegate
+    func voteViewControllerSuccess() {
+        
+        loadVoteDetails()
+        
+    }
+    
+    //MARK: YNFillStatisticsTableViewControllerDelegate
+    func fillStatisticsTableViewControllerSuccess() {
+        
+        //从新加载数据 刷新界面
+        loadVoteDetails()
+        
+    }
     
     //MARK: loaddata
     func loadVoteDetails() {
     
         //已登陆请求数据
+        
+        var function = ""
+        
+        if self.type == .Vote {
+        
+            function = "GroupVote"
+            
+        } else if self.type == .Statistics {
+        
+            function = "GroupCount"
+        }
+        
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
-            "c": "GroupVote",
+            "c": function,
             "a": "getDetail",
             "vote_id": model?.id,
             "user_id": kUser_ID() as? String,

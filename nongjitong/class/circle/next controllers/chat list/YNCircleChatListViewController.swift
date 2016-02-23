@@ -126,13 +126,18 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         case "7":
             
             //创建投票
-            let vc = YNCreatVoteViewController(group_id: model!.id!)
+            let vc = YNCreatVoteViewController(group_id: model!.id!, type: CreatType.Vote)
+            
             self.navigationController?.pushViewController(vc, animated: true)
             
             break
             
         case "8":
             //创建统计
+            let vc = YNCreatVoteViewController(group_id: model!.id!, type: CreatType.Statistics)
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+            
             break
             
         default:
@@ -281,8 +286,8 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
                     break
                 
                 case "8":
-                    //TODO:加载统计数据
-                    
+                    //加载统计数据
+                    loadVoteList()
                     
                     break
                 
@@ -372,14 +377,15 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
         case "7":
             
             //进入投票详情页
-            let detailVc = YNVotoDetailsViewController(type: self.currentClassIdIndex!, model: self.tableViewDataArray[indexPath.section])
+            let detailVc = YNVotoDetailsViewController(type: .Vote, model: self.tableViewDataArray[indexPath.section])
             self.navigationController?.pushViewController(detailVc, animated: true)
             
             break
             
         case "8":
-            //TODO:加载统计数据
-            
+            //加载统计数据
+            let detailVc = YNVotoDetailsViewController(type: .Statistics, model: self.tableViewDataArray[indexPath.section])
+            self.navigationController?.pushViewController(detailVc, animated: true)
             
             break
             
@@ -493,10 +499,21 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
     //MARK: 加载投票列表
     func loadVoteList() {
         
+        var function = ""
+        
+        if self.currentClassIdIndex! == "7" {
+        
+            function = "GroupVote"
+            
+        } else if self.currentClassIdIndex! == "8" {
+        
+            function = "GroupCount"
+        }
+        
         //已登陆请求数据
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
-            "c": "GroupVote",
+            "c": function,
             "a": "getList",
             "group_id": model?.id,
             "user_id": kUser_ID() as? String,

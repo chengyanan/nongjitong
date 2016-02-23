@@ -8,21 +8,40 @@
 
 import UIKit
 
+enum CreatType {
+
+    //Vote投票,Statistics统计
+    case Vote, Statistics
+}
+
 class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,YNAskQuestionTextCollectionViewCellDelegate, YNTitleCollectionViewCellDelegate, YNAddViteItemViewControllerDelegate, YNFinishInputViewDelegate {
 
     //MARK: property
+    
+    var type: CreatType?
+    
     let finishViewHeight: CGFloat = 40
     var finishView: YNFinishInputView?
     var groupId: String?
     
     var endTime: String?
     
-    init(group_id: String) {
+    init(group_id: String, type: CreatType) {
         
         super.init(nibName: nil, bundle: nil)
         
-        
         self.groupId = group_id
+        self.type = type
+        
+        if self.type == .Vote {
+        
+            self.title = "新建投票"
+            
+        } else if self.type == .Statistics {
+        
+            self.title = "新建统计"
+        }
+        
         
         
     }
@@ -30,6 +49,8 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
     //描述
     var textViewText: String?
@@ -88,8 +109,6 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = "新建投票"
         
         self.automaticallyAdjustsScrollViewInsets = false
 
@@ -212,7 +231,6 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
     
     func setupCollectionView() {
         
-//        self.collectionView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -285,9 +303,20 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
         
         let userId = kUser_ID() as? String
         
+        var function = ""
+        
+        if self.type == .Vote {
+            
+            function = "GroupVote"
+            
+        } else if self.type == .Statistics {
+        
+            function = "GroupCount"
+        }
+        
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
-            "c": "GroupVote",
+            "c": function,
             "a": "create",
             "group_id": groupId,
             "user_id": userId,
@@ -446,7 +475,16 @@ class YNCreatVoteViewController: UIViewController, UICollectionViewDataSource, U
             
         } else {
         
-            cell.addButton.text = "添加投票项"
+            if self.type == .Vote {
+            
+                cell.addButton.text = "添加投票项"
+                
+            } else if self.type == .Statistics {
+            
+                cell.addButton.text = "添加统计项"
+            }
+            
+            
             cell.addButton.textColor = UIColor.blueColor()
         }
         

@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol YNVoteViewControllerDelegate {
+
+    func voteViewControllerSuccess()
+    
+}
+
 class YNVoteViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNVoteItemTableViewCellDelegate  {
 
+    var delegate: YNVoteViewControllerDelegate?
+    
     var model: YNThreadModel?
     
     var voteDetailsModel: YNVoteDetailsModel?
@@ -246,7 +254,7 @@ class YNVoteViewController: UIViewController, UITableViewDataSource, UITableView
         let params: [String: String?] = ["m": "Appapi",
             "key": "KSECE20XE15DKIEX3",
             "c": "GroupVote",
-            "a": "create",
+            "a": "userVote",
             "vote_id": model?.id,
             "user_id": kUser_ID() as? String,
             "item_id": itemId
@@ -270,6 +278,9 @@ class YNVoteViewController: UIViewController, UITableViewDataSource, UITableView
                     if status == 1 {
                         
                         YNProgressHUD().showText("投票成功", toView: self.view)
+                        
+                        //通知代理刷新控制器
+                        self.delegate?.voteViewControllerSuccess()
                         
                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
                             

@@ -97,7 +97,7 @@ class YNThreadModel {
      
         self.type = dict["type"] as? String
         
-        calcuateCellHeight(self.descript!)
+        calcuateCellHeight(self.title!)
         
     }
     

@@ -19,7 +19,7 @@ class YNThreadListTableViewCell: UITableViewCell {
             
             self.nickName.text = model?.user_name
             self.postTime.text = model?.add_time
-            self.content.text = model?.descript
+            self.content.text = model?.title
            
             
             self.avatorImage.getImageWithURL(model!.avatar!, contentMode: UIViewContentMode.ScaleToFill)

@@ -26,15 +26,19 @@ class YNSearchResaultDetailModel: YNSearchResaultModel {
             
             for item in tempArray! {
             
-                let itemTitle = item["title"] as? String
+//                let itemTitle = item["title"] as? String
                 
-                let photoArray = item["urls"] as? NSArray
+                let photoArray = item["images"] as? NSArray
                 
                 if photoArray?.count > 0 {
                 
                     for photoitem in photoArray! {
                     
-                        let tempurl = photoitem as? String
+                        let dict = photoitem as? NSDictionary
+                        
+                        let itemTitle = dict!["title"] as? String
+                        
+                        let tempurl = dict!["url"] as? String
                         
                         let photo = Photo(title: itemTitle, url: tempurl, index: index)
                         

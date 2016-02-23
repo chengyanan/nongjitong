@@ -39,10 +39,23 @@ class YNTextView: UITextView {
         if self.text == "" {
             
             if let _ = self.placeHolder {
-            
-                let placeHolderRect: CGRect = CGRectMake(10, 8, CGRectGetWidth(self.frame) - 10, CGRectGetHeight(self.frame) - 8)
                 
-                let attributes: [String : AnyObject]? = [NSFontAttributeName: UIFont.systemFontOfSize(17),
+                var placeHolderRect: CGRect = CGRectZero
+                
+                if self.textAlignment == .Right {
+                
+                    let width = Tools().heightForText(self.placeHolder!, font: UIFont.systemFontOfSize(15), width: CGRectGetWidth(self.frame) - 10).width
+                    
+                    let X = CGRectGetWidth(self.frame) - 10 - width
+                    
+                    placeHolderRect = CGRectMake( X, 6, CGRectGetWidth(self.frame) - 10, CGRectGetHeight(self.frame) - 8)
+                    
+                } else {
+                
+                    placeHolderRect = CGRectMake(10, 6, CGRectGetWidth(self.frame) - 10, CGRectGetHeight(self.frame) - 8)
+                }
+                
+                let attributes: [String : AnyObject]? = [NSFontAttributeName: UIFont.systemFontOfSize(15),
                     NSForegroundColorAttributeName: kRGBA(200, g: 200, b: 200, a: 1)]
                 
                 let str = NSString(string: self.placeHolder!)

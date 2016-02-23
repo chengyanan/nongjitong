@@ -64,6 +64,8 @@
 		408FAE451C586F98001D5B7D /* YNCircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408FAE441C586F98001D5B7D /* YNCircleViewController.swift */; };
 		4092048E1C0FFCAF00CA30CF /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4092048D1C0FFCAF00CA30CF /* UIImageViewExtension.swift */; };
 		4093E66A1C3E6F2C0061DEB5 /* YNAskQuestionExplianCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4093E6691C3E6F2C0061DEB5 /* YNAskQuestionExplianCollectionCell.swift */; };
+		40968DC31C7C42750071661E /* YNFillStatisticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40968DC21C7C42750071661E /* YNFillStatisticsTableViewController.swift */; };
+		40968DC51C7C47930071661E /* YNFillNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40968DC41C7C47930071661E /* YNFillNumberTableViewCell.swift */; };
 		40983C891BFAEDB400EA2B04 /* YNWatchProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40983C881BFAEDB400EA2B04 /* YNWatchProductTableViewCell.swift */; };
 		40983C8B1BFB1CDD00EA2B04 /* YNWatchHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40983C8A1BFB1CDD00EA2B04 /* YNWatchHttp.swift */; };
 		40983C8D1BFB256700EA2B04 /* YNSelectedProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40983C8C1BFB256700EA2B04 /* YNSelectedProductModel.swift */; };
@@ -385,6 +387,8 @@
 		408FAE441C586F98001D5B7D /* YNCircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCircleViewController.swift; sourceTree = "<group>"; };
 		4092048D1C0FFCAF00CA30CF /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		4093E6691C3E6F2C0061DEB5 /* YNAskQuestionExplianCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNAskQuestionExplianCollectionCell.swift; sourceTree = "<group>"; };
+		40968DC21C7C42750071661E /* YNFillStatisticsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNFillStatisticsTableViewController.swift; sourceTree = "<group>"; };
+		40968DC41C7C47930071661E /* YNFillNumberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNFillNumberTableViewCell.swift; sourceTree = "<group>"; };
 		40983C881BFAEDB400EA2B04 /* YNWatchProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNWatchProductTableViewCell.swift; sourceTree = "<group>"; };
 		40983C8A1BFB1CDD00EA2B04 /* YNWatchHttp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNWatchHttp.swift; sourceTree = "<group>"; };
 		40983C8C1BFB256700EA2B04 /* YNSelectedProductModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSelectedProductModel.swift; sourceTree = "<group>"; };
@@ -919,6 +923,7 @@
 				40C1F1FA1C7467660055A43E /* YNCreatVoteViewController.swift */,
 				40D5AC111C79605800DE683D /* YNAVoteItemCollectionViewCell.swift */,
 				40D1D4081C7A9A3000107080 /* YNEndTimeCollectionViewCell.swift */,
+				40DB89951C7C0A8500C7999F /* add statistics */,
 				40D1D40A1C7AC81900107080 /* vote details */,
 				40D5AC131C796E6400DE683D /* add vote items */,
 				40ACDEFD1C730244006B4C6A /* thread details */,
@@ -1267,6 +1272,15 @@
 				40E268461C2A46EC00E17B13 /* YNHttpMyQuestion.swift */,
 			);
 			path = "my questions";
+			sourceTree = "<group>";
+		};
+		40DB89951C7C0A8500C7999F /* add statistics */ = {
+			isa = PBXGroup;
+			children = (
+				40968DC21C7C42750071661E /* YNFillStatisticsTableViewController.swift */,
+				40968DC41C7C47930071661E /* YNFillNumberTableViewCell.swift */,
+			);
+			path = "add statistics";
 			sourceTree = "<group>";
 		};
 		40E039811BF5C5F4007FFF2A /* location */ = {
@@ -1830,6 +1844,7 @@
 				4048E3F71C2BAB400035C415 /* YNHttpNearBy.swift in Sources */,
 				40ED43921BC613C3004713C9 /* YNTestFiledExtension.swift in Sources */,
 				40B650FC1BFC26C70019E7FD /* YNQuestionCollectionViewCell.swift in Sources */,
+				40968DC51C7C47930071661E /* YNFillNumberTableViewCell.swift in Sources */,
 				40D5729C1BD88EA000E19A12 /* YNResaultLoadModeCell.swift in Sources */,
 				40519C5B1BD74B2F00A8BE65 /* YNSearchResaultModel.swift in Sources */,
 				40D5EAF61C59F37C00DFCA71 /* YNCircleDetailsViewController.swift in Sources */,
@@ -1961,6 +1976,7 @@
 				40ED439D1BC61A75004713C9 /* YNNavigationController.swift in Sources */,
 				40D70F071C22A63700672A10 /* YNDateExtension.swift in Sources */,
 				40ACDF011C730D8A006B4C6A /* YNThreadDetailsInfoTableViewCell.swift in Sources */,
+				40968DC31C7C42750071661E /* YNFillStatisticsTableViewController.swift in Sources */,
 				408FAE451C586F98001D5B7D /* YNCircleViewController.swift in Sources */,
 				40ED439B1BC61A56004713C9 /* YNTabBarController.swift in Sources */,
 				40E0398A1BF5C5F4007FFF2A /* YNCalloutContentView.swift in Sources */,
