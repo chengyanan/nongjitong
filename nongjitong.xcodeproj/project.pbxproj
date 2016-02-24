@@ -214,6 +214,9 @@
 		40B8BD311C4CBF7000E9133C /* YNDocNameListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B8BD301C4CBF7000E9133C /* YNDocNameListViewController.swift */; };
 		40B8BD331C4CD6E900E9133C /* YNCatagoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B8BD321C4CD6E900E9133C /* YNCatagoryCollectionViewCell.swift */; };
 		40B8BD351C4CD70600E9133C /* YNDocListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B8BD341C4CD70600E9133C /* YNDocListCollectionViewCell.swift */; };
+		40BAE2A71C7D97D5009DF09F /* YNStatisticsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BAE2A61C7D97D5009DF09F /* YNStatisticsDetailsViewController.swift */; };
+		40BAE2A91C7D99CD009DF09F /* YNStatisticsDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BAE2A81C7D99CD009DF09F /* YNStatisticsDetailsModel.swift */; };
+		40BAE2AB1C7DA344009DF09F /* YNStatisticsDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BAE2AA1C7DA344009DF09F /* YNStatisticsDetailsTableViewCell.swift */; };
 		40BDF3041C4F2E34006AE250 /* YNDocDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BDF3031C4F2E34006AE250 /* YNDocDetailsViewController.swift */; };
 		40BDF3061C4F35F7006AE250 /* YNWebContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BDF3051C4F35F7006AE250 /* YNWebContentTableViewCell.swift */; };
 		40BDF3081C4F4EFF006AE250 /* YNDocAlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BDF3071C4F4EFF006AE250 /* YNDocAlbumTableViewCell.swift */; };
@@ -537,6 +540,9 @@
 		40B8BD301C4CBF7000E9133C /* YNDocNameListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDocNameListViewController.swift; sourceTree = "<group>"; };
 		40B8BD321C4CD6E900E9133C /* YNCatagoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCatagoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		40B8BD341C4CD70600E9133C /* YNDocListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDocListCollectionViewCell.swift; sourceTree = "<group>"; };
+		40BAE2A61C7D97D5009DF09F /* YNStatisticsDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNStatisticsDetailsViewController.swift; sourceTree = "<group>"; };
+		40BAE2A81C7D99CD009DF09F /* YNStatisticsDetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNStatisticsDetailsModel.swift; sourceTree = "<group>"; };
+		40BAE2AA1C7DA344009DF09F /* YNStatisticsDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNStatisticsDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		40BDF3031C4F2E34006AE250 /* YNDocDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDocDetailsViewController.swift; sourceTree = "<group>"; };
 		40BDF3051C4F35F7006AE250 /* YNWebContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNWebContentTableViewCell.swift; sourceTree = "<group>"; };
 		40BDF3071C4F4EFF006AE250 /* YNDocAlbumTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDocAlbumTableViewCell.swift; sourceTree = "<group>"; };
@@ -1279,6 +1285,9 @@
 			children = (
 				40968DC21C7C42750071661E /* YNFillStatisticsTableViewController.swift */,
 				40968DC41C7C47930071661E /* YNFillNumberTableViewCell.swift */,
+				40BAE2A61C7D97D5009DF09F /* YNStatisticsDetailsViewController.swift */,
+				40BAE2A81C7D99CD009DF09F /* YNStatisticsDetailsModel.swift */,
+				40BAE2AA1C7DA344009DF09F /* YNStatisticsDetailsTableViewCell.swift */,
 			);
 			path = "add statistics";
 			sourceTree = "<group>";
@@ -1827,9 +1836,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40BAE2AB1C7DA344009DF09F /* YNStatisticsDetailsTableViewCell.swift in Sources */,
 				401AD68D1BF03AAB00E747BF /* YNCategoryTableViewCell.swift in Sources */,
 				40983C8D1BFB256700EA2B04 /* YNSelectedProductModel.swift in Sources */,
 				40E039891BF5C5F4007FFF2A /* YNCallOutAnnotationView.swift in Sources */,
+				40BAE2A91C7D99CD009DF09F /* YNStatisticsDetailsModel.swift in Sources */,
 				40E0397E1BF5C5A4007FFF2A /* YNNearbyTitleView.swift in Sources */,
 				4043A4A91C1141E400F1F669 /* YNQuestionDetailViewController.swift in Sources */,
 				40D5AC151C796E8600DE683D /* YNAddViteItemViewController.swift in Sources */,
@@ -1896,6 +1907,7 @@
 				4003F7821BDF2F5400137258 /* YNProvinceTableViewController.swift in Sources */,
 				40DEA7E61C3A75A000BEB608 /* YNEarlyOtherSubscribeCell.swift in Sources */,
 				4003F7881BDF625800137258 /* YNBaseCityModel.swift in Sources */,
+				40BAE2A71C7D97D5009DF09F /* YNStatisticsDetailsViewController.swift in Sources */,
 				40FA6FF51BD4E61500CFE69C /* YNNewQuestionHeaderView.swift in Sources */,
 				40ED43881BC60B76004713C9 /* progressHUD.swift in Sources */,
 				40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */,

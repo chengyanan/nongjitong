@@ -252,11 +252,19 @@ class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITa
             let identify = "CELL_Vote_Item"
             var cell = tableView.dequeueReusableCellWithIdentifier(identify)
             
-            cell?.selectionStyle = .None
-            
             if cell == nil {
                 
                 cell = UITableViewCell(style: .Value1, reuseIdentifier: identify)
+            }
+            
+            cell?.selectionStyle = .None
+            if self.type == .Vote {
+                
+                cell?.accessoryType = .None
+                
+            } else if self.type == .Statistics {
+                
+                cell?.accessoryType = .DisclosureIndicator
             }
             
             let item = self.voteDetailsModel?.items[indexPath.row]
@@ -305,6 +313,24 @@ class YNVotoDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
         
         return cell!
+        
+        
+    }
+    
+    //MARK: tableview delegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        if self.type == .Statistics {
+        
+            if indexPath.section == 3 {
+            
+                let vc = YNStatisticsDetailsViewController(model: self.voteDetailsModel!.items[indexPath.row])
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+        }
         
         
     }
