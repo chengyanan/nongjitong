@@ -281,6 +281,7 @@
 		40E2370D1BFDCC0100321B12 /* YNAddSubscriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2370C1BFDCC0100321B12 /* YNAddSubscriptionTableViewCell.swift */; };
 		40E268471C2A46EC00E17B13 /* YNHttpMyQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E268461C2A46EC00E17B13 /* YNHttpMyQuestion.swift */; };
 		40E5ED1B1C17C3B100897799 /* YNInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E5ED1A1C17C3B100897799 /* YNInputView.swift */; };
+		40E6825A1C7EF16B005CEA7B /* Trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40E682591C7EF16B005CEA7B /* Trash@2x.png */; };
 		40E939EF1BD9CDC8001A5D35 /* YNPersionalSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E939E91BD9CDC8001A5D35 /* YNPersionalSettingTableViewController.swift */; };
 		40E939F01BD9CDC8001A5D35 /* YNSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E939EB1BD9CDC8001A5D35 /* YNSettingTableViewController.swift */; };
 		40ED43501BC60A28004713C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED434F1BC60A28004713C9 /* AppDelegate.swift */; };
@@ -607,6 +608,7 @@
 		40E2370C1BFDCC0100321B12 /* YNAddSubscriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNAddSubscriptionTableViewCell.swift; sourceTree = "<group>"; };
 		40E268461C2A46EC00E17B13 /* YNHttpMyQuestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNHttpMyQuestion.swift; sourceTree = "<group>"; };
 		40E5ED1A1C17C3B100897799 /* YNInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNInputView.swift; sourceTree = "<group>"; };
+		40E682591C7EF16B005CEA7B /* Trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trash@2x.png"; sourceTree = "<group>"; };
 		40E939E91BD9CDC8001A5D35 /* YNPersionalSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNPersionalSettingTableViewController.swift; sourceTree = "<group>"; };
 		40E939EB1BD9CDC8001A5D35 /* YNSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSettingTableViewController.swift; sourceTree = "<group>"; };
 		40ED434C1BC60A28004713C9 /* nongjitong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nongjitong.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1007,6 +1009,7 @@
 		40B8BC5A1C4C991400E9133C /* me */ = {
 			isa = PBXGroup;
 			children = (
+				40E682591C7EF16B005CEA7B /* Trash@2x.png */,
 				40B8BC5B1C4C991400E9133C /* my_article.png */,
 				40B8BC5C1C4C991400E9133C /* my_article@2x.png */,
 				40B8BC5D1C4C991400E9133C /* my_article@3x.png */,
@@ -1722,6 +1725,7 @@
 				40B8BD161C4C991400E9133C /* tab_question@3x.png in Resources */,
 				40B8BD0C1C4C991400E9133C /* askQuestionbtn@2x.png in Resources */,
 				40B8BCF11C4C991400E9133C /* bubble_left_blue@2x.png in Resources */,
+				40E6825A1C7EF16B005CEA7B /* Trash@2x.png in Resources */,
 				40B8BCED1C4C991400E9133C /* bubble_green.png in Resources */,
 				40B8BCC31C4C991400E9133C /* home_ask_question_location.png in Resources */,
 				40B8BCDA1C4C991400E9133C /* my_subscribe@3x.png in Resources */,

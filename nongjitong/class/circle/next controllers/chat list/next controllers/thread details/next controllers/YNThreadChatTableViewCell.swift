@@ -18,6 +18,8 @@ class YNThreadChatTableViewCell: UITableViewCell {
     
     var indexPath: NSIndexPath?
     
+    var isFirst = true
+    
     var delegate: YNThreadChatTableViewCellDelegate?
     
     var model: YNThreadChatAnswerModel? {
@@ -26,8 +28,8 @@ class YNThreadChatTableViewCell: UITableViewCell {
             
             if let _ = model {
                 
-                setInterface()
-                setLayout()
+                    setInterface()
+                    setLayout()
                 
                 //设置头像 和文字
                 self.contentButton.setTitle(model?.content, forState: .Normal)

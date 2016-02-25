@@ -91,6 +91,7 @@ class YNCircleChatListViewController: UIViewController, UICollectionViewDataSour
             self.loadMore()
         })
     }
+    
     func loadDataHeaderRefresh() {
         
         self.pageCount = 1

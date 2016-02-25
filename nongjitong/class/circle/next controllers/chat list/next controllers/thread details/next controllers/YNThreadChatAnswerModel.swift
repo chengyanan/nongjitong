@@ -58,6 +58,7 @@ class YNThreadChatAnswerModel {
     var avatar: String?
     var content: String?
     var add_time: String?
+    var user_id: String?
     
     var isMessageOwner: Bool?
     
@@ -71,6 +72,7 @@ class YNThreadChatAnswerModel {
         
         self.id = dict["id"] as? String
         self.user_name = dict["user_name"] as? String
+        self.user_id = dict["user_id"] as? String
         self.avatar = dict["avatar"] as? String
         self.content = dict["content"] as? String
         self.add_time = dict["add_time"] as? String

@@ -51,7 +51,7 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView()
         setLayout()
-
+        
     }
     
     func setLayout() {
@@ -62,6 +62,7 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
         Layout().addRightConstraint(tableView, toView: self.view, multiplier: 1, constant: 0)
     }
     
+
     //MARK: load data
     func loadMyQuestionDataFromServer() {
     
@@ -125,7 +126,10 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
                 
                 YNProgressHUD().showText("网络连接错误", toView: self.view)
         }
+        
     }
+    
+    
     
     func loadMyAnswerDataFromServer() {
     
@@ -135,7 +139,7 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
             
             progress.hideUsingAnimation()
             
-//            print("data - \(json)")
+            print("data - \(json)")
             
             if let status = json["status"] as? Int {
                 
@@ -223,6 +227,85 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
         self.navigationController?.pushViewController(questionDetailVc, animated: true)
         
     }
+
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if self .myType == .MyQuestion {
+        
+            if editingStyle == .Delete {
+                
+                deleteMyQuestion(self.dataAttay[indexPath.row], indexPath: indexPath)
+                
+            }
+            
+        } else {
+        
+            YNProgressHUD().showText("回答暂时还不能删哦", toView: self.view)
+        }
+        
+        
+    }
+    
+    
+    func deleteMyQuestion(model: YNQuestionModel, indexPath: NSIndexPath) {
+        
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "QuestionManage",
+            "a": "delQuestion",
+            "id": model.id
+        ]
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        
+        Network.post(kURL, params: params, success: { (data, response, error) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            do {
+                
+                let json: NSDictionary =  try NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                
+                print("data - \(json)")
+                
+                if let status = json["status"] as? Int {
+                    
+                    if status == 1 {
+                        
+                        
+                        self.dataAttay.removeAtIndex(indexPath.row)
+                        
+                        self.tableView.reloadData()
+                        
+                        
+                    } else if status == 0 {
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            //                            print(msg)
+                            YNProgressHUD().showText(msg, toView: self.view)
+                        }
+                    }
+                    
+                }
+                
+            } catch {
+                
+                YNProgressHUD().showText("请求错误", toView: self.view)
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("加载失败", toView: self.view)
+        }
+        
+        
+    }
+    
+    
+    
     
     
 }

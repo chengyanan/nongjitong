@@ -86,6 +86,12 @@ class YNThreadChatViewController: UIViewController, UITableViewDataSource, UITab
         self.tableView = tempTableView
         
         
+        self.tableView?.addHeaderRefreshWithActionHandler({ () -> Void in
+            
+            self.addMoreMessage()
+            
+        })
+        
         let tempinputView = YNInputView()
         tempinputView.delegate = self
         tempinputView.translatesAutoresizingMaskIntoConstraints = false
@@ -94,6 +100,13 @@ class YNThreadChatViewController: UIViewController, UITableViewDataSource, UITab
         
         setLayout()
         
+    }
+    
+    func addMoreMessage() {
+    
+        self.pageCount++
+        
+        self.loadMessages()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -123,7 +136,7 @@ class YNThreadChatViewController: UIViewController, UITableViewDataSource, UITab
         Layout().addRightConstraint(bottomInputView!, toView: self.view, multiplier: 1, constant: 0)
         
         //tableView
-        Layout().addTopConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
+        Layout().addTopConstraint(tableView!, toView: self.view, multiplier: 1, constant: 64)
         Layout().addLeftConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         Layout().addRightConstraint(tableView!, toView: self.view, multiplier: 1, constant: 0)
         Layout().addBottomToTopConstraint(tableView!, toView: bottomInputView!, multiplier: 1, constant: margin)
@@ -455,35 +468,67 @@ class YNThreadChatViewController: UIViewController, UITableViewDataSource, UITab
                         
                         let temparray = json["data"] as? NSArray
                         
-                        if temparray?.count < 20 {
-                            
-                            //显示加载更多
-                            self.isShowLoadMore = false
-                            
-                        } else {
-                            
-                            //不显示加载更多
-                            self.isShowLoadMore = true
-                        }
-                        
                         if self.pageCount == 1 {
                             
                             self.dataArray.removeAll()
+           
+                            for item in temparray! {
+                                
+                                let tempModel:YNThreadChatAnswerModel  = YNThreadChatAnswerModel(dict: item as! NSDictionary)
+                                
+                                //要反回每个message的发出者id 然后和使用者做比较 决定message放左边还是右边， 自己发的放右边
+                                
+                                if tempModel.user_id == kUser_ID() as? String {
+                                    
+                                    //是信息发出者
+                                    tempModel.isMessageOwner = true
+                                    
+                                } else {
+                                    
+                                    tempModel.isMessageOwner = false
+                                }
+                                
+                                
+                                
+                                self.dataArray.append(tempModel)
+                                
+                            }
+                            
+                            self.tableView?.reloadData()
+                            
+                            if self.pageCount == 1 {
+                                
+                                self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: self.dataArray.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+                            }
+                            
+                            
+                        } else {
+                        
+                        
+                            for item in temparray! {
+                            
+                                let tempModel:YNThreadChatAnswerModel  = YNThreadChatAnswerModel(dict: item as! NSDictionary)
+                                
+                                if tempModel.user_id == kUser_ID() as? String {
+                                    
+                                    //是信息发出者
+                                    tempModel.isMessageOwner = true
+                                    
+                                } else {
+                                    
+                                    tempModel.isMessageOwner = false
+                                }
+                                
+                                self.dataArray.insert(tempModel, atIndex: 0)
+                            }
+                            
+                           self.tableView?.reloadData()
+                            
+                            
                         }
                         
-                        for item in temparray! {
-                            
-                            let tempModel:YNThreadChatAnswerModel  = YNThreadChatAnswerModel(dict: item as! NSDictionary)
-                            
-                            //TODO: 要反回每个message的发出者id 然后和使用者做比较 决定message放左边还是右边， 自己发的放右边
-                            
-                            tempModel.isMessageOwner = false
-                            
-                            self.dataArray.append(tempModel)
-                            
-                        }
                         
-                        self.tableView?.reloadData()
+                        
                         
                         
                     } else if status == 0 {
@@ -514,19 +559,19 @@ class YNThreadChatViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     //是否显示加载更多
-    var isShowLoadMore = false {
-        
-        didSet {
-            
-            if isShowLoadMore {
-                
-                self.tableView?.addFooterRefresh()
-            } else {
-                
-                self.tableView?.removeFooterRefresh()
-            }
-        }
-    }
+//    var isShowLoadMore = false {
+//        
+//        didSet {
+//            
+//            if isShowLoadMore {
+//                
+//                self.tableView?.addFooterRefresh()
+//            } else {
+//                
+//                self.tableView?.removeFooterRefresh()
+//            }
+//        }
+//    }
     
     
 }
