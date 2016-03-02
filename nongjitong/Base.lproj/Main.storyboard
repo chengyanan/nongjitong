@@ -42,6 +42,11 @@
                                 <action selector="leftbarButtonClick:" destination="qyf-m8-zJv" id="d3m-bH-G8W"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="提问" id="2Kx-jo-82s">
+                            <connections>
+                                <action selector="askQuestionClick:" destination="qyf-m8-zJv" id="eVp-qM-ZBF"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOz-3N-fxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -394,7 +399,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paR-Rw-8T6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3158" y="3375"/>
+            <point key="canvasLocation" x="-3158" y="3571"/>
         </scene>
         <!--Setting Table View Controller-->
         <scene sceneID="plj-cl-HAf">
@@ -497,7 +502,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sG-Nr-47L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3158" y="4076"/>
+            <point key="canvasLocation" x="-3158" y="4328"/>
         </scene>
         <!--User Introduce View Controller-->
         <scene sceneID="7gL-a4-nEg">
@@ -659,7 +664,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUb-0r-Y1B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3158" y="4748"/>
+            <point key="canvasLocation" x="-3150" y="5020"/>
         </scene>
         <!--完善个人资料-->
         <scene sceneID="50f-Oq-V3V">
@@ -962,7 +967,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJu-P8-Jwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2273" y="2485"/>
+            <point key="canvasLocation" x="-2449" y="2605"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="A4q-Mg-87b">
@@ -978,7 +983,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Aa-pU-hnH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2986" y="2485"/>
+            <point key="canvasLocation" x="-3150" y="2605"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3bU-j5-STo">
@@ -994,7 +999,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vL-wX-XjC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1561" y="3191"/>
+            <point key="canvasLocation" x="-1561" y="3323"/>
         </scene>
         <!--Province Table View Controller-->
         <scene sceneID="K0M-Hw-Sq3">
@@ -1015,7 +1020,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJu-SS-pFL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1561" y="3850"/>
+            <point key="canvasLocation" x="-1561" y="3998"/>
         </scene>
         <!--City Table View Controller-->
         <scene sceneID="VHb-Tl-gTC">
@@ -1033,7 +1038,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BXr-Lh-VwM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-858" y="3850"/>
+            <point key="canvasLocation" x="-834" y="3998"/>
         </scene>
         <!--昵称-->
         <scene sceneID="4IY-SG-fjJ">
@@ -1082,7 +1087,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c4c-Um-f61" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-858" y="3191"/>
+            <point key="canvasLocation" x="-834" y="3323"/>
         </scene>
         <!--个人信息-->
         <scene sceneID="o0C-kd-jh8">
@@ -1410,7 +1415,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nwT-O2-99B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2417" y="3375"/>
+            <point key="canvasLocation" x="-2437" y="3571"/>
         </scene>
         <!--Motify Password View Controller-->
         <scene sceneID="eZZ-TI-FgB">
@@ -1474,7 +1479,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vZP-Uh-sgp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2417" y="4041"/>
+            <point key="canvasLocation" x="-2473" y="4328"/>
         </scene>
         <!--农技通-->
         <scene sceneID="L07-P1-bms">
@@ -1597,7 +1602,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zSu-Qf-6VS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="928" y="261"/>
+            <point key="canvasLocation" x="1052" y="1044"/>
         </scene>
         <!--提问-->
         <scene sceneID="8zQ-7O-29x">
@@ -1652,7 +1657,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frq-4x-CoW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-865" y="2485"/>
+            <point key="canvasLocation" x="-1089" y="2605"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="p3w-9F-lbR">
@@ -1668,7 +1673,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yI1-td-nCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1561" y="2485"/>
+            <point key="canvasLocation" x="-1761" y="2605"/>
         </scene>
         <!--Search Resault Detail View Controller-->
         <scene sceneID="h41-m7-LSe">
@@ -1736,7 +1741,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tSg-4r-O1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1629" y="261"/>
+            <point key="canvasLocation" x="1717" y="1044"/>
         </scene>
         <!--救援-->
         <scene sceneID="d2s-7G-2Gx">
@@ -1755,11 +1760,11 @@
             </objects>
             <point key="canvasLocation" x="-1739" y="-1032"/>
         </scene>
-        <!--搜索-->
+        <!--农技-->
         <scene sceneID="zGq-cL-FJg">
             <objects>
                 <navigationController id="Mez-u5-dlg" customClass="YNNavigationController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="搜索" image="tabBar_home" id="fAA-fg-4u2"/>
+                    <tabBarItem key="tabBarItem" title="农技" image="tabBar_home" id="fAA-fg-4u2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8EP-40-aCE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1770,7 +1775,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RhW-aQ-BwN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1739" y="272"/>
+            <point key="canvasLocation" x="-1731" y="1044"/>
         </scene>
         <!--预警-->
         <scene sceneID="Lb9-8i-nFb">
@@ -1787,7 +1792,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fYo-VT-VHG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1739" y="948"/>
+            <point key="canvasLocation" x="-2143" y="1856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OEU-iG-mfQ">
@@ -1803,7 +1808,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9SK-vO-F3T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-386" y="277"/>
+            <point key="canvasLocation" x="-326" y="1044"/>
         </scene>
         <!--搜索-->
         <scene sceneID="PvK-tH-KS8">
@@ -1853,12 +1858,152 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pza-DB-rYQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300" y="261"/>
+            <point key="canvasLocation" x="388" y="1044"/>
         </scene>
-        <!--搜索-->
+        <!--发现-->
+        <scene sceneID="7mM-tt-ECg">
+            <objects>
+                <navigationController title="发现" id="AAe-F9-XpY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="发现" image="tabbar_discover.png" id="pw0-En-lbG"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G4y-no-Wyr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="W4N-PT-Fal" kind="relationship" relationship="rootViewController" id="Rch-Fz-ri5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CaM-VH-8Tj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1732" y="319"/>
+        </scene>
+        <!--发现-->
+        <scene sceneID="Re9-yl-xcM">
+            <objects>
+                <viewController id="W4N-PT-Fal" customClass="YNDiscoverViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EYL-Ix-Epb"/>
+                        <viewControllerLayoutGuide type="bottom" id="S11-G9-dqi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="piS-p0-Dgv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i13-w4-NBI">
+                                <rect key="frame" x="50" y="100" width="235" height="78"/>
+                                <color key="backgroundColor" red="0.81960784313725488" green="0.88235294117647056" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="新闻" image="newsButton.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEF-tX-nnU">
+                                <rect key="frame" x="315" y="100" width="235" height="78"/>
+                                <color key="backgroundColor" red="0.19215686274509802" green="0.69019607843137254" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="圈子" image="circleButton.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k90-Vn-8ic">
+                                <rect key="frame" x="50" y="208" width="235" height="78"/>
+                                <color key="backgroundColor" red="0.99607843137254903" green="0.74509803921568629" blue="0.054901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="预警" image="warningButton.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBv-3M-71G">
+                                <rect key="frame" x="315" y="208" width="235" height="78"/>
+                                <color key="backgroundColor" red="0.56470588235294117" green="0.39215686274509803" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="专家" image="expertButton.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8q-Q8-dqx">
+                                <rect key="frame" x="50" y="316" width="235" height="77"/>
+                                <color key="backgroundColor" red="0.15686274509803921" green="0.37647058823529411" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="品牌" image="brandButton.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BG6-9b-Tz5">
+                                <rect key="frame" x="315" y="316" width="235" height="77"/>
+                                <color key="backgroundColor" red="0.66274509803921566" green="0.70980392156862748" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="农盟" image="nongmengButton.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5E-WE-PTo">
+                                <rect key="frame" x="50" y="423" width="235" height="78"/>
+                                <color key="backgroundColor" red="0.95294117647058818" green="0.44705882352941173" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="外链" image="otherLinksButton.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JEF-tX-nnU" firstAttribute="top" secondItem="i13-w4-NBI" secondAttribute="top" id="2hd-BO-95R"/>
+                            <constraint firstItem="dBv-3M-71G" firstAttribute="leading" secondItem="JEF-tX-nnU" secondAttribute="leading" id="BaI-Er-Jxt"/>
+                            <constraint firstItem="k90-Vn-8ic" firstAttribute="leading" secondItem="i13-w4-NBI" secondAttribute="leading" id="C8X-Ey-Lae"/>
+                            <constraint firstAttribute="trailing" secondItem="JEF-tX-nnU" secondAttribute="trailing" constant="50" id="ChC-Pp-JLY"/>
+                            <constraint firstItem="BG6-9b-Tz5" firstAttribute="leading" secondItem="dBv-3M-71G" secondAttribute="leading" id="IeG-fg-ddP"/>
+                            <constraint firstItem="BG6-9b-Tz5" firstAttribute="top" secondItem="d8q-Q8-dqx" secondAttribute="top" id="JiE-kK-i7y"/>
+                            <constraint firstItem="h5E-WE-PTo" firstAttribute="leading" secondItem="d8q-Q8-dqx" secondAttribute="leading" id="KDg-Qe-aBb"/>
+                            <constraint firstItem="dBv-3M-71G" firstAttribute="trailing" secondItem="JEF-tX-nnU" secondAttribute="trailing" id="KPg-Vh-TN2"/>
+                            <constraint firstItem="BG6-9b-Tz5" firstAttribute="leading" secondItem="d8q-Q8-dqx" secondAttribute="leading" id="Kjd-gY-Rhz"/>
+                            <constraint firstItem="h5E-WE-PTo" firstAttribute="trailing" secondItem="d8q-Q8-dqx" secondAttribute="trailing" id="Mbc-0P-gzS"/>
+                            <constraint firstItem="h5E-WE-PTo" firstAttribute="top" secondItem="d8q-Q8-dqx" secondAttribute="bottom" constant="30" id="SOf-sR-VWq"/>
+                            <constraint firstItem="dBv-3M-71G" firstAttribute="bottom" secondItem="k90-Vn-8ic" secondAttribute="bottom" id="Su9-ah-uxG"/>
+                            <constraint firstItem="BG6-9b-Tz5" firstAttribute="trailing" secondItem="dBv-3M-71G" secondAttribute="trailing" id="T3W-m7-BTR"/>
+                            <constraint firstItem="i13-w4-NBI" firstAttribute="leading" secondItem="piS-p0-Dgv" secondAttribute="leading" constant="50" id="UPE-bO-i8D"/>
+                            <constraint firstItem="k90-Vn-8ic" firstAttribute="trailing" secondItem="i13-w4-NBI" secondAttribute="trailing" id="afX-si-3IV"/>
+                            <constraint firstItem="JEF-tX-nnU" firstAttribute="width" secondItem="i13-w4-NBI" secondAttribute="width" id="cxF-oM-vUF"/>
+                            <constraint firstItem="JEF-tX-nnU" firstAttribute="leading" secondItem="i13-w4-NBI" secondAttribute="trailing" constant="30" id="dIB-F5-46l"/>
+                            <constraint firstItem="h5E-WE-PTo" firstAttribute="height" secondItem="i13-w4-NBI" secondAttribute="height" id="fqB-vE-PwU"/>
+                            <constraint firstItem="d8q-Q8-dqx" firstAttribute="height" secondItem="i13-w4-NBI" secondAttribute="height" id="hEu-0P-SQi"/>
+                            <constraint firstItem="k90-Vn-8ic" firstAttribute="height" secondItem="i13-w4-NBI" secondAttribute="height" id="jOh-yl-gPa"/>
+                            <constraint firstItem="d8q-Q8-dqx" firstAttribute="height" secondItem="i13-w4-NBI" secondAttribute="height" id="kun-RC-de3"/>
+                            <constraint firstItem="k90-Vn-8ic" firstAttribute="height" secondItem="i13-w4-NBI" secondAttribute="height" id="p0N-3h-fhV"/>
+                            <constraint firstItem="d8q-Q8-dqx" firstAttribute="leading" secondItem="k90-Vn-8ic" secondAttribute="leading" id="pCq-k2-Xfu"/>
+                            <constraint firstItem="dBv-3M-71G" firstAttribute="top" secondItem="k90-Vn-8ic" secondAttribute="top" id="rYz-x8-hC0"/>
+                            <constraint firstItem="i13-w4-NBI" firstAttribute="top" secondItem="EYL-Ix-Epb" secondAttribute="bottom" constant="36" id="tbD-26-c2S"/>
+                            <constraint firstItem="JEF-tX-nnU" firstAttribute="bottom" secondItem="i13-w4-NBI" secondAttribute="bottom" id="uGO-xS-OHz"/>
+                            <constraint firstItem="BG6-9b-Tz5" firstAttribute="bottom" secondItem="d8q-Q8-dqx" secondAttribute="bottom" id="uup-in-sst"/>
+                            <constraint firstItem="d8q-Q8-dqx" firstAttribute="trailing" secondItem="k90-Vn-8ic" secondAttribute="trailing" id="xjv-qH-GaH"/>
+                            <constraint firstItem="S11-G9-dqi" firstAttribute="top" secondItem="h5E-WE-PTo" secondAttribute="bottom" constant="50" id="zDq-WP-6yB"/>
+                            <constraint firstItem="d8q-Q8-dqx" firstAttribute="top" secondItem="k90-Vn-8ic" secondAttribute="bottom" constant="30" id="zRb-XM-SfF"/>
+                            <constraint firstItem="k90-Vn-8ic" firstAttribute="top" secondItem="i13-w4-NBI" secondAttribute="bottom" constant="30" id="zaA-vJ-qYt"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Kjd-gY-Rhz"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="发现" id="sbY-tj-aFd">
+                        <barButtonItem key="leftBarButtonItem" image="item_me" id="rK3-0C-fVP">
+                            <connections>
+                                <action selector="leftBarButtonClick:" destination="W4N-PT-Fal" id="owI-ui-Of8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="brandButton" destination="d8q-Q8-dqx" id="q9w-wq-wGI"/>
+                        <outlet property="circleButton" destination="JEF-tX-nnU" id="iaP-0S-ZpG"/>
+                        <outlet property="expertButton" destination="dBv-3M-71G" id="f8j-js-ZlH"/>
+                        <outlet property="newsButton" destination="i13-w4-NBI" id="y0d-wv-kpB"/>
+                        <outlet property="nongmengButton" destination="BG6-9b-Tz5" id="7eK-DS-9di"/>
+                        <outlet property="otherLinksButton" destination="h5E-WE-PTo" id="7B3-aU-dRA"/>
+                        <outlet property="warningButton" destination="k90-Vn-8ic" id="2Pc-2B-VPv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ufn-1s-3fS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1071" y="319"/>
+        </scene>
+        <!--农技-->
         <scene sceneID="eN4-mu-tin">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="qEV-VL-D7s" customClass="YNSecondSearchViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="农技" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="qEV-VL-D7s" customClass="YNSecondSearchViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cvP-31-P4x"/>
                         <viewControllerLayoutGuide type="bottom" id="s5X-Qo-ygf"/>
@@ -1868,7 +2013,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="搜索" id="TC8-c8-tll">
+                    <navigationItem key="navigationItem" title="农技" id="TC8-c8-tll">
                         <barButtonItem key="leftBarButtonItem" image="item_me" id="qcO-1o-h9j">
                             <connections>
                                 <action selector="leftItemClick:" destination="qEV-VL-D7s" id="nE6-yp-33X"/>
@@ -1878,12 +2023,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mRS-fe-NO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1055" y="272"/>
+            <point key="canvasLocation" x="-1023" y="1044"/>
         </scene>
         <!--Early Waring View Controller-->
         <scene sceneID="BdT-xH-3V1">
             <objects>
-                <viewController id="weu-DS-vJc" customClass="YNEarlyWaringViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SB_EarlyWaring" hidesBottomBarWhenPushed="YES" id="weu-DS-vJc" customClass="YNEarlyWaringViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ApU-gY-qgJ"/>
                         <viewControllerLayoutGuide type="bottom" id="9DV-ZN-uTH"/>
@@ -1893,7 +2038,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nKa-qH-zja">
-                                <rect key="frame" x="0.0" y="64" width="600" height="435"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CELL_OtherSubscript" rowHeight="87" id="dQf-gx-fcP" customClass="YNEarlyOtherSubscribeCell" customModule="nongjitong" customModuleProvider="target">
@@ -1961,26 +2106,14 @@
                                     <outlet property="delegate" destination="weu-DS-vJc" id="dGk-8x-sM8"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OUa-HR-M5g">
-                                <rect key="frame" x="208" y="507" width="185" height="29"/>
-                                <segments>
-                                    <segment title="给我的方案"/>
-                                    <segment title="写方案给别人"/>
-                                </segments>
-                                <connections>
-                                    <action selector="selectChanged:" destination="weu-DS-vJc" eventType="valueChanged" id="5jn-U4-vHW"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="nKa-qH-zja" secondAttribute="trailing" id="4yF-VF-HzZ"/>
-                            <constraint firstItem="9DV-ZN-uTH" firstAttribute="top" secondItem="nKa-qH-zja" secondAttribute="bottom" constant="52" id="QbK-V0-ahS"/>
+                            <constraint firstItem="9DV-ZN-uTH" firstAttribute="top" secondItem="nKa-qH-zja" secondAttribute="bottom" id="QbK-V0-ahS"/>
                             <constraint firstItem="nKa-qH-zja" firstAttribute="top" secondItem="EqC-6w-O7h" secondAttribute="top" constant="64" id="XhL-V8-cdv"/>
-                            <constraint firstItem="OUa-HR-M5g" firstAttribute="top" secondItem="nKa-qH-zja" secondAttribute="bottom" constant="8" symbolic="YES" id="aP6-Dg-zYb"/>
                             <constraint firstItem="nKa-qH-zja" firstAttribute="top" secondItem="EqC-6w-O7h" secondAttribute="topMargin" id="abw-Uj-KMq"/>
                             <constraint firstItem="nKa-qH-zja" firstAttribute="leading" secondItem="EqC-6w-O7h" secondAttribute="leading" id="kOO-Zn-jtB"/>
-                            <constraint firstItem="OUa-HR-M5g" firstAttribute="centerX" secondItem="nKa-qH-zja" secondAttribute="centerX" id="q5f-e7-aQs"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -1990,19 +2123,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="hKB-wy-fum">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="item_me" id="jgc-BB-qS1">
-                            <connections>
-                                <action selector="leftbarButtonClick:" destination="weu-DS-vJc" id="7vf-o0-Zyw"/>
-                            </connections>
-                        </barButtonItem>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T5x-zY-c8e">
-                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="OUa-HR-M5g">
+                            <rect key="frame" x="208" y="8" width="185" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="农场 合作社"/>
+                            <segments>
+                                <segment title="给我的方案"/>
+                                <segment title="写方案给别人"/>
+                            </segments>
                             <connections>
-                                <action selector="interCircleInterface:" destination="weu-DS-vJc" eventType="touchUpInside" id="8GB-Tw-vnu"/>
+                                <action selector="selectChanged:" destination="weu-DS-vJc" eventType="valueChanged" id="5jn-U4-vHW"/>
                             </connections>
-                        </button>
+                        </segmentedControl>
                     </navigationItem>
                     <connections>
                         <outlet property="segmentController" destination="OUa-HR-M5g" id="D4R-M6-MFp"/>
@@ -2011,7 +2142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rr-uJ-EAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1071" y="948"/>
+            <point key="canvasLocation" x="-1089" y="1856"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="v3P-kJ-Kxi">
@@ -2026,8 +2157,8 @@
                         <outlet property="customTabBar" destination="CQ3-2C-DAQ" id="kqT-XV-Efu"/>
                         <segue destination="KU6-ga-QPn" kind="relationship" relationship="viewControllers" id="3zT-07-v4t"/>
                         <segue destination="TLJ-hy-rP9" kind="relationship" relationship="viewControllers" id="zyu-gm-3po"/>
-                        <segue destination="Mez-u5-dlg" kind="relationship" relationship="viewControllers" id="tQ4-mw-hFZ"/>
-                        <segue destination="ca2-Bq-3tl" kind="relationship" relationship="viewControllers" id="dP2-ie-FjI"/>
+                        <segue destination="AAe-F9-XpY" kind="relationship" relationship="viewControllers" id="EOH-nl-uLL"/>
+                        <segue destination="Mez-u5-dlg" kind="relationship" relationship="viewControllers" id="B0O-cd-TTC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="19H-Ae-CSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2036,6 +2167,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="brandButton.png" width="50" height="50"/>
+        <image name="circleButton.png" width="50" height="50"/>
+        <image name="expertButton.png" width="50" height="50"/>
         <image name="home_page_default_avatar_image" width="42" height="42"/>
         <image name="item_me" width="20" height="21"/>
         <image name="myWaring" width="23" height="23"/>
@@ -2043,13 +2177,18 @@
         <image name="my_attention" width="24" height="24"/>
         <image name="my_center_seting.png" width="23" height="23"/>
         <image name="my_subscribe" width="24" height="24"/>
+        <image name="newsButton.png" width="50" height="50"/>
+        <image name="nongmengButton.png" width="50" height="50"/>
+        <image name="otherLinksButton.png" width="50" height="50"/>
         <image name="tabBar_home" width="25" height="25"/>
         <image name="tabBar_waring" width="22" height="22"/>
         <image name="tab_question" width="20" height="20"/>
         <image name="tab_waring" width="20" height="20"/>
+        <image name="tabbar_discover.png" width="23" height="23"/>
         <image name="user_default_avatar" width="100" height="100"/>
         <image name="user_seting_my_question" width="23" height="23"/>
         <image name="user_seting_question_feedback" width="23" height="23"/>
+        <image name="warningButton.png" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ORS-AJ-w28"/>

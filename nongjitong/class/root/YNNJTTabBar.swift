@@ -20,11 +20,11 @@ class YNNJTTabBar: UITabBar {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.addSubview(askQuestionButton)
-        
-        askQuestionButton.addTarget(self, action: "askQuestionButtonDidClick", forControlEvents: .TouchUpInside)
-        
-        addTagToUITarBarButton()
+//        self.addSubview(askQuestionButton)
+//        
+//        askQuestionButton.addTarget(self, action: "askQuestionButtonDidClick", forControlEvents: .TouchUpInside)
+//        
+//        addTagToUITarBarButton()
     }
     
     //MARK: event response
@@ -47,31 +47,31 @@ class YNNJTTabBar: UITabBar {
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let width = self.bounds.width / CGFloat(buttonCount)
-        let height = self.bounds.height
-        let frame = CGRect(x: 0, y: 0, width: width, height: height)
-        
-        //set askQuestionButton's  frame
-        let buttonFrame = CGRect(x: 0, y: 0, width: width - 12, height: height - 12)
-        askQuestionButton.frame = buttonFrame
-        askQuestionButton.center = CGPoint(x: self.bounds.width * 0.5, y: self.bounds.height * 0.5)
-        
-        //set 4 item's frame
-        for view in self.subviews {
-            
-            if view is UIControl && !(view is UIButton) {
-                
-                    view.frame = CGRectOffset(frame, width * CGFloat(view.tag), 0)
-
-            }
-            
-        }
-
-//         print(self.subviews as NSArray)
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//        let width = self.bounds.width / CGFloat(buttonCount)
+//        let height = self.bounds.height
+//        let frame = CGRect(x: 0, y: 0, width: width, height: height)
+//        
+//        //set askQuestionButton's  frame
+//        let buttonFrame = CGRect(x: 0, y: 0, width: width - 12, height: height - 12)
+//        askQuestionButton.frame = buttonFrame
+//        askQuestionButton.center = CGPoint(x: self.bounds.width * 0.5, y: self.bounds.height * 0.5)
+//        
+//        //set 4 item's frame
+//        for view in self.subviews {
+//            
+//            if view is UIControl && !(view is UIButton) {
+//                
+//                    view.frame = CGRectOffset(frame, width * CGFloat(view.tag), 0)
+//
+//            }
+//            
+//        }
+//
+////         print(self.subviews as NSArray)
+//    }
     
     
     private let buttonCount = 5

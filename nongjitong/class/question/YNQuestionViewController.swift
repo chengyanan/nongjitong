@@ -139,6 +139,37 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
+    @IBAction func askQuestionClick(sender: AnyObject) {
+        
+        if let _ = kUser_ID() as? String {
+            
+            //已登陆
+            let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+            let askVc = mainStoryBoard.instantiateViewControllerWithIdentifier("SB_AskQuestion")
+            
+            
+            self.presentViewController(askVc, animated: true) { () -> Void in
+                
+            }
+            
+            
+        } else {
+            
+            //未登录
+            let signInVc = YNSignInViewController()
+            let signInNaVc = UINavigationController(rootViewController: signInVc)
+            self.presentViewController(signInNaVc, animated: true, completion: { () -> Void in
+                
+            })
+            
+        }
+        
+        
+    }
+    
+    
+    
+    
     //MARK: 数据加载
     func loadDataFromServer() {
         

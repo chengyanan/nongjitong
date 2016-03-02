@@ -153,7 +153,7 @@ class YNNearbyViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         model0.isSelected = true
         let model1 = YNSelectedProductModel(id: "1", name: "生产者")
         let model2 = YNSelectedProductModel(id: "2", name: "农资人")
-        let model3 = YNSelectedProductModel(id: "3", name: "经纪人")
+        let model3 = YNSelectedProductModel(id: "3", name: "农技人")
         tempArray.append(model0)
         tempArray.append(model1)
         tempArray.append(model2)

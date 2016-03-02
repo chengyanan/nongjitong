@@ -125,16 +125,16 @@ class YNEarlyWaringViewController: UIViewController, UITableViewDataSource, UITa
         
     }
     
-    //MARK: event response
-    @IBAction func leftbarButtonClick(sender: AnyObject) {
-        
-        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        
-        let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting")
-        
-        self.navigationController?.pushViewController(settingVc, animated: true)
-        
-    }
+   //MARK: event response
+//    @IBAction func leftbarButtonClick(sender: AnyObject) {
+//        
+//        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+//        
+//        let settingVc = storyBoard.instantiateViewControllerWithIdentifier("SB_Setting")
+//        
+//        self.navigationController?.pushViewController(settingVc, animated: true)
+//        
+//    }
     
     @IBAction func selectChanged(sender: AnyObject) {
         

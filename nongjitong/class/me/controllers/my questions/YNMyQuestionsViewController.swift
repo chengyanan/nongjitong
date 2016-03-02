@@ -31,7 +31,9 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
                 self.title = "我的回答"
                 self.loadMyAnswerDataFromServer()
             }
+            
         }
+        
     }
     
     let tableView: UITableView = {
@@ -245,7 +247,6 @@ class YNMyQuestionsViewController: UIViewController, UITableViewDataSource, UITa
         
         
     }
-    
     
     func deleteMyQuestion(model: YNQuestionModel, indexPath: NSIndexPath) {
         

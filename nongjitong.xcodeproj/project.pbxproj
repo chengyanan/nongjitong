@@ -224,6 +224,17 @@
 		40BDF30C1C4F8CC3006AE250 /* YNDocDetailListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BDF30B1C4F8CC3006AE250 /* YNDocDetailListHeaderView.swift */; };
 		40C1F1FB1C7467660055A43E /* YNCreatVoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1F1FA1C7467660055A43E /* YNCreatVoteViewController.swift */; };
 		40C6B5411C34D485003004C5 /* YNSearchCatagoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6B5401C34D485003004C5 /* YNSearchCatagoryModel.swift */; };
+		40CE01CE1C867C5B00874B65 /* tabbar_discover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01CC1C867C5B00874B65 /* tabbar_discover@2x.png */; };
+		40CE01CF1C867C5B00874B65 /* tabbar_discover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01CD1C867C5B00874B65 /* tabbar_discover@3x.png */; };
+		40CE01D21C8685C700874B65 /* YNDiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE01D11C8685C700874B65 /* YNDiscoverViewController.swift */; };
+		40CE01DB1C86A4D000874B65 /* newsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01D41C86A4D000874B65 /* newsButton@2x.png */; };
+		40CE01DC1C86A4D000874B65 /* circleButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01D51C86A4D000874B65 /* circleButton@2x.png */; };
+		40CE01DD1C86A4D000874B65 /* warningButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01D61C86A4D000874B65 /* warningButton@2x.png */; };
+		40CE01DE1C86A4D000874B65 /* expertButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01D71C86A4D000874B65 /* expertButton@2x.png */; };
+		40CE01DF1C86A4D000874B65 /* brandButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01D81C86A4D000874B65 /* brandButton@2x.png */; };
+		40CE01E01C86A4D000874B65 /* nongmengButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01D91C86A4D000874B65 /* nongmengButton@2x.png */; };
+		40CE01E11C86A4D000874B65 /* otherLinksButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01DA1C86A4D000874B65 /* otherLinksButton@2x.png */; };
+		40CE01E31C86BE2B00874B65 /* YNDescoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE01E21C86BE2B00874B65 /* YNDescoverButton.swift */; };
 		40D1D4091C7A9A3000107080 /* YNEndTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1D4081C7A9A3000107080 /* YNEndTimeCollectionViewCell.swift */; };
 		40D1D40C1C7AC84800107080 /* YNVotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1D40B1C7AC84800107080 /* YNVotoDetailsViewController.swift */; };
 		40D1D40E1C7ACEE100107080 /* YNVoteDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D1D40D1C7ACEE100107080 /* YNVoteDetailsModel.swift */; };
@@ -551,6 +562,17 @@
 		40BDF30B1C4F8CC3006AE250 /* YNDocDetailListHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDocDetailListHeaderView.swift; sourceTree = "<group>"; };
 		40C1F1FA1C7467660055A43E /* YNCreatVoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCreatVoteViewController.swift; sourceTree = "<group>"; };
 		40C6B5401C34D485003004C5 /* YNSearchCatagoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YNSearchCatagoryModel.swift; path = ../YNSearchCatagoryModel.swift; sourceTree = "<group>"; };
+		40CE01CC1C867C5B00874B65 /* tabbar_discover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_discover@2x.png"; sourceTree = "<group>"; };
+		40CE01CD1C867C5B00874B65 /* tabbar_discover@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_discover@3x.png"; sourceTree = "<group>"; };
+		40CE01D11C8685C700874B65 /* YNDiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDiscoverViewController.swift; sourceTree = "<group>"; };
+		40CE01D41C86A4D000874B65 /* newsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newsButton@2x.png"; sourceTree = "<group>"; };
+		40CE01D51C86A4D000874B65 /* circleButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleButton@2x.png"; sourceTree = "<group>"; };
+		40CE01D61C86A4D000874B65 /* warningButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warningButton@2x.png"; sourceTree = "<group>"; };
+		40CE01D71C86A4D000874B65 /* expertButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "expertButton@2x.png"; sourceTree = "<group>"; };
+		40CE01D81C86A4D000874B65 /* brandButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brandButton@2x.png"; sourceTree = "<group>"; };
+		40CE01D91C86A4D000874B65 /* nongmengButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nongmengButton@2x.png"; sourceTree = "<group>"; };
+		40CE01DA1C86A4D000874B65 /* otherLinksButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "otherLinksButton@2x.png"; sourceTree = "<group>"; };
+		40CE01E21C86BE2B00874B65 /* YNDescoverButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDescoverButton.swift; sourceTree = "<group>"; };
 		40D1D4081C7A9A3000107080 /* YNEndTimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNEndTimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		40D1D40B1C7AC84800107080 /* YNVotoDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNVotoDetailsViewController.swift; sourceTree = "<group>"; };
 		40D1D40D1C7ACEE100107080 /* YNVoteDetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNVoteDetailsModel.swift; sourceTree = "<group>"; };
@@ -965,6 +987,7 @@
 		40B8BBEF1C4C927100E9133C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				40CE01D31C86A4BF00874B65 /* discover */,
 				400594E71C75808E005DC5E6 /* launchimage */,
 				4037548E1C5CB80B002569CB /* circle */,
 				40B8BC441C4C991400E9133C /* homepage */,
@@ -1101,6 +1124,8 @@
 		40B8BC9A1C4C991400E9133C /* tabBar */ = {
 			isa = PBXGroup;
 			children = (
+				40CE01CC1C867C5B00874B65 /* tabbar_discover@2x.png */,
+				40CE01CD1C867C5B00874B65 /* tabbar_discover@3x.png */,
 				40FAE9BB1C4DF84000F9DCF3 /* sapi-nav-back-btn-right.png */,
 				40FAE9BC1C4DF84000F9DCF3 /* sapi-nav-back-btn-right@2x.png */,
 				40FAE9BD1C4DF84000F9DCF3 /* sapi-nav-back-btn-right@3x.png */,
@@ -1184,6 +1209,29 @@
 				40B1A8541C50742D00B2D9F1 /* YNDocPhotoModel.swift */,
 			);
 			path = nextControllers;
+			sourceTree = "<group>";
+		};
+		40CE01D01C8685A400874B65 /* discover */ = {
+			isa = PBXGroup;
+			children = (
+				40CE01D11C8685C700874B65 /* YNDiscoverViewController.swift */,
+				40CE01E21C86BE2B00874B65 /* YNDescoverButton.swift */,
+			);
+			path = discover;
+			sourceTree = "<group>";
+		};
+		40CE01D31C86A4BF00874B65 /* discover */ = {
+			isa = PBXGroup;
+			children = (
+				40CE01D41C86A4D000874B65 /* newsButton@2x.png */,
+				40CE01D51C86A4D000874B65 /* circleButton@2x.png */,
+				40CE01D61C86A4D000874B65 /* warningButton@2x.png */,
+				40CE01D71C86A4D000874B65 /* expertButton@2x.png */,
+				40CE01D81C86A4D000874B65 /* brandButton@2x.png */,
+				40CE01D91C86A4D000874B65 /* nongmengButton@2x.png */,
+				40CE01DA1C86A4D000874B65 /* otherLinksButton@2x.png */,
+			);
+			path = discover;
 			sourceTree = "<group>";
 		};
 		40D1D40A1C7AC81900107080 /* vote details */ = {
@@ -1432,6 +1480,7 @@
 		40ED438A1BC6119D004713C9 /* class */ = {
 			isa = PBXGroup;
 			children = (
+				40CE01D01C8685A400874B65 /* discover */,
 				408FAE431C586F76001D5B7D /* circle */,
 				409A97161BF9824000F94BB1 /* question */,
 				40ED43991BC618DF004713C9 /* root */,
@@ -1692,6 +1741,7 @@
 				40B8BCBE1C4C991400E9133C /* get_cur_location_icon@2x.png in Resources */,
 				40B8BCDB1C4C991400E9133C /* myWaring.png in Resources */,
 				40B8BD0B1C4C991400E9133C /* askQuestionbtn.png in Resources */,
+				40CE01E01C86A4D000874B65 /* nongmengButton@2x.png in Resources */,
 				40B8BCD61C4C991400E9133C /* my_center_seting@2x.png in Resources */,
 				40B8BCC01C4C991400E9133C /* home_ask_question_camera.png in Resources */,
 				40B8BD081C4C991400E9133C /* register_userName.png in Resources */,
@@ -1733,13 +1783,17 @@
 				40B8BCC11C4C991400E9133C /* home_ask_question_camera@2x.png in Resources */,
 				40B8BD091C4C991400E9133C /* register_userName@2x.png in Resources */,
 				40B8BD2C1C4CAF1F00E9133C /* answer_tag.png in Resources */,
+				40CE01CF1C867C5B00874B65 /* tabbar_discover@3x.png in Resources */,
 				40D1D4201C7B026600107080 /* voteItemUnselected@2x.png in Resources */,
+				40CE01E11C86A4D000874B65 /* otherLinksButton@2x.png in Resources */,
 				40B8BD281C4C991400E9133C /* watch_Separator@3x.png in Resources */,
 				40D1D41F1C7B026600107080 /* voteItemUnselected@3x.png in Resources */,
+				40CE01CE1C867C5B00874B65 /* tabbar_discover@2x.png in Resources */,
 				40B8BCD01C4C991400E9133C /* my_article@2x.png in Resources */,
 				40B8BCF41C4C991400E9133C /* chatroom_msg_failed@2x.png in Resources */,
 				40B8BCC21C4C991400E9133C /* home_ask_question_camera@3x.png in Resources */,
 				40B8BCCC1C4C991400E9133C /* icon_cell_rightArrow.png in Resources */,
+				40CE01DE1C86A4D000874B65 /* expertButton@2x.png in Resources */,
 				403754931C5CB81B002569CB /* barbuttonicon_InfoMulti@2x.png in Resources */,
 				40B8BCDE1C4C991400E9133C /* the-refresh.png in Resources */,
 				40B8BCEE1C4C991400E9133C /* bubble_green@2x.png in Resources */,
@@ -1756,6 +1810,7 @@
 				40B8BD211C4C991400E9133C /* tagSelected@2x.png in Resources */,
 				40B8BCD41C4C991400E9133C /* my_attention@3x.png in Resources */,
 				40B8BCF81C4C991400E9133C /* home_page_location_image@3x.png in Resources */,
+				40CE01DD1C86A4D000874B65 /* warningButton@2x.png in Resources */,
 				40B8BD101C4C991400E9133C /* item_me@3x.png in Resources */,
 				40B8BCE41C4C991400E9133C /* user_seting_about_our.png in Resources */,
 				40B8BCEC1C4C991400E9133C /* user_seting_question_feedback@3x.png in Resources */,
@@ -1784,6 +1839,7 @@
 				40B8BD2D1C4CAF1F00E9133C /* answer_tag@2x.png in Resources */,
 				40B8BCCA1C4C991400E9133C /* home_page_default_avatar_image@2x.png in Resources */,
 				40FAE9BF1C4DF84000F9DCF3 /* sapi-nav-back-btn-right@2x.png in Resources */,
+				40CE01DB1C86A4D000874B65 /* newsButton@2x.png in Resources */,
 				40B8BCF01C4C991400E9133C /* bubble_left_blue.png in Resources */,
 				40B8BD0E1C4C991400E9133C /* item_me.png in Resources */,
 				40B8BCE71C4C991400E9133C /* user_seting_my_question.png in Resources */,
@@ -1792,6 +1848,7 @@
 				40B8BCBA1C4C991400E9133C /* addNewNearQuestion.png in Resources */,
 				40B8BCE51C4C991400E9133C /* user_seting_about_our@2x.png in Resources */,
 				40292E4B1BD5F7840028F87C /* LaunchScreen.storyboard in Resources */,
+				40CE01DF1C86A4D000874B65 /* brandButton@2x.png in Resources */,
 				40B8BCC61C4C991400E9133C /* home_ask_qusetion_delete.png in Resources */,
 				40B8BD261C4C991400E9133C /* watch_Separator.png in Resources */,
 				40B8BD141C4C991400E9133C /* tab_question.png in Resources */,
@@ -1802,6 +1859,7 @@
 				40B8BCFB1C4C991400E9133C /* ic_list_answer@3x.png in Resources */,
 				40B8BCCD1C4C991400E9133C /* icon_cell_rightArrow@2x.png in Resources */,
 				40B8BCF71C4C991400E9133C /* home_page_location_image@2x.png in Resources */,
+				40CE01DC1C86A4D000874B65 /* circleButton@2x.png in Resources */,
 				400594EC1C75808E005DC5E6 /* Default@2x.png in Resources */,
 				40B8BCD31C4C991400E9133C /* my_attention@2x.png in Resources */,
 				40B8BD111C4C991400E9133C /* sapi-nav-back-btn-bg.png in Resources */,
@@ -1865,6 +1923,7 @@
 				40D5EAF61C59F37C00DFCA71 /* YNCircleDetailsViewController.swift in Sources */,
 				40E0398B1BF5C5F4007FFF2A /* YNLocationAnnotation.swift in Sources */,
 				40ACDEFC1C72F933006B4C6A /* YNThreadListTableViewCell.swift in Sources */,
+				40CE01D21C8685C700874B65 /* YNDiscoverViewController.swift in Sources */,
 				40B1CEE71BE5F97200D42187 /* YNAskQuestionLocationCollectionViewCell.swift in Sources */,
 				40B1CEE31BE5F93400D42187 /* YNAskQuestionTextCollectionViewCell.swift in Sources */,
 				40ED43A11BC61AF5004713C9 /* YNEarlyWaringViewController.swift in Sources */,
@@ -1924,6 +1983,7 @@
 				40ACDEF81C72DCC3006B4C6A /* YNThreadModel.swift in Sources */,
 				40D70EFF1C22573400672A10 /* YNAskQuestionModel.swift in Sources */,
 				401F4FB61C02C92A00F45EBA /* YNSelectAreaViewController.swift in Sources */,
+				40CE01E31C86BE2B00874B65 /* YNDescoverButton.swift in Sources */,
 				40ED43851BC60B76004713C9 /* Location.swift in Sources */,
 				40B8BD311C4CBF7000E9133C /* YNDocNameListViewController.swift in Sources */,
 				40E237051BFD9B4200321B12 /* YNAddSubscriptionViewController.swift in Sources */,
