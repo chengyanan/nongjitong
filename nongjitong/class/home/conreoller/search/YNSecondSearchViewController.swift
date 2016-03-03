@@ -49,7 +49,7 @@ class YNSecondSearchViewController: UIViewController, UISearchBarDelegate, YNFin
         //加载选项数据
 //        loadHttpData("0", reloadData: .tableViewCatagory)
         
-        getCategoryFromServer("0", reloadData: .tableViewCatagory)
+//        getCategoryFromServer("0", reloadData: .tableViewCatagory)
         
     }
     override func viewWillAppear(animated: Bool) {

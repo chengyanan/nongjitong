@@ -21,6 +21,7 @@ class YNSelectedProductModel {
     init(id: String, name: String) {
     
         self.class_id = id
+        self.id = id
         self.class_name = name
     }
     

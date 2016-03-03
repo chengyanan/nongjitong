@@ -77,6 +77,8 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
             
             self.loadMore()
         })
+        
+        
     }
     
     func loadDataHeaderRefresh() {

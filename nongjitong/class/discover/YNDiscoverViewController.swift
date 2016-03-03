@@ -87,7 +87,9 @@ class YNDiscoverViewController: UIViewController {
     //MARK: event response
     func newsButtonClick() {
     
+        let newsVc = YNNewsViewController()
         
+        self.navigationController?.pushViewController(newsVc, animated: true)
         
     }
     
