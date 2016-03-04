@@ -50,6 +50,17 @@ class YNNewsViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     //MARK: life cycle
+    init() {
+    
+        super.init(nibName: nil, bundle: nil)
+        
+        self.hidesBottomBarWhenPushed = true
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -151,14 +162,13 @@ class YNNewsViewController: UIViewController, UITableViewDataSource, UITableView
         return cell!
     }
     
-//
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        
-//        let questionDetailVc = YNQuestionDetailViewController()
-//        questionDetailVc.questionModel = self.tableViewDataArray[indexPath.section]
-//        self.navigationController?.pushViewController(questionDetailVc, animated: true)
-//       
-//    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let detailVc = YNNewsDetailsViewController(news: self.tableViewDataArray[indexPath.row])
+        
+        self.navigationController?.pushViewController(detailVc, animated: true)
+       
+    }
     
     func loadMore() {
         
@@ -357,7 +367,7 @@ class YNNewsViewController: UIViewController, UITableViewDataSource, UITableView
             
             if let status = json["status"] as? Int {
                 
-                print(json)
+//                print(json)
                 
                 if status == 1 {
                     

@@ -14,6 +14,7 @@ class YNNewsModel {
     var title: String?
     var summary: String?
     var tags: String?
+    var tagsArray = [String]?()
     var photo: String?
     var user_id: String?
     var user_name: String?
@@ -23,8 +24,6 @@ class YNNewsModel {
     var order_num: String?
     var level: String?
     var add_time: String?
-    var shareurl: String?
-    var content: String?
 
     init(dict: NSDictionary) {
     
@@ -43,11 +42,10 @@ class YNNewsModel {
         self.add_time = dict["add_time"] as? String
         self.level = dict["level"] as? String
         self.add_time = dict["add_time"] as? String
-        self.shareurl = dict["shareurl"] as? String
-        self.content = dict["content"] as? String
         
+        self.tagsArray = self.tags?.componentsSeparatedByString("|")
         
-        
+      
     }
     
     
