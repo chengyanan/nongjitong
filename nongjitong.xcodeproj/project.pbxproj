@@ -58,6 +58,7 @@
 		40519C5B1BD74B2F00A8BE65 /* YNSearchResaultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40519C5A1BD74B2F00A8BE65 /* YNSearchResaultModel.swift */; };
 		406732AB1BFC56570071F6EA /* YNQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406732AA1BFC56570071F6EA /* YNQuestionTableViewCell.swift */; };
 		406805AE1C324E9C009FC170 /* YNNewSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406805AD1C324E9C009FC170 /* YNNewSearchViewController.swift */; };
+		4069916E1C8D212700C794A6 /* YNBottomToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069916D1C8D212700C794A6 /* YNBottomToolView.swift */; };
 		406CBBEC1BFEDBCE000584D4 /* YNScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */; };
 		407F6B5A1C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B591C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift */; };
 		407F6B5C1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */; };
@@ -405,6 +406,7 @@
 		40519C5A1BD74B2F00A8BE65 /* YNSearchResaultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchResaultModel.swift; sourceTree = "<group>"; };
 		406732AA1BFC56570071F6EA /* YNQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		406805AD1C324E9C009FC170 /* YNNewSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNNewSearchViewController.swift; sourceTree = "<group>"; };
+		4069916D1C8D212700C794A6 /* YNBottomToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNBottomToolView.swift; sourceTree = "<group>"; };
 		406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNScaleView.swift; sourceTree = "<group>"; };
 		407F6B591C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMYWriteWaringViewController.swift; sourceTree = "<group>"; };
 		407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYWaringDetailViewController.swift; sourceTree = "<group>"; };
@@ -804,6 +806,7 @@
 				401C58051C8962A300B42455 /* YNNewstagCollectionViewCell.swift */,
 				40D8C5291C896D60009A93D4 /* YNNewsCommentTableViewCell.swift */,
 				40D8C52B1C8986B0009A93D4 /* YNNewsRelationTableViewCell.swift */,
+				4069916D1C8D212700C794A6 /* YNBottomToolView.swift */,
 			);
 			path = "next Controller";
 			sourceTree = "<group>";
@@ -2075,6 +2078,7 @@
 				40DEA7E01C3A509400BEB608 /* YNSolutionDetailsViewController.swift in Sources */,
 				404E0BAE1C1690B100924D5A /* YNHttpAswerQuestion.swift in Sources */,
 				40E237021BFD854B00321B12 /* YNSunscriptionTableViewCell.swift in Sources */,
+				4069916E1C8D212700C794A6 /* YNBottomToolView.swift in Sources */,
 				40D5EAE91C59AE1900DFCA71 /* YNCircleModel.swift in Sources */,
 				404E0BB21C16A01200924D5A /* YNNewAnswerQuestionViewController.swift in Sources */,
 				40ED43861BC60B76004713C9 /* Macro.swift in Sources */,
