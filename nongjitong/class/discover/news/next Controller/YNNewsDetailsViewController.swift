@@ -508,21 +508,21 @@ class YNNewsDetailsViewController: UIViewController, UITableViewDataSource, UITa
             
         } else {
             
-            //TODO: 有内容发送
-            
-            
-            //判断tableView是否需要向上移动
-//            decideIfTableViewNeedMoveUp()
-            
-            self.messageStr = ""
-            
-            //TODO: 判断移动到评论区
+            //有内容发送
+            newsComment()
             
             self.view.endEditing(true)
+            
         }
         
         
     }
+    
+    
+    
+    
+    
+    
     
     //判断tableView是否需要向上移动
     func inputViewTextViewDidChange(text: String) {
@@ -635,6 +635,19 @@ class YNNewsDetailsViewController: UIViewController, UITableViewDataSource, UITa
                         
                         self.tableView?.reloadData()
                         
+                        //TODO: 判断移动到评论区
+                        
+                        if self.messageStr != "" {
+                        
+                            //有评论
+                            
+                            self.tableView?.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+                            
+                            self.messageStr = ""
+                        }
+                        
+                   
+                        
                     } else if status == 0 {
                         
                         if let msg = json["msg"] as? String {
@@ -690,7 +703,7 @@ class YNNewsDetailsViewController: UIViewController, UITableViewDataSource, UITa
                     
                     if status == 1 {
                         
-                        //TODO: 成功刷新界面
+                        //TODO: 投票成功刷新界面
                         
                         
                         
@@ -723,6 +736,69 @@ class YNNewsDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
 
 
+    //MARK: 对新闻发表评论
+    func newsComment() {
+        
+        let params: [String: String?] = ["m": "Appapi",
+            "key": "KSECE20XE15DKIEX3",
+            "c": "NewsComment",
+            "a": "add",
+            "news_id": newsModel?.id,
+            "user_id": kUser_ID() as? String,
+            "content": self.messageStr
+        ]
+        
+        let progress = YNProgressHUD().showWaitingToView(self.view)
+        
+        Network.post(kURL, params: params, success: { (data, response, error) -> Void in
+            
+            progress.hideUsingAnimation()
+            
+            do {
+                
+                let json: NSDictionary =  try NSJSONSerialization.JSONObjectWithData(data , options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                
+                //                print("data - \(json)")
+                
+                if let status = json["status"] as? Int {
+                    
+                    if status == 1 {
+                   
+                        //评论成功刷新界面
+                        self.getNewsDetail()
+                        
+                    
+                    } else if status == 0 {
+                        
+                        if let msg = json["msg"] as? String {
+                            
+                            //                            print(msg)
+                            YNProgressHUD().showText(msg, toView: self.view)
+                        }
+                    }
+                    
+                }
+                
+                
+            } catch {
+                
+                YNProgressHUD().showText("请求错误", toView: self.view)
+            }
+            
+            
+            }) { (error) -> Void in
+                
+                progress.hideUsingAnimation()
+                YNProgressHUD().showText("加载失败", toView: self.view)
+        }
+        
+        
+        
+    }
+    
+    
+    
+    
 
 
 

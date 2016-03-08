@@ -42,6 +42,8 @@ class YNNewsCommentModel {
     
     var height: CGFloat = 0
     
+    init() {}
+    
     init(dict: NSDictionary) {
         
         self.id = dict["id"] as? String
