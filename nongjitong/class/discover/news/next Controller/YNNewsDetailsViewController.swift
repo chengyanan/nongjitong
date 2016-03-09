@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YNNewsDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNBottomToolViewDelegate, YNInputViewDelegate {
+class YNNewsDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YNBottomToolViewDelegate, YNInputViewDelegate, YNNewsCommentTableViewCellDelegate {
     
     var newsModel: YNNewsModel?
     var model: YNNewsDetailsModel?
@@ -214,6 +214,8 @@ class YNNewsDetailsViewController: UIViewController, UITableViewDataSource, UITa
             
             cell?.model = self.model!.comments[indexPath.row]
             
+            cell?.delegate = self
+            
             return cell!
             
         } else if indexPath.section == 2 {
@@ -366,6 +368,20 @@ class YNNewsDetailsViewController: UIViewController, UITableViewDataSource, UITa
         
     }
    
+    //MARK: YNNewsCommentTableViewCellDelegate
+    func newsCommentTableViewCell(cell: YNNewsCommentTableViewCell) {
+        
+        self.model?.comments.removeAtIndex(cell.model!.index)
+        
+        for var i = 0; i < self.model?.comments.count; i++ {
+        
+            self.model?.comments[i].index = i
+        }
+        
+        self.tableView?.reloadSections(NSIndexSet(index: 1), withRowAnimation: .None)
+        
+    }
+    
     
     //MARK: YNBottomToolViewDelegate
     func buttonClick(button: UIButton) {
@@ -380,7 +396,7 @@ class YNNewsDetailsViewController: UIViewController, UITableViewDataSource, UITa
         case 2:
             
             //反对
-            self.newsCommentVoteOppose()            
+//            self.newsCommentVoteOppose()            
             
             break
             

@@ -279,6 +279,11 @@
 		40D70F071C22A63700672A10 /* YNDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D70F061C22A63700672A10 /* YNDateExtension.swift */; };
 		40D8C52A1C896D60009A93D4 /* YNNewsCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8C5291C896D60009A93D4 /* YNNewsCommentTableViewCell.swift */; };
 		40D8C52C1C8986B0009A93D4 /* YNNewsRelationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8C52B1C8986B0009A93D4 /* YNNewsRelationTableViewCell.swift */; };
+		40DC4AE81C8FBEC200BBDAEA /* Trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40DC4AE71C8FBEC200BBDAEA /* Trash@2x.png */; };
+		40DC4AEC1C8FC62000BBDAEA /* Trash24@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40DC4AEB1C8FC62000BBDAEA /* Trash24@2x.png */; };
+		40DC4AEE1C8FC69B00BBDAEA /* Trash32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40DC4AED1C8FC69B00BBDAEA /* Trash32@2x.png */; };
+		40DC4AF01C8FF58900BBDAEA /* Share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40DC4AEF1C8FF58900BBDAEA /* Share@2x.png */; };
+		40DC4AF31C8FF9BF00BBDAEA /* YNOtherLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC4AF21C8FF9BF00BBDAEA /* YNOtherLinkViewController.swift */; };
 		40DDBCE41C0C3A5B0007211A /* YNQuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DDBCE31C0C3A5B0007211A /* YNQuestionModel.swift */; };
 		40DEA7D61C3A187F00BEB608 /* YNSearchResaultQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DEA7D51C3A187F00BEB608 /* YNSearchResaultQuestionViewController.swift */; };
 		40DEA7D81C3A21A800BEB608 /* YNSearchResaultSolutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DEA7D71C3A21A800BEB608 /* YNSearchResaultSolutionViewController.swift */; };
@@ -632,6 +637,11 @@
 		40D70F061C22A63700672A10 /* YNDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNDateExtension.swift; sourceTree = "<group>"; };
 		40D8C5291C896D60009A93D4 /* YNNewsCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNNewsCommentTableViewCell.swift; sourceTree = "<group>"; };
 		40D8C52B1C8986B0009A93D4 /* YNNewsRelationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNNewsRelationTableViewCell.swift; sourceTree = "<group>"; };
+		40DC4AE71C8FBEC200BBDAEA /* Trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trash@2x.png"; sourceTree = "<group>"; };
+		40DC4AEB1C8FC62000BBDAEA /* Trash24@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trash24@2x.png"; sourceTree = "<group>"; };
+		40DC4AED1C8FC69B00BBDAEA /* Trash32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trash32@2x.png"; sourceTree = "<group>"; };
+		40DC4AEF1C8FF58900BBDAEA /* Share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share@2x.png"; sourceTree = "<group>"; };
+		40DC4AF21C8FF9BF00BBDAEA /* YNOtherLinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNOtherLinkViewController.swift; sourceTree = "<group>"; };
 		40DDBCE31C0C3A5B0007211A /* YNQuestionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNQuestionModel.swift; sourceTree = "<group>"; };
 		40DEA7D51C3A187F00BEB608 /* YNSearchResaultQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchResaultQuestionViewController.swift; sourceTree = "<group>"; };
 		40DEA7D71C3A21A800BEB608 /* YNSearchResaultSolutionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSearchResaultSolutionViewController.swift; sourceTree = "<group>"; };
@@ -926,6 +936,10 @@
 		4069916F1C8D53B700C794A6 /* news */ = {
 			isa = PBXGroup;
 			children = (
+				40DC4AEF1C8FF58900BBDAEA /* Share@2x.png */,
+				40DC4AED1C8FC69B00BBDAEA /* Trash32@2x.png */,
+				40DC4AEB1C8FC62000BBDAEA /* Trash24@2x.png */,
+				40DC4AE71C8FBEC200BBDAEA /* Trash@2x.png */,
 				406991701C8D53CA00C794A6 /* agree_up_vote@2x.png */,
 				406991711C8D53CA00C794A6 /* hand_down_vote@2x.png */,
 				406991721C8D53CA00C794A6 /* favorite@2x.png */,
@@ -1284,6 +1298,7 @@
 			children = (
 				40CE01D11C8685C700874B65 /* YNDiscoverViewController.swift */,
 				4011C0321C87CEDC000E0695 /* news */,
+				40DC4AF11C8FF98C00BBDAEA /* other link */,
 			);
 			path = discover;
 			sourceTree = "<group>";
@@ -1410,6 +1425,14 @@
 				40BAE2AA1C7DA344009DF09F /* YNStatisticsDetailsTableViewCell.swift */,
 			);
 			path = "add statistics";
+			sourceTree = "<group>";
+		};
+		40DC4AF11C8FF98C00BBDAEA /* other link */ = {
+			isa = PBXGroup;
+			children = (
+				40DC4AF21C8FF9BF00BBDAEA /* YNOtherLinkViewController.swift */,
+			);
+			path = "other link";
 			sourceTree = "<group>";
 		};
 		40E039811BF5C5F4007FFF2A /* location */ = {
@@ -1831,6 +1854,7 @@
 				40B8BD2E1C4CAF1F00E9133C /* answer_tag@3x.png in Resources */,
 				40B8BCDC1C4C991400E9133C /* myWaring@2x.png in Resources */,
 				40B8BCF61C4C991400E9133C /* home_page_location_image.png in Resources */,
+				40DC4AEE1C8FC69B00BBDAEA /* Trash32@2x.png in Resources */,
 				40B8BCC41C4C991400E9133C /* home_ask_question_location@2x.png in Resources */,
 				40B8BCD91C4C991400E9133C /* my_subscribe@2x.png in Resources */,
 				40B8BCF51C4C991400E9133C /* chatroom_msg_failed@3x.png in Resources */,
@@ -1851,6 +1875,7 @@
 				40B8BCDA1C4C991400E9133C /* my_subscribe@3x.png in Resources */,
 				40B8BCEF1C4C991400E9133C /* bubble_green@3x.png in Resources */,
 				40B8BCC11C4C991400E9133C /* home_ask_question_camera@2x.png in Resources */,
+				40DC4AEC1C8FC62000BBDAEA /* Trash24@2x.png in Resources */,
 				406991781C8D53CA00C794A6 /* favorited@2x.png in Resources */,
 				40B8BD091C4C991400E9133C /* register_userName@2x.png in Resources */,
 				40B8BD2C1C4CAF1F00E9133C /* answer_tag.png in Resources */,
@@ -1890,6 +1915,7 @@
 				40B8BD251C4C991400E9133C /* tagUnSelected@3x.png in Resources */,
 				40B8BCDF1C4C991400E9133C /* the-refresh@2x.png in Resources */,
 				40B8BCD21C4C991400E9133C /* my_attention.png in Resources */,
+				40DC4AF01C8FF58900BBDAEA /* Share@2x.png in Resources */,
 				40B8BD041C4C991400E9133C /* addNewSubscription@3x.png in Resources */,
 				40B8BCF21C4C991400E9133C /* bubble_left_blue@3x.png in Resources */,
 				40B8BCEA1C4C991400E9133C /* user_seting_question_feedback.png in Resources */,
@@ -1916,6 +1942,7 @@
 				40CE01DB1C86A4D000874B65 /* newsButton@2x.png in Resources */,
 				40B8BCF01C4C991400E9133C /* bubble_left_blue.png in Resources */,
 				40B8BD0E1C4C991400E9133C /* item_me.png in Resources */,
+				40DC4AE81C8FBEC200BBDAEA /* Trash@2x.png in Resources */,
 				40B8BCE71C4C991400E9133C /* user_seting_my_question.png in Resources */,
 				40B8BCBF1C4C991400E9133C /* get_cur_location_icon@3x.png in Resources */,
 				40B8BD1A1C4C991400E9133C /* tabBar_home.png in Resources */,
@@ -2134,6 +2161,7 @@
 				40ED439D1BC61A75004713C9 /* YNNavigationController.swift in Sources */,
 				40D70F071C22A63700672A10 /* YNDateExtension.swift in Sources */,
 				40ACDF011C730D8A006B4C6A /* YNThreadDetailsInfoTableViewCell.swift in Sources */,
+				40DC4AF31C8FF9BF00BBDAEA /* YNOtherLinkViewController.swift in Sources */,
 				40968DC31C7C42750071661E /* YNFillStatisticsTableViewController.swift in Sources */,
 				408FAE451C586F98001D5B7D /* YNCircleViewController.swift in Sources */,
 				40ED439B1BC61A56004713C9 /* YNTabBarController.swift in Sources */,

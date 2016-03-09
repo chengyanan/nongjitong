@@ -26,11 +26,11 @@ class YNBottomToolView: UIView {
         
         self.backgroundColor = kRGBA(244, g: 244, b: 244, a: 1)
         
-        self.addSubview(voteButton)
-        self.addSubview(objectButton)
-        self.addSubview(favoriteButton)
+//        self.addSubview(voteButton)
+//        self.addSubview(objectButton)
+//        self.addSubview(favoriteButton)
         self.addSubview(commentButton)
-       
+        self.addSubview(shareButton)
         setLayout()
         
         voteButton.addTarget(self, action: "buttonClick:", forControlEvents: .TouchUpInside)
@@ -42,26 +42,32 @@ class YNBottomToolView: UIView {
     
     func setLayout() {
     
-        //voteButton
-        Layout().addLeftConstraint(voteButton, toView: self, multiplier: 1, constant: 0)
-        Layout().addTopConstraint(voteButton, toView: self, multiplier: 1, constant: 0)
-        Layout().addBottomConstraint(voteButton, toView: self, multiplier: 1, constant: 0)
-        
-        //objectButton
-        Layout().addTopBottomConstraints(objectButton, toView: voteButton, multiplier: 1, constant: 0)
-        Layout().addLeftToRightConstraint(objectButton, toView: voteButton, multiplier: 1, constant: 0)
-        Layout().addWidthConstraint(objectButton, toView: voteButton, multiplier: 1, constant: 0)
-        
-        //favoriteButton
-        Layout().addTopBottomConstraints(favoriteButton, toView: objectButton, multiplier: 1, constant: 0)
-        Layout().addLeftToRightConstraint(favoriteButton, toView: objectButton, multiplier: 1, constant: 0)
-        Layout().addWidthConstraint(favoriteButton, toView: objectButton, multiplier: 1, constant: 0)
+//        //voteButton
+//        Layout().addLeftConstraint(voteButton, toView: self, multiplier: 1, constant: 0)
+//        Layout().addTopConstraint(voteButton, toView: self, multiplier: 1, constant: 0)
+//        Layout().addBottomConstraint(voteButton, toView: self, multiplier: 1, constant: 0)
+//        
+//        //objectButton
+//        Layout().addTopBottomConstraints(objectButton, toView: voteButton, multiplier: 1, constant: 0)
+//        Layout().addLeftToRightConstraint(objectButton, toView: voteButton, multiplier: 1, constant: 0)
+//        Layout().addWidthConstraint(objectButton, toView: voteButton, multiplier: 1, constant: 0)
+//        
+//        //favoriteButton
+//        Layout().addTopBottomConstraints(favoriteButton, toView: objectButton, multiplier: 1, constant: 0)
+//        Layout().addLeftToRightConstraint(favoriteButton, toView: objectButton, multiplier: 1, constant: 0)
+//        Layout().addWidthConstraint(favoriteButton, toView: objectButton, multiplier: 1, constant: 0)
         
         //commentButton
-        Layout().addTopBottomConstraints(commentButton, toView: favoriteButton, multiplier: 1, constant: 0)
-        Layout().addLeftToRightConstraint(commentButton, toView: favoriteButton, multiplier: 1, constant: 0)
-        Layout().addWidthConstraint(commentButton, toView: favoriteButton, multiplier: 1, constant: 0)
-        Layout().addRightConstraint(commentButton, toView: self, multiplier: 1, constant: 0)
+        Layout().addLeftConstraint(commentButton, toView: self, multiplier: 1, constant: 0)
+        Layout().addTopConstraint(commentButton, toView: self, multiplier: 1, constant: 0)
+        Layout().addBottomConstraint(commentButton, toView: self, multiplier: 1, constant: 0)
+        
+        //shareButton
+        Layout().addTopBottomConstraints(shareButton, toView: commentButton, multiplier: 1, constant: 0)
+        Layout().addRightConstraint(shareButton, toView: self, multiplier: 1, constant: 0)
+        Layout().addLeftToRightConstraint(shareButton, toView: commentButton, multiplier: 1, constant: 0)
+        
+        Layout().addWidthConstraint(shareButton, toView: commentButton, multiplier: 1, constant: 0)
         
         
     }
@@ -141,6 +147,23 @@ class YNBottomToolView: UIView {
         
     }()
 
+    
+    
+    let shareButton: UIButton = {
+        
+        //评论
+        let tempView = UIButton()
+        tempView.tag = 5
+        tempView.setTitle("分享", forState: .Normal)
+        tempView.setImage(UIImage(named: "Share"), forState: .Normal)
+        tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.titleLabel?.font = UIFont.systemFontOfSize(11)
+        tempView.setTitleColor(UIColor.grayColor(), forState: .Normal)
+        tempView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 6)
+        
+        return tempView
+        
+    }()
     
     
     

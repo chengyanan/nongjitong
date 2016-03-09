@@ -16,6 +16,8 @@ class YNNewsCommentModel {
     static let avatarHeight: CGFloat = 30
     static let avatorContentMargin: CGFloat = 10
     
+    var index = 0
+    
     //评论的ID
     var id: String?
     
@@ -32,10 +34,10 @@ class YNNewsCommentModel {
     var content: String?
     
     //赞成人数
-    var support_num: String?
+    var support_num = 0
     
     //反对人数
-    var oppose_num: String?
+    var oppose_num = 0
     
     //评论时间
     var add_time: String?
@@ -51,8 +53,8 @@ class YNNewsCommentModel {
         self.user_name = dict["user_name"] as? String
         self.avatar = dict["avatar"] as? String
         self.content = dict["content"] as? String
-        self.support_num = dict["support_num"] as? String
-        self.oppose_num = dict["oppose_num"] as? String
+        self.support_num = dict["support_num"] as! Int
+        self.oppose_num = dict["oppose_num"] as! Int
         self.add_time = dict["add_time"] as? String
         
         let contentHeight = Tools().heightForText(self.content!, font: UIFont.systemFontOfSize(12), width: kScreenWidth - 12*2).height

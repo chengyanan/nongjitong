@@ -115,16 +115,23 @@ class YNDiscoverViewController: UIViewController {
     
     func brandButtonClick() {
     
+        let vc = YNOtherLinkViewController(type: .Brand)
         
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func nongmengButtonClick() {
     
+        let vc = YNOtherLinkViewController(type: .Nongmeng)
         
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func otherLinksButtonClick() {
     
+        let vc = YNOtherLinkViewController(type: .Other)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     

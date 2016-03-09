@@ -35,4 +35,6 @@ class YNNewsRelationTableViewCell: UITableViewCell {
         return tempView
     }()
     
+    
+    
 }

@@ -39,12 +39,21 @@ class YNNewsDetailsModel {
         
         
         if  tempCommentsArray?.count > 0 {
-        
-            for item in tempCommentsArray! {
+            
+            for var i = 0; i < tempCommentsArray?.count; i++ {
+            
+            
+                let item = tempCommentsArray![i] as! NSDictionary
                 
-                let model = YNNewsCommentModel(dict: item as! NSDictionary)
+                let model = YNNewsCommentModel(dict: item)
+                
+                model.index = i
+                
                 self.comments.append(model)
+                
             }
+        
+
         }
         
         
