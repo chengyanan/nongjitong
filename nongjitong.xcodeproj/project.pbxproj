@@ -107,6 +107,7 @@
 		40B1CEE71BE5F97200D42187 /* YNAskQuestionLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B1CEE61BE5F97200D42187 /* YNAskQuestionLocationCollectionViewCell.swift */; };
 		40B5B2891BEC80BC008E5F77 /* YNSelectedCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B5B2881BEC80BC008E5F77 /* YNSelectedCategoryViewController.swift */; };
 		40B650FC1BFC26C70019E7FD /* YNQuestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B650FB1BFC26C70019E7FD /* YNQuestionCollectionViewCell.swift */; };
+		40B704C21C9157860053CD30 /* tabbar_vedio@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40B704C11C9157860053CD30 /* tabbar_vedio@2x.png */; };
 		40B8491A1C44EDD4008615CA /* UIScrollView+CYNRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B849161C44EDD4008615CA /* UIScrollView+CYNRefresh.swift */; };
 		40B8491B1C44EDD4008615CA /* YNCycleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B849171C44EDD4008615CA /* YNCycleLayer.swift */; };
 		40B8491C1C44EDD4008615CA /* YNRefreshFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B849181C44EDD4008615CA /* YNRefreshFooterView.swift */; };
@@ -465,6 +466,7 @@
 		40B1CEE61BE5F97200D42187 /* YNAskQuestionLocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNAskQuestionLocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		40B5B2881BEC80BC008E5F77 /* YNSelectedCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNSelectedCategoryViewController.swift; sourceTree = "<group>"; };
 		40B650FB1BFC26C70019E7FD /* YNQuestionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNQuestionCollectionViewCell.swift; sourceTree = "<group>"; };
+		40B704C11C9157860053CD30 /* tabbar_vedio@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_vedio@2x.png"; sourceTree = "<group>"; };
 		40B849161C44EDD4008615CA /* UIScrollView+CYNRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+CYNRefresh.swift"; sourceTree = "<group>"; };
 		40B849171C44EDD4008615CA /* YNCycleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNCycleLayer.swift; sourceTree = "<group>"; };
 		40B849181C44EDD4008615CA /* YNRefreshFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNRefreshFooterView.swift; sourceTree = "<group>"; };
@@ -1055,6 +1057,13 @@
 			path = "select catagory";
 			sourceTree = "<group>";
 		};
+		40B704B61C9149510053CD30 /* train */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = train;
+			sourceTree = "<group>";
+		};
 		40B849151C44EDD4008615CA /* refresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -1206,6 +1215,7 @@
 		40B8BC9A1C4C991400E9133C /* tabBar */ = {
 			isa = PBXGroup;
 			children = (
+				40B704C11C9157860053CD30 /* tabbar_vedio@2x.png */,
 				40CE01CC1C867C5B00874B65 /* tabbar_discover@2x.png */,
 				40CE01CD1C867C5B00874B65 /* tabbar_discover@3x.png */,
 				40FAE9BB1C4DF84000F9DCF3 /* sapi-nav-back-btn-right.png */,
@@ -1572,6 +1582,7 @@
 		40ED438A1BC6119D004713C9 /* class */ = {
 			isa = PBXGroup;
 			children = (
+				40B704B61C9149510053CD30 /* train */,
 				40CE01D01C8685A400874B65 /* discover */,
 				408FAE431C586F76001D5B7D /* circle */,
 				409A97161BF9824000F94BB1 /* question */,
@@ -1858,6 +1869,7 @@
 				40B8BCC41C4C991400E9133C /* home_ask_question_location@2x.png in Resources */,
 				40B8BCD91C4C991400E9133C /* my_subscribe@2x.png in Resources */,
 				40B8BCF51C4C991400E9133C /* chatroom_msg_failed@3x.png in Resources */,
+				40B704C21C9157860053CD30 /* tabbar_vedio@2x.png in Resources */,
 				40B8BCC81C4C991400E9133C /* home_ask_qusetion_delete@3x.png in Resources */,
 				40B8BCC51C4C991400E9133C /* home_ask_question_location@3x.png in Resources */,
 				40B8BCCE1C4C991400E9133C /* icon_cell_rightArrow@3x.png in Resources */,
