@@ -2020,7 +2020,7 @@
         <!--培训-->
         <scene sceneID="Fsb-17-Sbg">
             <objects>
-                <viewController id="AxW-29-lNe" sceneMemberID="viewController">
+                <viewController id="AxW-29-lNe" customClass="YNTrainViewController" customModule="nongjitong" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rbg-i0-zZN"/>
                         <viewControllerLayoutGuide type="bottom" id="xPt-D8-Str"/>

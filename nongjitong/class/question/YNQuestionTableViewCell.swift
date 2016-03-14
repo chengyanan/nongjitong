@@ -201,6 +201,8 @@ class YNQuestionTableViewCell: UITableViewCell {
         tempView.image = UIImage(named: "home_page_default_avatar_image")
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.clipsToBounds = true
+        tempView.layer.drawsAsynchronously = true
+        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     
@@ -211,6 +213,8 @@ class YNQuestionTableViewCell: UITableViewCell {
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.font = UIFont.boldSystemFontOfSize(13)
         tempView.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        tempView.layer.drawsAsynchronously = true
+        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     
@@ -219,9 +223,11 @@ class YNQuestionTableViewCell: UITableViewCell {
         //time
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.layer.drawsAsynchronously = true
         tempView.font = UIFont.systemFontOfSize(11)
         tempView.textColor = UIColor.grayColor()
         tempView.adjustsFontSizeToFitWidth = true
+        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     
@@ -232,10 +238,12 @@ class YNQuestionTableViewCell: UITableViewCell {
 //        tempView.setTitle("河南省, 郑州市, 金水区", forState: .Normal)
         tempView.setImage(UIImage(named: "home_page_location_image"), forState: .Normal)
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.layer.drawsAsynchronously = true
         tempView.titleLabel?.font = UIFont.systemFontOfSize(11)
         tempView.setTitleColor(UIColor.grayColor(), forState: .Normal)
         tempView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 6)
         tempView.userInteractionEnabled = false
+        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     
@@ -244,10 +252,11 @@ class YNQuestionTableViewCell: UITableViewCell {
         //问题内容
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.layer.drawsAsynchronously = true
         tempView.numberOfLines = 3
         tempView.font = UIFont.systemFontOfSize(15)
         tempView.lineBreakMode = NSLineBreakMode.ByWordWrapping
-//        tempView.backgroundColor = UIColor.whiteColor()
+        tempView.backgroundColor = UIColor.whiteColor()
        
         return tempView
     }()
@@ -257,12 +266,13 @@ class YNQuestionTableViewCell: UITableViewCell {
         //种类
         let tempView = UIButton()
         tempView.setImage(UIImage(named: "answer_tag"), forState: .Normal)
+        tempView.layer.drawsAsynchronously = true
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.titleLabel?.font = UIFont.systemFontOfSize(11)
         tempView.setTitleColor(UIColor.grayColor(), forState: .Normal)
         tempView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 6)
         tempView.userInteractionEnabled = false
-//        tempView.backgroundColor = UIColor.whiteColor()
+        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     
@@ -272,11 +282,12 @@ class YNQuestionTableViewCell: UITableViewCell {
         let tempView = UIButton()
         tempView.setImage(UIImage(named: "ic_list_answer_count"), forState: .Normal)
         tempView.translatesAutoresizingMaskIntoConstraints = false
+        tempView.layer.drawsAsynchronously = true
         tempView.titleLabel?.font = UIFont.systemFontOfSize(11)
         tempView.setTitleColor(UIColor.grayColor(), forState: .Normal)
         tempView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 6)
         tempView.userInteractionEnabled = false
-//        tempView.backgroundColor = UIColor.whiteColor()
+        tempView.backgroundColor = UIColor.whiteColor()
         return tempView
     }()
     
