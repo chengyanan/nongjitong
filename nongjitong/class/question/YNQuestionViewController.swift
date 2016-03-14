@@ -532,34 +532,62 @@ class YNQuestionViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if indexPath.section == self.tableViewDataArray.count {
+        let model = self.tableViewDataArray[indexPath.section]
         
-            let identify: String = "Cell_Resault_LoadMore_code"
-            var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(identify)
+        if model.photo.count > 0 {
+        
+        
+            let identify = "CELL_Question"
+            
+            var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNQuestionTableViewCell
             
             if cell == nil {
                 
-                cell = YNResaultLoadModeCell(style: .Default, reuseIdentifier: identify)
-                
+                cell = YNQuestionTableViewCell(style: .Default, reuseIdentifier: identify)
             }
             
             return cell!
             
+            
         }
         
-        let identify = "CELL_Question"
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNQuestionTableViewCell
+        let identify = "CELL_Question_NOImage"
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNQuestionNoImageTableViewCell
         
         if cell == nil {
-        
-            cell = YNQuestionTableViewCell(style: .Default, reuseIdentifier: identify)
+            
+            cell = YNQuestionNoImageTableViewCell(style: .Default, reuseIdentifier: identify)
         }
         
-        cell?.model = self.tableViewDataArray[indexPath.section]
-        
         return cell!
+        
     }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        let model = self.tableViewDataArray[indexPath.section]
+        
+        if model.photo.count > 0 {
+        
+            let realCell = cell as? YNQuestionTableViewCell
+            
+            realCell?.model = model
+            
+        } else {
+        
+            let realCell = cell as? YNQuestionNoImageTableViewCell
+            
+            realCell?.model = model
+            
+        }
+        
+        
+        
+    }
+    
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         

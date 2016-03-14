@@ -1,22 +1,24 @@
 //
-//  YNQuestionTableViewCell.swift
+//  YNQuestionListTableViewCell.swift
 //  nongjitong
 //
-//  Created by 农盟 on 15/11/18.
-//  Copyright © 2015年 农盟. All rights reserved.
+//  Created by 农盟 on 16/3/14.
+//  Copyright © 2016年 农盟. All rights reserved.
 //
 
 import UIKit
 
-class YNQuestionTableViewCell: UITableViewCell {
+class YNQuestionListTableViewCell: UITableViewCell {
+
+   
     
     let marginModel = YNQuestionModelConstant()
     
-    var model: YNQuestionModel? {
+    var imageViewWithHeight: CGFloat?
     
-        didSet {
+    var model: YNQuestionModel? {
         
-//            self.removePictures()
+        didSet {
             
             self.nickName.text = model?.user_name
             self.postTime.text = model?.createTime
@@ -27,80 +29,93 @@ class YNQuestionTableViewCell: UITableViewCell {
             
             self.avatorImage.getImageWithURL(model!.avatar!, contentMode: UIViewContentMode.ScaleToFill)
             
-            if model?.photo.count > 0 {
-            
-                //添加图片
-                self.addPictures()
-                
-                
-            } else {
-            
-
-            }
+            showPicture()
             
         }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
         
-        self.removePictures()
     }
+
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setInterface()
         setLayout()
-
+        
         self.selectionStyle = .None
         self.avatorImage.layer.cornerRadius = marginModel.avatarHeight * 0.5
+        
+        self.addPictures()
+        
     }
-
+    
+    
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func removePictures() {
     
-        for view in self.contentView.subviews {
+    func showPicture() {
         
-            if view is UIImageView {
-                
-                if view.tag > 0 {
-                
-                    view.removeFromSuperview()
-                }
+        self.imageViewOne?.hidden = self.imageViewOne?.tag > self.model?.photo.count
+        
+        if !self.imageViewOne!.hidden {
+        
+            let x = self.imageViewOne!.frame.origin.x
+            let y = self.model!.marginModel.imageY!
             
-            }
+            let imageWithHeight = self.imageViewOne!.frame.size.width
+            
+            self.imageViewOne?.frame = CGRectMake(x, y, imageWithHeight, imageWithHeight)
+            
+            self.imageViewOne?.getImageWithURL(model!.photo[self.imageViewOne!.tag - 1], contentMode: UIViewContentMode.ScaleToFill)
         }
+        
+        self.imageViewTwo?.hidden = self.imageViewTwo?.tag > self.model?.photo.count
+        
+        if !self.imageViewTwo!.hidden {
+            
+            let x = self.imageViewTwo!.frame.origin.x
+            let y = self.model!.marginModel.imageY!
+            
+            let imageWithHeight = self.imageViewTwo!.frame.size.width
+            
+            self.imageViewTwo?.frame = CGRectMake(x, y, imageWithHeight, imageWithHeight)
+            
+            self.imageViewTwo?.getImageWithURL(model!.photo[self.imageViewTwo!.tag - 1], contentMode: UIViewContentMode.ScaleToFill)
+        }
+        
+        
+        self.imageViewThree?.hidden = self.imageViewThree?.tag > self.model?.photo.count
+        if !self.imageViewThree!.hidden {
+            
+            let x = self.imageViewThree!.frame.origin.x
+            let y = self.model!.marginModel.imageY!
+            
+            let imageWithHeight = self.imageViewThree!.frame.size.width
+            
+            self.imageViewThree?.frame = CGRectMake(x, y, imageWithHeight, imageWithHeight)
+            
+            self.imageViewThree?.getImageWithURL(model!.photo[self.imageViewThree!.tag - 1], contentMode: UIViewContentMode.ScaleToFill)
+        }
+        
+        
     }
+
     
     func addPictures() {
-    
-        for var i = 0; i < model?.photo.count; i++ {
+        
+        for var i = 0; i < 3; i++ {
             
             // 图片最大数量
             if i < 3 {
-            //图片最多显示3张
+                //图片最多显示3张
                 
                 let imageView = UIImageView()
                 
                 imageView.tag = i+1
-                
-                let leftRightMargin = model!.marginModel.leftRightMargin
-                
-                let imageWidthHeight = model!.marginModel.imageWidthHeight!
-                
-                let imageY = model!.marginModel.imageY!
-                
-                let imageMargin = model!.marginModel.imageMargin
-                
-                let x =  leftRightMargin + CGFloat(i) * imageWidthHeight + CGFloat(i) * imageMargin
-                
-                imageView.frame = CGRectMake(x, imageY, imageWidthHeight, imageWidthHeight)
-                
-                imageView.getImageWithURL(model!.photo[i], contentMode: UIViewContentMode.ScaleToFill)
+                imageView.hidden = true
                 imageView.clipsToBounds = true
                 imageView.userInteractionEnabled = true
                 //添加点击事件
@@ -109,27 +124,54 @@ class YNQuestionTableViewCell: UITableViewCell {
                 imageView.addGestureRecognizer(gestureRecognizer)
                 
                 self.contentView.addSubview(imageView)
-         
+                
+                let leftRightMargin = marginModel.leftRightMargin
+                
+                let imageMargin = marginModel.imageMargin
+               
+                let photoAiiWidth = kScreenWidth - marginModel.leftRightMargin*2
+                
+                let marginAllWidth: CGFloat = 2*marginModel.imageMargin
+                
+                let imageWidthHeight = (photoAiiWidth - marginAllWidth) / 3 - 1
+                
+                let x =  leftRightMargin + CGFloat(i) * imageWidthHeight + CGFloat(i) * imageMargin
+                
+                 imageView.frame = CGRectMake(x, 0, imageWidthHeight, imageWidthHeight)
+                
+                
+                
+                if i == 0 {
+                    
+                    self.imageViewOne = imageView
+                } else if i == 1 {
+                
+                    self.imageViewTwo = imageView
+                } else if i == 2 {
+                
+                    self.imageViewThree = imageView
+                }
+                
                 
             }
-        
+            
             
         }
     }
     
     
     func showImageBrower(sender: UITapGestureRecognizer) {
-    
+        
         let tempView = sender.view
         
         let imageBrowerView = YNPhotoBrowerView()
         imageBrowerView.photos = self.model!.photo
         imageBrowerView.firstIndex = tempView?.tag
         
-//        print(tempView?.tag)
+        //        print(tempView?.tag)
         
         let keyWindow = UIApplication.sharedApplication().keyWindow
-    
+        
         imageBrowerView.frame = keyWindow!.bounds
         
         keyWindow?.addSubview(imageBrowerView)
@@ -137,9 +179,9 @@ class YNQuestionTableViewCell: UITableViewCell {
         
     }
     
-
-    func setLayout() {
     
+    func setLayout() {
+        
         //avatorImage
         Layout().addTopConstraint(avatorImage, toView: self.contentView, multiplier: 1, constant: marginModel.topMargin)
         Layout().addLeftConstraint(avatorImage, toView: self.contentView, multiplier: 1, constant: marginModel.leftRightMargin)
@@ -183,7 +225,7 @@ class YNQuestionTableViewCell: UITableViewCell {
     }
     
     func setInterface() {
-    
+        
         self.contentView.addSubview(avatorImage)
         self.contentView.addSubview(nickName)
         self.contentView.addSubview(postTime)
@@ -195,7 +237,7 @@ class YNQuestionTableViewCell: UITableViewCell {
     
     //MARK: interface UI
     let avatorImage: UIImageView = {
-    
+        
         //头像
         let tempView = UIImageView()
         tempView.image = UIImage(named: "home_page_default_avatar_image")
@@ -207,7 +249,7 @@ class YNQuestionTableViewCell: UITableViewCell {
     }()
     
     let nickName: UILabel = {
-    
+        
         //昵称
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
@@ -219,7 +261,7 @@ class YNQuestionTableViewCell: UITableViewCell {
     }()
     
     let postTime: UILabel = {
-    
+        
         //time
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
@@ -232,10 +274,10 @@ class YNQuestionTableViewCell: UITableViewCell {
     }()
     
     let location: UIButton = {
-    
+        
         //地点
         let tempView = UIButton()
-//        tempView.setTitle("河南省, 郑州市, 金水区", forState: .Normal)
+        //        tempView.setTitle("河南省, 郑州市, 金水区", forState: .Normal)
         tempView.setImage(UIImage(named: "home_page_location_image"), forState: .Normal)
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.layer.drawsAsynchronously = true
@@ -257,7 +299,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         tempView.font = UIFont.systemFontOfSize(15)
         tempView.lineBreakMode = NSLineBreakMode.ByWordWrapping
         tempView.backgroundColor = UIColor.whiteColor()
-       
+        
         return tempView
     }()
     
@@ -292,6 +334,8 @@ class YNQuestionTableViewCell: UITableViewCell {
     }()
     
     
-    
-    
+    var imageViewOne: UIImageView?
+    var imageViewTwo: UIImageView?
+    var imageViewThree: UIImageView?
+
 }

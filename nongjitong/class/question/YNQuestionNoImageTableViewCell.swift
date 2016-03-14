@@ -1,22 +1,21 @@
 //
-//  YNQuestionTableViewCell.swift
+//  YNQuestionNoImageTableViewCell.swift
 //  nongjitong
 //
-//  Created by 农盟 on 15/11/18.
-//  Copyright © 2015年 农盟. All rights reserved.
+//  Created by 农盟 on 16/3/14.
+//  Copyright © 2016年 农盟. All rights reserved.
 //
 
 import UIKit
 
-class YNQuestionTableViewCell: UITableViewCell {
+class YNQuestionNoImageTableViewCell: UITableViewCell {
+
     
     let marginModel = YNQuestionModelConstant()
     
     var model: YNQuestionModel? {
-    
-        didSet {
         
-//            self.removePictures()
+        didSet {
             
             self.nickName.text = model?.user_name
             self.postTime.text = model?.createTime
@@ -27,119 +26,27 @@ class YNQuestionTableViewCell: UITableViewCell {
             
             self.avatorImage.getImageWithURL(model!.avatar!, contentMode: UIViewContentMode.ScaleToFill)
             
-            if model?.photo.count > 0 {
-            
-                //添加图片
-                self.addPictures()
-                
-                
-            } else {
-            
-
-            }
-            
         }
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        self.removePictures()
-    }
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setInterface()
         setLayout()
-
+        
         self.selectionStyle = .None
         self.avatorImage.layer.cornerRadius = marginModel.avatarHeight * 0.5
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func removePictures() {
     
-        for view in self.contentView.subviews {
-        
-            if view is UIImageView {
-                
-                if view.tag > 0 {
-                
-                    view.removeFromSuperview()
-                }
-            
-            }
-        }
-    }
-    
-    func addPictures() {
-    
-        for var i = 0; i < model?.photo.count; i++ {
-            
-            // 图片最大数量
-            if i < 3 {
-            //图片最多显示3张
-                
-                let imageView = UIImageView()
-                
-                imageView.tag = i+1
-                
-                let leftRightMargin = model!.marginModel.leftRightMargin
-                
-                let imageWidthHeight = model!.marginModel.imageWidthHeight!
-                
-                let imageY = model!.marginModel.imageY!
-                
-                let imageMargin = model!.marginModel.imageMargin
-                
-                let x =  leftRightMargin + CGFloat(i) * imageWidthHeight + CGFloat(i) * imageMargin
-                
-                imageView.frame = CGRectMake(x, imageY, imageWidthHeight, imageWidthHeight)
-                
-                imageView.getImageWithURL(model!.photo[i], contentMode: UIViewContentMode.ScaleToFill)
-                imageView.clipsToBounds = true
-                imageView.userInteractionEnabled = true
-                //添加点击事件
-                let gestureRecognizer = UITapGestureRecognizer(target: self, action: "showImageBrower:")
-                
-                imageView.addGestureRecognizer(gestureRecognizer)
-                
-                self.contentView.addSubview(imageView)
-         
-                
-            }
-        
-            
-        }
-    }
-    
-    
-    func showImageBrower(sender: UITapGestureRecognizer) {
-    
-        let tempView = sender.view
-        
-        let imageBrowerView = YNPhotoBrowerView()
-        imageBrowerView.photos = self.model!.photo
-        imageBrowerView.firstIndex = tempView?.tag
-        
-//        print(tempView?.tag)
-        
-        let keyWindow = UIApplication.sharedApplication().keyWindow
-    
-        imageBrowerView.frame = keyWindow!.bounds
-        
-        keyWindow?.addSubview(imageBrowerView)
-        
-        
-    }
-    
-
     func setLayout() {
-    
+        
         //avatorImage
         Layout().addTopConstraint(avatorImage, toView: self.contentView, multiplier: 1, constant: marginModel.topMargin)
         Layout().addLeftConstraint(avatorImage, toView: self.contentView, multiplier: 1, constant: marginModel.leftRightMargin)
@@ -183,7 +90,7 @@ class YNQuestionTableViewCell: UITableViewCell {
     }
     
     func setInterface() {
-    
+        
         self.contentView.addSubview(avatorImage)
         self.contentView.addSubview(nickName)
         self.contentView.addSubview(postTime)
@@ -195,7 +102,7 @@ class YNQuestionTableViewCell: UITableViewCell {
     
     //MARK: interface UI
     let avatorImage: UIImageView = {
-    
+        
         //头像
         let tempView = UIImageView()
         tempView.image = UIImage(named: "home_page_default_avatar_image")
@@ -207,7 +114,7 @@ class YNQuestionTableViewCell: UITableViewCell {
     }()
     
     let nickName: UILabel = {
-    
+        
         //昵称
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
@@ -219,7 +126,7 @@ class YNQuestionTableViewCell: UITableViewCell {
     }()
     
     let postTime: UILabel = {
-    
+        
         //time
         let tempView = UILabel()
         tempView.translatesAutoresizingMaskIntoConstraints = false
@@ -232,10 +139,10 @@ class YNQuestionTableViewCell: UITableViewCell {
     }()
     
     let location: UIButton = {
-    
+        
         //地点
         let tempView = UIButton()
-//        tempView.setTitle("河南省, 郑州市, 金水区", forState: .Normal)
+
         tempView.setImage(UIImage(named: "home_page_location_image"), forState: .Normal)
         tempView.translatesAutoresizingMaskIntoConstraints = false
         tempView.layer.drawsAsynchronously = true
@@ -257,7 +164,7 @@ class YNQuestionTableViewCell: UITableViewCell {
         tempView.font = UIFont.systemFontOfSize(15)
         tempView.lineBreakMode = NSLineBreakMode.ByWordWrapping
         tempView.backgroundColor = UIColor.whiteColor()
-       
+        
         return tempView
     }()
     
@@ -293,5 +200,5 @@ class YNQuestionTableViewCell: UITableViewCell {
     
     
     
-    
+
 }

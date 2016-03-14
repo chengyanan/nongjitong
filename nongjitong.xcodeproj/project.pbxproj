@@ -63,6 +63,8 @@
 		406CBBEC1BFEDBCE000584D4 /* YNScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */; };
 		40712BC61C967B1E00281C90 /* hand_down_vote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40712BC51C967B1E00281C90 /* hand_down_vote@2x.png */; };
 		40712BC81C967C7000281C90 /* agree_up_vote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40712BC71C967C7000281C90 /* agree_up_vote@2x.png */; };
+		40712BCA1C96972B00281C90 /* YNQuestionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40712BC91C96972B00281C90 /* YNQuestionListTableViewCell.swift */; };
+		40712BCC1C96BD6100281C90 /* YNQuestionNoImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40712BCB1C96BD6100281C90 /* YNQuestionNoImageTableViewCell.swift */; };
 		407F6B5A1C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B591C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift */; };
 		407F6B5C1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */; };
 		407F6B5E1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407F6B5D1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift */; };
@@ -449,6 +451,8 @@
 		406CBBEB1BFEDBCE000584D4 /* YNScaleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNScaleView.swift; sourceTree = "<group>"; };
 		40712BC51C967B1E00281C90 /* hand_down_vote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hand_down_vote@2x.png"; sourceTree = "<group>"; };
 		40712BC71C967C7000281C90 /* agree_up_vote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agree_up_vote@2x.png"; sourceTree = "<group>"; };
+		40712BC91C96972B00281C90 /* YNQuestionListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNQuestionListTableViewCell.swift; sourceTree = "<group>"; };
+		40712BCB1C96BD6100281C90 /* YNQuestionNoImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNQuestionNoImageTableViewCell.swift; sourceTree = "<group>"; };
 		407F6B591C3BACEE00EDDC2F /* YNMYWriteWaringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMYWriteWaringViewController.swift; sourceTree = "<group>"; };
 		407F6B5B1C3BB31D00EDDC2F /* MYWaringDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MYWaringDetailViewController.swift; sourceTree = "<group>"; };
 		407F6B5D1C3BB80500EDDC2F /* YNMotifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YNMotifyPasswordViewController.swift; sourceTree = "<group>"; };
@@ -1059,6 +1063,8 @@
 				40DDBCE31C0C3A5B0007211A /* YNQuestionModel.swift */,
 				40AD3B811C76D494003A3156 /* YNPhotoBrowerView.swift */,
 				40AD3B831C76FBBF003A3156 /* YNPhotoBrowerCollectionViewCell.swift */,
+				40712BC91C96972B00281C90 /* YNQuestionListTableViewCell.swift */,
+				40712BCB1C96BD6100281C90 /* YNQuestionNoImageTableViewCell.swift */,
 				4043A4A71C1141B400F1F669 /* controllers */,
 			);
 			path = question;
@@ -2159,6 +2165,7 @@
 				40DEA7D81C3A21A800BEB608 /* YNSearchResaultSolutionViewController.swift in Sources */,
 				40D5EB061C5A157C00DFCA71 /* YNOtherSendMessageTableViewCell.swift in Sources */,
 				40DEA7DA1C3A22E300BEB608 /* YNSearchSolutionCell.swift in Sources */,
+				40712BCC1C96BD6100281C90 /* YNQuestionNoImageTableViewCell.swift in Sources */,
 				40DDBCE41C0C3A5B0007211A /* YNQuestionModel.swift in Sources */,
 				401C58041C8960CC00B42455 /* YNNewsTagsTableViewCell.swift in Sources */,
 				40DEA7E21C3A5EC400BEB608 /* YNEarlyToMyProgramModel.swift in Sources */,
@@ -2213,6 +2220,7 @@
 				40ACDEF61C72D0E0006B4C6A /* YNCreatViewController.swift in Sources */,
 				40ED43871BC60B76004713C9 /* Network.swift in Sources */,
 				40ACDEF81C72DCC3006B4C6A /* YNThreadModel.swift in Sources */,
+				40712BCA1C96972B00281C90 /* YNQuestionListTableViewCell.swift in Sources */,
 				40D70EFF1C22573400672A10 /* YNAskQuestionModel.swift in Sources */,
 				401F4FB61C02C92A00F45EBA /* YNSelectAreaViewController.swift in Sources */,
 				40ED43851BC60B76004713C9 /* Location.swift in Sources */,
