@@ -510,16 +510,9 @@ class YNTrainViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        //        if self.isShowLoadMore {
-        //
-        //            return self.tableViewDataArray.count + 1
-        //
-        //        } else {
-        //
-        //            return self.tableViewDataArray.count
-        //        }
+//        return self.tableViewDataArray.count
         
-        return self.tableViewDataArray.count
+        return 10
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -529,42 +522,29 @@ class YNTrainViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if indexPath.section == self.tableViewDataArray.count {
-            
-            let identify: String = "Cell_Resault_LoadMore_code"
-            var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(identify)
-            
-            if cell == nil {
-                
-                cell = YNResaultLoadModeCell(style: .Default, reuseIdentifier: identify)
-                
-            }
-            
-            return cell!
-            
-        }
+        let identify = "CELL_Temp"
         
-        let identify = "CELL_Question"
-        
-        var cell = tableView.dequeueReusableCellWithIdentifier(identify) as? YNQuestionTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(identify)
         
         if cell == nil {
             
-            cell = YNQuestionTableViewCell(style: .Default, reuseIdentifier: identify)
+            cell = UITableViewCell(style: .Default, reuseIdentifier: identify)
         }
-        
-        cell?.model = self.tableViewDataArray[indexPath.section]
+    
+        cell?.textLabel?.text = "rose"
         
         return cell!
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        if indexPath.section == self.tableViewDataArray.count {
-            
-            return 44
-        }
-        return self.tableViewDataArray[indexPath.section].height!
+//        if indexPath.section == self.tableViewDataArray.count {
+//            
+//            return 44
+//        }
+//        return self.tableViewDataArray[indexPath.section].height!
+        
+        return 44
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -576,17 +556,6 @@ class YNTrainViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if indexPath.section == self.tableViewDataArray.count {
-            
-            self.loadMore()
-            
-        } else {
-            
-            let questionDetailVc = YNQuestionDetailViewController()
-            questionDetailVc.questionModel = self.tableViewDataArray[indexPath.section]
-            self.navigationController?.pushViewController(questionDetailVc, animated: true)
-        }
         
         
     }
@@ -676,9 +645,6 @@ class YNTrainViewController: UIViewController, UITableViewDataSource, UITableVie
         print("YNQuestionViewController didReceiveMemoryWarning")
     }
     
-    
-
-   
     
     
     
