@@ -77,6 +77,11 @@ class YNTrainViewController: UIViewController, UITableViewDataSource, UITableVie
         })
         
         
+        
+        print("rose")
+        
+        
+        
     }
     
     func loadDataHeaderRefresh() {
